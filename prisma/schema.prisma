@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  DANCER
+  REPRESENTATIVE
+  CONTACT
+}
+
+
+model User {
+  id             String      @id @default(uuid())
+  firstName      String
+  lastName       String
+  email          String      @unique  
+  photo          String?
+  userRole       UserRole       @default(CONTACT)      
+  active         Boolean        @default(false)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  dancer         Dancer?
+  representative Representative?
+  password       String
+}
+
+
+model Dancer {
+  id               String         @id @default(uuid())
+  user             User           @relation(fields: [userId], references: [id])
+  representative   Representative? @relation(fields: [representativeId], references: [id])
+  userId           String         @unique
+  representativeId String?
+  Payment          Int
+  review           Review?
+}
+
+model Representative {
+  id         String  @id @default(uuid()) 
+  user       User    @relation(fields: [userId], references: [id])
+  userId     String  @unique
+  dancers    Dancer[]
+  Payment    Int
+  review     Review?
+}
+
+model Review {
+  id               String      @id @default(uuid())
+  content          String
+  representative   Representative?  @relation(fields: [representativeId], references: [id])
+  representativeId String?   @unique
+  dancer           Dancer?         @relation(fields: [dancerId], references: [id])
+  dancerId         String?   @unique
+  @@unique([dancerId, representativeId])
+}
+
+
+model Question {
+    id      String       @id @default(uuid())
+  question String      @unique
+  answer   String      @unique
+}
+

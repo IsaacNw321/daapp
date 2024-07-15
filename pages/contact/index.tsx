@@ -11,6 +11,7 @@ const Contact : NextPage = () => {
     <RootLayout>
       <Suspense fallback={<Loading/>}>
       <WorkDays/>
+      <QuestionsLazy/>
       </Suspense>
     </RootLayout>
   )

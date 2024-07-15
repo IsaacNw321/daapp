@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { getUserById } from "../../utils/users";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { postUser } from "../../utils/users";
+import { postUser, emailExist } from "../../utils/users";
 import { postedUser } from "../../app/types";
 import axios from "axios";
 const links = [{
@@ -51,23 +51,31 @@ export default function NavBar(){
 
   
   useEffect(() => {
-    
-    const data = {
-      id: userId,
-      firstName: user?.given_name,
-      lastName: user?.family_name,
-      email: user?.email,
-      photo: user?.picture,
-    };
-    postUserMutation.mutate(data);
-  
-        if (!isLoading && user) {
+    if (user) {
+        const verifyEmails = emailExist();
+        verifyEmails.then(result => {
+            if (result.some(email => email === user?.email)) {
+                console.log("This user already exists");
+            } else {
+                const data = {
+                    id: userId,
+                    firstName: user?.given_name,
+                    lastName: user?.family_name,
+                    email: user?.email,
+                    photo: user?.picture,
+                    password: user?.sub
+                };
+                postUserMutation.mutate(data);
+            }
+        });
+
+        if (!isLoading) {
             setName(dbUser?.message.firstName);
             setEmail(dbUser?.message.email);
             setPicture(dbUser?.message.photo);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [isLoading, dbUser, user, userId]);
+    }
+}, [isLoading, dbUser, user, userId, postUserMutation]);
   return (
     <header className={styles.header}>
       <nav>

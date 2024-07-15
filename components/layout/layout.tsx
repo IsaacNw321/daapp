@@ -3,6 +3,7 @@ import Navbar from './NavBar';
 import styles from "../../styles/home.module.css";
 import { Footer } from './Footer';
 import { Suspense } from 'react';
+import Loading from './loading';
 export default function RootLayout({
   children,
 }: {
@@ -15,7 +16,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </Head>
         <Navbar/>
-        <Suspense fallback={<div>Cargando...</div>}>
+        <Suspense fallback={<Loading/>}>
         <main className={styles.main}>
           {children}
         </main>
