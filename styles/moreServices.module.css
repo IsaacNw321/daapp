@@ -1,0 +1,321 @@
+.fatherCont{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+@media screen and (min-width: 460px){
+  .fatherCont{
+    display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  }
+}
+
+
+.mServicesCont{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  flex-direction: column;
+  height: 1050px;
+  background-color: #000;
+  border-radius: 20px;
+  animation-name: slideup;
+  animation-duration: 1s;
+}
+
+@media screen and (max-width: 460px){
+  .mServicesCont{
+    width: 360px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 400px;
+  }
+}
+
+
+
+.mServicesContLittle{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  flex-direction: column;
+  height: 500px;
+  background-color: #000;
+  border-radius: 20px;
+  animation-name: slideup;
+  animation-duration: 1s;
+}
+
+@media screen and (max-width: 460px){
+  .mServicesContLittle{
+    width: 360px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 520px;
+  }
+}
+
+.mServicesCont h3{
+  color: #fff;
+  font-size: 50px;
+  margin-bottom: 2%;
+  margin-top: 2%;
+}
+
+.mServicesContLittle h3{
+  color: #fff;
+  font-size: 50px;
+  margin-bottom: 2%;
+  margin-top: 2%;
+}
+
+.mServicesCont button{
+  color: white;
+  width: 100px;
+  height: 50px;
+  background-color: #232323;
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
+}
+@media screen and (max-width: 460px){
+  .mServicesCont button{
+    margin-left: 35%;
+    position: relative;
+    bottom: -1460px;
+  }
+ 
+}
+
+.mServicesContLittle button{
+  color: white;
+  background-color: #232323;
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 460px){
+  .mServicesContLittle button{
+    position: relative;
+    bottom: -660px;
+    margin-bottom:10px;
+    margin-left: 35%;
+    z-index:1;
+  }
+
+ 
+}
+
+.mServices{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 1050px;
+  height: 850px;
+  animation-name: slideup;
+  animation-duration: 1s;
+}
+
+@media screen and (max-width: 460px){
+  .mServices{
+    width: 360px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+}
+
+.mServicesLittle{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 1050px;
+  height: 530px;
+  animation-name: slideup;
+  animation-duration: 1s;
+}
+
+@media screen and (max-width: 460px){
+  .mServicesLittle{
+    width: 360px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+}
+.mServicesLittle button{
+  height: 80px;
+}
+
+.mservice{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  width: 300px;
+  height:400px;
+  animation-name: slideup;
+  animation-duration: 1s;
+}
+.mservice h3{
+  color: 	#fff;
+  font-size: 24px;
+}
+
+.mservice p{
+  text-align: center;
+}
+
+.carouselCont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  width: 85%;
+  margin: auto;
+  background-color: black;
+}
+
+.carouselCont button{
+  display: 'flex';
+  justifyContent: 'space-between';
+  alignItems: 'center';
+}
+@media screen and (max-width: 460px){
+.buttoncontainer{
+  display: none;
+}
+.carouselCont button{
+  margin-right: 20px;
+}
+}
+
+@media screen and (max-width: 460px){
+  .carouselCont{
+    margin-left: 30px;
+    width: 350px;
+    margin-bottom:30px;
+    height: 650px;
+  }
+}
+
+.item h3{
+  color: white;
+  font-size: 30px;
+  position: absolute;
+  bottom: 70%;
+  left: 35%;
+}
+
+
+.carouselCont h2{
+  text-align: center;
+}
+
+
+.carouselCont button{
+  background-color: #232323;
+  color:white;
+  border-radius: 10px;
+  width: 160px;
+  height: 40px;
+  font-size: 16px;
+  font-weigth: 700;
+  position: absolute;
+  bottom: 12%;
+  left: 30%;
+  align-self: center;
+}
+
+@media screen and (max-width: 460px){
+  .carouselCont button{
+    margin-left: 0px;
+    position: absolute;
+    bottom: 15%;
+    left: 23%;
+  }
+}
+
+.image{
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  border-left: 5px solid black;
+  border-top: 2px solid black;
+  animation-name: show;
+  animation-duration: 1s;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+
+@media screen and (max-width: 460px){
+  .image{
+    margin-left: 0px;
+    width: 320px;
+    border-radius: 50%;
+  }
+}
+
+.imageS{
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border-left: 5px solid black;
+  border-top: 2px solid black;
+  animation-name: show;
+  animation-duration: 1s;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+@media screen and (max-width: 460px){
+  .imageS{
+    margin-left: 30px;
+    width: 320px;
+    border-radius: 50%;
+  }
+}
+.item p{
+  position: absolute;
+  left: 10%;
+  bottom: 30%;
+  z-index: 1;
+  font-size: 20px;
+}
+
+
+@media screen and (max-width: 460px){
+  .item{
+    margin-right: 30px;
+  }
+  .item p{
+    display: none;
+  }
+  .buttoncontainer{
+    margin-left: 35%;
+  }
+}
+
+
+@keyframes slideup {
+  from {
+    opacity: 0;
+    transform: translateY(-25%);
+  }
+
+  to{
+    opacity:1;
+    transform: translateY(0%);
+  }
+}
+
+@keyframes show {
+  from{
+    scale : 35%;
+  }
+  to{
+    scale : 100%;
+  }
+}
