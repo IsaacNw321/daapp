@@ -1,0 +1,464 @@
+.fatherCont{
+  display:flex;
+  flex-direction: column;
+  background-color: #000;
+}
+
+.main{
+  margin-top: 8%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 6px;
+}
+
+
+.leftCont {
+  padding: 20px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  border-radius: 26px;
+  height:720px;
+  border: 4px solid #232323;
+}
+
+
+.leftCont h2{
+  font-size: 50px;
+  margin-bottom: 15px;
+  color: white;
+  font-family: Poppins;
+  animation-duration: 1s;
+  animation-name: slideup;
+}
+
+.leftCont span{
+  margin-top: 8px;
+  margin-bottom: 16px;
+  width: 20%;
+  height: 2px;
+  background-color: #fff;
+  display: flex;
+}
+
+.leftCont p{
+  font-weight: bold;
+  color: #fff;
+}
+
+
+.myForm{
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  color:  #fff;
+  height: 700px;
+  width: 450px;
+  animation-name: showSlow;
+  animation-duration: 0.6s;
+}
+
+
+.myForm input{
+  background-color: white;
+  color: white;
+  width: 450px;
+  height: 45px;
+  border-radius: 10px;
+  border: 2px solid #fff;
+  background-color:#232323;
+  padding: 16px;
+}
+
+.myForm label{
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  width: 150px;
+  height: 20px;
+  margin: 10px;
+}
+
+
+
+.myForm textarea{
+  background-color:#232323;
+  width:450px;
+  height: 100px;
+  border-radius: 10px;
+  padding: 16px;
+  border: 2px solid white;
+}
+
+
+
+.myForm button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  font-size: 24px;
+  padding: 16px 32px;
+  color: white;
+  background-color: #000;
+  margin-top: 30px;
+  border-radius: 20px;
+  border: 2px solid white;
+}
+
+.myForm button:hover {
+  cursor: pointer;
+  background-color: black;
+  border-radius: 20px;
+}
+
+.myForm p{
+  height: 0;
+}
+
+.rightCont{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  margin-top:120px;
+  margin-bottom: 30px;
+  margin-left: 17%;
+  width: 840px;
+  height: 750px;
+  background-color: #000;
+  border-radius: 26px;
+  border: 4px solid #232323;
+}
+
+@media screen and (max-width: 460px){
+  .rightCont{
+    width: 340px;
+    margin-left: 30px;
+    padding: 8px;
+    height: 700px;
+  }
+}
+
+.rightCont span{
+  margin-top: 18px;
+  margin-bottom: 16px;
+  width: 40%;
+  height: 2px;
+  background-color: white;
+}
+
+.rightCont button{
+  background-color: #232323;
+  border-radius: 10px;
+  width: 90px;
+  height: 40px;
+  margin-top: 18px;
+}
+
+.rightCont button:hover{
+  cursor: pointer;
+  background-color: #fff;
+  color: black;
+}
+.rightCont h2{
+  margin-top: 20px;
+  font-size: 50px;
+  color: white;
+  font-family: Poppins;
+  animation-duration: 1s;
+  animation-name: slideup;
+}
+
+.rightCont p{
+  font-weight: bold;
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+
+
+.day{
+  display:flex;
+  padding: 16px;
+  align-items:center;
+  justify-content: center;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 24px;
+  color: #fff;
+  width: 600px;
+  height: 75px;
+  margin-right: 2%;
+  margin-left:2%;
+  transition: transform 0.6s ease-in;
+}
+
+.day:hover{
+  transform: Scale(1.2);
+}
+
+
+.order{
+  width: 600px;
+  display: flex;
+  flex-wrap:wrap;
+  margin-top: 30px;
+  animation-duration: 1s;
+  animation-name: slideup;
+}
+
+@media screen and (max-width: 460px){
+  .rightCont h2{
+    font-size: 30px;
+  }
+  .day{
+    font-size: 20px;
+  }
+}
+@keyframes slideup {
+  from {
+    opacity: 0;
+    transform: translateY(-25%);
+  }
+
+  to{
+    opacity:1;
+    transform: translateY(0%);
+  }
+}
+
+
+
+.buttons{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 5%;
+  gap: 20px;
+  height: 600px;
+}
+
+.buttons button{
+  font-size: 20px;
+  font-family: 'Poppins';
+  border-radius:5px;
+  width: 200px;
+  height: 70px;
+}
+
+.buttons button:hover{
+  cursor: pointer;
+}
+
+.questionsSect{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.questionsCont{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  width: 840px;
+  height: 750px;
+  background-color: black;
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 20px;
+  border:4px solid #232323;
+}
+
+.questions{
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: #000;
+  width: 1150px;
+  height: 600px;
+  gap:100px;
+  margin: auto;
+}
+
+.question{
+  padding: 16px;
+  margin-top:5%;
+  font-size: 26px;
+  color: 	white;
+  width: 650px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 0.6s ease-in;
+  animation-name: appear;
+  animation-duration: 1s;
+  font-weight: bold;
+}
+
+.question:hover{
+  transform: scale(1.1);
+  transition: transform 0.6s ease-out;
+}
+
+.answer{
+  color: white;
+  font-size: 18px;
+  width: 800px;
+  animation-name: showSlow;
+  animation-duration: 0.6s;
+  animation: hideAnswer 0.8s ease-in;
+  opacity: 1;
+  font-weight: bold;
+}
+
+
+.frec{
+  font-size: 3.5em;
+  color:white;
+  margin-left: 80px;
+  font-family: Poppins;
+  margin-top: 10px;
+  margin-bottom: 2%;
+  width: 600px;
+}
+
+@media screen and (max-width: 460px){
+  .frec{
+    font-size: 30px;
+    text-align: center;
+  }
+  .questionsCont{
+    width: 380px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: auto;
+  }
+  .question{
+    width: 260px;
+    height: auto;
+  }
+  .questionsSect{
+    width: 400px;
+  }
+}
+
+.active{
+  background-color: #232323;
+}
+
+.inactive{
+  background-color: white;
+  color: black;
+}
+
+.inactive:hover{
+  background-color: black;
+  color: white;
+}
+
+
+@keyframes showSlow {
+  from {
+    opacity: 0;
+  }
+
+  to{
+    opacity: 1;
+  }
+}
+
+@keyframes showAnswer {
+  from {
+    opacity: 0;
+    height: 0px;
+    transform: translateX(10%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    height: 50px;
+  }
+}
+
+@keyframes rotate {
+  from{
+    transform:rotate(180deg);
+  }
+
+  to{
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes rotate2 {
+  from{
+    transform:rotate(0deg);
+  }
+
+  to{
+    transform: rotate(180deg);
+  }
+}
+
+.slideDown {
+  width: 100%;
+  height: 2px;
+  background-color: white;
+}
+
+
+.slideDown.close {
+  height: 2px;
+  animation-name: showSlow;
+  animation-duration: 0.6s;
+}
+
+.answer.open{
+  animation: showAnswer 0.8s forwards;
+}
+
+.qI{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.image{
+  transform: rotate(0deg);
+  animation-name: rotate;
+  animation-duration: 0.6s;
+}
+
+.imageOpen{
+  animation-name: rotate2;
+  animation-duration: 0.6s;
+  transform: rotate(180deg);
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

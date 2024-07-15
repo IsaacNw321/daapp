@@ -1,0 +1,34 @@
+.learning{
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width : 80%;
+  height: 200px;
+  background-color: black;
+  z-index:-1;
+  position: absolute;
+  top: 100%;
+  left: 10%;
+  border-radius:20px;
+}
+
+.learningTitle{
+  font-size:42px;
+  text-align:center;
+  color: white;
+  font-family: Poppins;
+}
+
+@media screen and (max-width: 450px) {
+  .learning{
+    margin: auto;
+    width : 80%;
+    height: 200px;
+    background-color:transparent;
+    position: absolute;
+    top: 90%;
+    left: 10%;
+    border-radius:20px;
+  }
+}

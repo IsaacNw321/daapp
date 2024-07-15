@@ -1,0 +1,255 @@
+.header{
+  width: 100%;
+  background-color: 	transparent;
+  color: white;
+  heigth: 300px;
+  position: fixed;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+}
+
+.Nav{
+  background-color: #030303;
+  display:flex;
+  width: 220px;
+  list-style: none;
+  gap: 20px;
+  heigth: 150px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.NavShow{
+  background-color: #030303;
+  display:flex;
+  justify-content: flex-start;
+  width: 1020px;
+  margin-left: 2%;
+  list-style: none;
+  gap: 20px;
+  heigth: 160px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.userButtonShow{
+  background-color: #030303;
+  display:flex;
+  flex-direction: column;
+  width: 94%;
+  margin-left: 2%;
+  list-style: none;
+  gap: 20px;
+  heigth: 300px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  text-align: center;
+  margin-top: 20px;
+}
+
+.userButtonShow:hover{
+  cursor: pointer;
+}
+
+.userButton{
+  text-align: center;
+  background-color: #030303;
+  display:none;
+  width: 94%;
+  list-style: none;
+  gap: 20px;
+  heigth: 300px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+
+.Div a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 120px;
+  transform: scale(1);
+  transition: transform 0.6s ease-out;
+}
+
+.Div a:hover{
+  cursor: pointer;
+  transform: Scale(1.1);
+  transition: transform 0.6s ease-out;
+}
+
+.Div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align:center;
+  width: 120px;
+  font-size: 20px;
+  transform: scale(1);
+  transition: transform 0.6s ease-out;
+}
+.Div:nth-child(1){
+  width:120px;
+  heigth:120px;
+  display:flex;
+  align-items: center;
+  justify-content:center;
+  margin-left:40px;
+}
+
+
+.Div:nth-child(4){
+  font-size:20px;
+  width:150px;
+  heigth:120px;
+  display:flex;
+  justify-content: center;
+  border-radius: 5px;
+  margin-right:25%;
+  padding:10px;
+}
+
+.Div:nth-child(5){
+  margin-top: 20px;
+}
+
+
+.notLogNavBar{
+  display: none;
+}
+
+.notLogNavBar:hover{
+  border-radius: 20px;
+  background-color:white;
+  color: black;
+  cursor: pointer;
+}
+
+.logNavBar{
+  background-color: #030303;
+  display:flex;
+  width: 94%;
+  margin-left: 2%;
+  list-style: none;
+  gap: 20px;
+  heigth: 300px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.logNavBar li{
+  background-color: "#232323";
+  width: 120px;
+  height: 40px;
+  border-radius: 30px;
+  transition: transform 0.5s;
+  margin: auto;
+  background-color: #232323;
+}
+
+.logNavBar button{
+  background-color: "#232323";
+  width: 120px;
+  height: 50px;
+  border-radius: 20px;
+  transition: transform 0.5s;
+  margin: auto;
+  background-color: #232323;
+  cursor: pointer;
+}
+.notLogNavBar button{
+  background-color: "#232323";
+  width: 120px;
+  height: 50px;
+  border-radius: 20px;
+  transition: transform 0.5s;
+  margin: auto;
+  background-color: #232323;
+}
+
+.notlogNavBar li{
+  display: none;
+}
+
+
+.imgLogNavBar{
+  border-radius: 50%;
+  margin: auto;
+}
+
+.toggleMenu{
+  cursor: pointer;
+  top: 1rem;
+  right: 1rem;
+  position: absolute;
+  filter: invert(1);
+}
+
+
+
+@media screen and (min-width: 460px){
+  .toggleMenu{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 460px){
+  .Nav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px  0px  8px;
+  }
+  .NavShow{
+    display: none;
+  }
+
+  .Div:nth-child(1){
+    width:40px;
+    text-align: center;
+    margin-left:0;
+    margin-top: 10px;
+  }
+  .Div:nth-child(4){
+    margin-right:0px;
+  }
+
+  .Div:nth-child(5){
+    width:40px;
+    
+    margin-left:0;
+  }
+
+  .notLogNavBar{
+    margin-left:0px;
+  }
+  .logNavBar{
+    margin-left:0px;
+  }
+}
+
+.button{
+  background-color: #030303;
+  display:flex;
+  flex-direction: column;
+  width: 94%;
+  margin-left: 2%;
+  list-style: none;
+  gap: 20px;
+  heigth: 300px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  text-align: center;
+  margin-top: 10px;
+}
+
+.notButton{
+  display : none;
+}
+
+.logo{
+  filter: invert(1);
+}

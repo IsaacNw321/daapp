@@ -1,0 +1,132 @@
+.fatherCont{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 700px;
+}
+
+@media screen and (max-width: 460px){
+  .fatherCont{
+    justify-content: center;
+    height: 1540px;
+    margin-bottom: 220px;
+  }
+}
+
+.image{
+  width: 90%;
+  border-radius: 20px;
+  height: 400px;
+}
+
+.upCont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40%;
+  width: 100%;
+  height: 440px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.downCont{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  height: 60%;
+  width: 100%;
+  background-color: #000;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 460px){
+  .upCont{
+    margin-top: 420px;
+    width: 360px;
+    margin-left: 30px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+  .downCont{
+    margin-left: 30px;
+  }
+}
+
+
+
+
+.infoResults{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 900px;
+}
+
+@media screen and (max-width: 460px){
+  .infoResults{
+    width: 360px;
+    margin-left: 50px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+}
+
+.downCont h2{
+  color: white;
+  text-align: center;
+  font-size: 50px;
+  margin-top: 35px;
+  font-family: "Poppins";
+}
+
+.downCont p{
+  font-size: 18px;
+  text-align: center;
+}
+@media screen and (max-width: 460px){
+.downCont p{
+  width: 220px;
+  margin-right: 30px;
+}
+}
+
+
+.infoResult{
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: black;
+  color: 	white;
+  gap: 20px;
+  width: 260px;
+  height: 200px;
+  text-align: center;
+  border-radius: 20px;
+  border: 2px solid white;
+}
+@media screen and (max-width: 460px){
+.infoResult{
+  margin-left: 0px;
+}
+}
+
+
+.infoResult h3{
+  font-family: "Poppins";
+  font-size: 40px;
+}
+
+.infoResult p{
+  font-size: 22px;
+  color: white;
+}
+

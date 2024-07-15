@@ -1,0 +1,86 @@
+
+
+.genderCont{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items:center;
+  width: 100%;
+  heigth: 500px;
+  background-color: #000;
+  color: #232323;
+  border: 5px solid black;
+}
+
+
+@media screen and (max-width: 460px){
+  .genderCont{
+    flex-direction: column;
+   
+  }
+}
+
+.infoGender{
+  margin: 6px;
+  color: white;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 450px;
+  height: 300px;
+  gap: 20px;
+  background-color: #000;
+  border: 2px double #232323;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 460px){
+  .infoGender{
+    width: 340px;
+    margin-top: 50px;
+  }
+}
+
+.swiperCont{
+  display: flex;
+  padding: 70px;
+  justify-content: center;
+  align-items: center;
+  width: 550px;
+  height: 500px;
+  border-radius: 20%;
+}
+
+
+.swiperSlide{
+  display : flex;
+  align-items: center;
+  flex-direction: row;
+  width: 450px;
+  height: 450px;
+}
+
+@media screen and (max-width: 460px){
+  .swiperSlide{
+    width: 320px;
+  }
+  .swiperCont{
+    width: 440px;
+    height: 400px;
+  }
+}
+
+.image{
+  border-radius: 30%;
+  border-left: 5px solid black;
+  border-top: 2px solid black;
+}
+
+@media screen and (max-width: 460px){
+  .image{
+    width: 300px;
+    height: 300px;
+  }
+}
