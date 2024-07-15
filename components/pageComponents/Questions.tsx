@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import styles from "../../styles/contact.module.css";
 import QuestionItem from "../questions/QuestionItem";
 import { useQuery } from 'react-query';
-import { getQuestions } from "@components/utils/questions";
+import { getQuestions } from "../../utils/questions";
 
 const Questions = () => {
   const {data, isLoading} = useQuery('question', ()=> getQuestions());

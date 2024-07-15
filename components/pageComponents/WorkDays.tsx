@@ -25,24 +25,13 @@ const WorkDays : NextComponentType = () =>{
     <h2>Horario de trabajo</h2>
     <div className={styles.order}> 
       <div className={styles.day} >
-        Martes : 08:00 am a 11:00 am
-        <p>Lirico</p>
+        Martes : 09:30 am a 11:30 am
       </div>
       <div className={styles.day} >
-        Miercoles : 08:00 am a 11:00 am
-         <p>Urbano</p>
+        Jueves : 09:30 am a 11:30 am
       </div>
       <div className={styles.day} >
-        Jueves : 08:00 am a 11:00 am
-         <p>Ballet</p>
-      </div>
-      <div className={styles.day} >
-        Viernes : 08:00 am a 11:00 am
-        <p>Contemporaneo</p>
-      </div>
-      <div className={styles.day} >
-        Sabado : 08:00 am a 12:00pm
-         <p>Condicionamiento fisico</p>
+        Sabado : 01:00 pm a 4:30pm
       </div>
     </div>
    </div>
