@@ -8,7 +8,7 @@ import Image from "next/image";
 import { useQuery } from "react-query";
 import Loading from "../layout/loading";
 
-export const LogginButton = ({ userName, userEmail, userPicture }: any) =>{
+export const LogginButton = ({ userName, userPicture }: any) =>{
   const [dropdown, setDropdown] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
   const {error,  user} = useUser();
@@ -16,9 +16,7 @@ export const LogginButton = ({ userName, userEmail, userPicture }: any) =>{
   const showMenu = () => {
     setDropdown(!dropdown); 
 }
-
-
-  const userId = user?.sub ?? '';
+'';
  
   let id: string = ''
   if (user && user.sub) {
@@ -57,7 +55,7 @@ export const LogginButton = ({ userName, userEmail, userPicture }: any) =>{
               height={40}
               src={userPicture}
               alt="User profile picture"
-              priority={true}
+              loading="lazy"
             />
           )}
         </button>

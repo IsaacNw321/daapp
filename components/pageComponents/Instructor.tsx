@@ -27,8 +27,8 @@ export const Instructor = ({nameInstructor, array, text, position}:InstructorPro
         >
         <div className={styles.swiperSlide}>
           {
-            array?.map((e:any) => 
-            <SwiperSlide key={e}> 
+            array?.map((e:any, index : number) => 
+            <SwiperSlide key={index}> 
             <Image
                 className={styles.image}
                 height={450} 

@@ -1,15 +1,23 @@
 import axios from 'axios';
-import { ReviewRProps, ReviewDProps, postReviewDancer, postReviewRepresentative, updateReview } from '@components/app/types';
+import { ReviewRProps, ReviewDProps, postReviewDancer, postReviewRepresentative, updateReview } from '../app/types';
 
-export const getReviews = async () =>{
-  const response = await axios.get("/api/reviews")
-  if(response.status === 200){
-    return response.data
-    
-  } else {
-    throw new Error('Failed to get Reviews');
+const axiosInstance = axios.create({
+  baseURL: 'http://localhost:3000', 
+  timeout: 5000, 
+});
+
+export const getReviews = async () => {
+  try {
+      const response = await axiosInstance.get("/api/reviews");
+      if (response.status === 200) {
+          return response.data;
+      }
+  } catch (error) {
+      console.error("Error fetching reviews:", error);
+      throw error;
   }
-}
+};
+
 
 export const getReviewById = async (id: String) =>{
   try {

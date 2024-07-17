@@ -1,8 +1,7 @@
-"use client"
 import styles from "../../styles/Testimonials.module.css";
 import { useState, useEffect } from "react";
 import { useQuery } from 'react-query';
-import { getReviews } from "@components/utils/reviews";
+import { getReviews } from "../../utils/reviews";
 import { ReviewCard } from "../reviews/ReviewCard";
 import { NextComponentType } from "next";
 import {items} from "../../utils/items";
@@ -14,7 +13,7 @@ const responsive = {
 }
 
 const Testimonials: NextComponentType = () =>{
-
+  
   const {data} = useQuery('reviews', ()=> getReviews());
   const [reviews, setReviews] = useState<any>();
   useEffect(()=>{
@@ -38,7 +37,7 @@ const Testimonials: NextComponentType = () =>{
     // eslint-disable-next-line react-hooks/exhaustive-deps
   })
   setReviews(reviewItems);
-}, [ data])
+}, [ data, reviews])
  
 
   return (
@@ -55,7 +54,7 @@ const Testimonials: NextComponentType = () =>{
     </p>
     <div className={styles.reviews}>
     <div className={styles.carouselCont}>
-    {!reviews ? <p className={styles.reviews}>No hay comentarios</p> : 
+    {!reviews ? <div className={styles.reviews}>No hay comentarios</div> : 
        <AliceCarousel
         mouseTracking
         responsive={responsive}

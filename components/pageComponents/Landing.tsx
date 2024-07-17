@@ -8,11 +8,11 @@ const Landing : NextComponentType = () => {
     <div className={styles.Landing}>
       <Image
         className={styles.image}
-        width='700' 
-        height='700' 
+        width={700} 
+        height={700} 
         alt={'Dancers'} 
         src={Reginfo}
-        loading="lazy">
+        priority={true}>
       </Image>
     <div className={styles.fadeInLeftWhen}>
     <h1 className={styles.title}>

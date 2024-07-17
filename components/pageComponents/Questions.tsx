@@ -10,9 +10,7 @@ const Questions = () => {
   const [showAnswer, setShowAnswer] = useState<{ [key: number]: boolean }>({});
   useEffect(()=>{
     if (!data) return;
-    console.log(data);
     setQuestion(data.data);
-    console.log(question);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, data])
   const toggleAnswer = (index: number) => {

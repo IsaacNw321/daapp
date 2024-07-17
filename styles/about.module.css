@@ -181,6 +181,7 @@
   border-radius: 20%;
   animation-duration: 1s;
   width: 330px;
+  height: 400px;
   animation-name: slideup;
 }
 

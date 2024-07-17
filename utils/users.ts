@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { postedUser } from '@components/app/types';
+
 export const getUserById = async(id : String) =>{
   const response = await axios.get(`/api/users/${id}`, {
     timeout: 1000, 
@@ -27,16 +27,16 @@ export const postUser = async (userData : any) => {
   }
 };
 
-export const emailExist = async (email : any) =>{
-  const response = await axios.get(`/api/users`, email);
-  const userExist = await response.data;
-  
-  if(!userExist){
-      return 'There is no data';
-  };
-  return userExist;
+export const emailExist = async () => {
+  try {
+      const response = await axios.get(`/api/users`);
+      const usersEmail = response.data;
+     return usersEmail
+  } catch (error) {
+      console.error('An error occurred:', error);
+      return 'Error checking email existence';
+  }
 };
-
 export const updateUser = async (id: string, updatedUserData: any) => {
   try {
     const response = await axios.put(`/api/users/${id}`, updatedUserData);

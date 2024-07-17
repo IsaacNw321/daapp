@@ -30,8 +30,8 @@ export const GendersAndShows  = ({ nameGender, description, array}: any) =>{
         >
         <div className={styles.swiperSlide}>
           {
-            array?.map((e:any) => 
-            <SwiperSlide key={e}> 
+            array?.map((e:any, index: number) => 
+            <SwiperSlide key={index}> 
             <Image
                 className={styles.image}
                 height={400} 
