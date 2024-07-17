@@ -10,7 +10,7 @@ export const ReviewCard = ({ content, userRole , user }: any) =>{
           {lastName}
         </h3> 
         <div>
-        {userRole === "REPRESENTATIVE" ? <p>Representante</p> : <p>Bailarin</p>}
+        {userRole === "Representante" ? <p>Representante</p> : <p>Bailarin</p>}
         </div>
         <p>
           {content}

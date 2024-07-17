@@ -9,8 +9,7 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import { getUserById } from "../../utils/users";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { postUser, emailExist } from "../../utils/users";
-import { postedUser } from "../../app/types";
-import axios from "axios";
+
 const links = [{
     type: "image",
     alt: "Logo",
@@ -34,10 +33,8 @@ const links = [{
 
 export default function NavBar(){
   const [name, setName] = useState<String | undefined>('')
-  const [email, setEmail] = useState<String | undefined>('');
   const [picture, setPicture] = useState<String | undefined>('');
   const [showMenu, setShowMenu] = useState<any>(false);
-  const [hasPostedUser, setHasPostedUser] = useState(false);
   const queryClient = useQueryClient();
   const postUserMutation = useMutation(postUser, {
     onSuccess: () => {
@@ -47,12 +44,13 @@ export default function NavBar(){
   const {user} = useUser();
   const userId = user?.sub ?? '';
   
+  
   const { data: dbUser, isLoading } = useQuery(['user', userId], () => getUserById(userId));
-
   
   useEffect(() => {
-    if (user) {
-        const verifyEmails = emailExist();
+    const verifyEmails = emailExist();
+    if(!user) return
+    if (user && !verifyEmails !== undefined) {
         verifyEmails.then(result => {
             if (result.some(email => email === user?.email)) {
                 console.log("This user already exists");
@@ -63,7 +61,6 @@ export default function NavBar(){
                     lastName: user?.family_name,
                     email: user?.email,
                     photo: user?.picture,
-                    password: user?.sub
                 };
                 postUserMutation.mutate(data);
             }
@@ -71,7 +68,6 @@ export default function NavBar(){
 
         if (!isLoading) {
             setName(dbUser?.message.firstName);
-            setEmail(dbUser?.message.email);
             setPicture(dbUser?.message.photo);
         }
     }
