@@ -23,25 +23,25 @@ import S4 from "../public/images/S4.jpeg";
 
 export const Genders = [
   {
-    id : 1,
+    id : 7,
     nameGender : "Contemporaneo",
     description : "La danza contemporánea se entiende como la evolución natural hacia la libertad de expresión y de movimientos, eliminando las barreras de estilos más clásicos. Se basa en transmitir sentimientos y vivencias, evitando representar únicamente el concepto de belleza tradicional.",
     array : [C1, C2, C3, C4]
   },
   {
-    id : 2,
+    id : 8,
     nameGender : "Ballet",
     description : "El ballet clásico o danza clásica es una forma de danza cuyos movimientos están basados en el control total y absoluto del cuerpo, se recomienda empezar desde temprana edad debido a su grado de dificultad, sin embargo no es un impedimento para adentrarse en la practica de este arte. A diferencia de otras danzas, en el ballet cada paso está codificado.",
     array : [B1, B2, B3,B4,B5]
   },
   {
-    id : 3,
+    id : 9,
     nameGender : "Urbano",
     description : "El baile urbano, es un conjunto de estilos de baile creados en ambientes fuera del estudio, los cuales se caracterizan por la ejecución de movimientos muy claros y potentes, intercalados con movimientos más discretos que requieren una alta técnica. Algunos de ellos son : Break Dance, Hip-Hop, House, Popping, Waving y elementos de Freestyle o estilo libre.",
     array : [U1, U2, U3, U4]
   },
   {
-    id : 4,
+    id : 10,
     nameGender : "Baile Infantil",
     description : "La danza infantil es un medio para preservar aquello que con la edad va desapareciendo. La danza potencia su imaginación, su capacidad de juego y, sobre todo, su participación en actividades culturales.",
     array : [L1, L2, L3 ,L4]

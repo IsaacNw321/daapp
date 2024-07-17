@@ -78,7 +78,7 @@ export default function NavBar(){
 }, [isLoading, dbUser, user, userId, postUserMutation]);
   return (
     <header className={styles.header}>
-      <nav>
+      <nav >
       <button onClick={()=>setShowMenu(!showMenu)}>
         <div>
           <Image
@@ -109,6 +109,7 @@ export default function NavBar(){
               </Link>
             </li>
           )}
+            </ul>
           <div>
             {user ? 
             <LogginButton
@@ -116,12 +117,11 @@ export default function NavBar(){
               userPicture={picture ?? ''}  
               /> 
             :  <Link href="/api/auth/login">
-            <button className={styles.userButtonShow}>
+            <button className={styles.notLoog}>
               Iniciar Sesion
             </button>
           </Link>}
           </div>
-        </ul>
       </nav>
     </header>  
   )

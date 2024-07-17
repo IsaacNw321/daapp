@@ -9,6 +9,11 @@
   justify-content: center;
 }
 
+.nav{
+  display:flex;
+  list-style: none;
+}
+
 .Nav{
   background-color: #030303;
   display:flex;
@@ -46,6 +51,33 @@
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
   text-align: center;
   margin-top: 20px;
+}
+
+.notLoog{
+  position: absolute;
+  left: 80%;
+  bottom: 10%;
+  background-color: #030303;
+  display:flex;
+  justify-content: center;
+  align-items:center;
+  width: 120px;
+  margin-left: 2%;
+  list-style: none;
+  gap: 20px;
+  heigth: 300px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  height: 40px;
+}
+
+
+@media screen and (max-width: 460px){
+  .notLoog{
+    position: relative;
+    left: 22%;
+    bottom: 10%;
+  }
 }
 
 .userButtonShow:hover{
@@ -129,9 +161,12 @@
 }
 
 .logNavBar{
+  position: absolute;
+  left: 80%;
+  bottom: 10%;
   background-color: #030303;
   display:flex;
-  width: 94%;
+  width: 120px;
   margin-left: 2%;
   list-style: none;
   gap: 20px;
@@ -224,10 +259,14 @@
   }
 
   .notLogNavBar{
-    margin-left:0px;
+    position: relative;
+    left: 22%;
+    bottom: 0%;
   }
   .logNavBar{
-    margin-left:0px;
+    position: relative;
+    left: 22%;
+    bottom: 0%;
   }
 }
 

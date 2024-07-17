@@ -3,7 +3,6 @@ const nextConfig = {
   images: {
     domains: ['lh3.googleusercontent.com', 's.gravatar.com'],
   },
-  reactStrictMode: true,
 };
 
 export default nextConfig;

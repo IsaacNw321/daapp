@@ -1,4 +1,3 @@
-"use client"
 import styles from "../../styles/Testimonials.module.css";
 import Image from "next/image";
 export const ReviewCard = ({ content, userRole , user }: any) =>{
@@ -10,9 +9,9 @@ export const ReviewCard = ({ content, userRole , user }: any) =>{
           {firstName + " "}
           {lastName}
         </h3> 
-        <p>
+        <div>
         {userRole === "REPRESENTATIVE" ? <p>Representante</p> : <p>Bailarin</p>}
-        </p>
+        </div>
         <p>
           {content}
         </p>

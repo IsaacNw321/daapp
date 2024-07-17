@@ -30,7 +30,7 @@ const MoreServices : NextComponentType = () =>{
             width={260}  
             alt={`picture`} 
             src={MS1}
-            loading="lazy">
+            priority={true}>
           </Image>
           <h3>
             Clases Privadas
@@ -46,7 +46,7 @@ const MoreServices : NextComponentType = () =>{
             width={260}  
             alt={`picture`} 
             src={MS2}
-            loading="lazy">
+            priority={true}>
           </Image>
               <h3>
                 Clases de flexibilidad
@@ -62,7 +62,7 @@ const MoreServices : NextComponentType = () =>{
             width={260}  
             alt={`picture`} 
             src={MS3}
-            loading="lazy">
+            priority={true}>
           </Image>
               <h3>
                 Eventos de baile social

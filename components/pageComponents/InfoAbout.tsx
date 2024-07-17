@@ -27,7 +27,7 @@ const InfoAbout : NextComponentType = () =>{
         src={flow}
         width={400}
         height={450}
-        loading="lazy">
+        priority={true}>
       </Image>
     </div>
     <div>
@@ -37,7 +37,7 @@ const InfoAbout : NextComponentType = () =>{
         src={ballet}
         width={400}
         height={450}
-        loading="lazy">
+        priority={true}>
       </Image>
     </div>
   </div>

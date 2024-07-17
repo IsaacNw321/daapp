@@ -12,7 +12,7 @@ const Landing : NextComponentType = () => {
         height={700} 
         alt={'Dancers'} 
         src={Reginfo}
-        loading="lazy">
+        priority={true}>
       </Image>
     <div className={styles.fadeInLeftWhen}>
     <h1 className={styles.title}>

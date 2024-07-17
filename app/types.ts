@@ -1,4 +1,21 @@
 import { User } from "@prisma/client"
+import { Url } from "next/dist/shared/lib/router/router";
+
+export interface HomeProps {
+  reviews: ReviewType[]; 
+}
+
+export interface reviewUser {
+  firstName : string,
+  lastName : string,
+  photo: string
+}
+
+export interface ReviewType {
+  content: string,
+  user: reviewUser,
+  userRole: string
+}
 
 export interface postedUser {
   firstName: String,

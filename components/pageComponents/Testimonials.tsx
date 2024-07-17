@@ -13,7 +13,7 @@ const responsive = {
 }
 
 const Testimonials: NextComponentType = () =>{
-
+  
   const {data} = useQuery('reviews', ()=> getReviews());
   const [reviews, setReviews] = useState<any>();
   useEffect(()=>{
@@ -37,7 +37,7 @@ const Testimonials: NextComponentType = () =>{
     // eslint-disable-next-line react-hooks/exhaustive-deps
   })
   setReviews(reviewItems);
-}, [ data])
+}, [ data, reviews])
  
 
   return (
