@@ -33,7 +33,6 @@ model User {
   updatedAt      DateTime       @updatedAt
   dancer         Dancer?
   representative Representative?
-  password       String
 }
 
 

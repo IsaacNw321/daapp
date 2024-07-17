@@ -4,7 +4,6 @@ import { useQuery } from 'react-query';
 import { getReviews } from "../../utils/reviews";
 import { ReviewCard } from "../reviews/ReviewCard";
 import { NextComponentType } from "next";
-import {items} from "../../utils/items";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 const responsive = {
@@ -19,8 +18,9 @@ const Testimonials: NextComponentType = () =>{
   useEffect(()=>{
     if (!data) return;
     let reviewItems = data?.map((review: any, idx : number) => {
-      let userRole = review.representative !== undefined 
-      ? "Representante"
+      let userRole;  
+      review.representative.id !== undefined 
+      ? userRole = "Representante"
        : "Bailarin";
        let user;
        if (review.representative) {
