@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ReviewRProps, ReviewDProps, postReviewDancer, postReviewRepresentative, updateReview } from '../app/types';
+import { postReviewDancer, postReviewRepresentative, updateReview } from '../app/types';
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:3000', 
@@ -58,6 +58,7 @@ export const postedReviewRepresentative = async ({content, representativeId} :po
   });
     if (createReview !== undefined) {
       console.log("comentario posteado");
+      return true
     } else {
       console.log("no se pudo postear");
     }
@@ -74,6 +75,7 @@ export const postedReviewDancer = async ({content, dancerId} : postReviewDancer)
   });
     if (createReview !== undefined) {
       console.log("comentario posteado");
+      return true
     } else {
       console.log("no se pudo postear");
     }

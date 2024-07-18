@@ -1,14 +1,74 @@
 import { User } from "@prisma/client"
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { Url } from "next/dist/shared/lib/router/router";
+import { StaticImageData } from "next/image";
+
+export interface getUser {
+  firstName: string,
+  lastName: string,
+  email: string,
+  photo: string,
+  userRole: string,
+  active: boolean,
+  updatedAt: Date | null 
+  createdAt: Date | null    
+}
+
+export interface reviewProps {
+  key : number
+  content: string;
+  userRole: string | undefined;
+  user: reviewUser;
+}
+
+export interface QuestionItemProps {
+  question: string;
+  answer: string;
+  isOpen: boolean;
+  type : String;
+  toggleAnswer: () => void;
+}
+
+export interface LogginButtonProps {
+  userName: String;
+  userPicture:  StaticImport | String;
+}
+
+export interface LogginNavProps {
+  userName: String;
+  userPicture:  StaticImport | String;
+}
+
+
+
+export interface UserRequestBody {
+  firstName: string;
+  lastName: string;
+  email: string;
+  photo: string | undefined;
+}
 
 export interface HomeProps {
   reviews: ReviewType[]; 
+}
+
+export interface InstructorProps {
+  nameInstructor: string;
+  array: StaticImageData[];
+  text: string;
+  position: string;
 }
 
 export interface reviewUser {
   firstName : string,
   lastName : string,
   photo: string
+}
+
+export interface Question {
+  id : string;
+  question: string | undefined;
+  answer: string | undefined;
 }
 
 export interface ReviewType {
@@ -18,9 +78,9 @@ export interface ReviewType {
 }
 
 export interface postedUser {
-  firstName: String,
-  lastName: String,
-  email: String
+  firstName: string,
+  lastName: string,
+  email: string
 }
 
 export interface postDancers {
@@ -31,7 +91,7 @@ export interface postDancers {
 
 export interface postReviewDancer {
   content : String
-  dancerId: String,
+  dancerId: String | undefined,
 }
 
 export interface Content {
@@ -39,7 +99,7 @@ export interface Content {
 }
 
 export interface postReviewRepresentative {
-  representativeId: String,
+  representativeId: String | undefined,
   content : String
 }
 
@@ -77,4 +137,27 @@ export interface RoleProps {
 
 export interface postRole {
   userRole: "CONTACT" | "DANCER" | "REPRESENTATIVE";
+}
+
+export interface DancersProps {
+  firstName: string;
+  lastName: string;
+  Payment: number;
+}
+
+export interface PaymentStatusProps {
+  Payment: number;
+}
+
+export interface DancerInfo {
+  firstName: string;
+  lastName: string;
+  Payment: number | undefined
+}
+
+
+export interface GendersAndShowsProps {
+  nameGender: string;
+  description: string;
+  array: StaticImageData[]; 
 }

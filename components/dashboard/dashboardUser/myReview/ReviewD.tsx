@@ -29,7 +29,7 @@ const ReviewD : React.FC<ReviewDProps> = ({dancerId, reviewId}) =>{
           }
         } else {
           const createReview = await postedReviewDancer(infoReview)
-          if(createReview !== undefined){
+          if(createReview){
             setShowSucess(true);
             setTimeout(() => {
                 setShowSucess(false);

@@ -5,12 +5,7 @@ import { prisma } from "../../../lib/prisma";
 export default async function  Representative(req: NextApiRequest, res: NextApiResponse){
   const method = req.method;
   const {
-    id,
-    content,
-    representative,
-    representativeId,
-    dancer,
-    dancerId
+   userId
   } = req.body;
   switch(method){
     case "GET" :
@@ -31,24 +26,22 @@ export default async function  Representative(req: NextApiRequest, res: NextApiR
         res.status(200).json(reviews);
       }
     } catch (error) {
-      res.status(500).json({message : error});
+      res.status(500).json({message : (error as Error).message});
     }
   break;
   case "POST":
   try {
     const newRepresentative = await prisma.representative.create({
       data: {
-        id: req.body.id,
-        userId: req.body.userId,
+        userId: userId,
         Payment: req.body.Payment,
-        review: req.body.review
       }
     });
     newRepresentative
       ? res.status(200).json({ message: 'Representative created' })
       : res.status(400).json({ message: 'Could not create representative' });
   } catch (error) {
-    res.status(500).json({ message: error });
+    res.status(500).json({message : (error as Error).message});
   }
   break;
   default:

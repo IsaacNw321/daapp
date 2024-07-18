@@ -4,12 +4,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { SwiperButtons } from '../pageComponents/swiperButtons';
 import { EffectFade } from 'swiper/modules';
 import { Navigation } from 'swiper/modules';
-import Image from "next/image";
+import Image, {StaticImageData} from "next/image";
 import 'swiper/css';
 import 'swiper/css/effect-fade';
+import { GendersAndShowsProps } from "@/app/types";
 
-
-export const GendersAndShows  = ({ nameGender, description, array}: any) =>{
+export const GendersAndShows: React.FC<GendersAndShowsProps> = ({ nameGender, description, array}) =>{
 
   return(
     <div className={styles.genderCont}>
