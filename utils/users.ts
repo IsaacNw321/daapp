@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { postedUser } from '@/app/types';
 export const getUserById = async(id : String) =>{
   const response = await axios.get(`/api/users/${id}`, {
     timeout: 1000, 
@@ -13,7 +13,7 @@ export const getUserById = async(id : String) =>{
   return response.data;
 };
 
-export const postUser = async (userData : any) => {
+export const postUser = async (userData : postedUser) => {
   try {
     const response = await axios.post(`/api/users`, userData);
     if (response.status === 200) {
@@ -37,6 +37,7 @@ export const emailExist = async () => {
       return 'Error checking email existence';
   }
 };
+
 export const updateUser = async (id: string, updatedUserData: any) => {
   try {
     const response = await axios.put(`/api/users/${id}`, updatedUserData);

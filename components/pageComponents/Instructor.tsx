@@ -7,15 +7,9 @@ import { EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import styles from "../../styles/OurTeam.module.css";
+import { InstructorProps } from '@/app/types';
 
-interface InstructorProps {
-  nameInstructor: string;
-  array: StaticImageData[];
-  text: string;
-  position: string;
-}
-
-export const Instructor = ({nameInstructor, array, text, position}:InstructorProps) =>{
+export const Instructor: React.FC<InstructorProps> = ({nameInstructor, array, text, position}) =>{
   return (
     <div className={styles.instructor}>
       <div className={styles.swiperCont}>

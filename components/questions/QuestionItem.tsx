@@ -1,14 +1,7 @@
 import Image from "next/image";
 import styles from "../../styles/contact.module.css";
 import arrow from "../../public/images/awd.jpg";
-
-interface QuestionItemProps {
-  question: string;
-  answer: string;
-  isOpen: boolean;
-  type : String;
-  toggleAnswer: () => void;
-}
+import { QuestionItemProps } from "@/app/types";
 
 const QuestionItem: React.FC<QuestionItemProps> = ({ question, answer, isOpen, toggleAnswer }) => {
   return (

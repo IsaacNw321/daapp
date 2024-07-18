@@ -1,28 +1,30 @@
 "use client"
-import styles from "../../../../styles/dashboard.module.css"
+import React from 'react';
+import styles from "../../../../styles/dashboard.module.css";
 import PaymentStatus from "../myPaymentStatus/PaymentStatus";
+import { DancersProps } from '@/app/types';
 
 
-
-export const Dancers = ({ firstName,lastName, Payment} : any) =>{
- 
+const Dancers: React.FC<DancersProps> = ({ firstName, lastName, Payment }) => {
   return (
     <>
-    <div>
-       <div className={Payment !== 0 ? styles.danceCard : styles.danceCardNoPay}>
+      <div>
+        <div className={Payment !== 0 ? styles.danceCard : styles.danceCardNoPay}>
           <h4>
-            Bailarin {firstName + " "+ lastName }
+            Bailarin {firstName + " " + lastName}
           </h4>
           <div className={styles.paymentC}>
-          {!Payment ? <p>sin estado de pago</p> : 
-          <PaymentStatus 
-          Payment={Payment}
-          />
-}         </div>
-      </div> 
-    </div>
+            {!Payment ? <p>sin estado de pago</p> :
+              <PaymentStatus
+                Payment={Payment}
+              />
+            }
+          </div>
+        </div>
+      </div>
     </>
   );
 };
+
 
 export default Dancers;

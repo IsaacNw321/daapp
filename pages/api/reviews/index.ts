@@ -5,11 +5,8 @@ import { prisma } from "../../../lib/prisma";
 export default async function  Reviews(req: NextApiRequest, res: NextApiResponse){
   const method = req.method;
   const {
-    id,
     content,
-    representative,
     representativeId,
-    dancer,
     dancerId
   } = req.body;
   switch(method){
@@ -50,11 +47,16 @@ export default async function  Reviews(req: NextApiRequest, res: NextApiResponse
         res.status(200).json(reviews);
       }
     } catch (error) {
-      res.status(500).json({message : error});
+      res.status(500).json({message : (error as Error).message});
     }
   break;
   case "POST":
     try{
+      if (!representativeId && !dancerId) {
+        res.status(400).json({ message: 'Either representativeId or dancerId must be provided' });
+        return;
+      }
+
     const newReview =  await prisma.review.create({
       data : {
         content,
@@ -65,8 +67,8 @@ export default async function  Reviews(req: NextApiRequest, res: NextApiResponse
       newReview
         ? res.status(200).json({ message: 'created' })
         : res.status(400).json({ message: 'could not create review' })
-    } catch (error) {
-        res.status(500).json({message : error})
+    }catch (error) {
+      res.status(500).json({message : (error as Error).message});
     }
   break;
   default:

@@ -9,6 +9,7 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import { getUserById } from "../../utils/users";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { postUser, emailExist } from "../../utils/users";
+import { string } from "zod";
 
 const links = [{
     type: "image",
@@ -36,42 +37,47 @@ export default function NavBar(){
   const [picture, setPicture] = useState<String | undefined>('');
   const [showMenu, setShowMenu] = useState<any>(false);
   const queryClient = useQueryClient();
+  const {user} = useUser();
+  const userId = user?.sub ?? '';
+  
+  
   const postUserMutation = useMutation(postUser, {
     onSuccess: () => {
       queryClient.invalidateQueries(['user', userId]);
     },
   });
-  const {user} = useUser();
-  const userId = user?.sub ?? '';
-  
-  
-  const { data: dbUser, isLoading } = useQuery(['user', userId], () => getUserById(userId));
-  
+  const { data: dbUser, isLoading } = useQuery(['user', userId], () => getUserById(userId), {
+    enabled: !!userId, 
+  });
+  let count = 0;
   useEffect(() => {
-    const verifyEmails = emailExist();
-    if(!user) return
-    if (user && !verifyEmails !== undefined) {
-        verifyEmails.then(result => {
-            if (result.some(email => email === user?.email)) {
-                console.log("This user already exists");
-            } else {
-                const data = {
-                    id: userId,
-                    firstName: user?.given_name,
-                    lastName: user?.family_name,
-                    email: user?.email,
-                    photo: user?.picture,
-                };
-                postUserMutation.mutate(data);
-            }
-        });
-
-        if (!isLoading) {
-            setName(dbUser?.message.firstName);
-            setPicture(dbUser?.message.photo);
+    if (count>0) return;
+    if (!user) return;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (user.email && emailPattern.test(user.email)) {
+      if (!dbUser) {
+        try {
+          const data = {
+            id: userId,
+            firstName: user.given_name as string,
+            lastName: user.family_name as string,
+            email: user.email as string,
+            photo: user.picture as string,
+          };
+          postUserMutation.mutate(data);
+          count++;
+        } catch (error) {
+          console.error("Error verifying emails:", error);
         }
+      } else {
+        if (!isLoading) {
+          setName(dbUser?.firstName);
+          setPicture(dbUser?.photo);
+        }
+      }
     }
-}, [isLoading, dbUser, user, userId, postUserMutation]);
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading, dbUser, user, userId, count]);
   return (
     <header className={styles.header}>
       <nav >
@@ -109,7 +115,7 @@ export default function NavBar(){
           <div>
             {user ? 
             <LogginButton
-              userName={name ?? ''}
+              userName={name ?? ''} 
               userPicture={picture ?? ''}  
               /> 
             :  <Link href="/api/auth/login">

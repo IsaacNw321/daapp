@@ -1,13 +1,6 @@
 import axios from 'axios';
-import { postDancers } from '@components/app/types';
-export const getDancers = async () =>{
-  const Dancers = await axios.get("/api/dancers")
-  if(!Dancers){
-    console.log("there is no data")
-  } else {
-    return Dancers
-  }
-}
+import { postDancers } from '../app/types';
+
 
 export const createDancer = async (dancerData: postDancers) =>{
   try {

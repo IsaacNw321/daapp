@@ -19,7 +19,7 @@ const Testimonials: NextComponentType = () =>{
     if (!data) return;
     let reviewItems = data?.map((review: any, idx : number) => {
       let userRole;  
-      review.representative.id !== undefined 
+      review.representative?.id !== undefined 
       ? userRole = "Representante"
        : "Bailarin";
        let user;

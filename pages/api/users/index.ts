@@ -1,7 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../lib/prisma";
+import { UserRequestBody } from "@/app/types";
 
 
+const isValidEmail = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
 export default async function  Users(req: NextApiRequest, res: NextApiResponse){
   const method = req.method;
   const {
@@ -9,10 +14,12 @@ export default async function  Users(req: NextApiRequest, res: NextApiResponse){
     firstName, 
     lastName, 
     email, 
-    phone, 
     photo,
-    password
   } = req.body;
+  if (!isValidEmail(email)) {
+    return res.status(400).json({ message: 'Invalid email format' });
+  }
+
   switch(method){
     case "GET" :
     try {
@@ -29,7 +36,7 @@ export default async function  Users(req: NextApiRequest, res: NextApiResponse){
         res.status(200).json(userEmails);
       }
     } catch (error) {
-      res.status(500).json({message : error});
+      res.status(500).json({message : (error as Error).message});
     }
   break;
   case "POST":
@@ -41,7 +48,6 @@ export default async function  Users(req: NextApiRequest, res: NextApiResponse){
           lastName,
           email,
           photo,
-          password,
           updatedAt: new Date(),
         }
       });
@@ -49,7 +55,7 @@ export default async function  Users(req: NextApiRequest, res: NextApiResponse){
         ? res.status(200).json(newUser)
         : res.status(400).json({ message: 'could not create user' })
     } catch (error) {
-        res.status(500).json({message : error})
+      res.status(500).json({message : (error as Error).message});
     }
   break;
   default:

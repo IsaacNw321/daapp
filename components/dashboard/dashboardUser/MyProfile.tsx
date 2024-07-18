@@ -5,7 +5,7 @@ import { getUserById, postUser } from "../../../utils/users";
 import Link from "next/link";
 import styles from "../../../styles/dashboard.module.css"
 import { useQuery } from "react-query";
-import {Dancers} from "../dashboardUser/myDancers/Dancers";
+import Dancers from "../dashboardUser/myDancers/Dancers";
 import PaymentStatus from "./myPaymentStatus/PaymentStatus";
 import Role from "./myRole/Role";
 import { CreateDancer } from "./myDancers/createDancer";
@@ -13,62 +13,64 @@ import Loading from "../../../components/layout/loading";
 import ReviewD from "./myReview/ReviewD";
 import ReviewR from "./myReview/ReviewR";
 import Image from "next/image";
+import { DancerInfo } from "@/app/types";
+
 
 const MyProfile : NextComponentType = () =>{
   const { user, isLoading: isLoadingU  } = useUser();
   const [showDancers, setShowDancers] = useState(false);
-const [userDancers , setuserDancers] = useState<any>()
-const [payment , setPayment] = useState<any>()
-const toggleShowDancers = () => {
-  setShowDancers(prevState => !prevState);
-};
+  const [userDancers , setuserDancers] = useState<any>()
+  const [payment , setPayment] = useState<any>()
+  const toggleShowDancers = () => {
+    setShowDancers(prevState => !prevState);
+  };
 
   const userId = user?.sub ?? '';
   const { data: dbUser, isLoading } = useQuery(['user', userId], () => getUserById(userId));
   let numberDancers;
-  if(dbUser?.message.representative?.dancers){
-    numberDancers = [...dbUser?.message.representative?.dancers].length
+  if(dbUser?.representative?.dancers){
+    numberDancers = [...dbUser?.representative?.dancers].length
   }
-useEffect(() => {
-  
-  const payment = dbUser?.message?.representative?.Payment;
-  if (payment) {
-    setPayment(payment);
-  }
-  
+  useEffect(() => {
+    
+    const payment = dbUser?.representative?.Payment;
+    if (payment) {
+      setPayment(payment);
+    }
+    
 
-  const dancers = dbUser?.message?.representative?.dancers;
-  if (dancers) {
-    const allDancersInfo = dancers.map((dancer: any) => {
-      const { Payment, user: { firstName, lastName } } = dancer;
-      return {
-        firstName,
-        lastName,
-        Payment
-      };
-    });
-    setuserDancers(allDancersInfo);
-  }
-}, [user, userId, dbUser, payment, numberDancers]);
+    const dancers = dbUser?.representative?.dancers;
+    if (dancers) {
+      const allDancersInfo: DancerInfo[] = dancers.map((dancer: any) => {
+        const { Payment, user: { firstName, lastName } } = dancer;
+        return {
+          firstName,
+          lastName,
+          Payment
+        };
+      });
+      setuserDancers(allDancersInfo);
+    }
+  }, [user, userId, dbUser, payment, numberDancers]);
 
   if (isLoading) return <Loading/>;
-  const userRole = dbUser?.message.userRole;
+  const userRole = dbUser?.userRole;
   let reviewId;
   let representativeId;
   let dancerId;
-  let firstName = dbUser?.message.firstName;
-  let lastName = dbUser?.message.lastName;
-  let picture = dbUser?.message.photo;
-  if(userRole === "REPRESENTATIVE" && dbUser?.message.representative.review !== undefined){
-    reviewId = dbUser?.message.representative?.review?.id
+  let firstName = dbUser?.firstName;
+  let lastName = dbUser?.lastName;
+  let picture = dbUser?.photo;
+  if(userRole === "REPRESENTATIVE" && dbUser?.representative.review !== undefined){
+    reviewId = dbUser?.representative?.review?.id
   } 
-  if(userRole === "DANCER" && dbUser?.message.dancer.review !== undefined)
-    reviewId =  dbUser?.message.dancer?.review?.id
+  if(userRole === "DANCER" && dbUser?.dancer.review !== undefined)
+    reviewId =  dbUser?.dancer?.review?.id
   if(userRole === "REPRESENTATIVE"){
-    representativeId = dbUser?.message.representative?.id
+    representativeId = dbUser?.representative?.id
   }
   if(userRole === "DANCER"){
-    dancerId = dbUser?.message.dancer?.id
+    dancerId = dbUser?.dancer?.id
   }
   return (
     <div className={styles.dashboardUser}>

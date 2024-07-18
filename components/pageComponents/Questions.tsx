@@ -3,14 +3,16 @@ import styles from "../../styles/contact.module.css";
 import QuestionItem from "../questions/QuestionItem";
 import { useQuery } from 'react-query';
 import { getQuestions } from "../../utils/questions";
+import { Question } from "@/app/types";
+
 
 const Questions = () => {
-  const {data, isLoading} = useQuery('question', ()=> getQuestions());
+  const {data, isLoading} = useQuery<Question[]>('question', ()=> getQuestions());
   const [question, setQuestion] = useState<any>();
   const [showAnswer, setShowAnswer] = useState<{ [key: number]: boolean }>({});
   useEffect(()=>{
     if (!data) return;
-    setQuestion(data.data);
+    setQuestion(data);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, data])
   const toggleAnswer = (index: number) => {

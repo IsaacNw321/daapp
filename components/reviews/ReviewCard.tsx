@@ -1,6 +1,8 @@
 import styles from "../../styles/Testimonials.module.css";
 import Image from "next/image";
-export const ReviewCard = ({ content, userRole , user }: any) =>{
+import { reviewProps } from "@/app/types";
+
+export const ReviewCard: React.FC<reviewProps> = ({ content, userRole , user }) =>{
   const {firstName, lastName, photo,  } = user
   return(
     <>

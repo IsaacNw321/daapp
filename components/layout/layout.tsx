@@ -4,24 +4,27 @@ import styles from "../../styles/home.module.css";
 import { Footer } from './Footer';
 import { Suspense } from 'react';
 import Loading from './loading';
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+
+interface RootLayoutProps {
+  children: React.ReactNode;
+}
+
+const RootLayout: React.FC<RootLayoutProps> = ({ children }: RootLayoutProps) => {
   return (
     <>
       <Head>
-        <title>Dancer Angels </title>
+        <title>Dancer Angels</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-        <Navbar/>
-        <Suspense fallback={<Loading/>}>
+      <Navbar />
+      <Suspense fallback={<Loading />}>
         <main className={styles.main}>
           {children}
         </main>
-      <Footer/> 
-        </Suspense>
+        <Footer />
+      </Suspense>
     </>
-  )
-}
+  );
+};
+
+export default RootLayout;

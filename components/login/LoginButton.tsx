@@ -7,10 +7,12 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useQuery } from "react-query";
 import Loading from "../layout/loading";
+import { LogginButtonProps } from "@/app/types";
 
-export const LogginButton = ({ userName, userPicture }: any) =>{
-  const [dropdown, setDropdown] = useState(false)
-  const [isAdmin, setIsAdmin] = useState(false)
+
+export const LogginButton: React.FC<LogginButtonProps>  = ({ userName, userPicture }) =>{
+  const [dropdown, setDropdown] = useState<boolean>(false)
+  const [isAdmin, setIsAdmin] = useState<boolean>(false)
   const {error,  user} = useUser();
   const { picture } = user || {};
   const showMenu = () => {

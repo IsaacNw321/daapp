@@ -7,20 +7,21 @@ const phoneRegex = new RegExp(
 
 export const userSchema = z.object({
   firstName: z.string()
-    .min(3, { message: 'El nombre debe tener mas de 3 letras' })
+  
+    .min(3, { message: 'El nombre debe tener más de 3 letras' })
     .max(20, { message: 'El nombre es muy largo' })
-    .refine(value => isNaN(Number(value)), {
-      message: 'El nombre no pueden ser numeros',
-      path: ['firstName']
-    }),
+    .refine(value => /^[a-zA-ZÀ-ÿ\s'-]+$/.test(value), {
+      message:  'El nombre solo puede contener letras, espacios, guiones y apóstrofes', path: ['firstName'] }),
   lastName: z.string()
-    .min(3, { message: 'El apellido debe tener mas de 3 letras' })
+    .min(3, { message: 'El apellido debe tener más de 3 letras' })
     .max(20, { message: 'El apellido es muy largo' })
-    .refine(value => isNaN(Number(value)), {
-      message: 'El apellido no pueden ser numeros',
-      path: ['lastName']
+    .refine(value => /^[a-zA-ZÀ-ÿ\s'-]+$/.test(value), {
+      message:  'El apellido solo puede contener letras, espacios, guiones y apóstrofes', path: ['lastName'] }),
+  email: z.string()
+    .refine(value => /^\S+@\S+\.\S+$/.test(value), {
+      message: 'Ingresa un correo auténtico ejemplo: ejemplo@gmail.com',
+      path: ['email']
     }),
-  email: z.string().email({ message: 'Ingresa un correo autentico ejemplo : ejemplo@gmail.com' }),
 })
 
 export const reviewSchema = z.object({

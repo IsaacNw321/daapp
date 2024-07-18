@@ -1,6 +1,11 @@
 import Head from 'next/head'
 
-const MainLayout = ({ children, title }: any) => {
+
+type DashBoardLayoutProps = {
+    children: React.ReactNode
+    title: string
+}
+const MainLayout = ({ children, title }: DashBoardLayoutProps) => {
   return (
       <>
           <Head>
