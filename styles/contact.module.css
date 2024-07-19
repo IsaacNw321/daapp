@@ -132,9 +132,10 @@
   margin-left: 17%;
   width: 840px;
   height: 560px;
-  background-color: #000;
+  background-color: #6B0D0D;
   border-radius: 26px;
-  border: 4px solid #232323;
+  border: 4px solid white;
+  box-shadow: 0 0 20px  #FF0000;
 }
 
 @media screen and (max-width: 460px){
@@ -273,7 +274,7 @@
   text-align: left;
   width: 840px;
   height: 750px;
-  background-color: black;
+  background-color:  #6B0D0D;
   border-radius: 20px;
   padding: 16px;
   margin-bottom: 20px;
@@ -308,6 +309,8 @@
   animation-name: appear;
   animation-duration: 1s;
   font-weight: bold;
+  background-color: black;
+  border-radius: 20px;
 }
 
 .question:hover{
@@ -335,17 +338,17 @@
   margin-top: 10px;
   margin-bottom: 2%;
   width: 600px;
+  text-align: center;
 }
 
 @media screen and (max-width: 460px){
   .frec{
     font-size: 30px;
-    text-align: center;
   }
   .questionsCont{
-    width: 380px;
+    width: 360px;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
     height: auto;
   }
   .question{
@@ -353,7 +356,7 @@
     height: auto;
   }
   .questionsSect{
-    width: 400px;
+    width: 380px;
   }
 }
 

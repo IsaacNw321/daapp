@@ -92,7 +92,7 @@ export default function NavBar(){
           />
         </div>
         </button>
-        <ul className={showMenu === false ? styles.NavShow : styles.Nav}>
+        <ul className={showMenu === false ? styles.Nav : styles.NavShow}>
           {links.map(({ type, label, route })=>
             <li key={route} className={styles.Div}>
               <Link href={route}>

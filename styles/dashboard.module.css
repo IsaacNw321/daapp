@@ -3,7 +3,7 @@
   flex-direction: column;
   padding: 24px;
   align-items: center;
-  background-color: white;
+  background-color: black;
   color: black;
   height: auto;
   width: 80%;
@@ -36,11 +36,11 @@
   display: flex;
   flex-direction: row;
   gap: 30px;
-  background-color: white;
+  background-color: black;
 }
 
 .text1 h3{
-  background-color: black;
+  background-color: #6B0D0D;
   border-radius: 10px;
   padding: 12px;
   color: white;
@@ -66,7 +66,7 @@
 }
 
 .back{
-  background-color : black;
+  background-color : #6B0D0D;
   width: 80px;
   height: 40px;
   border-radius: 15px;
@@ -81,10 +81,11 @@
   gap: 20px;
   display: flex;
   flex-direction: column;
-  background-color: black;
+  background-color: #6B0D0D;
   border-radius: 20px;
   padding: 16px;
   color: white;
+  box-shadow: 0 0 20px  #FF0000;
 }
 
 .form input{
@@ -147,13 +148,12 @@
 }
 
 .button{
-  background-color: "#232323";
   width: 120px;
   height: 40px;
   border-radius: 30px;
   transition: transform 0.5s;
   margin: auto;
-  background-color: #232323;
+  background-color: black;
 }
 
 .button:hover{
@@ -180,9 +180,10 @@
   margin: auto;
   display: flex;
   flex-direction: row;
-  background-color: #232323;
+  background-color: black;
   width: 600px; 
   height: 80px;
+  border: 2px solid #6B0D0D;
   border-radius: 24px;
 }
 
@@ -204,7 +205,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color:  black;
+  background-color:  red;
   color: white;
   height: 40px;
 }
@@ -214,7 +215,7 @@
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  background-color: #232323;
+  background-color:gray;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   height: 40px;
@@ -244,7 +245,7 @@
   border-radius: 4px;
   font-size: 16px;
   color: white;
-  background-color: #232323;
+  background-color: black;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none; 
@@ -256,9 +257,10 @@
 
 .text{
   color: white;
-  background-color: #232323;
+  background-color: black;
   border-radius: 10px;
   padding: 12px;
+  border: 2px solid #6B0D0D;
 }
 
 .danceCard {
@@ -273,8 +275,8 @@
   width: 300px;
   height: 145px;
   border-radius: 10px;
-  border: 2px solid #fff;
-  background-color:#232323;
+  border: 2px solid #6B0D0D;
+  background-color:black;
   padding: 16px;
   margin-top: 10px;
 }
@@ -291,8 +293,8 @@
   width: 300px;
   height: 60px;
   border-radius: 10px;
-  border: 2px solid #fff;
-  background-color:#232323;
+  border: 2px solid #6B0D0D;
+  background-color:black;
   padding: 16px;
   margin-top: 10px;
 }
@@ -300,6 +302,7 @@
 @media screen and (max-width: 460px){
   .danceCard {
     width: 260px;
+    height: 180px;
   }
   .danceCardNoPay {
     width: 260px;
@@ -313,7 +316,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: white;
+  background-color: #6B0D0D;
   border-radius: 26px;
   height:500px;
 }
@@ -358,6 +361,7 @@
   border: 4px solid #232323;
   background-color: black;
   border-radius: 30px;
+  box-shadow: 0 0 20px  #FF0000;
 }
 
 
@@ -511,3 +515,5 @@
     transform: translateY(0%);
   }
 }
+
+

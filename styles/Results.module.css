@@ -86,6 +86,14 @@
   font-family: "Poppins";
 }
 
+.proud{
+  font-size: 18px;
+  text-align: center;
+  border: 2px solid #6B0D0D;
+  padding: 8px;
+  border-radius: 10px;
+}
+
 .downCont p{
   font-size: 18px;
   text-align: center;
@@ -112,6 +120,7 @@
   text-align: center;
   border-radius: 20px;
   border: 2px solid white;
+  box-shadow: 0 0 20px  #FF0000;
 }
 @media screen and (max-width: 460px){
 .infoResult{
@@ -129,4 +138,5 @@
   font-size: 22px;
   color: white;
 }
+
 

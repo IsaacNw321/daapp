@@ -19,7 +19,7 @@ const Results : NextComponentType = () => {
         <h2>
           Nuestros Resultados
         </h2>
-        <p>
+        <p className={styles.proud}>
           Estamos orgullosos de lo que hemos logrado, pero no nos detenemos aquí.
         </p>
         <div className={styles.infoResults}>

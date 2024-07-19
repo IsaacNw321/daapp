@@ -15,18 +15,19 @@
 }
 
 .Nav{
-  background-color: #030303;
+  background-color: #6B0D0D;
   display:flex;
-  width: 220px;
+  width: 190px;
   list-style: none;
   gap: 20px;
   heigth: 150px;
   border-radius: 20px;
+  border: 2px solid white;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 .NavShow{
-  background-color: #030303;
+  background-color: #6B0D0D;
   display:flex;
   justify-content: flex-start;
   width: 1020px;
@@ -34,6 +35,7 @@
   list-style: none;
   gap: 20px;
   heigth: 160px;
+  border: 2px solid white;
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
@@ -41,7 +43,7 @@
 .userButtonShow{
   position: absolute;
   top: 20%;
-  background-color: #030303;
+  background-color: #6B0D0D;
   display:flex;
   flex-direction: column;
   width: 94%;
@@ -53,6 +55,10 @@
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
   text-align: center;
   margin-top: 40px;
+}
+
+.userButtonShow li {
+  border: 2px solid #6B0D0D;
 }
 
 .notLoog{
@@ -296,5 +302,5 @@
 }
 
 .logo{
-  filter: invert(1);
+  border-radius: 30%;
 }

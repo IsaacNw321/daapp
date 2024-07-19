@@ -53,7 +53,7 @@ export const CreateDancer: React.FC<createDanceProps> = ({userRole, representati
        <div className={userRole === "REPRESENTATIVE" ? styles.leftCont : styles.none}>
        {userRole === "REPRESENTATIVE" && (
               <button onClick={handleAddDancer} className={styles.button}>
-                Add a Dancer
+                Registrar Bailarin
               </button>
               )}
             {showAddDancerForm && (
