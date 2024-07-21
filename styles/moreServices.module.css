@@ -15,11 +15,13 @@
 
 .mServicesCont{
   display: flex;
+  margin: auto;
   justify-content: center;
   align-items:center;
   flex-direction: column;
+  width: 90%;
   height: 1050px;
-  background-color: #000;
+  background-color: black;
   border-radius: 20px;
   animation-name: slideup;
   animation-duration: 1s;
@@ -29,20 +31,22 @@
   .mServicesCont{
     width: 360px;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 400px;
+    grid-template-columns: 370px;
+    grid-template-rows: 630px;
   }
 }
 
 
 
 .mServicesContLittle{
+  margin: auto;
   display: flex;
   justify-content: center;
+  width: 90%;
   align-items:center;
   flex-direction: column;
   height: 500px;
-  background-color: #000;
+  background-color: black;
   border-radius: 20px;
   animation-name: slideup;
   animation-duration: 1s;
@@ -50,10 +54,10 @@
 
 @media screen and (max-width: 460px){
   .mServicesContLittle{
-    width: 360px;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 520px;
+      width: 360px;
+      display: grid;
+      grid-template-columns: 370px;
+      grid-template-rows: 510px;
   }
 }
 
@@ -69,38 +73,53 @@
   font-size: 50px;
   margin-bottom: 2%;
   margin-top: 2%;
+  margin: auto;
 }
 
 .mServicesCont button{
   color: white;
   width: 100px;
   height: 50px;
-  background-color: #232323;
+  background-color: black;
   width: 100px;
   height: 50px;
   border-radius: 20px;
+  border: 2px solid #6B0D0D;
+}
+
+.mServicesCont button:hover{
+  cursor: pointer;
+  background-color: white;
+  color: black;
 }
 @media screen and (max-width: 460px){
   .mServicesCont button{
     margin-left: 35%;
     position: relative;
-    bottom: -1460px;
+    bottom: -1530px;
   }
  
 }
 
 .mServicesContLittle button{
   color: white;
-  background-color: #232323;
+  background-color:  black;
   width: 100px;
   height: 50px;
   border-radius: 20px;
+  border: 2px solid #6B0D0D;
+}
+
+.mServicesContLittle button:hover{
+  cursor: pointer;
+  background-color: white;
+  color: black;
 }
 
 @media screen and (max-width: 460px){
   .mServicesContLittle button{
     position: relative;
-    bottom: -660px;
+    bottom: -705px;
     margin-bottom:10px;
     margin-left: 35%;
     z-index:1;
@@ -153,10 +172,11 @@
 .mservice{
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   margin: auto;
   width: 300px;
-  height:400px;
+  height:410px;
   animation-name: slideup;
   animation-duration: 1s;
 }
@@ -167,7 +187,19 @@
 
 .mservice p{
   text-align: center;
+  margin-bottom: 10px;
 }
+
+@media screen and (max-width: 460px){
+  .mservice p{
+    margin-left: 15px;
+    margin-bottom: 20px;
+  }
+  .mservice h3{
+    
+  }
+}
+
 
 .carouselCont{
   display: flex;
@@ -267,7 +299,8 @@
   border-top: 2px solid black;
   animation-name: show;
   animation-duration: 1s;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 20px  #FF0000;
+  margin-bottom:12px;
 }
 
 @media screen and (max-width: 460px){

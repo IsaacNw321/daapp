@@ -1,65 +1,69 @@
 .fatherCont{
   width: 100%;
-  height: 435px;
+  height: 335px;
   display: flex;
-  align-items: space-around;
+  justify-content: space-between;
   flex-direction: column;
   margin-bottom: 30px;
 }
 
 @media screen and (max-width: 460px){
   .fatherCont{
-    height: 325px;
+    height: 375px;
+    margin-top: 30px;
   }
 }
 
 .lineCont{
   width: 100%;
   height: 2px;
-  background-color: white;
+  background-color: #6B0D0D;
 }
 
 .links{
   margin:auto;
   display:flex;
   flex-direction:row;
-  justify-content: space-around;
+  justify-content:  space-between;
   gap: 8%;
   margin-top: 4%;
-  margin-bottom: 4%;
   width: 80%;
-  height: 60%;
+  height: 250px;
 }
 
 @media screen and (max-width: 460px){
   .links{
-    display: flex;
-    flex-direction: column;
+    height: 165px;
+    margin-top: 0px;
   }
 }
+
+
 
 .trendding{
   font-size: 1.1em;
   width:40%;
-  height:100%;
+  height:150px;
   background-color: transparent;
   display:flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  gap: 12px;
+  gap: 7px;
 }
 
 @media screen and (max-width: 460px){
   .trendding{
     display: flex;
-    flex-direction: row;
   }
 }
 
 .fatherCont button{
-  background-color: #232323;
+  background-color: black;
   border-radius: 10px;
   width: 90px;
   height: 40px;
+  border: 2px solid #6B0D0D;
 }
 
 .fatherCont button:hover{
@@ -69,24 +73,25 @@
 }
 
 .logo{
-  width: 100%;
-  height:15%;
-  margin-bottom: 40px;
-  filter: invert(1);
+  width: 60px;
+  height:40px;
+  border-radius: 30%;
+  margin-bottom: 15px;
 }
 
 @media screen and (max-width: 460px){
   .logo{
-    display: flex;
-    flex.direction: row;
+  height:170px;
   }
 }
+
+
 
 .fooTitle{
   font-size: 1.5em;
   width: 100%;
   height:15%;
-  margin-bottom: 10%;
+  margin-bottom: 5px;
   color: #fff;
 }
 
@@ -94,19 +99,20 @@
   font-size: 1.5em;
   width: 100%;
   height:15%;
-  margin-bottom: 8%;
+  margin-bottom: 10px;
   color: #fff;
   padding-left:12px;
+  margin-top:12px;
 }
 
 
 .fooTitle3{
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
   font-size: 1.5em;
   width: 100%;
-  height:15%;
-  margin-bottom: 5%;
+  height:60px;
   color: #fff;
 }
 
@@ -124,15 +130,14 @@
 @media screen and (max-width: 460px){
   .resources{
     display: flex;
-    flex-direction: column-wrap;
     width:300px;
     height: 400px;
   }
 }
 .social{
   font-size: 1.1em;
-  width:40%;
-  height:100%;
+  width:150px;
+  height:150px;
   background-color: transparent;
   display:flex;
   flex-direction: column;
@@ -142,18 +147,19 @@
 
 @media screen and (max-width: 460px){
   .social{
-    display: flex;
-    flex-direction: row;
+    
   }
 }
 .legal{
   font-size: 1.1em;
   width:50%;
-  height:100%;
-  background-color: transparent;
+  height:160px;
+  background-color:transparent;
   display:flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  gap: 12px;
+  gap: 7px;
   border-radius: 10px;
 }
 
@@ -181,7 +187,6 @@
 @media screen and (max-width: 460px){
   .legal{
     display: flex;
-    flex-direction: row;
     margin-bottom: 25px;
   }
 }
@@ -190,13 +195,6 @@
   display:flex;
   flex-direction:column;
   gap: 7px;
+  margin-top: 10px;
 }
 
-@media screen and (max-width: 460px){
-  .media2{
-    display: grid;
-   grid-template-columns: 1fr 1fr;
-   grid-template-rows: 1fr 1fr;
-   margin-bottom:30px;
-  }
-}

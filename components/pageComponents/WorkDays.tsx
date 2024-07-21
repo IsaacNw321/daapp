@@ -3,6 +3,7 @@ import { NextComponentType } from "next";
 import Link from "next/link";
 const WorkDays : NextComponentType = () =>{
   return (
+    <div className={styles.daysCont}>
     <div className={styles.rightCont}>
         <h2>
           Registrate y mantente informado
@@ -34,6 +35,7 @@ const WorkDays : NextComponentType = () =>{
         Sabado : 01:00 pm a 4:30pm
       </div>
     </div>
+   </div>
    </div>
   )
 }

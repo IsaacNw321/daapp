@@ -16,7 +16,7 @@
 @media screen and (max-width: 460px){
   .genderCont{
     flex-direction: column;
-   
+    margin-right: 20px;
   }
 }
 
@@ -31,8 +31,8 @@
   width: 450px;
   height: 300px;
   gap: 20px;
-  background-color: #000;
-  border: 2px double #232323;
+  background-color: #6B0D0D;
+  box-shadow: 0 0 20px  #FF0000;
   border-radius: 20px;
 }
 
@@ -74,13 +74,26 @@
 
 .image{
   border-radius: 30%;
-  border-left: 5px solid black;
-  border-top: 2px solid black;
+  border-left: 5px solid white;
+  border-top: 2px solid white;
 }
 
 @media screen and (max-width: 460px){
   .image{
     width: 300px;
     height: 300px;
+  }
+}
+
+.textResponsive{
+  display: none;
+}
+
+@media screen and (max-width: 460px){
+  .textResponsive{
+    color: white;
+    width: 200px;
+    height:40px;
+    font-size: 14px;
   }
 }

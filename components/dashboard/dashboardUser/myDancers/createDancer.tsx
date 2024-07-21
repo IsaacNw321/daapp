@@ -13,8 +13,9 @@ export const CreateDancer: React.FC<createDanceProps> = ({userRole, representati
    const {register,handleSubmit,watch, formState: {errors}} = useForm<DancerR>({
     resolver: zodResolver(userSchema)
   });
-  const [showAddDancerForm, setShowAddDancerForm] = useState(false);
-  const [showSuccess, setShowSucess] = useState(false);
+  const [showAddDancerForm, setShowAddDancerForm] = useState<boolean>(false);
+  const [showSuccess, setShowSucess] = useState<boolean>(false);
+  const [textButton, setTextButton] = useState<boolean>(false);
   const [dancerData, setDancerData] = useState({ firstName: '', lastName: '', email: '' });
   
   const onSubmit: SubmitHandler<DancerR> = async (data: postedUser) => {
@@ -41,6 +42,7 @@ export const CreateDancer: React.FC<createDanceProps> = ({userRole, representati
   const handleAddDancer = () => {
     setShowAddDancerForm((prevShowAddDancerForm) => !prevShowAddDancerForm);
     setShowSucess(false); 
+    setTextButton((prevShowAddDancerForm) => !prevShowAddDancerForm);
   };
   
   if (numberDancers !== undefined && numberDancers >2) {
@@ -53,7 +55,7 @@ export const CreateDancer: React.FC<createDanceProps> = ({userRole, representati
        <div className={userRole === "REPRESENTATIVE" ? styles.leftCont : styles.none}>
        {userRole === "REPRESENTATIVE" && (
               <button onClick={handleAddDancer} className={styles.button}>
-                Add a Dancer
+                {textButton === false ? "Registrar Bailarin" : "Ocultar formulario"}
               </button>
               )}
             {showAddDancerForm && (

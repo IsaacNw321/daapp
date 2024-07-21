@@ -15,33 +15,33 @@
 }
 
 .Nav{
-  background-color: #030303;
+  background-color: #6B0D0D;
   display:flex;
-  width: 220px;
+  width: 190px;
   list-style: none;
   gap: 20px;
   heigth: 150px;
   border-radius: 20px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  border: 2px solid white;
 }
 
 .NavShow{
-  background-color: #030303;
+  background-color: #6B0D0D;
   display:flex;
   justify-content: flex-start;
-  width: 1020px;
+  width: 920px;
   margin-left: 2%;
   list-style: none;
   gap: 20px;
   heigth: 160px;
+  border: 2px solid white;
   border-radius: 20px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 .userButtonShow{
   position: absolute;
   top: 20%;
-  background-color: #030303;
+  background-color: #6B0D0D;
   display:flex;
   flex-direction: column;
   width: 94%;
@@ -55,16 +55,20 @@
   margin-top: 40px;
 }
 
+.userButtonShow li {
+  border: 2px solid #6B0D0D;
+}
+
 .notLoog{
   position: absolute;
-  left: 80%;
+  left: 850px;
   bottom: 10%;
-  background-color: #030303;
+  background-color: #000;
   display:flex;
   justify-content: center;
   align-items:center;
   width: 120px;
-  margin-left: 2%;
+  margin-bottom: 3px;
   list-style: none;
   gap: 20px;
   heigth: 300px;
@@ -130,12 +134,15 @@
   transition: transform 0.6s ease-out;
 }
 .Div:nth-child(1){
-  width:120px;
-  heigth:120px;
+  width:62px;
+  heigth:62px;
   display:flex;
   align-items: center;
   justify-content:center;
   margin-left:40px;
+  border: 2px solid white;
+  border-radius: 30%;
+  background-color: #000;
 }
 
 
@@ -168,9 +175,9 @@
 
 .logNavBar{
   position: absolute;
-  left: 80%;
+  left: 850px;
   bottom: 10%;
-  background-color: #030303;
+  background-color: #000;
   display:flex;
   width: 120px;
   margin-left: 2%;
@@ -192,23 +199,21 @@
 }
 
 .logNavBar button{
-  background-color: "#232323";
+  background-color: #000;
   width: 120px;
   height: 50px;
   border-radius: 20px;
   transition: transform 0.5s;
   margin: auto;
-  background-color: #232323;
   cursor: pointer;
 }
 .notLogNavBar button{
-  background-color: "#232323";
+  background-color: #000;
   width: 120px;
   height: 50px;
   border-radius: 20px;
   transition: transform 0.5s;
   margin: auto;
-  background-color: #232323;
 }
 
 .notlogNavBar li{
@@ -296,5 +301,5 @@
 }
 
 .logo{
-  filter: invert(1);
+  border-radius: 30%;
 }

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "../../styles/NavBar.module.css";
-import logo from "../../public/images/finalLogo.jpg";
+import logo from "../../public/images/blackLogo.png";
 import Image from "next/image";
 import { LogginButton } from "../login/LoginButton";
 import MenuIcon from "../../public/images/MenuuIcon.jpg"
@@ -8,8 +8,7 @@ import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { getUserById } from "../../utils/users";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { postUser, emailExist } from "../../utils/users";
-import { string } from "zod";
+import { postUser } from "../../utils/users";
 
 const links = [{
     type: "image",
@@ -99,7 +98,7 @@ export default function NavBar(){
                 <div>
                   {type === "image" && 
                   <Image
-                  width={80}
+                  width={50}
                   height={50}
                   alt="logo"
                   src={logo}

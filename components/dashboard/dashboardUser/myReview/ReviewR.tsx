@@ -28,12 +28,12 @@ const ReviewR : React.FC<ReviewRProps> = ({representativeId, reviewId}) =>{
         }
       } else {
         const createReview = await postedReviewRepresentative(infoReview)
-        if(createReview !== undefined){
-          setContent({ content: "" });
+        if(createReview){
           setShowSucess(true);
           setTimeout(() => {
               setShowSucess(false);
           }, 3000);
+          setContent({ content: "" });
         }
       } 
 }  catch (error) {

@@ -18,7 +18,7 @@ const Landing : NextComponentType = () => {
     <h1 className={styles.title}>
       Aprende a Bailar con
       <br></br>
-      Pasion por el baile
+      Dancers Angels
       <br></br> 
       Pasion por el baile
     </h1>

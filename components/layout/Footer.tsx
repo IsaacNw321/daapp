@@ -2,7 +2,7 @@
 import styles from "../../styles/Footer.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../../public/images/finalLogo.jpg";
+import logo from "../../public/images/blackLogo.png";
 export const Footer = () =>{
   return (
     <footer>
@@ -15,7 +15,7 @@ export const Footer = () =>{
             <div className={styles.logo}>
               <Image
               width={60}
-              height={60}
+              height={50}
               alt="logo"
               src={logo}
               />
