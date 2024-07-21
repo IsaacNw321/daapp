@@ -31,8 +31,8 @@
   .mServicesCont{
     width: 360px;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 400px;
+    grid-template-columns: 370px;
+    grid-template-rows: 630px;
   }
 }
 
@@ -54,10 +54,10 @@
 
 @media screen and (max-width: 460px){
   .mServicesContLittle{
-    width: 360px;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 520px;
+      width: 360px;
+      display: grid;
+      grid-template-columns: 370px;
+      grid-template-rows: 510px;
   }
 }
 
@@ -84,12 +84,19 @@
   width: 100px;
   height: 50px;
   border-radius: 20px;
+  border: 2px solid #6B0D0D;
+}
+
+.mServicesCont button:hover{
+  cursor: pointer;
+  background-color: white;
+  color: black;
 }
 @media screen and (max-width: 460px){
   .mServicesCont button{
     margin-left: 35%;
     position: relative;
-    bottom: -1560px;
+    bottom: -1530px;
   }
  
 }
@@ -100,6 +107,13 @@
   width: 100px;
   height: 50px;
   border-radius: 20px;
+  border: 2px solid #6B0D0D;
+}
+
+.mServicesContLittle button:hover{
+  cursor: pointer;
+  background-color: white;
+  color: black;
 }
 
 @media screen and (max-width: 460px){
@@ -158,6 +172,7 @@
 .mservice{
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   margin: auto;
   width: 300px;
@@ -174,6 +189,17 @@
   text-align: center;
   margin-bottom: 10px;
 }
+
+@media screen and (max-width: 460px){
+  .mservice p{
+    margin-left: 15px;
+    margin-bottom: 20px;
+  }
+  .mservice h3{
+    
+  }
+}
+
 
 .carouselCont{
   display: flex;

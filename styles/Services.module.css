@@ -16,7 +16,7 @@
 @media screen and (max-width: 460px){
   .genderCont{
     flex-direction: column;
-   
+    margin-right: 20px;
   }
 }
 
@@ -32,7 +32,7 @@
   height: 300px;
   gap: 20px;
   background-color: #6B0D0D;
-  border: 2px double #232323;
+  box-shadow: 0 0 20px  #FF0000;
   border-radius: 20px;
 }
 
@@ -82,5 +82,18 @@
   .image{
     width: 300px;
     height: 300px;
+  }
+}
+
+.textResponsive{
+  display: none;
+}
+
+@media screen and (max-width: 460px){
+  .textResponsive{
+    color: white;
+    width: 200px;
+    height:40px;
+    font-size: 14px;
   }
 }

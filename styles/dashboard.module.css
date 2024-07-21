@@ -96,7 +96,7 @@
   height: 45px;
   border-radius: 10px;
   border: 2px solid #fff;
-  background-color:#232323;
+  background-color:#000;
   padding: 16px;
   margin-top: 10px;
 }
@@ -106,13 +106,12 @@
 }
 
 .form button{
-  background-color: "#232323";
+  background-color: black;
   width: 120px;
   height: 40px;
   border-radius: 30px;
   transition: transform 0.5s;
   margin: auto;
-  background-color: #232323;
 }
 
 .form button:hover{
@@ -318,7 +317,7 @@
   flex-direction: column;
   background-color: #6B0D0D;
   border-radius: 26px;
-  height:500px;
+  height:600px;
 }
 
 
@@ -348,13 +347,14 @@
 
 .myForm{
   margin-top: 16px;
+  padding:12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   color:  #fff;
-  height: 700px;
+  height: 550px;
   width: 450px;
   animation-name: showSlow;
   animation-duration: 0.6s;
@@ -374,15 +374,15 @@
   height: 45px;
   border-radius: 10px;
   border: 2px solid #fff;
-  background-color:#232323;
+  background-color:#000;
   padding: 16px;
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .myForm label{
   color: #fff;
   font-size: 16px;
-  font-weight: bold;
   width: 150px;
   height: 50px;
 }
@@ -393,14 +393,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 380px;
+  width: 390px;
   height: 50px;
   font-size: 20px;
   padding: 16px 32px;
   color: white;
   background-color: #000;
   margin-top: 30px;
-  border-radius: 20px;
+  border-radius: 42px;
   border: 2px solid white;
 }
 

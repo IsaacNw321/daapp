@@ -122,6 +122,12 @@
   height: 0;
 }
 
+.daysCont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .rightCont{
   display: flex;
   justify-content: flex-start;
@@ -129,7 +135,6 @@
   flex-direction: column;
   margin-top:120px;
   margin-bottom: 30px;
-  margin-left: 17%;
   width: 840px;
   height: 560px;
   background-color: #6B0D0D;
@@ -264,6 +269,7 @@
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  background-color: transparent;
 }
 
 .questionsCont{
@@ -344,6 +350,7 @@
 @media screen and (max-width: 460px){
   .frec{
     font-size: 30px;
+    margin-left: 10px;
   }
   .questionsCont{
     width: 360px;

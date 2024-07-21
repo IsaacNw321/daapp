@@ -31,7 +31,7 @@
   margin-top: 20px;
   width: 25%;
   height: 2px;
-  background-color: white;
+  background-color:  #6B0D0D;
   display: flex;
 }
 
@@ -55,8 +55,7 @@
   animation-name: slideup;
   border-radius: 20px;
   font-family: Poppins;
-  border: 2px double #191619;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 20px  #FF0000;
   height: 290px;
   width: 400px;
   background-color: #6B0D0D;
@@ -71,7 +70,7 @@
 @media screen and (max-width: 460px){
   .about p{
     flex-direction: column;
-    margin-left:60px;
+    margin-left:30px;
     width: 260px;
     height: 500px;
   }
@@ -82,7 +81,7 @@
   display: flex;
   align-items:center;
   flex-direction: column;
-  background-color: 	#000;
+  background-color: 	transparent;
   border-radius: 40px;
 }
 
@@ -90,6 +89,7 @@
   .downCont{
     width: 360px;
     height:1280px;
+    margin-bottom: 50px;
   }
 }
 
@@ -100,6 +100,13 @@
   animation-duration: 1s;
   animation-name: slideup;
   font-family: 'Poppins', 'sans-serif';
+}
+
+
+@media screen and (max-width: 460px){
+  .downCont h3{
+    margin-left: 30px;
+  }
 }
 
 
@@ -133,7 +140,7 @@
     grid-template-columns: 1fr;
     width: 360px;
     height: 400px;
-    margin-left: 40px;
+    margin-left: 0px;
   }
   .services div{
     width: 320px;
@@ -159,7 +166,7 @@
   background-color: #000;
   border-radius: 30px;
   border: 2px double #232323;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 20px  #FF0000;
   width: 450px;
   animation-name: show;
   animation-duration: 1s;
@@ -182,17 +189,15 @@
 .image{
   border-radius: 20%;
   animation-duration: 1s;
-  width: 330px;
+  width: 300px;
   height: 400px;
   animation-name: slideup;
 }
 
 @media screen and (max-width: 460px){
   .image{
-    margin-left: 30px;
     width: 320px;
     margin-bottom:30px;
-   
   }
 }
 

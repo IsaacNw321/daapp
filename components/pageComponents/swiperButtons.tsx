@@ -2,7 +2,7 @@
 import { useSwiper } from "swiper/react";
 import styles from "../../styles/OurTeam.module.css";
 import Image from "next/image";
-import arrow from "../../public/images/arrowSwipe.png";
+import arrow from "../../public/images/awd.jpg";
 import arrowPre from "../../public/images/arrowpreSwipe.png";
 import { NextComponentType } from "next";
 export const SwiperButtons : NextComponentType = () =>{
@@ -14,8 +14,8 @@ export const SwiperButtons : NextComponentType = () =>{
         className={styles.slidePrev}>
            <Image
                 className={styles.bimage}
-                height={28} 
-                width={28}  
+                height={25} 
+                width={25}  
                 alt={`arrow`} 
                 src={arrow}
                 loading="lazy">
@@ -26,8 +26,8 @@ export const SwiperButtons : NextComponentType = () =>{
         className={styles.slideNext}>
            <Image
                 className={styles.bimage}
-                height={28} 
-                width={28}  
+                height={25} 
+                width={25}  
                 alt={`arrow`} 
                 src={arrow}
                 loading="lazy">
