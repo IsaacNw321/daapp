@@ -9,6 +9,7 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import { getUserById } from "../../utils/users";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { postUser } from "../../utils/users";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 const links = [{
     type: "image",
@@ -33,7 +34,7 @@ const links = [{
 
 export default function NavBar(){
   const [name, setName] = useState<String | undefined>('')
-  const [picture, setPicture] = useState<String | undefined>('');
+  const [picture, setPicture] = useState<string | StaticImport>('');
   const [showMenu, setShowMenu] = useState<any>(false);
   const queryClient = useQueryClient();
   const {user} = useUser();
@@ -77,6 +78,8 @@ export default function NavBar(){
     }
      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, dbUser, user, userId, count]);
+
+
   return (
     <header className={styles.header}>
       <nav >

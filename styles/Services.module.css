@@ -10,6 +10,8 @@
   background-color: #000;
   color: #232323;
   border: 5px solid black;
+  animation-name: slideup;
+  animation-duration: 5s;
 }
 
 
@@ -95,5 +97,19 @@
     width: 200px;
     height:40px;
     font-size: 14px;
+  }
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(-50%);
+    opacity: .2;
+    width: 20%;
+  }
+
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+    width: 100%;
   }
 }

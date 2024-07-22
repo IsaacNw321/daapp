@@ -1,5 +1,5 @@
 .header{
-  width: 100%;
+  width: 90%;
   background-color: 	transparent;
   color: white;
   heigth: 300px;
@@ -23,14 +23,15 @@
   heigth: 150px;
   border-radius: 20px;
   border: 2px solid white;
+  animation-duration: 2s;
+  animation-name: slidedown;
 }
 
 .NavShow{
   background-color: #6B0D0D;
   display:flex;
-  justify-content: flex-start;
-  width: 920px;
-  margin-left: 2%;
+  justify-content: center;
+  width: 135%;
   list-style: none;
   gap: 20px;
   heigth: 160px;
@@ -53,6 +54,8 @@
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
   text-align: center;
   margin-top: 40px;
+  animation-duration: 2s;
+  animation-name: slidedownuserButton;
 }
 
 .userButtonShow li {
@@ -61,7 +64,7 @@
 
 .notLoog{
   position: absolute;
-  left: 850px;
+  margin-left: 620px;
   bottom: 10%;
   background-color: #000;
   display:flex;
@@ -87,6 +90,7 @@
     position: relative;
     left: 22%;
     bottom: 10%;
+    margin-left: 40px;
   }
 }
 
@@ -175,12 +179,11 @@
 
 .logNavBar{
   position: absolute;
-  left: 850px;
+  margin-left: 620px;
   bottom: 10%;
   background-color: #000;
   display:flex;
   width: 120px;
-  margin-left: 2%;
   list-style: none;
   gap: 20px;
   heigth: 300px;
@@ -248,6 +251,7 @@
     flex-direction: column;
     align-items: center;
     padding: 16px  0px  8px;
+    margin-left: 60px;
   }
   .NavShow{
     display: none;
@@ -278,6 +282,7 @@
     position: relative;
     left: 22%;
     bottom: 0%;
+    margin-left: 40px;
   }
 }
 
@@ -302,4 +307,30 @@
 
 .logo{
   border-radius: 30%;
+}
+
+@keyframes slidedown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+    height: 0;
+  }
+
+  to{
+    transform: translateY(0%);
+    opacity: 1;
+    height: 82%;
+  }
+}
+
+@keyframes slidedownuserButton {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  to{
+    transform: translateY(0%);
+    opacity: 1;
+  }
 }

@@ -31,7 +31,7 @@ export interface QuestionItemProps {
 
 export interface LogginButtonProps {
   userName: String;
-  userPicture:  StaticImport | String;
+  userPicture:  StaticImport | string;
 }
 
 export interface LogginNavProps {
@@ -84,7 +84,7 @@ export interface postedUser {
 }
 
 export interface postDancers {
-  representativeId: String,
+  representativeId: String | undefined,
   userId: String,
 }
 
