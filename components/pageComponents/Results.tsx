@@ -1,5 +1,5 @@
 import styles from "../../styles/Results.module.css";
-import R1 from "../../public/images/R1.jpeg";
+import R1 from "../../public/images/results.jpeg";
 import Image from "next/image";
 import { NextComponentType } from "next";
 const Results : NextComponentType = () => {

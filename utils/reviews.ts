@@ -13,8 +13,7 @@ export const getReviews = async () => {
           return response.data;
       }
   } catch (error) {
-      console.error("Error fetching reviews:", error);
-      throw error;
+    return
   }
 };
 

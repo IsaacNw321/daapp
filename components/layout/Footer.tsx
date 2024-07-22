@@ -85,33 +85,6 @@ export const Footer = () =>{
               </div> 
             </div>
           </div>
-          <div className={styles.legal}>
-            <h3 className={styles.fooTitle3}>
-              Legal
-            </h3>
-            <Link 
-              href={'/'}
-              style={{ 
-              textDecoration: 'none',
-              backgroundColor: 'transparent' 
-              }}
-            >
-              <button>
-                Terminos y condiciones
-              </button>
-            </Link>  
-            <Link 
-              href={'/'}
-              style={{ 
-              textDecoration: 'none',
-              backgroundColor: 'transparent' 
-              }}
-            >
-              <button>
-                Politica de privacidad
-              </button>
-            </Link>
-          </div>
         </div>
       </nav>
       <div className={styles.lineCont}>

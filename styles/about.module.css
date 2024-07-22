@@ -209,6 +209,8 @@
   margin-top: 100px;
   justify-content: center;
   margin-left: 20px;
+  animation-name: slidein;
+  animation-duration: 1s;
 }
 
 @media screen and (max-width: 460px){
@@ -238,5 +240,17 @@
   }
   to{
     scale: 100%;
+  }
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(-50%);
+    opacity: .2;
+  }
+
+  to {
+    transform: translateX(0%);
+    opacity: 1;
   }
 }

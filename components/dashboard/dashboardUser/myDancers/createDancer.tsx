@@ -6,7 +6,7 @@ import { createDancer } from "../../../../utils/dancers";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import {userSchema} from "../../../../validations/userSchema";
-import { createDanceProps, postedUser } from "../../../../app/types";
+import { createDanceProps, postDancers, postedUser } from "../../../../app/types";
 import { DancerR } from "../../../../app/types";
 export const CreateDancer: React.FC<createDanceProps> = ({userRole, representativeId, numberDancers}) =>{
 
@@ -25,7 +25,7 @@ export const CreateDancer: React.FC<createDanceProps> = ({userRole, representati
       const newUserResponse = await postUser(userData);
       if (newUserResponse && newUserResponse.id) {
         const userId = newUserResponse.id;
-        const createDancerData = { userId, representativeId };
+        const createDancerData: postDancers = { userId, representativeId };
         const newDancerResponse = await createDancer(createDancerData);
       } else {
         console.error("User response is null or does not contain an id property");

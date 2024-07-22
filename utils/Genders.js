@@ -9,16 +9,16 @@ import B4 from "../public/images/B4.jpeg";
 import B5 from "../public/images/B5.jpeg";
 import U1 from "../public/images/U1.jpeg";
 import U2 from "../public/images/U2.jpeg";
-import U3 from "../public/images/U3.jpeg";
+import U3 from "../public/images/urban.jpeg";
 import U4 from "../public/images/U4.jpeg";
 import L1 from "../public/images/L1.jpeg";
 import L2 from "../public/images/L2.jpeg";
 import L3 from "../public/images/L3.jpeg";
-import L4 from "../public/images/L4.jpeg";
+import L4 from "../public/images/contempo2.jpeg";
 import S1 from "../public/images/S1.jpeg";
 import S2 from "../public/images/S2.jpeg";
 import S3 from "../public/images/S3.jpeg";
-import S4 from "../public/images/S4.jpeg";
+import S4 from "../public/images/flayer.jpeg";
 
 
 export const Genders = [

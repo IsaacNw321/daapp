@@ -1,4 +1,4 @@
-import E1 from "../public/images/E1.jpeg";
+import E1 from "../public/images/esme.jpeg";
 import E2 from "../public/images/E2.jpeg";
 import E3 from "../public/images/E3.jpeg";
 import I1 from "../public/images/I1.jpeg";

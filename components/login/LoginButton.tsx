@@ -38,7 +38,7 @@ export const LogginButton: React.FC<LogginButtonProps>  = ({ userName, userPictu
     return <div>Error</div>
   }
   if (isLoading) {
-    return <div className={styles.logNavBar}>Cargando, espere un momento por favor...</div>;
+    return <div className={styles.logNavBar}>Cargando...</div>;
   }
   if (!dbUser){
     setTimeout(() => {
@@ -47,7 +47,6 @@ export const LogginButton: React.FC<LogginButtonProps>  = ({ userName, userPictu
   }
  return (
   <div className={styles.logNavBar}>
-    {isLoading ?( <Loading/>) : (
       <div>
         <button onClick={showMenu}>
           {userPicture && (
@@ -91,8 +90,6 @@ export const LogginButton: React.FC<LogginButtonProps>  = ({ userName, userPictu
           </li>
         </u>
       </div>
-    ) 
-    }
   </div>
 );
 }

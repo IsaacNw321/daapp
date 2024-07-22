@@ -114,10 +114,10 @@
 
 @media screen and (max-width: 450px) {
   .buttonH{
-    margin-left: 240px;
-    width: 70px;
+    margin-left: 220px;
+    width: 100px;
     height: 45px;
-    border-radius: 40%;
+    border-radius: 20px;
   }
 }
 

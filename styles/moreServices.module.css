@@ -94,7 +94,7 @@
 }
 @media screen and (max-width: 460px){
   .mServicesCont button{
-    margin-left: 35%;
+    margin-left: 150px;
     position: relative;
     bottom: -1530px;
   }
@@ -121,7 +121,7 @@
     position: relative;
     bottom: -705px;
     margin-bottom:10px;
-    margin-left: 35%;
+    margin-left: 150px;
     z-index:1;
   }
 
@@ -140,7 +140,7 @@
 
 @media screen and (max-width: 460px){
   .mServices{
-    width: 360px;
+    width: 350px;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
@@ -192,11 +192,13 @@
 
 @media screen and (max-width: 460px){
   .mservice p{
-    margin-left: 15px;
+    position: relative;
+    left: 20px;
     margin-bottom: 20px;
   }
   .mservice h3{
-    
+    position: relative;
+    left: 23px;
   }
 }
 
