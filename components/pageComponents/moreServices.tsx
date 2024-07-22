@@ -4,7 +4,7 @@ import { useState } from "react";
 import MS1 from "../../public/images/MS1.jpeg";
 import MS2 from "../../public/images/MS2.jpeg";
 import MS3 from "../../public/images/MS3.jpeg";
-import MS4 from "../../public/images/MS4.jpeg";
+import MS4 from "../../public/images/contempo.jpeg";
 import MS5 from "../../public/images/MS5.jpeg";
 import MS6 from "../../public/images/MS6.jpeg";
 import { NextComponentType } from "next";
@@ -61,7 +61,7 @@ const MoreServices : NextComponentType = () =>{
             height={260} 
             width={260}  
             alt={`picture`} 
-            src={MS3}
+            src={MS4}
             priority={true}>
           </Image>
               <h3>
@@ -79,7 +79,7 @@ const MoreServices : NextComponentType = () =>{
                 height={260} 
                 width={260}  
                 alt={`picture`} 
-                src={MS4}
+                src={MS3}
                 loading="lazy">
               </Image>
               <h3>
