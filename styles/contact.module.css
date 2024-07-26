@@ -130,7 +130,7 @@
 
 .rightCont{
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
   margin-top:120px;
@@ -144,9 +144,15 @@
 }
 
 @media screen and (max-width: 460px){
+  .daysCont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+  }
   .rightCont{
     width: 340px;
-    margin-left: 30px;
+    margin-left: 10px;
     padding: 8px;
     height: 700px;
   }

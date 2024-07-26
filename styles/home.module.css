@@ -1,7 +1,7 @@
 
 .fatherCont{
   margin: auto;
-  background-color: #232323;
+  background-color: #000;
   z-index: -1;
   height: 920px;
 }
@@ -60,12 +60,14 @@
   margin-left: 20px;
   position: relative;
   transition: font-size 0.5s;
+  font-weight: 500;
 }
 @media screen and (max-width: 450px) {
   .title {
-    font-size: 28px; 
+    font-size: 26px; 
     height: 160px;
     margin-left: 0px;
+    margin-right: 10px;
   }
 }
 
@@ -84,6 +86,7 @@
   animation-name: slidein;
   margin-left: 20px;
   transition: font-size 0.5s;
+  font-weight: 300;
 }
 
 @media screen and (max-width: 450px) {
@@ -92,6 +95,7 @@
     width: 240px;
     margin-top: 0;
     height: 50px;
+    margin-left: 0px;
   }
 }
 .buttonH {

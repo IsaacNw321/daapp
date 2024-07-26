@@ -7,9 +7,7 @@
   align-items:center;
   width: 100%;
   heigth: 500px;
-  background-color: #000;
-  color: #232323;
-  border: 5px solid black;
+  background-color: transparent;
   animation-name: slideup;
   animation-duration: 5s;
 }
@@ -18,7 +16,7 @@
 @media screen and (max-width: 460px){
   .genderCont{
     flex-direction: column;
-    margin-right: 20px;
+    margin-right: 60px;
   }
 }
 
@@ -40,8 +38,9 @@
 
 @media screen and (max-width: 460px){
   .infoGender{
-    width: 340px;
-    margin-top: 50px;
+    width: 320px;
+    margin-top: 20px;
+    height: auto;
   }
 }
 
