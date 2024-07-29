@@ -21,7 +21,7 @@
   flex-direction: column;
   width: 90%;
   height: 1050px;
-  background-color: black;
+  background-color: transparent;
   border-radius: 20px;
   animation-name: slideup;
   animation-duration: 1s;
@@ -29,7 +29,7 @@
 
 @media screen and (max-width: 460px){
   .mServicesCont{
-    width: 360px;
+    width: 330px;
     display: grid;
     grid-template-columns: 370px;
     grid-template-rows: 630px;
@@ -46,7 +46,7 @@
   align-items:center;
   flex-direction: column;
   height: 500px;
-  background-color: black;
+  background-color: transparent;
   border-radius: 20px;
   animation-name: slideup;
   animation-duration: 1s;
@@ -54,7 +54,7 @@
 
 @media screen and (max-width: 460px){
   .mServicesContLittle{
-      width: 360px;
+      width: 330px;
       display: grid;
       grid-template-columns: 370px;
       grid-template-rows: 510px;
@@ -98,6 +98,11 @@
     position: relative;
     bottom: -1530px;
   }
+  .mServicesCont button:hover{
+    cursor: pointer;
+    background-color: black;
+    color: white;
+  }
  
 }
 
@@ -124,7 +129,11 @@
     margin-left: 150px;
     z-index:1;
   }
-
+  .mServicesContLittle button:hover{
+    cursor: pointer;
+    background-color: black;
+    color: white;
+  }
  
 }
 

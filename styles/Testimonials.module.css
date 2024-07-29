@@ -34,6 +34,7 @@
   width: 700px;
   border: 2px solid #6B0D0D;
   border-radius: 10px;
+  background-color: #000;
 }
 
 @media screen and (max-width: 460px){
@@ -54,7 +55,7 @@
   align-items: space-around;
   justify-content: flex-start;
   width: 450px;
-  height: 250px;
+  height: 280px;
   text-align: left;
   border: 2px solid #6B0D0D;
   border-radius: 10px;
@@ -63,12 +64,7 @@
   margin-left: 10px;
 }
 
-@media screen and (max-width: 460px){
-  .item{
-    width: 300px;
-    height: 350px;
-  }
-}
+
 
 .item h3{
   color: white;
@@ -85,7 +81,7 @@
   width: 90px;
   height: 90px;
   position: relative;
-  bottom: 20%;
+  bottom: 40%;
   left: 90%;
   border-radius: 50%;
 }
@@ -93,10 +89,23 @@
 @media screen and (max-width: 460px){
   .tImage{
     width: 80px;
-  height: 80px;
+    height: 80px;
     position: relative;
-    bottom: -15%;
-    left: 60%;
+    bottom: -10%;
+    left: 70%;
+  }
+  .item{
+    width: 320px;
+    height: 350px;
+  }
+  .item p{
+    width: 200px;
+    margin-left: 10px;
+  }
+  .reviews{
+    width: 95%;
+    height: 400px;
+    background-color: transparent;
   }
 }
 

@@ -23,6 +23,9 @@
     font-size: 2em;
    margin-top: 20px;
   }
+  .ourTeam{
+    width: 360px;
+  }
 }
 
 .instructorText{
@@ -83,14 +86,13 @@
   display: flex;
   justify-content: center;
   width: 500px;
-  height: 550px;
+  height: 560px;
 }
 
 @media screen and (max-width: 460px){
   .swiperCont{
     width: 350px;
     border-radius: 50%;
-    height: 380px;
   }
 }
 
@@ -105,7 +107,6 @@
   height: 300px;
   gap: 20px;
   border-radius: 20px;
-  border: 2px double #232323;
 }
 
 @media screen and (max-width: 460px){
@@ -113,7 +114,7 @@
     width: 330px;
     text-align: center;
     height: 400px;
-    margin-left: 40px;
+    margin-left: 0px;
     padding: 8px;
   }
 }
@@ -193,11 +194,13 @@
 
 @media screen and (max-width: 460px){
   .slideNext{
-    
+    left: 37%;
+    margin-bottom:20px;
   }
   
   .slidePrev{
-    
+    left: 37%;
+    margin-bottom:20px;
   }
 }
 
@@ -231,10 +234,14 @@
 }
 @media screen and (max-width: 460px){
   .image{
-    width: 280px;
-    border-radius: 50%;
-    height: 360px;
-    margin-left: 50px;
+    width: 300px;
+    height: 430px;
+    border-radius: 20px;
+    margin-left: 25px;
+  }
+  .swiperSlide{
+    width: 320px;
+    height: 300px;
   }
 }
 @keyframes slideup {

@@ -232,9 +232,10 @@
 .toggleMenu{
   cursor: pointer;
   top: 1rem;
-  right: 1rem;
+  right: -10px;
   position: absolute;
   filter: invert(1);
+  border-radius: 10px;
 }
 
 
@@ -283,6 +284,9 @@
     left: 22%;
     bottom: 0%;
     margin-left: 40px;
+  }
+  .hidden {
+    display: none;
   }
 }
 

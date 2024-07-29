@@ -14,6 +14,7 @@ import ReviewD from "./myReview/ReviewD";
 import ReviewR from "./myReview/ReviewR";
 import Image from "next/image";
 import { DancerInfo } from "@/app/types";
+import UserUpdate from "./UpdateUser";
 
 
 const MyProfile : NextComponentType = () =>{
@@ -74,6 +75,7 @@ const MyProfile : NextComponentType = () =>{
   }
   return (
     <div className={styles.dashboardUser}>
+      {firstName && lastName ? (
         <div className={styles.info}>
           <div className={styles.firstLine}>
             <Link
@@ -156,7 +158,7 @@ const MyProfile : NextComponentType = () =>{
     </>
   )}
 </div>
-      </div>
+      </div> ) : <UserUpdate/> }
     </div>
   );
 }
