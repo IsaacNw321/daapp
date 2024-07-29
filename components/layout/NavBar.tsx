@@ -59,8 +59,8 @@ export default function NavBar(){
         try {
           const data = {
             id: userId,
-            firstName: user.given_name as string,
-            lastName: user.family_name as string,
+            firstName: user?.given_name as string,
+            lastName: user?.family_name as string,
             email: user.email as string,
             photo: user.picture as string,
           };

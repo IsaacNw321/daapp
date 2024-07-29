@@ -161,3 +161,8 @@ export interface GendersAndShowsProps {
   description: string;
   array: StaticImageData[]; 
 }
+
+export interface fullName{
+  firstName : string;
+  lastName : string;
+}
