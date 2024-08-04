@@ -1,21 +1,19 @@
-import { User } from "@prisma/client"
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
-import { Url } from "next/dist/shared/lib/router/router";
 import { StaticImageData } from "next/image";
 
 export interface getUser {
-  firstName: string,
-  lastName: string,
-  email: string,
-  photo: string,
-  userRole: string,
-  active: boolean,
-  updatedAt: Date | null 
-  createdAt: Date | null    
+  firstName: string;
+  lastName: string;
+  email: string;
+  photo: string;
+  userRole: string;
+  active: boolean;
+  updatedAt: Date | null;
+  createdAt: Date | null;    
 }
 
 export interface reviewProps {
-  key : number
+  key : number;
   content: string;
   userRole: string | undefined;
   user: reviewUser;
@@ -60,9 +58,9 @@ export interface InstructorProps {
 }
 
 export interface reviewUser {
-  firstName : string,
-  lastName : string,
-  photo: string
+  firstName : string;
+  lastName : string;
+  photo: string;
 }
 
 export interface Question {
@@ -72,40 +70,40 @@ export interface Question {
 }
 
 export interface ReviewType {
-  content: string,
-  user: reviewUser,
-  userRole: string
+  content: string;
+  user: reviewUser;
+  userRole: string;
 }
 
 export interface postedUser {
-  firstName: string,
-  lastName: string,
-  email: string
+  firstName: string;
+  lastName: string;
+  email: string;
 }
 
 export interface postDancers {
-  representativeId: String | undefined,
-  userId: String,
+  representativeId: String | undefined;
+  userId: String;
 }
 
 
 export interface postReviewDancer {
-  content : String
-  dancerId: String | undefined,
+  content : String;
+  dancerId: String | undefined;
 }
 
 export interface Content {
-  content : String
+  content : String;
 }
 
 export interface postReviewRepresentative {
-  representativeId: String | undefined,
-  content : String
+  representativeId: String | undefined;
+  content : String;
 }
 
 export interface updateReview {
-  content : String,
-  reviewId : String
+  content : String;
+  reviewId : String;
 }
 
 export interface DancerR  {
@@ -125,14 +123,14 @@ export interface ReviewDProps {
 }
 
 export interface createDanceProps {
-  userRole : "ADMIN"| "REPRESENTATIVE"| "DANCER" | "CONTACT",
-  representativeId : string | undefined,
-  numberDancers : number | undefined
+  userRole : "ADMIN"| "REPRESENTATIVE"| "DANCER" | "CONTACT";
+  representativeId : string | undefined;
+  numberDancers : number | undefined;
 }
 
 export interface RoleProps {
-  userRole : "ADMIN"| "REPRESENTATIVE"| "DANCER" | "CONTACT",
-  userId : string
+  userRole : "ADMIN"| "REPRESENTATIVE"| "DANCER" | "CONTACT";
+  userId : string;
 }
 
 export interface postRole {
@@ -152,7 +150,7 @@ export interface PaymentStatusProps {
 export interface DancerInfo {
   firstName: string;
   lastName: string;
-  Payment: number | undefined
+  Payment: number | undefined;
 }
 
 

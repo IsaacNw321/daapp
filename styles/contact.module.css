@@ -311,7 +311,7 @@
   font-size: 26px;
   color: 	white;
   width: 650px;
-  height: 80px;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: left;
@@ -333,7 +333,8 @@
 .answer{
   color: white;
   font-size: 18px;
-  width: 800px;
+  width: 600px;
+  height: 80px;
   animation-name: showSlow;
   animation-duration: 0.6s;
   animation: hideAnswer 0.8s ease-in;
@@ -359,14 +360,21 @@
     margin-left: 10px;
   }
   .questionsCont{
-    width: 360px;
+    width: 340px;
+    margin-right: 20px;
     justify-content: flex-start;
     align-items: center;
     height: auto;
   }
   .question{
     width: 260px;
+    font-size: 20px;
     height: auto;
+  }
+  .answer{
+    width: 240px;
+    height: 150px;
+    font-size: 14px;
   }
   .questionsSect{
     width: 380px;

@@ -19,14 +19,13 @@ const Testimonials: NextComponentType = () =>{
     if (!data) return;
     let reviewItems = data?.map((review: any, idx : number) => {
       let userRole;  
-      review.representative?.id !== undefined 
-      ? userRole = "Representante"
-       : "Bailarin";
        let user;
-       if (review.representative) {
-         user = review.representative.user;
-       } else if (review.dancer) {
+       if (!review.representative) {
          user = review.dancer.user;
+         userRole = "Bailarin"
+      } else {
+         user = review.representative.user;
+         userRole = "Representante"
        }
       return ReviewCard({
         key : idx,
