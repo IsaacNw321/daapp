@@ -4,6 +4,7 @@ import styles from "../../styles/home.module.css";
 import { Footer } from './Footer';
 import { Suspense } from 'react';
 import Loading from './loading';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -20,6 +21,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }: RootLayoutProps) =>
       <Suspense fallback={<Loading />}>
         <main className={styles.main}>
           {children}
+          <SpeedInsights />
         </main>
         <Footer />
       </Suspense>
