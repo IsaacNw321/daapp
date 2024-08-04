@@ -1,14 +1,11 @@
 import axios from 'axios';
 import { postReviewDancer, postReviewRepresentative, updateReview } from '../app/types';
 
-const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000', 
-  timeout: 5000, 
-});
+
 
 export const getReviews = async () => {
   try {
-      const response = await axiosInstance.get("/api/reviews");
+      const response = await axios.get("/api/reviews");
       if (response.status === 200) {
           return response.data;
       }
