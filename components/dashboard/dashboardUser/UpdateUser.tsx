@@ -25,23 +25,16 @@ const UserUpdate: NextComponentType = () => {
       let datos = {
           ...data,
       }
-      console.log(datos,userId, 'Soy datos')
       const response = await axios.put(`/api/users/${userId}`, datos);
       const user = await response.data;
-      if(user){
-          console.log('User updated')
-      }
-      if(!user){
-          console.log('User was not updated!!!')
-      }
       redirectionAlert({
           icon: 'info',
-          title: '<strong>Datos actualizados con éxito</strong>',
+          title: '<strong>Datos actualizados con éxito, vuelva a ingresar a su perfil</strong>',
           confirmButtonText: 'Ok!',
           confirmButtonAriaLabel: 'Thumbs up, great!',
       });
       setTimeout(()=>{
-          router.push('/profile')
+          router.push('/')
       }, 1000)
   }
 
@@ -56,13 +49,13 @@ const UserUpdate: NextComponentType = () => {
                <label htmlFor="firstName">
         {errors.firstName ? errors.firstName.message : "Nombre"}
         </label>
-              <input  {...register("firstName")}type="text" placeholder="Nombre" value={userName.firstName} onChange={(e) => setUserName({ firstName: e.target.value })} />
+              <input  {...register("firstName")}type="text" placeholder="Nombre"  />
               <label htmlFor="lastName">
         {
           errors.lastName ? errors.lastName.message : "Apellido"
         }
         </label>
-              <input   {...register("lastName")}type="text" placeholder="Apellido" value={userName.lastName} onChange={(e) => setUserName({ lastName: e.target.value })} />
+              <input   {...register("lastName")}type="text" placeholder="Apellido"  />
              
               <button type="submit">Enviar</button>
             </form>
