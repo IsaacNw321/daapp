@@ -2,95 +2,74 @@
 import styles from "../../../../styles/dashboard.module.css"
 import React, { useState, useEffect } from 'react';
 import { postUser } from "../../../../utils/users";
-import { createDancer, createDancerR } from "../../../../utils/dancers";
+import { createDancer, createDancerR, updateDancer } from "../../../../utils/dancers";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
-import {danceRSchema, userSchema} from "../../../../validations/userSchema";
-import { createDanceProps, postDancers, PostedDancerR, postedUser } from "../../../../app/types";
+import {infoDancerSchema} from "../../../../validations/userSchema";
+import { createDanceProps, infoDancer, infoDancerProps, postDancers, PostedDancerR, postedUser, updatedDancer } from "../../../../app/types";
 import { DancerR } from "../../../../app/types";
-export const CreateDancer: React.FC<createDanceProps> = ({userRole, representativeId, numberDancers}) =>{
+export const InfoDancer: React.FC<infoDancerProps> = ({userRole, dancerId}) =>{
 
-   const {register,handleSubmit,watch, formState: {errors}} = useForm<DancerR>({
-    resolver: zodResolver(danceRSchema)
+   const {register,handleSubmit,watch, formState: {errors}} = useForm<infoDancer>({
+    resolver: zodResolver(infoDancerSchema)
   });
   const [showAddDancerForm, setShowAddDancerForm] = useState<boolean>(false);
   const [showSuccess, setShowSucess] = useState<boolean>(false);
   const [textButton, setTextButton] = useState<boolean>(false);
   const [dancerData, setDancerData] = useState({
-    firstName: '',
-    lastName: '',
-    allergies: '',
-    cI: '',
-    age: '',
-    dateBirth: '',
+    allergies: "",
+    cI: "",
+    age: "",
+    dateBirth: "",
+    phone : ""
   });
   
-  const onSubmit: SubmitHandler<DancerR> = async (data: PostedDancerR) => {
+  const onSubmit: SubmitHandler<infoDancer> = async (data: updatedDancer) => {
     try {
-      const { firstName, lastName, allergies, cI, age, dateBirth } = data;
-      const dancerData = { firstName, lastName, allergies, cI, age, dateBirth  };
-      const newUserResponse = await createDancerR(dancerData);
-     if(newUserResponse){
-       setShowSucess(true);
-       setTimeout(() => {
-           setShowSucess(false);
-       }, 3000);
-       setDancerData({
-         firstName: '',
-         lastName: '',
-         allergies: '',
-         cI: '',
-         age: '',
-         dateBirth: '',
-       })
-     }
+      const { allergies } = data;
+      const cI = Number(data.cI);
+      const age = Number(data.age);
+      const phone = Number(data.phone);
+      const dateBirth = new Date(data.dateBirth);
+  
+      const dancerData = { allergies, cI, age, dateBirth, phone };
+      const newUserResponse = await updateDancer(dancerId, dancerData);
+  
+      if (newUserResponse) {
+        setShowSucess(true);
+        setTimeout(() => {
+          setShowSucess(false);
+        }, 3000);
+        setDancerData({
+          allergies: "",
+          cI: "",
+          age: "",
+          dateBirth: "",
+          phone: ""
+        });
+      }
     } catch (error) {
       console.error(error);
     }
   };
-  const handleAddDancer = () => {
+  const handleUpdateDancer = () => {
     setShowAddDancerForm((prevShowAddDancerForm) => !prevShowAddDancerForm);
     setShowSucess(false); 
     setTextButton((prevShowAddDancerForm) => !prevShowAddDancerForm);
   };
   
-  if (numberDancers !== undefined && numberDancers >2) {
-    return null; 
-  }
   
   return (
     <>
       <div>
-        <div className={userRole === "REPRESENTATIVE" ? styles.leftCont : styles.none}>
-          {userRole === "REPRESENTATIVE" && (
-            <button onClick={handleAddDancer} className={styles.button}>
-              {textButton === false ? "Registrar Bailarin" : "Ocultar formulario"}
+        <div className={userRole === "DANCER" ? styles.leftCont : styles.none}>
+          {userRole === "DANCER" && (
+            <button onClick={handleUpdateDancer} className={styles.button}>
+              {textButton === false ? "Completar Datos" : "Ocultar formulario"}
             </button>
           )}
           {showAddDancerForm && (
-            <form onSubmit={handleSubmit(onSubmit)} className={styles.myForm}>
-              <label htmlFor="firstName">
-                {errors.firstName ? errors.firstName.message : "Nombre"}
-              </label>
-              <input
-                {...register("firstName")}
-                type="text"
-                placeholder="Nombre"
-                value={dancerData.firstName}
-                onChange={(e) => setDancerData({ ...dancerData, firstName: e.target.value })}
-              />
-  
-              <label htmlFor="lastName">
-                {errors.lastName ? errors.lastName.message : "Apellido"}
-              </label>
-              <input
-                {...register("lastName")}
-                type="text"
-                placeholder="Apellido"
-                value={dancerData.lastName}
-                onChange={(e) => setDancerData({ ...dancerData, lastName: e.target.value })}
-              />
-  
+            <form onSubmit={handleSubmit(onSubmit)} className={styles.myForm}>          
               <label htmlFor="allergies">
                 {errors.allergies ? errors.allergies.message : "Alergias"}
               </label>
@@ -112,7 +91,16 @@ export const CreateDancer: React.FC<createDanceProps> = ({userRole, representati
                 value={dancerData.cI}
                 onChange={(e) => setDancerData({ ...dancerData, cI: e.target.value })}
               />
-  
+                 <label htmlFor="phone">
+                {errors.cI ? errors.cI.message : "Phone"}
+              </label>
+              <input
+                {...register("phone")}
+                type="number"
+                placeholder="phone"
+                value={dancerData.phone}
+                onChange={(e) => setDancerData({ ...dancerData, phone: e.target.value })}
+              />
               <label htmlFor="age">
                 {errors.age ? errors.age.message : "Edad"}
               </label>
@@ -147,4 +135,4 @@ export const CreateDancer: React.FC<createDanceProps> = ({userRole, representati
   );
 };
 
-export default createDancer;
+export default InfoDancer;

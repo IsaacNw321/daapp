@@ -51,7 +51,7 @@ export interface HomeProps {
 }
 
 export interface InstructorProps {
-  nameInstructor: string;
+  nameInstructor: number;
   array: StaticImageData[];
   text: string;
   position: string;
@@ -79,6 +79,15 @@ export interface postedUser {
   firstName: string;
   lastName: string;
   email: string;
+}
+
+export interface PostedDancerR {
+  firstName: string;
+  lastName: string;
+  cI : number;
+  allergies : string;
+  age : number,
+  dateBirth : Date
 }
 
 export interface postDancers {
@@ -109,7 +118,40 @@ export interface updateReview {
 export interface DancerR  {
   firstName: string;
   lastName: string;
-  email: string;
+  cI : number;
+  allergies : string;
+  age : number,
+  dateBirth : Date
+ }
+
+ export interface infoDancer  {
+  phone : number;
+  cI : number;
+  allergies : string;
+  age : number,
+  dateBirth : Date
+ }
+
+ export interface infoDancerProps {
+  userRole : "ADMIN"| "REPRESENTATIVE"| "DANCER" | "CONTACT";
+  dancerId : string;
+ }
+
+ export interface infoRepresentativeProps {
+  userRole : "ADMIN"| "REPRESENTATIVE"| "DANCER" | "CONTACT";
+  representativeId : string;
+ }
+
+ export interface infoRepresentative {
+  Adress : string;
+  phone : number
+ }
+ export interface updatedDancer {
+  phone : number;
+  cI : number;
+  allergies : string;
+  age : number,
+  dateBirth : Date
  }
 
 export  interface ReviewRProps {

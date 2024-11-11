@@ -2,7 +2,7 @@ import axios from 'axios';
 import { postedUser } from '@/app/types';
 export const getUserById = async(id : String) =>{
   const response = await axios.get(`/api/users/${id}`, {
-    timeout: 1000, 
+    timeout: 3000, 
   });
 
   

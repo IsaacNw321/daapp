@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "../../../lib/prisma";
+import  prisma  from "../../../lib/prisma";
 
 
 export default async function Users(req: NextApiRequest, res: NextApiResponse){
@@ -16,11 +16,7 @@ export default async function Users(req: NextApiRequest, res: NextApiResponse){
           include : {
             representative : {
               include : {
-                dancers  : {
-                  include : {
-                    user : true,
-                  }
-                },
+                dancers  : true,
                review : {
                 select: {
                   id: true 

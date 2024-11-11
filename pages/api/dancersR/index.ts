@@ -1,29 +1,29 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import  prisma  from "../../../lib/prisma";
 
-export default async function Dancers(req: NextApiRequest, res: NextApiResponse) {
+export default async function DancersR(req: NextApiRequest, res: NextApiResponse) {
   const method = req.method;
   const {
-    userId,
+    firstName,
+    lastName,
     allergies,
+    cI,
     age,
-    Adress,
-    phone,
-    CI,
-    dateBirth
+    dateBirth,
+    representativeId,
   } = req.body;
   switch (method) {
     case "POST":
       try {
-        const newDancer = await prisma.dancer.create({
+        const newDancer = await prisma.dancerR.create({
           data: {
-            userId,
+            firstName,
+            lastName,
             allergies,
+            cI,
             age,
-            Adress,
-            phone,
-            CI,
             dateBirth,
+            representativeId,
             Payment : 0
           }
         });
@@ -36,10 +36,7 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
       break;
     case "GET":
       try {
-        const dancersWithUserData = await prisma.dancer.findMany({
-          include: {
-            user: true
-          }
+        const dancersWithUserData = await prisma.dancerR.findMany({
         });
         dancersWithUserData
         ? res.status(200).json({ message: dancersWithUserData })

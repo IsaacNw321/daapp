@@ -15,7 +15,8 @@ import ReviewR from "./myReview/ReviewR";
 import Image from "next/image";
 import { DancerInfo } from "@/app/types";
 import UserUpdate from "./UpdateUser";
-
+import InfoDancer from "./fullinfo/infoDancer";
+import InfoRepresentative from "./fullinfo/infoRepresentative";
 
 const MyProfile : NextComponentType = () =>{
   const { user, isLoading: isLoadingU  } = useUser();
@@ -27,6 +28,7 @@ const MyProfile : NextComponentType = () =>{
   };
 
   const userId = user?.sub ?? '';
+  console.log(userId)
   const { data: dbUser, isLoading } = useQuery(['user', userId], () => getUserById(userId));
   let numberDancers;
   if(dbUser?.representative?.dancers){
@@ -43,7 +45,7 @@ const MyProfile : NextComponentType = () =>{
     const dancers = dbUser?.representative?.dancers;
     if (dancers) {
       const allDancersInfo: DancerInfo[] = dancers.map((dancer: any) => {
-        const { Payment, user: { firstName, lastName } } = dancer;
+        const { Payment, firstName, lastName } = dancer;
         return {
           firstName,
           lastName,
@@ -113,15 +115,21 @@ const MyProfile : NextComponentType = () =>{
           userId={userId}
         />
            {userRole === "REPRESENTATIVE" ? (
-        <ReviewR
-          representativeId={representativeId}
-          reviewId={reviewId}
-        />
+            <>
+            <ReviewR
+              representativeId={representativeId}
+              reviewId={reviewId}
+            />
+            <InfoRepresentative representativeId={representativeId} userRole={userRole}/>
+            </>
       ) : userRole === "DANCER" ? (
+        <>
         <ReviewD
           dancerId={dancerId}
           reviewId={reviewId}
         />
+        <InfoDancer dancerId={dancerId} userRole={userRole} />
+        </>
       ) : null}
         <div className={!payment ? styles.notPaymentC : styles.paymentC}> 
           <PaymentStatus 

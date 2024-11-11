@@ -2,34 +2,33 @@ import { NextApiRequest, NextApiResponse } from "next";
 import  prisma  from "../../../lib/prisma";
 
 export default async function Dancers(req: NextApiRequest, res: NextApiResponse) {
+  const id = req.query.id;
   const method = req.method;
   const {
-    userId,
     allergies,
     age,
-    Adress,
     phone,
-    CI,
+    cI,
     dateBirth
   } = req.body;
   switch (method) {
-    case "POST":
+    case "PUT":
       try {
-        const newDancer = await prisma.dancer.create({
+        const updateDancer = await prisma.dancer.update({
+          where : {
+            id : String(id)
+          },
           data: {
-            userId,
             allergies,
-            age,
-            Adress,
-            phone,
-            CI,
+            age : Number(age),
+            phone : Number(phone),
+            CI : Number(cI),
             dateBirth,
-            Payment : 0
           }
         });
-        newDancer
-          ? res.status(200).json({ message: 'Dancer created' })
-          : res.status(400).json({ message: 'Could not create dancer' });
+        updateDancer
+          ? res.status(200).json({ message: 'Dancer updated' })
+          : res.status(400).json({ message: 'Could not update dancer' });
       } catch (error) {
         res.status(500).json({message : (error as Error).message});
       }
@@ -37,6 +36,9 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
     case "GET":
       try {
         const dancersWithUserData = await prisma.dancer.findMany({
+          where : {
+            id : String(id)
+          },
           include: {
             user: true
           }

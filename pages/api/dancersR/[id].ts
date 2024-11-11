@@ -1,19 +1,23 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import  prisma  from "../../../lib/prisma";
 
-export default async function Reviews(req: NextApiRequest, res: NextApiResponse){
+
+export default async function Dancer(req: NextApiRequest, res: NextApiResponse){
   const id = req.query.id;
   const method = req.method;
-  const { content, representative, dancer } = req.body;
+  const { allergies, CI, age, dateBirth, phone } = req.body
   switch (method){
     case "GET":
       try {
-        const review = await prisma.review.findUnique({
+        const representative = await prisma.dancer.findUnique({
           where : {
             id : String(id)
           },
+          include : {
+            review : true
+          }
         })
-        review ? res.status(200).json({ message : review })
+        representative ? res.status(200).json({ message : representative })
         : res.status(400).json({ message : "There is not any user with that id"})
       } catch (error) {
         res.status(500).json({message : (error as Error).message});
@@ -21,15 +25,19 @@ export default async function Reviews(req: NextApiRequest, res: NextApiResponse)
     break;
     case "PUT":
       try {
-        const updatedReview = await prisma.review.update({
+        const updatedUser = await prisma.dancer.update({
           where : {
             id : String(id)
           },
           data: {
-            content : content,
+            phone : phone,
+            allergies, 
+            CI, 
+            age, 
+            dateBirth, 
           }
         })
-        updatedReview ? res.status(200).json({message : "user updated"})
+        updatedUser ? res.status(200).json({message : "user updated"})
         : res.status(400).json({message : "there is not users with that id"})
       } catch (error) {
         res.status(500).json({message : (error as Error).message});
@@ -37,12 +45,12 @@ export default async function Reviews(req: NextApiRequest, res: NextApiResponse)
     break;
     case "DELETE":
       try {
-        const deletedReview = await prisma.review.delete({
+        const deleteRepresentative = await prisma.dancer.delete({
           where : {
             id : String(id)
           }
         })
-        deletedReview ? res.status(200).json({message : "User deleted"})
+        deleteRepresentative ? res.status(200).json({message : "User deleted"})
         : res.status(400).json({message : "There is no users with that id"})
       } catch (error) {
         res.status(500).json({message : (error as Error).message});

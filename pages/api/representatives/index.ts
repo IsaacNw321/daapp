@@ -1,11 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "../../../lib/prisma";
+import  prisma  from "../../../lib/prisma";
 
 
 export default async function  Representative(req: NextApiRequest, res: NextApiResponse){
   const method = req.method;
   const {
-   userId
+   userId,
+   Adress,
+   phone
   } = req.body;
   switch(method){
     case "GET" :
@@ -34,6 +36,8 @@ export default async function  Representative(req: NextApiRequest, res: NextApiR
     const newRepresentative = await prisma.representative.create({
       data: {
         userId: userId,
+        Adress,
+        phone,
         Payment: req.body.Payment,
       }
     });
