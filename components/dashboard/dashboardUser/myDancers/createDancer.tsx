@@ -1,14 +1,12 @@
 "use client"
 import styles from "../../../../styles/dashboard.module.css"
-import React, { useState, useEffect } from 'react';
-import { postUser } from "../../../../utils/users";
+import React, { useState } from 'react';
 import { createDancer, createDancerR } from "../../../../utils/dancers";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import {danceRSchema} from "../../../../validations/dancerRSchema";
-import { createDanceProps, postDancers, PostedDancerR, postedUser } from "../../../../app/types";
-import { DancerR } from "../../../../app/types";
-export const CreateDancer: React.FC<createDanceProps> = ({userRole, representativeId, numberDancers}) =>{
+import { DancerR, createDanceProps } from "../../../../app/types";
+export const CreateDancer = ({userRole, representativeId, numberDancers} : createDanceProps) =>{
 
    const {register,handleSubmit,watch, formState: {errors}} = useForm<DancerR>({
     resolver: zodResolver(danceRSchema)
@@ -25,7 +23,7 @@ export const CreateDancer: React.FC<createDanceProps> = ({userRole, representati
     dateBirth: '',
   });
   
-  const onSubmit: SubmitHandler<DancerR> = async (data: PostedDancerR) => {
+  const onSubmit: SubmitHandler<DancerR> = async (data) => {
     try {
       const { firstName, lastName, allergies } = data;
       const dateBirth = new Date(data.dateBirth)

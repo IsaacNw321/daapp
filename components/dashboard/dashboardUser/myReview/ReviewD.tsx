@@ -4,10 +4,9 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import {reviewSchema} from "../../../../validations/reviewSchema";
 import { updatedReview, postedReviewDancer } from "../../../../utils/reviews";
-import {  Content } from "../../../../app/types";
 import { useState } from "react";
-import { ReviewDProps } from "../../../../app/types";
-const ReviewD : React.FC<ReviewDProps> = ({dancerId, reviewId}) =>{
+import { ReviewDProps, Content } from "../../../../app/types";
+const ReviewD = ({dancerId, reviewId} : ReviewDProps) =>{
   const [content, setContent] = useState({ content: '' }); 
   const [showSuccess, setShowSucess] = useState(false);
   const {register,handleSubmit,watch, formState: {errors}} = useForm<Content>({

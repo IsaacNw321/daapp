@@ -5,7 +5,7 @@ import PaymentStatus from "../myPaymentStatus/PaymentStatus";
 import { DancersProps } from '@/app/types';
 
 
-const Dancers: React.FC<DancersProps> = ({ firstName, lastName, Payment }) => {
+const Dancers = ({ firstName, lastName, Payment } : DancersProps) => {
   return (
     <>
       <div>

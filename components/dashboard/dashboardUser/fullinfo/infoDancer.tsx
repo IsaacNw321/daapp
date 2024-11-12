@@ -1,14 +1,12 @@
 "use client"
 import styles from "../../../../styles/dashboard.module.css"
-import React, { useState, useEffect } from 'react';
-import { postUser } from "../../../../utils/users";
-import { createDancer, createDancerR, updateDancer } from "../../../../utils/dancers";
+import React, { useState } from 'react';
+import { updateDancer } from "../../../../utils/dancers";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import {infoDancerSchema} from "../../../../validations/dancerSchema";
-import { createDanceProps, infoDancer, infoDancerProps, postDancers, PostedDancerR, postedUser, updatedDancer } from "../../../../app/types";
-import { DancerR } from "../../../../app/types";
-export const InfoDancer: React.FC<infoDancerProps> = ({userRole, dancerId}) =>{
+import { infoDancer, infoDancerProps } from "../../../../app/types";
+export const InfoDancer = ({userRole, dancerId} : infoDancerProps) =>{
 
    const {register,handleSubmit,watch, formState: {errors}} = useForm<infoDancer>({
     resolver: zodResolver(infoDancerSchema)
@@ -27,7 +25,7 @@ export const InfoDancer: React.FC<infoDancerProps> = ({userRole, dancerId}) =>{
     Adress : ""
   });
   
-  const onSubmit: SubmitHandler<infoDancer> = async (data: updatedDancer) => {
+  const onSubmit: SubmitHandler<infoDancer> = async (data) => {
     try {
       const { allergies, firstName, lastName, Adress } = data;
       const cI = Number(data.cI);

@@ -4,15 +4,14 @@ import dynamic from 'next/dynamic';
 import React, { Suspense } from 'react';
 import Loading from "../../components/layout/loading";
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client'
-const MyProfileLazy = dynamic(() => import('../../components/dashboard/dashboardUser/MyProfile'), { suspense: true });
-const Profile : NextPage = withPageAuthRequired(() => {
-
+const AdminLazy = dynamic(() => import('../../components/dashboard/dashboardAdmin/controlPanel'), { suspense: true });
+const ControlPanel : NextPage = withPageAuthRequired(() => {
   return (
     <DashboardLayout title="Mi perfil">
       <Suspense fallback={<Loading/>}>
-        <MyProfileLazy/>
+        <AdminLazy/>
       </Suspense>
     </DashboardLayout>
   )
 })
-export default Profile;
+export default ControlPanel;

@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { infoRepresentativeSchema } from "../../../../validations/representativeSchema";
-import { createDanceProps, infoRepresentative, infoRepresentativeProps } from "../../../../app/types";
+import { infoRepresentative, infoRepresentativeProps } from "../../../../app/types";
 import { updatedRepresentative } from "@/utils/representative";
 
-export const InfoRepresentative: React.FC<infoRepresentativeProps> = ({ userRole, representativeId }) => {
+export const InfoRepresentative = ({ userRole, representativeId } : infoRepresentativeProps) => {
 
   const { register, handleSubmit, formState: { errors } } = useForm<infoRepresentative>({
     resolver: zodResolver(infoRepresentativeSchema)
@@ -23,7 +23,7 @@ export const InfoRepresentative: React.FC<infoRepresentativeProps> = ({ userRole
     phone: ''
   });
 
-  const onSubmit: SubmitHandler<infoRepresentative> = async (data: infoRepresentative) => {
+  const onSubmit: SubmitHandler<infoRepresentative> = async (data) => {
     try {
       const { Adress, firstName, lastName } = data;
       const phone = Number(data.phone)

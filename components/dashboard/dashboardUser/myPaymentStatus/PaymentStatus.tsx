@@ -2,7 +2,7 @@ import styles from "../../../../styles/dashboard.module.css";
 import { PaymentStatusProps } from "@/app/types";
 
 
-export const PaymentStatus: React.FC<PaymentStatusProps> = ({ Payment }: PaymentStatusProps) => {
+export const PaymentStatus = ({ Payment }: PaymentStatusProps) => {
   const totalMonths: number = 12;
   const currentDateTime = new Date().toISOString();
 const currentMonth = new Date(currentDateTime).getMonth();

@@ -3,10 +3,10 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import {reviewSchema} from "../../../../validations/reviewSchema";
 import { updatedReview, postedReviewRepresentative } from "../../../../utils/reviews";
-import { Content, postReviewRepresentative } from "../../../../app/types";
+import { Content, postReviewRepresentative, ReviewRProps } from "../../../../app/types";
 import { useState } from "react";
-import { ReviewRProps } from "../../../../app/types";
-const ReviewR : React.FC<ReviewRProps> = ({representativeId, reviewId}) =>{
+
+const ReviewR = ({representativeId, reviewId} : ReviewRProps) =>{
   const [content, setContent] = useState({ content: '' }); 
   const [showSuccess, setShowSucess] = useState(false);
   const {register,handleSubmit,watch, formState: {errors}} = useForm<postReviewRepresentative>({
