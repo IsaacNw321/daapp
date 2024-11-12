@@ -3,7 +3,7 @@ import styles from "../../../../styles/dashboard.module.css"
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
-import { infoRepresentativeSchema } from "../../../../validations/userSchema";
+import { infoRepresentativeSchema } from "../../../../validations/representativeSchema";
 import { createDanceProps, infoRepresentative, infoRepresentativeProps } from "../../../../app/types";
 import { updatedRepresentative } from "@/utils/representative";
 
@@ -17,15 +17,17 @@ export const InfoRepresentative: React.FC<infoRepresentativeProps> = ({ userRole
   const [showSuccess, setShowSucess] = useState<boolean>(false);
   const [textButton, setTextButton] = useState<boolean>(false);
   const [representativeData, setRepresentativeData] = useState({
+    firstName : '',
+    lastName : '',
     Adress: '',
     phone: ''
   });
 
   const onSubmit: SubmitHandler<infoRepresentative> = async (data: infoRepresentative) => {
     try {
-      const { Adress } = data;
+      const { Adress, firstName, lastName } = data;
       const phone = Number(data.phone)
-      const representativeData = { Adress, phone };
+      const representativeData = { firstName , lastName, Adress, phone, representativeId };
       const newUserResponse = await updatedRepresentative(representativeId, representativeData);
       if (newUserResponse) {
         setShowSucess(true);
@@ -33,6 +35,8 @@ export const InfoRepresentative: React.FC<infoRepresentativeProps> = ({ userRole
           setShowSucess(false);
         }, 3000);
         setRepresentativeData({
+          firstName : '',
+          lastName : '',
           Adress: '',
           phone: ''
         });
@@ -59,6 +63,31 @@ export const InfoRepresentative: React.FC<infoRepresentativeProps> = ({ userRole
           )}
           {showAddDancerForm && (
             <form onSubmit={handleSubmit(onSubmit)} className={styles.myForm}>
+              <label htmlFor="firstName">
+                {errors.firstName ? errors.firstName.message : "Nombre"}
+              </label>
+              <input  
+                {...register("firstName")}
+                type="text" 
+                placeholder="Nombre" 
+                value={representativeData.firstName}
+                onChange={(e) => {
+                  console.log("First Name:", e.target.value);
+                  setRepresentativeData({ ...representativeData, firstName: e.target.value });
+                }}
+              />
+              <label htmlFor="lastName">
+                {
+                  errors.lastName ? errors.lastName.message : "Apellido"
+                }
+             </label>
+              <input   
+                {...register("lastName")}
+                type="text"
+                placeholder="Apellido"
+                value={representativeData.lastName}
+                onChange={(e) => setRepresentativeData({...representativeData, lastName : e.target.value})}
+              />
               <label htmlFor="Adress">
                 {errors.Adress ? errors.Adress.message : "Dirección"}
               </label>

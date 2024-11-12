@@ -5,7 +5,7 @@ import { postUser } from "../../../../utils/users";
 import { createDancer, createDancerR } from "../../../../utils/dancers";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
-import {danceRSchema, userSchema} from "../../../../validations/userSchema";
+import {danceRSchema} from "../../../../validations/dancerRSchema";
 import { createDanceProps, postDancers, PostedDancerR, postedUser } from "../../../../app/types";
 import { DancerR } from "../../../../app/types";
 export const CreateDancer: React.FC<createDanceProps> = ({userRole, representativeId, numberDancers}) =>{
@@ -27,8 +27,11 @@ export const CreateDancer: React.FC<createDanceProps> = ({userRole, representati
   
   const onSubmit: SubmitHandler<DancerR> = async (data: PostedDancerR) => {
     try {
-      const { firstName, lastName, allergies, cI, age, dateBirth } = data;
-      const dancerData = { firstName, lastName, allergies, cI, age, dateBirth  };
+      const { firstName, lastName, allergies } = data;
+      const dateBirth = new Date(data.dateBirth)
+      const age = Number(data.age)
+      const cI = Number(data.cI)
+      const dancerData = { firstName, lastName, allergies, cI, age, dateBirth, representativeId  };
       const newUserResponse = await createDancerR(dancerData);
      if(newUserResponse){
        setShowSucess(true);

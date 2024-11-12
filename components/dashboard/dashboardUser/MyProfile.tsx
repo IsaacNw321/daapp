@@ -7,14 +7,12 @@ import styles from "../../../styles/dashboard.module.css"
 import { useQuery } from "react-query";
 import Dancers from "../dashboardUser/myDancers/Dancers";
 import PaymentStatus from "./myPaymentStatus/PaymentStatus";
-import Role from "./myRole/Role";
 import { CreateDancer } from "./myDancers/createDancer";
 import Loading from "../../../components/layout/loading";
 import ReviewD from "./myReview/ReviewD";
 import ReviewR from "./myReview/ReviewR";
 import Image from "next/image";
 import { DancerInfo } from "@/app/types";
-import UserUpdate from "./UpdateUser";
 import InfoDancer from "./fullinfo/infoDancer";
 import InfoRepresentative from "./fullinfo/infoRepresentative";
 
@@ -28,7 +26,6 @@ const MyProfile : NextComponentType = () =>{
   };
 
   const userId = user?.sub ?? '';
-  console.log(userId)
   const { data: dbUser, isLoading } = useQuery(['user', userId], () => getUserById(userId));
   let numberDancers;
   if(dbUser?.representative?.dancers){
@@ -77,7 +74,7 @@ const MyProfile : NextComponentType = () =>{
   }
   return (
     <div className={styles.dashboardUser}>
-      {firstName && lastName ? (
+     
         <div className={styles.info}>
           <div className={styles.firstLine}>
             <Link
@@ -108,12 +105,8 @@ const MyProfile : NextComponentType = () =>{
           </div>
           <label  className={styles.text}>
             Si quieres ser parte de nosotros escoje tu rol aqui, veremos tu solicitud y tendras nuestra respuesta
-            Si eres Representante que quiere inscirbir a su hijo escoja el rol Representante, asi tendra la opcion de inscibirlo una vez activada su cuenta
+            Si eres Representante que quiere inscribir a su hijo escoja el rol Representante, asi tendra la opcion de inscibirlo una vez activada su cuenta
           </label>
-        <Role 
-          userRole={userRole}
-          userId={userId}
-        />
            {userRole === "REPRESENTATIVE" ? (
             <>
             <ReviewR
@@ -166,7 +159,7 @@ const MyProfile : NextComponentType = () =>{
     </>
   )}
 </div>
-      </div> ) : <UserUpdate/> }
+      </div> 
     </div>
   );
 }

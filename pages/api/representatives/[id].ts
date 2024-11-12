@@ -5,7 +5,7 @@ import  prisma  from "../../../lib/prisma";
 export default async function Representative(req: NextApiRequest, res: NextApiResponse){
   const id = req.query.id;
   const method = req.method;
-  const { Adress, phone } = req.body
+  const { firstName, lastName, Adress, phone } = req.body
   switch (method){
     case "GET":
       try {
@@ -31,7 +31,16 @@ export default async function Representative(req: NextApiRequest, res: NextApiRe
           },
           data: {
             phone : phone,
-            Adress : Adress
+            Adress : Adress,
+            user: {
+              update : {
+                firstName : firstName,
+                lastName : lastName
+              }
+            },
+          },
+          include : {
+            user : true
           }
         })
         updatedUser ? res.status(200).json({message : "user updated"})

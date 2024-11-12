@@ -125,11 +125,14 @@ export interface DancerR  {
  }
 
  export interface infoDancer  {
+  firstName : string;
+  lastName : string;
   phone : number;
   cI : number;
   allergies : string;
-  age : number,
-  dateBirth : Date
+  age : number;
+  dateBirth : Date;
+  Adress : string;
  }
 
  export interface infoDancerProps {
@@ -143,15 +146,20 @@ export interface DancerR  {
  }
 
  export interface infoRepresentative {
+  firstName : string;
+  lastName : string;
   Adress : string;
   phone : number
  }
  export interface updatedDancer {
+  firstName : string;
+  lastName : string;
   phone : number;
   cI : number;
   allergies : string;
   age : number,
-  dateBirth : Date
+  dateBirth : Date;
+  Adress : string
  }
 
 export  interface ReviewRProps {

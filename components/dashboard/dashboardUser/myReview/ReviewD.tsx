@@ -2,7 +2,7 @@
 import styles from "../../../../styles/dashboard.module.css"
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
-import {reviewSchema} from "../../../../validations/userSchema";
+import {reviewSchema} from "../../../../validations/reviewSchema";
 import { updatedReview, postedReviewDancer } from "../../../../utils/reviews";
 import {  Content } from "../../../../app/types";
 import { useState } from "react";

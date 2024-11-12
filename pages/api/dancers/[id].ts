@@ -5,11 +5,14 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
   const id = req.query.id;
   const method = req.method;
   const {
+    firstName,
+    lastName,
     allergies,
     age,
     phone,
     cI,
-    dateBirth
+    dateBirth,
+    Adress
   } = req.body;
   switch (method) {
     case "PUT":
@@ -24,6 +27,16 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
             phone : Number(phone),
             CI : Number(cI),
             dateBirth,
+            Adress,
+            user : {
+              update : {
+                firstName,
+                lastName
+              }
+            }
+          },
+          include : {
+            user : true
           }
         });
         updateDancer

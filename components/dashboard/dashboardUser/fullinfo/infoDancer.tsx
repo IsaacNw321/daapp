@@ -5,7 +5,7 @@ import { postUser } from "../../../../utils/users";
 import { createDancer, createDancerR, updateDancer } from "../../../../utils/dancers";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
-import {infoDancerSchema} from "../../../../validations/userSchema";
+import {infoDancerSchema} from "../../../../validations/dancerSchema";
 import { createDanceProps, infoDancer, infoDancerProps, postDancers, PostedDancerR, postedUser, updatedDancer } from "../../../../app/types";
 import { DancerR } from "../../../../app/types";
 export const InfoDancer: React.FC<infoDancerProps> = ({userRole, dancerId}) =>{
@@ -17,22 +17,25 @@ export const InfoDancer: React.FC<infoDancerProps> = ({userRole, dancerId}) =>{
   const [showSuccess, setShowSucess] = useState<boolean>(false);
   const [textButton, setTextButton] = useState<boolean>(false);
   const [dancerData, setDancerData] = useState({
+    firstName : "",
+    lastName : "",
     allergies: "",
     cI: "",
     age: "",
     dateBirth: "",
-    phone : ""
+    phone : "",
+    Adress : ""
   });
   
   const onSubmit: SubmitHandler<infoDancer> = async (data: updatedDancer) => {
     try {
-      const { allergies } = data;
+      const { allergies, firstName, lastName, Adress } = data;
       const cI = Number(data.cI);
       const age = Number(data.age);
       const phone = Number(data.phone);
       const dateBirth = new Date(data.dateBirth);
   
-      const dancerData = { allergies, cI, age, dateBirth, phone };
+      const dancerData = { firstName, lastName, allergies, cI, age, dateBirth, phone, Adress };
       const newUserResponse = await updateDancer(dancerId, dancerData);
   
       if (newUserResponse) {
@@ -41,11 +44,14 @@ export const InfoDancer: React.FC<infoDancerProps> = ({userRole, dancerId}) =>{
           setShowSucess(false);
         }, 3000);
         setDancerData({
+          firstName : "",
+          lastName : "",
           allergies: "",
           cI: "",
           age: "",
           dateBirth: "",
-          phone: ""
+          phone: "",
+          Adress : ""
         });
       }
     } catch (error) {
@@ -69,7 +75,31 @@ export const InfoDancer: React.FC<infoDancerProps> = ({userRole, dancerId}) =>{
             </button>
           )}
           {showAddDancerForm && (
-            <form onSubmit={handleSubmit(onSubmit)} className={styles.myForm}>          
+            <form onSubmit={handleSubmit(onSubmit)} className={styles.myForm}> 
+             <label htmlFor="firstName">
+                {errors.firstName ? errors.firstName.message : "Nombre"}
+              </label>
+              <input  
+                {...register("firstName")}
+                type="text" 
+                placeholder="Nombre" 
+                value={dancerData.firstName}
+                onChange={(e) => {
+                  setDancerData({...dancerData, firstName: e.target.value });
+                }}
+              />
+              <label htmlFor="lastName">
+                {
+                  errors.lastName ? errors.lastName.message : "Apellido"
+                }
+             </label>
+              <input   
+                {...register("lastName")}
+                type="text"
+                placeholder="Apellido"
+                value={dancerData.lastName}
+                onChange={(e) => setDancerData({...dancerData, lastName : e.target.value})}
+              />         
               <label htmlFor="allergies">
                 {errors.allergies ? errors.allergies.message : "Alergias"}
               </label>
@@ -111,7 +141,16 @@ export const InfoDancer: React.FC<infoDancerProps> = ({userRole, dancerId}) =>{
                 value={dancerData.age}
                 onChange={(e) => setDancerData({ ...dancerData, age: e.target.value })}
               />
-  
+               <label htmlFor="Adress">
+                {errors.Adress ? errors.Adress.message : "Dirección"}
+              </label>
+              <input
+                {...register("Adress")}
+                type="text"
+                placeholder="Dirección"
+                value={dancerData.Adress}
+                onChange={(e) => setDancerData({ ...dancerData, Adress: e.target.value })}
+              />
               <label htmlFor="dateBirth">
                 {errors.dateBirth ? errors.dateBirth.message : "Fecha de Nacimiento"}
               </label>

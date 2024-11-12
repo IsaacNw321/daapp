@@ -21,7 +21,7 @@ const Testimonials: NextComponentType = () =>{
       let userRole;  
        let user;
        if (!review.representative) {
-         user = review.dancer.user;
+         user = review?.dancer?.user;
          userRole = "Bailarin"
       } else {
          user = review.representative.user;
