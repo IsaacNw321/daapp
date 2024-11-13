@@ -51,3 +51,17 @@ export const updateUser = async (id: string, updatedUserData: any) => {
     return null;
   }
 };
+
+export const getUsers = async () => {
+  try {
+    const response = await axios.get(`/api/users`)
+    if(response.status){
+      return response.data
+    } else {
+      throw new Error('Error getting users')
+    }
+  } catch (error) {
+    console.error('Erro gettin users :', error);
+    return null;
+  }
+}

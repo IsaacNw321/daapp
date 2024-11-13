@@ -10,7 +10,7 @@ export const FilterUsers = (users : any ) => {
   }
   const {filters} = context
   return users.filter(user  => {
-    return filters.role === 'all' || filters.role === user.type
+    return filters.role === 'all' || filters.role === user.userRole
   })
 }
 

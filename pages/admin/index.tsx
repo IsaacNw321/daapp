@@ -8,13 +8,13 @@ import { FiltersProvider } from "@/context/filters";
 const AdminLazy = dynamic(() => import('../../components/dashboard/dashboardAdmin/controlPanel'), { suspense: true });
 const ControlPanel : NextPage = withPageAuthRequired(() => {
   return (
-      <FiltersProvider>
     <DashboardLayout title="Mi perfil">
       <Suspense fallback={<Loading/>}>
+      <FiltersProvider>
         <AdminLazy/>
+      </FiltersProvider>
       </Suspense>
     </DashboardLayout>
-      </FiltersProvider>
   )
 })
 export default ControlPanel;
