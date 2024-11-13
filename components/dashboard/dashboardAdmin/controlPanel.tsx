@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import styles from '../../../styles/admin.module.css'
+import { FilterUsers } from '@/hooks/filters'
 
 const initialUsers = [
   { id: 1, name: 'John Doe', type: 'Dancer', createdBy: 'Self' },
@@ -12,16 +13,12 @@ const initialUsers = [
 ]
 
 export default function AdminPanel() {
+ 
   const [users, setUsers] = useState(initialUsers)
   const [filter, setFilter] = useState('all')
-
-  const filteredUsers = users.filter(user => {
-    if (filter === 'all') return true
-    if (filter === 'representatives') return user.type === 'Representative'
-    if (filter === 'dancers') return user.type === 'Dancer'
-    if (filter === 'dancersR') return user.type === 'Dancer' && user.createdBy === 'Rep'
-    return true
-  })
+  const CfilteredUsers = FilterUsers(initialUsers);
+  console.log(CfilteredUsers)
+   
 
   const deleteUser = (id : any) => {
     setUsers(users.filter(user => user.id !== id))
@@ -56,7 +53,7 @@ export default function AdminPanel() {
         </div>
         
         <div className={styles.userGrid}>
-          {filteredUsers.map(user => (
+          {CfilteredUsers.map(user => (
             <div key={user.id} className={styles.userCard}>
               <h2 className={styles.userName}>{user.name}</h2>
               <p className={styles.userType}>{user.type}</p>
