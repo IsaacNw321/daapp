@@ -4,17 +4,13 @@ import { useContext, useState, useEffect } from 'react'
 import styles from '../../../styles/admin.module.css'
 import { FilterUsers } from '@/hooks/filters'
 import { FiltersContext } from '@/context/filters'
-import { getUsers } from '@/utils/users'
-const initialUsers = [
-  { id: 1, name: 'John Doe', type: 'Dancer', createdBy: 'Self' },
-  { id: 2, name: 'Jane Smith', type: 'Representative', createdBy: 'Self' },
-  { id: 3, name: 'Alice Johnson', type: 'Dancer', createdBy: 'Rep' },
-  { id: 4, name: 'Bob Williams', type: 'Representative', createdBy: 'Self' },
-  { id: 5, name: 'Charlie Brown', type: 'Dancer', createdBy: 'Rep' },
-]
+import { getUsers, deleteUser, updateUser, getUserById } from '@/utils/users'
+import { createRoleDancer } from '@/utils/dancers'
+import { createRepresentative} from '@/utils/representative'
+import { RemoveRoles } from './Roles/removeRoles'
+import { AsignRoles } from './Roles/asignRoles'
 
 export default function AdminPanel() {
-
   const context = useContext(FiltersContext);
   const { filters, setFilters } = context;
   const [users, setUsers] = useState([]);
@@ -33,15 +29,11 @@ export default function AdminPanel() {
     fetchUsers();
   }, []);
 
-  console.log(users);
+ 
 
   const filteredUsers = FilterUsers(users);
-  console.log(filteredUsers);
+  
 
-  console.log(filters.role);
-  const deleteUser = (id : any) => {
-    setUsers(users.filter(user => user.id !== id))
-  }
 
   const userCounts = {
     total: users.length,
@@ -56,6 +48,7 @@ export default function AdminPanel() {
     role : newValue
    }))
  }
+
   return (
     <div className={styles.adminContainer}>
       <div className={styles.adminPanel}>
@@ -90,9 +83,10 @@ export default function AdminPanel() {
                 user.userRole === "DANCER" ? "Bailarin" : 
                 user.userRole === "CONTACT" ? "Usuario sin rol" : ""}
               </p>
-              <button className={styles.deleteButton} onClick={() => deleteUser(user.id)}>
-                Eliminar Usuario
-              </button>
+              {user.userRole === "CONTACT" ? (           
+               <AsignRoles userId={user.id} />             
+              ) 
+              : <RemoveRoles userId={user.id} /> }
             </div>
           ))}
         </div>

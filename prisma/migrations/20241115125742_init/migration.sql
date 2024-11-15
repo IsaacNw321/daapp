@@ -20,13 +20,13 @@ CREATE TABLE "User" (
 CREATE TABLE "Dancer" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
-    "Payment" INTEGER NOT NULL,
-    "allergies" TEXT NOT NULL,
-    "CI" INTEGER NOT NULL,
-    "age" INTEGER NOT NULL,
-    "dateBirth" TIMESTAMP(3) NOT NULL,
-    "phone" INTEGER NOT NULL,
-    "Adress" TEXT NOT NULL,
+    "Payment" INTEGER NOT NULL DEFAULT 0,
+    "allergies" TEXT,
+    "CI" INTEGER,
+    "age" INTEGER,
+    "dateBirth" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "phone" INTEGER,
+    "Adress" TEXT,
 
     CONSTRAINT "Dancer_pkey" PRIMARY KEY ("id")
 );
@@ -35,9 +35,9 @@ CREATE TABLE "Dancer" (
 CREATE TABLE "Representative" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
-    "Payment" INTEGER NOT NULL,
-    "phone" INTEGER NOT NULL,
-    "Adress" TEXT NOT NULL,
+    "Payment" INTEGER NOT NULL DEFAULT 0,
+    "phone" INTEGER,
+    "Adress" TEXT,
 
     CONSTRAINT "Representative_pkey" PRIMARY KEY ("id")
 );
@@ -51,8 +51,8 @@ CREATE TABLE "DancerR" (
     "allergies" TEXT NOT NULL,
     "cI" INTEGER NOT NULL,
     "age" INTEGER NOT NULL,
-    "dateBirth" TIMESTAMP(3) NOT NULL,
-    "Payment" INTEGER NOT NULL,
+    "dateBirth" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "Payment" INTEGER NOT NULL DEFAULT 0,
 
     CONSTRAINT "DancerR_pkey" PRIMARY KEY ("id")
 );

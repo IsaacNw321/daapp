@@ -5,7 +5,7 @@ import  prisma  from "../../../lib/prisma";
 export default async function Users(req: NextApiRequest, res: NextApiResponse){
   const id = req.query.id;
   const method = req.method;
-  const { firstName, lastName, email, phone, photo, active } = req.body;
+  const { firstName, lastName, email, phone, photo, active, userRole } = req.body;
   switch (method){
     case "GET":
       try {
@@ -52,7 +52,8 @@ export default async function Users(req: NextApiRequest, res: NextApiResponse){
             lastName: lastName,
             email: email,
             photo: photo,
-            active : active
+            active : active,
+            userRole
           }
         })
         updatedUser ? res.status(200).json({message : "user updated"})

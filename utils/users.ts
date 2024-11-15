@@ -65,3 +65,17 @@ export const getUsers = async () => {
     return null;
   }
 }
+
+export const deleteUser = async (id: string) => {
+  try {
+    const response = await axios.delete(`/api/users/${id}`);
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      throw new Error('Failed to delete user');
+    }
+  } catch (error) {
+    console.error('Error removing user:', error);
+    return null;
+  }
+};
