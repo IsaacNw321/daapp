@@ -15,6 +15,20 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
     Adress
   } = req.body;
   switch (method) {
+    case "DELETE" :
+      try {
+        const deletedDancer = await prisma.dancer.delete({
+          where : {
+            id : String(id)
+          }
+        })
+        deletedDancer
+          ? res.status(200).json({message : 'Deleted dancer'})
+          : res.status(404).json({message : "Not exist user with that id"})
+      } catch (error) {
+        res.status(500).json({message : (error as Error).message});
+      }
+    break;
     case "PUT":
       try {
         const updateDancer = await prisma.dancer.update({

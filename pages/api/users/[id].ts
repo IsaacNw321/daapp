@@ -42,6 +42,7 @@ export default async function Users(req: NextApiRequest, res: NextApiResponse){
       }
     break;
     case "PUT":
+    
       try {
         const updatedUser = await prisma.user.update({
           where : {
