@@ -4,11 +4,10 @@ import { useContext, useState, useEffect } from 'react'
 import styles from '../../../styles/admin.module.css'
 import { FilterUsers } from '@/hooks/filters'
 import { FiltersContext } from '@/context/filters'
-import { getUsers, deleteUser, updateUser, getUserById } from '@/utils/users'
-import { createRoleDancer } from '@/utils/dancers'
-import { createRepresentative} from '@/utils/representative'
+import { getUsers } from '@/utils/users'
 import { RemoveRoles } from './Roles/removeRoles'
 import { AsignRoles } from './Roles/asignRoles'
+import { LisOfQuestions } from './questions/sectionQuestions'
 
 export default function AdminPanel() {
   const context = useContext(FiltersContext);
@@ -25,15 +24,10 @@ export default function AdminPanel() {
         console.error('Error fetching users:', error);
       }
     };
-
     fetchUsers();
   }, []);
 
- 
-
   const filteredUsers = FilterUsers(users);
-  
-
 
   const userCounts = {
     total: users.length,
@@ -90,6 +84,7 @@ export default function AdminPanel() {
             </div>
           ))}
         </div>
+       <LisOfQuestions />
       </div>
     </div>
   )

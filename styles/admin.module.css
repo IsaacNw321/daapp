@@ -91,3 +91,26 @@
 .roleButton:hover {
   background-color: #b91c1c;
 }
+
+.questionsCont{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.questionsCont h3{
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.questions {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.questionCard {
+  background-color: #333;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  gap: 1rem;
+}
