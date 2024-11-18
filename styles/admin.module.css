@@ -125,3 +125,98 @@
   padding: 1rem;
   gap: 1rem;
 }
+
+.container {
+  min-height: 100vh;
+  background-color: black;
+  color: white;
+  padding: 1rem;
+}
+
+.card {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #1a1a1a;
+  border: 2px solid #6B0D0D;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #6B0D0D;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+}
+
+.content {
+  padding: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.detailItem {
+  margin-bottom: 1rem;
+}
+
+.detailLabel {
+  font-size: 0.875rem;
+  color: #a0a0a0;
+  margin-bottom: 0.25rem;
+}
+
+.detailValue {
+  font-size: 1rem;
+}
+
+.allergiesSection {
+  margin-top: 1.5rem;
+}
+
+.allergiesTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.allergiesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.allergyBadge {
+  background-color: #6B0D0D;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.875rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 2rem;
+  }
+}

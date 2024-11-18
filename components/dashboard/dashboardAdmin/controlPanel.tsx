@@ -1,5 +1,5 @@
 'use client'
-
+import Link from 'next/link';
 import { useContext, useState, useEffect } from 'react'
 import styles from '../../../styles/admin.module.css'
 import { FilterUsers } from '@/hooks/filters'
@@ -68,10 +68,13 @@ export default function AdminPanel() {
         <div className={styles.userGrid}>
           {filteredUsers.map(user => (
             <div key={user.id} className={styles.userCard}>
-              <h2 className={styles.userName}>
-                {user.firstName}
-                {user.lastName}
-              </h2>
+            <Link href={`/admin/user/${user.id}`}>
+            {
+              user.firstName && user.lastName !== null 
+              ? <p>Name: {user.firstName} {user.lastName}</p> 
+              : <p>{user.email}</p>     
+            }
+              </Link>
               <p className={styles.userType}>
                 {user.userRole === "REPRESENTATIVE" ? "Representante" :
                 user.userRole === "DANCER" ? "Bailarin" : 
