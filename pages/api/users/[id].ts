@@ -19,7 +19,8 @@ export default async function Users(req: NextApiRequest, res: NextApiResponse){
                 dancers  : true,
                review : {
                 select: {
-                  id: true 
+                  id: true,
+                  content: true 
                 }
                }
               },

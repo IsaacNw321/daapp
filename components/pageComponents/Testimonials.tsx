@@ -30,7 +30,9 @@ const Testimonials: NextComponentType = () =>{
       return ReviewCard({
         key : idx,
         content : review.content,
-        user : user,
+        firstName : user.firstName,
+        lastName : user.lastName,
+        photo : user.photo,
         userRole : userRole
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps

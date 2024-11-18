@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { getUserById } from '@/utils/users'; 
+import { deletedReview } from '@/utils/reviews';
 import styles from '@/styles/admin.module.css'
 export default function UserDetail() {
   const router = useRouter();
@@ -52,6 +53,17 @@ export default function UserDetail() {
         <DetailItem label="Nombre" value={`${user.firstName} ${user.lastName}`} />   
         <DetailItem label="Telefono" value={user.representative.phone} />
         <DetailItem label="Direccion" value={user.representative.Adress} />
+        {
+          user.representative.review?.content ? (
+            <>
+        <DetailItem label="Comentario" value={user.representative.review.content} />
+        <button onClick={() => deletedReview(user.representative.review.id)} className={styles.deleteButton}>
+          Borrar Comentario 
+        </button>
+            </>
+
+          ) : <></>
+        }
       </>
     ) : (
       <p>Rol sin asignar</p>
