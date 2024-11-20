@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { getUserById } from '@/utils/users'; 
 import { deletedReview } from '@/utils/reviews';
+import { postPayment, updatePayment } from '@/utils/payments';
 import PaymentStatus from '@/components/dashboard/dashboardUser/myPaymentStatus/PaymentStatus';
 import styles from '@/styles/admin.module.css'
 export default function UserDetail() {
@@ -27,6 +28,7 @@ export default function UserDetail() {
 
   if (!user) return <p>Loading...</p>;
   let pending = 0;
+  let confirm = true;
   if(user.userRole === "REPRESENTATIVE"){
     for(let i= 0; i<user.representative.Payment.length; i++){
       if(user.representative.Payment[i].confirm === false){
@@ -52,14 +54,27 @@ export default function UserDetail() {
     e.preventDefault();
   const formData = new FormData(e.currentTarget);
   const typePayment = formData.get('typePayment') as string;
-
-  if (typePayment === "PMOVIL") {
-    const numberRef = formData.get('numberRef') as string;
-    const paymentData = { numberRef, typePayment, id };
-    console.log(paymentData);
-  } else if (typePayment === "CASH") {
-    const paymentData = { cash: true, typePayment, id };
-    console.log(paymentData);
+  if(user.userRole === "DANCER"){
+    let dancerId = id
+    if (typePayment === "PMOVIL") {
+      const numberRef = formData.get('numberRef') as string;
+      const paymentData = { numberRef, typePayment, dancerId };
+      postPayment(paymentData)
+    } else if (typePayment === "CASH") {
+      const paymentData = { cash: true, typePayment, dancerId };
+      postPayment(paymentData);
+    }
+  }
+  if(user.userRole === "REPRESENTATIVE"){
+    let dancerRId = id
+    if (typePayment === "PMOVIL") {
+      const numberRef = formData.get('numberRef') as string;
+      const paymentData = { numberRef, typePayment, dancerRId };
+      postPayment(paymentData)
+    } else if (typePayment === "CASH") {
+      const paymentData = { cash: true, typePayment, dancerRId };
+      postPayment(paymentData);
+    }
   }
   }
   console.log(pending)
@@ -109,10 +124,10 @@ export default function UserDetail() {
                         <li key={payment.id}>
                           {payment.type === "PMOVIL" ? (
                             <strong> Pago Movil : {payment.numberRef}
-                             {payment.confirm ? null : (<button className={styles.roleButton}>
+                             {payment.confirm ? null : (<button  onClick={() => updatePayment(payment.id, {confirm})}className={styles.roleButton}>
                              confirmar Pago
                              </button>)}</strong>
-                          ) : (<strong> Efectivo : {payment.cash}   {payment.confirm ? null : (<button className={styles.roleButton}>
+                          ) : (<strong> Efectivo : {payment.cash}   {payment.confirm ? null : (<button onClick={() => updatePayment(payment.id, {confirm})} className={styles.roleButton}>
                              confirmar Pago
                              </button>)}</strong>)}
                         </li>
@@ -185,10 +200,10 @@ export default function UserDetail() {
                         <li key={payment.id}>
                           {payment.type === "PMOVIL" ? (
                             <strong> Pago Movil : {payment.numberRef}
-                             {payment.confirm ? null : (<button className={styles.roleButton}>
+                             {payment.confirm ? null : (<button onClick={() => updatePayment(payment.id, {confirm})} className={styles.roleButton}>
                              confirmar Pago
                              </button>)}</strong>
-                          ) : (<strong> Efectivo : {payment.cash}   {payment.confirm ? null : (<button className={styles.roleButton}>
+                          ) : (<strong> Efectivo : {payment.cash}   {payment.confirm ? null : (<button onClick={() => updatePayment(payment.id, {confirm})} className={styles.roleButton}>
                              confirmar Pago
                              </button>)}</strong>)}
                         </li>
