@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { getUserById } from '@/utils/users'; 
 import { deletedReview } from '@/utils/reviews';
+import PaymentStatus from '@/components/dashboard/dashboardUser/myPaymentStatus/PaymentStatus';
 import styles from '@/styles/admin.module.css'
 export default function UserDetail() {
   const router = useRouter();
@@ -44,9 +45,26 @@ export default function UserDetail() {
         <DetailItem label="Nombre" value={`${user.firstName} ${user.lastName}`} />
         <DetailItem label="Edad" value={user.dancer.age} />
         <DetailItem label="Telefono" value={user.dancer.phone} />
-        <DetailItem label="Direccion" value={user.dancer.Address} />
+        <DetailItem label="Direccion" value={user.dancer.Adress} />
         <DetailItem label="CI" value={user.dancer.CI} />
         <DetailItem label="Alergias" value={user.dancer.allergies} />
+        <DetailItem label= "Fecha de inscripcion" value={user.createdAt}/>
+        {
+          user.dancer.review?.content ? (
+            <>
+        <DetailItem label="Comentario" value={user.dancer.review.content} />
+        <button onClick={() => deletedReview(user.dancer.review.id)} className={styles.deleteButton}>
+          Borrar Comentario 
+        </button>
+            </>
+
+          ) : <></>
+        }
+        {
+          user.active ? (
+            <PaymentStatus Payment={user.dancer.Payment} />
+          ) : <></> 
+        }
       </>
     ) : user.userRole === "REPRESENTATIVE" ? (
       <>
@@ -64,6 +82,25 @@ export default function UserDetail() {
 
           ) : <></>
         }
+        <DetailItem label= "Fecha de inscripcion" value={user.createdAt}/>
+        <ul className={styles.dancersR}>
+          {user.representative?.dancers.map(dancer => {
+            return(
+              <li key={dancer.id}>
+                <DetailItem label="Nombre" value={`${dancer.firstName} ${dancer.lastName}`} />
+                <DetailItem label="Edad" value={dancer.age} />
+                <DetailItem label="CI" value={dancer.cI} />
+                <DetailItem label="Alergias" value={dancer.allergies} />
+                <DetailItem label= "Fecha de inscripcion" value={dancer.dateBirth}/>
+                {
+                user.active ? (
+                 <PaymentStatus Payment={dancer.Payment} />
+                ) : <></> 
+                }
+              </li>
+            )
+          })}
+        </ul>
       </>
     ) : (
       <p>Rol sin asignar</p>

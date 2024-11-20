@@ -29,7 +29,8 @@ export default async function Users(req: NextApiRequest, res: NextApiResponse){
               include : {
                 review : {
                   select : {
-                    id : true
+                    id : true,
+                    content: true
                   }
                 }
               }

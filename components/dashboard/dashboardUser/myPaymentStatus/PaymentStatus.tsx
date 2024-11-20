@@ -24,13 +24,13 @@ const currentMonth = new Date(currentDateTime).getMonth();
       <h4>Estado de pago</h4>
       <div className={styles.paymentB}>
         <div className={styles.greenBar} style={{ width: `${greenWidth}%` }}>
-          Pagado <ul>{paidMonths.join(', ')}</ul>
+           <ul>{paidMonths.join(', ')}</ul>
         </div>
         <div className={styles.redBar} style={{ width: `${redWidth}%` }}>
-          No <ul>{notPaidMonths.join(', ')}</ul>
+           <ul>{notPaidMonths.join(', ')}</ul>
         </div>
         <div className={styles.grayBar} style={{ width: `${grayWidth}%` }}>
-          Meses por venir <ul>{inComingMonths.join(', ')}</ul>
+          <ul>{inComingMonths.join(', ')}</ul>
         </div>
       </div>
     </>
