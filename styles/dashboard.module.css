@@ -202,6 +202,17 @@
   height: 40px;
   color: white;
 }
+.blueBar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: blue;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 40px;
+  color: white;
+}
 
 .redBar {
   display: flex;

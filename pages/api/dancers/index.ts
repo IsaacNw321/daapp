@@ -24,7 +24,6 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
             phone,
             CI,
             dateBirth,
-            Payment : 0
           }
         });
         newDancer

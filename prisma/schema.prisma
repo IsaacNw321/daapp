@@ -20,6 +20,10 @@ enum UserRole {
   CONTACT
 }
 
+enum TypePayment {
+  PMOVIL
+  CASH
+}
 
 model User {
   id             String      @id @default(uuid())
@@ -40,7 +44,7 @@ model Dancer {
   id               String         @id @default(uuid())
   user             User           @relation(fields: [userId], references: [id])
   userId           String         @unique
-  Payment          Int            @default(0)
+  Payment          Payment[]           
   review           Review?
   allergies String?
   CI       Int?
@@ -55,7 +59,7 @@ model Representative {
   user       User    @relation(fields: [userId], references: [id])
   userId     String  @unique
   dancers    DancerR[]
-  Payment    Int       @default(0)
+  Payment    Payment[]    
   review     Review?
   phone      Int?
   Adress     String? 
@@ -64,14 +68,14 @@ model Representative {
 model DancerR {
   id   String @id @default(uuid())
   representative   Representative? @relation(fields: [representativeId], references: [id])
-  representativeId String?
+  representativeId String
   firstName String 
   lastName String 
   allergies String
   cI       Int
   age      Int
   dateBirth DateTime @default(now())
-  Payment Int     @default(0)
+  Payment Payment[]    
 }
 
 model Review {
@@ -91,3 +95,16 @@ model Question {
   answer   String      @unique
 }
 
+model Payment {
+  id               String      @id @default(uuid())
+  type          TypePayment    @default(PMOVIL)
+  numberRef        String?
+  cash             Boolean?
+  confirm          Boolean      @default(false)
+  representative   Representative?  @relation(fields: [representativeId], references: [id])
+  representativeId String?   
+  dancerR           DancerR?         @relation(fields: [dancerRId], references: [id])
+  dancerRId         String?  
+  dancer            Dancer?         @relation(fields: [dancerId], references: [id])
+  dancerId          String? 
+}

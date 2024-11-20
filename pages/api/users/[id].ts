@@ -16,13 +16,18 @@ export default async function Users(req: NextApiRequest, res: NextApiResponse){
           include : {
             representative : {
               include : {
-                dancers  : true,
+                dancers  : {
+                  include : {
+                    Payment : true
+                  }
+                },
                review : {
                 select: {
                   id: true,
                   content: true 
                 }
-               }
+               },
+               Payment : true
               },
             },
             dancer : {
@@ -32,7 +37,8 @@ export default async function Users(req: NextApiRequest, res: NextApiResponse){
                     id : true,
                     content: true
                   }
-                }
+                },
+                Payment : true
               }
             }
           }

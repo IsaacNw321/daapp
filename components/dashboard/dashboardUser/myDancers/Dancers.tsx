@@ -5,7 +5,7 @@ import PaymentStatus from "../myPaymentStatus/PaymentStatus";
 import { DancersProps } from '@/app/types';
 
 
-const Dancers = ({ firstName, lastName, Payment } : DancersProps) => {
+const Dancers = ({ firstName, lastName, Payment, pending } : DancersProps) => {
   return (
     <>
       <div>
@@ -17,6 +17,7 @@ const Dancers = ({ firstName, lastName, Payment } : DancersProps) => {
             {!Payment ? <p>sin estado de pago</p> :
               <PaymentStatus
                 Payment={Payment}
+                pending={pending}
               />
             }
           </div>

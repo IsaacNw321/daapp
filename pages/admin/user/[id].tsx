@@ -8,7 +8,8 @@ export default function UserDetail() {
   const router = useRouter();
   const { id } = router.query;
   const [user, setUser] = useState(null);
-
+  const [addPayment, setAddPayment] = useState(false)
+  const [typePayment, setTypePayment] = useState('PMOVIL')
   useEffect(() => {
     if (id) {
       const fetchUser = async () => {
@@ -25,7 +26,43 @@ export default function UserDetail() {
   }, [id]);
 
   if (!user) return <p>Loading...</p>;
+  let pending = 0;
+  if(user.userRole === "REPRESENTATIVE"){
+    for(let i= 0; i<user.representative.Payment.length; i++){
+      if(user.representative.Payment[i].confirm === false){
+        pending++
+      }
+    }
+  }
+  if(user.userRole === "DANCER"){
+    for(let i= 0; i<user.dancer.Payment.length; i++){
+      if(user.dancer.Payment[i].confirm === false){
+        pending++
+      }
+    }
+  }
+  const handleShowP = (e: any) => {
+    setAddPayment(prevState => !prevState)
+  }
+  const handleType = (e: any) => {
+  const type = e.target.value
+  setTypePayment(type)
+  }
+  const handlePayment =(id: string) => (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  const formData = new FormData(e.currentTarget);
+  const typePayment = formData.get('typePayment') as string;
 
+  if (typePayment === "PMOVIL") {
+    const numberRef = formData.get('numberRef') as string;
+    const paymentData = { numberRef, typePayment, id };
+    console.log(paymentData);
+  } else if (typePayment === "CASH") {
+    const paymentData = { cash: true, typePayment, id };
+    console.log(paymentData);
+  }
+  }
+  console.log(pending)
   return (
     
     <div className={styles.container}>
@@ -62,7 +99,51 @@ export default function UserDetail() {
         }
         {
           user.active ? (
-            <PaymentStatus Payment={user.dancer.Payment} />
+            <>
+            <PaymentStatus Payment={user.dancer.Payment.length} pending={pending} />
+            <h3>Lista de Pagos</h3>
+                 <ul>               
+                  { 
+                    user.dancer.Payment.map(payment => {
+                      return(
+                        <li key={payment.id}>
+                          {payment.type === "PMOVIL" ? (
+                            <strong> Pago Movil : {payment.numberRef}
+                             {payment.confirm ? null : (<button className={styles.roleButton}>
+                             confirmar Pago
+                             </button>)}</strong>
+                          ) : (<strong> Efectivo : {payment.cash}   {payment.confirm ? null : (<button className={styles.roleButton}>
+                             confirmar Pago
+                             </button>)}</strong>)}
+                        </li>
+                      )
+                    })
+                  }
+                 </ul>
+                 <button  className={styles.roleButton} onClick={handleShowP}>
+                    Agregar Pago
+                  </button>
+                  {
+                    addPayment 
+                    ? (
+                      <form onSubmit={handlePayment(user.dancer.id)}>
+                        <select name='typePayment' onChange={handleType} >
+                          <option value="PMOVIL">Pago movil</option>
+                          <option value="CASH">Efectivo</option>
+                        </select>
+                        {typePayment === "PMOVIL" ? (
+                          <>
+                          <label htmlFor="numberRef">Numero de Referencia</label>
+                          <input type="text" name='numberRef'  placeholder='Numero de referencia'/>
+                          </>
+                        ) : null}
+                        <button type='submit' className={styles.roleButton}>
+                          Enviar
+                        </button>
+                      </form>
+                    ) : null
+                  }
+            </>
           ) : <></> 
         }
       </>
@@ -85,6 +166,7 @@ export default function UserDetail() {
         <DetailItem label= "Fecha de inscripcion" value={user.createdAt}/>
         <ul className={styles.dancersR}>
           {user.representative?.dancers.map(dancer => {
+            const pendingD = dancer.Payment.filter(payment => !payment.confirm).length;
             return(
               <li key={dancer.id}>
                 <DetailItem label="Nombre" value={`${dancer.firstName} ${dancer.lastName}`} />
@@ -94,7 +176,51 @@ export default function UserDetail() {
                 <DetailItem label= "Fecha de inscripcion" value={dancer.dateBirth}/>
                 {
                 user.active ? (
-                 <PaymentStatus Payment={dancer.Payment} />
+                  <>
+                 <h3>Lista de Pagos</h3>
+                 <ul className={styles.dancersR}>               
+                  { 
+                    dancer.Payment.map(payment => {
+                      return(
+                        <li key={payment.id}>
+                          {payment.type === "PMOVIL" ? (
+                            <strong> Pago Movil : {payment.numberRef}
+                             {payment.confirm ? null : (<button className={styles.roleButton}>
+                             confirmar Pago
+                             </button>)}</strong>
+                          ) : (<strong> Efectivo : {payment.cash}   {payment.confirm ? null : (<button className={styles.roleButton}>
+                             confirmar Pago
+                             </button>)}</strong>)}
+                        </li>
+                      )
+                    })
+                  }
+                  <button className={styles.roleButton} onClick={handleShowP}>
+                    Agregar Pago
+                  </button>
+                  {
+                    addPayment 
+                    ? (
+                      <form onSubmit={handlePayment(dancer.id)}>
+                        <select name='typePayment' onChange={handleType} >
+                          <option value="PMOVIL">Pago movil</option>
+                          <option value="CASH">Efectivo</option>
+                        </select>
+                        {typePayment === "PMOVIL" ? (
+                          <>
+                          <label htmlFor="numberRef">Numero de Referencia</label>
+                          <input type="text" name='numberRef'  placeholder='Numero de referencia'/>
+                          </>
+                        ) : null}
+                        <button type='submit' className={styles.roleButton}>
+                          Enviar
+                        </button>
+                      </form>
+                    ) : null
+                  }
+                  <PaymentStatus Payment={dancer.Payment.length} pending={pendingD} />
+                 </ul>
+                  </>
                 ) : <></> 
                 }
               </li>

@@ -191,10 +191,12 @@ export interface DancersProps {
   firstName: string;
   lastName: string;
   Payment: number;
+  pending : number;
 }
 
 export interface PaymentStatusProps {
   Payment: number;
+  pending : number;
 }
 
 export interface DancerInfo {

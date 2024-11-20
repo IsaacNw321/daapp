@@ -46,7 +46,7 @@ const MyProfile : NextComponentType = () =>{
         return {
           firstName,
           lastName,
-          Payment
+          Payment : Payment.length
         };
       });
       setuserDancers(allDancersInfo);
@@ -58,19 +58,30 @@ const MyProfile : NextComponentType = () =>{
   let reviewId;
   let representativeId;
   let dancerId;
+  let pending = 0;
   let firstName = dbUser?.firstName;
   let lastName = dbUser?.lastName;
   let picture = dbUser?.photo;
   if(userRole === "REPRESENTATIVE" && dbUser?.representative.review !== undefined){
     reviewId = dbUser?.representative?.review?.id
   } 
-  if(userRole === "DANCER" && dbUser?.dancer.review !== undefined)
+  if(userRole === "DANCER" && dbUser?.dancer.review !== undefined){
     reviewId =  dbUser?.dancer?.review?.id
+  }
   if(userRole === "REPRESENTATIVE"){
     representativeId = dbUser?.representative?.id
+    for(let i= 0; i<dbUser.representative.Payment.length; i++){
+      if(dbUser.representative.Payment[i].confirm === false){
+        pending++
+      }
+    }
   }
   if(userRole === "DANCER"){
     dancerId = dbUser?.dancer?.id
+    for(let i= 0; i<dbUser.dancer.Payment.length; i++){
+      if(dbUser.dancer.Payment[i].confirm === false){
+        pending++
+      }
   }
   return (
     <div className={styles.dashboardUser}>
@@ -127,6 +138,7 @@ const MyProfile : NextComponentType = () =>{
         <div className={!payment ? styles.notPaymentC : styles.paymentC}> 
           <PaymentStatus 
             Payment={payment}
+            pending={pending}
           />  
         </div>
         <CreateDancer
@@ -152,6 +164,7 @@ const MyProfile : NextComponentType = () =>{
               firstName={el.firstName}
               lastName={el.lastName}
               Payment={el.Payment}
+              pending={pending}
             />
           ))
         )
@@ -163,5 +176,5 @@ const MyProfile : NextComponentType = () =>{
     </div>
   );
 }
-
+}
 export default MyProfile;
