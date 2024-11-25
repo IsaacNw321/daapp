@@ -10,23 +10,13 @@ import { AsignRoles } from './Roles/asignRoles'
 import { LisOfQuestions } from './questions/sectionQuestions'
 import { deletedReview, getReviews } from '@/utils/reviews';
 import { useQuery } from 'react-query';
-import { ReviewCard } from '@/components/reviews/ReviewCard';
-import AliceCarousel from 'react-alice-carousel';
+import { ListOfReviews } from './reviews/ListOfReviews';
+
 export default function AdminPanel() {
   const context = useContext(FiltersContext);
-  const responsive = {
-    0 : {items : 1},
-    800 : {items: 2}
-  }
+  
   const { filters, setFilters } = context;
   const [users, setUsers] = useState([]);
-  const {data, error, isLoading} = useQuery('reviews', ()=> getReviews());
-  const [reviews, setReviews] = useState<any>([]);
-  useEffect(()=>{
-    if (!data) return;
-    setReviews(data);
-    console.log(reviews)
-}, [isLoading, data, reviews])
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -100,31 +90,8 @@ export default function AdminPanel() {
             </div>
           ))}
         </div>
-       <LisOfQuestions />
-       <section className={styles.questionsCont}>
-        <strong>Seccion de Comentarios</strong>
-        <ul className={styles.questions}>
-          {
-            reviews.map(review => {
-              return(
-                <li className={styles.questionCard} key={review.id}>
-                   {review.representative ? <p>Representante</p> : <p>Bailarin</p>}
-                   <br />
-                  {review.representative 
-                    ? <p>{review.representative.user.firstName + ' '} {review.representative.user.lastName}</p>
-                    :  <p>{review.dancer.user.firstName + ' '}  {review.dancer.user.lastName}</p>}
-                    <br />
-                    <p>{review.content}</p>
-                    <br />
-                    <button onClick={(e) => deletedReview(review.id)} className={styles.roleButton}>
-                      Eliminar Comentario
-                    </button>
-                </li>
-              )
-            })
-          }
-        </ul>
-       </section>
+       <LisOfQuestions />   
+        <ListOfReviews />
       </div>
     </div>
   )

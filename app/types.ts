@@ -1,6 +1,101 @@
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { StaticImageData } from "next/image";
 
+export enum UserRole {
+  ADMIN = 'ADMIN',
+  DANCER = 'DANCER',
+  REPRESENTATIVE = 'REPRESENTATIVE',
+  CONTACT = 'CONTACT',
+}
+
+export enum TypePayment {
+  PMOVIL = 'PMOVIL',
+  CASH = 'CASH',
+}
+
+
+export interface User {
+  id: string;
+  firstName?: string;
+  lastName?: string;
+  email: string;
+  photo?: string;
+  userRole: UserRole;
+  active: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  dancer?: Dancer;
+  representative?: Representative;
+}
+
+export interface Dancer {
+  id: string;
+  userId: string;
+  user : User;
+  Payment: Payment[];
+  review?: Review;
+  allergies?: string;
+  CI?: number;
+  age?: number;
+  dateBirth: Date;
+  phone?: number;
+  Adress?: string;
+}
+
+
+export interface Representative {
+  id: string;
+  userId: string;
+  user : User;
+  dancers: DancerR[];
+  Payment: Payment[];
+  review?: Review;
+  phone?: number;
+  Adress?: string;
+}
+
+
+export interface DancerR {
+  id: string;
+  representativeId: string;
+  firstName: string;
+  lastName: string;
+  allergies: string;
+  cI: number;
+  age: number;
+  dateBirth: Date;
+  Payment: Payment[];
+}
+
+
+export interface Review {
+  id: string;
+  content: string;
+  representative: Representative;
+  representativeId?: string;
+  dancer : Dancer;
+  dancerId?: string;
+}
+
+
+export interface Question {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+
+export interface Payment {
+  id: string;
+  type: TypePayment;
+  numberRef?: string;
+  cash?: boolean;
+  confirm: boolean;
+  representativeId?: string;
+  dancerRId?: string;
+  dancerId?: string;
+}
+
 export interface getUser {
   firstName: string;
   lastName: string;
