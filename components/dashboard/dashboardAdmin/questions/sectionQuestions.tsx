@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { getQuestions, deleteQuestion } from '@/utils/questions'
 import { NewQuestion } from './createQuestion';
 import { ChangueContentQuestion } from './updateQuestion';
-import { Question } from '@prisma/client';
+import { Question } from '@/app/types';
 export const LisOfQuestions = () =>{
   const [questions, setQuestions] = useState<Question[]>([]);
   const [showCreateQuestion, setShowCreateQestion] = useState<boolean>(false)

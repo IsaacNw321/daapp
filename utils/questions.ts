@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { dataQuestion, idQuestion, Question } from '@/app/types';
+import { dataQuestion, Question } from '@/app/types';
 
 export const getQuestions = async (): Promise<Question[]> => {
   try {
@@ -37,10 +37,10 @@ export const createQuestion = async (data: dataQuestion): Promise<Question | und
   }
 }
 
-export const updateQuestion = async (data: dataQuestion, id: idQuestion): Promise<Question | undefined> => {
-  console.log(id.id);
+export const updateQuestion = async (data: dataQuestion, id: string): Promise<Question | undefined> => {
+  
   try {
-    const response = await axios.put<Question>(`/api/questions/${id.id}`, data);
+    const response = await axios.put<Question>(`/api/questions/${id}`, data);
     if (response.status === 200) {
       return response.data;
     }

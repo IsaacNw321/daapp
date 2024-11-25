@@ -1,21 +1,28 @@
 import { useEffect, useState } from "react";
 import styles from '@/styles/admin.module.css'
 import { getUsers } from "@/utils/users";
-import { User } from "@prisma/client";
+import { User } from "@/app/types";
+import Loading from "@/components/layout/loading";
+import { useQuery } from "react-query";
 export const Statistics = () => {
   const [users, setUsers] = useState<User[]>([]);
+  const { data, error, isLoading } = useQuery<User[]>('statisticsUser', () => getUsers());
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const usersResponse = await getUsers();
-        setUsers(usersResponse);
-        console.log(usersResponse);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    };
-    fetchUsers();
-  }, []);
+    if (!data) return;
+    setUsers(data);
+  }, [isLoading, data, users]);
+  if(isLoading){
+    return(
+      <Loading/>
+    )
+  }
+  if(error){
+    return(
+      <div>
+        Ha habido un error
+      </div>
+    )
+  }
   const userCounts = {
     total: users.length,
     representatives: users.filter(user => user.userRole === 'REPRESENTATIVE').length,

@@ -1,3 +1,4 @@
+import { Representative } from '@prisma/client';
 import axios from 'axios';
 export const updatedRepresentative = async (id: string, updatedRepresentative: any) => {
   try {
@@ -14,7 +15,7 @@ export const updatedRepresentative = async (id: string, updatedRepresentative: a
 };
 
 
-export const deleteRepresentative = async (repId: string) =>{
+export const deleteRepresentative = async (repId: string | undefined): Promise<Representative | null>  =>{
   try {
     const response = await axios.delete(`/api/representatives/${repId}`);
     if (response.status === 200) {

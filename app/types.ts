@@ -27,7 +27,7 @@ export interface User {
   dancer?: Dancer;
   representative?: Representative;
 }
-
+export type noRole = UserRole | undefined;
 export interface Dancer {
   id: string;
   userId: string;
@@ -96,16 +96,7 @@ export interface Payment {
   dancerId?: string;
 }
 
-export interface getUser {
-  firstName: string;
-  lastName: string;
-  email: string;
-  photo: string;
-  userRole: string;
-  active: boolean;
-  updatedAt: Date | null;
-  createdAt: Date | null;    
-}
+export type SelectChangeEvent = React.ChangeEvent<HTMLSelectElement>;
 
 export interface reviewProps {
   key : number;
@@ -165,7 +156,7 @@ export interface Question {
 }
 
 export type dataQuestion = Omit<Question, 'id'>
-export type idQuestion = Omit<Question, 'question'|'answer'>
+
 export interface ReviewType {
   content: string;
   user: reviewUser;

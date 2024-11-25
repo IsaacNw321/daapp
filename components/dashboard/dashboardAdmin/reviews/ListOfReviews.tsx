@@ -6,7 +6,7 @@ import { Review } from '@/app/types';
 
 export const ListOfReviews = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
-  const { data, error, isLoading } = useQuery<Review[]>('reviews', () => getReviews());
+  const { data, error, isLoading } = useQuery<Review[]>('reviewsAdmin', () => getReviews());
 
   useEffect(() => {
     if (!data) return;

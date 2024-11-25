@@ -1,11 +1,14 @@
 import { FiltersContext } from '@/context/filters'
 import { useContext } from 'react';
 import styles from '@/styles/admin.module.css'
+import { SelectChangeEvent } from '@/app/types';
 export const Filters = () => {
   const context = useContext(FiltersContext);
-  
-  const { filters, setFilters } = context;
-  const handleSelect = (e : any) => {
+  if (!context) {
+    throw new Error('Filters must be used within a FiltersProvider');
+  }
+  const { setFilters } = context;
+  const handleSelect = (e : SelectChangeEvent) => {
     const newValue = e.target.value;
     setFilters(prevState => ({
      ...prevState,

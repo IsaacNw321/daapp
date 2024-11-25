@@ -1,25 +1,43 @@
 import { updateQuestion } from "@/utils/questions"
 import styles from '../../../../styles/admin.module.css'
-export const ChangueContentQuestion = (id : any) => {
-  const handleSubmit = (e : any) =>{
-    e.preventDefault();
-    const {question, answer} = Object.fromEntries(new window.FormData(e.target))
-    const data = {question, answer}
-    console.log(id)
-    updateQuestion(data, id)
-  }
+import { zodResolver } from '@hookform/resolvers/zod';
+import { SubmitHandler, useForm } from "react-hook-form";
+import { questionSchema } from '../../../../validations/questionsSchema'; 
+import { dataQuestion } from "@/app/types";
+import React from "react";
+export const ChangueContentQuestion : React.FC<string> = (id) => {
+  const { register, handleSubmit, formState: { errors } } = useForm<dataQuestion>({
+    resolver: zodResolver(questionSchema),
+  });
+
+  const onSubmit: SubmitHandler<dataQuestion> = async (data) => {
+    try {
+      const response = await updateQuestion(data , id);
+      console.log(response)
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return(
-    <form onSubmit={handleSubmit} className={styles.questionForm}>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.questionForm}>
       <label htmlFor="question">
-        Pregunta
+        {errors.question ? errors.question.message : "Pregunta"}
       </label>
-      <input type="text" name="question"/>
-      <label htmlFor="question">
-        Respuesta
+      <input
+        {...register("question")}
+        type="text"
+        name="question"
+      />
+      <label htmlFor="answer">
+        {errors.answer ? errors.answer.message : "Respuesta"}
       </label>
-      <input type="text" name="answer" />
+      <input
+        {...register("answer")}
+        type="text"
+        name="answer"
+      />
       <button className={styles.roleButton} type="submit">
-        Editar
+        Actualizar
       </button>
     </form>
   )

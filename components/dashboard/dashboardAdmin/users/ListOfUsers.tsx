@@ -6,21 +6,28 @@ import { RemoveRoles } from "../Roles/removeRoles";
 import { getUsers } from "@/utils/users";
 import styles from "@/styles/admin.module.css"
 import { User } from "@/app/types";
+import { useQuery } from "react-query";
+import Loading from "@/components/layout/loading";
 export const ListOfUsers = () => {
   const [users, setUsers] = useState<User[]>([]);
+  const { data, error, isLoading } = useQuery<User[]>('usersAdmin', () => getUsers());
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const usersResponse = await getUsers();
-        setUsers(usersResponse);
-        console.log(usersResponse);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    };
-    fetchUsers();
-  }, []);
+    if (!data) return;
+    setUsers(data);
+  }, [isLoading, data, users]);
   const filteredUsers = FilterUsers(users);
+  if(isLoading){
+    return(
+      <Loading/>
+    )
+  }
+  if(error){
+    return(
+      <div>
+        Ha habido un error
+      </div>
+    )
+  }
   return(
     <section className={styles.userGrid}>
     {filteredUsers.map((user : User) => (

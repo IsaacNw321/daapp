@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { infoDancer, postDancers, PostedDancerR } from '../app/types';
+import { Dancer } from '@prisma/client';
 
 
 export const createDancer = async (dancerData: postDancers) =>{
@@ -17,7 +18,7 @@ export const createDancer = async (dancerData: postDancers) =>{
 }
 
 
-export const deleteDancer = async (dancerId: string) =>{
+export const deleteDancer = async (dancerId: string | undefined) =>{
   try {
     const response = await axios.delete(`/api/dancers/${dancerId}`);
     if (response.status === 200) {
@@ -60,20 +61,20 @@ export const createDancerR = async (dancerData: PostedDancerR) =>{
 }
 
 
-export const createRoleDancer = async (userId : string, userRole : string) =>{
+export const createRoleDancer = async (userId : string, userRole : string) : Promise<Dancer| undefined> =>{
   try {
     const response = await axios.put(`/api/users/${userId}`, {userRole: userRole})
     if(response.status === 200){
       const newRepresentative = await axios.post('/api/dancers', {userId})
       if(newRepresentative.status === 200){
-        return 'Bailarin creado'
+        return response.data
       } else {
         throw new Error('Could not create Bailarin')
       }
     }
   } catch (error) {
     console.error('Error creating dancer:', error);
-    return null;
+    return undefined;
   }
 }
 
