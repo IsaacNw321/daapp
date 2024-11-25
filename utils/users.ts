@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { postedUser } from '@/app/types';
+import { postedUser, User } from '@/app/types';
 export const getUserById = async(id : String) =>{
   const response = await axios.get(`/api/users/${id}`, {
     timeout: 3000, 
@@ -52,17 +52,17 @@ export const updateUser = async (id: string, updatedUserData: any) => {
   }
 };
 
-export const getUsers = async () => {
+export const getUsers = async (): Promise<User[]> => {
   try {
-    const response = await axios.get(`/api/users`)
-    if(response.status){
-      return response.data
+    const response = await axios.get<User[]>(`/api/users`);
+    if (response.status === 200) {
+      return response.data;
     } else {
-      throw new Error('Error getting users')
+      throw new Error('Error getting users');
     }
   } catch (error) {
-    console.error('Erro gettin users :', error);
-    return null;
+    console.error('Error getting users:', error);
+    return []; 
   }
 }
 

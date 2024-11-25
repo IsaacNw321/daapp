@@ -160,10 +160,12 @@ export interface reviewUser {
 
 export interface Question {
   id : string;
-  question: string | undefined;
-  answer: string | undefined;
+  question: string;
+  answer: string ;
 }
 
+export type dataQuestion = Omit<Question, 'id'>
+export type idQuestion = Omit<Question, 'question'|'answer'>
 export interface ReviewType {
   content: string;
   user: reviewUser;

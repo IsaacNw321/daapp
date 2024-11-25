@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react';
 import { getQuestions, deleteQuestion } from '@/utils/questions'
 import { NewQuestion } from './createQuestion';
 import { ChangueContentQuestion } from './updateQuestion';
+import { Question } from '@prisma/client';
 export const LisOfQuestions = () =>{
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [showCreateQuestion, setShowCreateQestion] = useState<boolean>(false)
   const [edit, setEdit] = useState<boolean>(false);
   useEffect(() => {
@@ -26,7 +27,7 @@ export const LisOfQuestions = () =>{
   }
   return (
     <section className={styles.questionsCont}>
-    <h3>Seccion de Preguntas Frecuentes</h3>
+    <strong>Seccion de Preguntas Frecuentes</strong>
     <ul className={styles.questions}>
       {
         questions.map(question => {
