@@ -6,7 +6,7 @@ import { getUserById } from '@/utils/users';
 import { UserRole } from '@/app/types';
 import { RepresentativeDetails } from '@/components/dashboard/dashboardAdmin/users/RepresentativeDetails';
 import { DancerDetails } from '@/components/dashboard/dashboardAdmin/users/DancersDetails';
-
+import { DetailItem } from '@/components/dashboard/dashboardAdmin/users/DancersDetails';
 export default function UserDetail() {
   const router = useRouter();
   const { id } = router.query;
@@ -34,11 +34,12 @@ export default function UserDetail() {
           <h1 className={styles.title}>Detalles de usuario</h1>
         </header>
         <div className={styles.content}>
+        <DetailItem label="Nombre" value={`${user?.firstName} ${user?.lastName}`} />
           <div className={styles.grid}>
             {user?.userRole === UserRole.REPRESENTATIVE ? (
-              <RepresentativeDetails user={user} />
+              <RepresentativeDetails representative={user.representative} />
             ) : user?.userRole === UserRole.DANCER ? (
-              <DancerDetails user={user} />
+              <DancerDetails dancer={user.dancer} />
             ) : (
               <p>Rol sin asignar</p>
             )}
