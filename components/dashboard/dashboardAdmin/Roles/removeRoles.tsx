@@ -2,7 +2,7 @@ import { useState } from "react";
 import { updateUser, getUserById } from '@/utils/users';
 import { deleteDancer } from '@/utils/dancers';
 import { deleteRepresentative } from '@/utils/representative';
-import styles from '../../../../styles/admin.module.css';
+import styles from '@/styles/admin.module.css';
 import { UserRole } from "@/app/types";
 
 export const RemoveRoles: React.FC<string> = (userId) => {

@@ -1,4 +1,4 @@
-import styles from '../../../../styles/admin.module.css'
+import styles from '@/styles/admin.module.css'
 import { createRoleDancer } from '@/utils/dancers'
 import { createRepresentative} from '@/utils/representative'
 import { deleteUser } from '@/utils/users'

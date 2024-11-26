@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { deletedReview, getReviews } from '@/utils/reviews';
 import { useState, useEffect } from 'react';
-import styles from '../../../../styles/admin.module.css';
+import styles from '@/styles/admin.module.css';
 import { Review } from '@/app/types';
 
 export const ListOfReviews = () => {

@@ -7,7 +7,7 @@ export const PaymentStatus = ({ Payment, pending }: PaymentStatusProps) => {
   const currentMonth = new Date(currentDateTime).getMonth();
   const months: string[] = ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
 
-  // Calculate confirmed and pending payments
+ 
   const confirmedPayments = Payment - pending;
   const pendingPayments = Payment - confirmedPayments;
 

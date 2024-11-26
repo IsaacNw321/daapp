@@ -2,15 +2,15 @@ import axios from 'axios';
 import { postedUser, User } from '@/app/types';
 
 
-export const getUserById = async (id: string): Promise<User | undefined> => {
-  try {
-    const response = await axios.get<User>(`/api/users/${id}`, { timeout: 3000 });
-    return response.data;
-  } catch (error) {
-    console.error('Error getting user by ID:', error);
-    return undefined;
+export async function getUserById(id: string): Promise<User | undefined> {
+ 
+  const response = await axios.get(`/api/users/${id}`);
+  if (response.status !== 200) {
+    return undefined
   }
-};
+  const user: User = await response.data;
+  return user;
+}
 
 
 export const postUser = async (userData: postedUser): Promise<User | null> => {

@@ -1,8 +1,8 @@
 import { updateQuestion } from "@/utils/questions"
-import styles from '../../../../styles/admin.module.css'
+import styles from '@/styles/admin.module.css'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from "react-hook-form";
-import { questionSchema } from '../../../../validations/questionsSchema'; 
+import { questionSchema } from '@/validations/questionsSchema'; 
 import { dataQuestion } from "@/app/types";
 import React from "react";
 export const ChangueContentQuestion : React.FC<string> = (id) => {

@@ -1,4 +1,4 @@
-import styles from '../../../../styles/admin.module.css'
+import styles from '@/styles/admin.module.css'
 import { useEffect, useState } from 'react';
 import { getQuestions, deleteQuestion } from '@/utils/questions'
 import { NewQuestion } from './createQuestion';

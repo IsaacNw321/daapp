@@ -1,10 +1,10 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { questionSchema } from '../../../../validations/questionsSchema'; 
+import { questionSchema } from '@/validations/questionsSchema'; 
 import { createQuestion } from "@/utils/questions";
 import { dataQuestion } from '@/app/types';
-import styles from '../../../../styles/admin.module.css';
+import styles from '@/styles/admin.module.css';
 
 
 
