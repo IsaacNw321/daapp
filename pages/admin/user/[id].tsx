@@ -7,26 +7,24 @@ import { UserRole } from '@/app/types';
 import { RepresentativeDetails } from '@/components/dashboard/dashboardAdmin/users/RepresentativeDetails';
 import { DancerDetails } from '@/components/dashboard/dashboardAdmin/users/DancersDetails';
 import { DetailItem } from '@/components/dashboard/dashboardAdmin/users/DancersDetails';
+import { useQuery } from 'react-query';
+import Loading from '@/components/layout/loading';
+
 export default function UserDetail() {
   const router = useRouter();
   const { id } = router.query;
   const [user, setUser] = useState<User | undefined>(undefined);
- 
+ const {data , isLoading, error} = useQuery(["adminUser", id], () => getUserById(id))
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const userResponse = await getUserById(id as string);
-        setUser(userResponse);
-      } catch (error) {
-        console.error('Error fetching user:', error);
-      }
-    };
-    if (id) {
-      fetchUser();
-    }
+    if(!data) return
+    setUser(data)
+    console.log(data)
   }, [id]);
 
-
+ if(isLoading) return <Loading/>
+ if(error) return <div>
+  Hubo un error vuelva a intentarlo mas tarde
+ </div>
   return (
     <div className={styles.container}>
       <div className={styles.card}>

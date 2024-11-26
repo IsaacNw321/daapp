@@ -1,10 +1,5 @@
-import { TypePayment, User } from "@/app/types";
-import PaymentStatus from "../../dashboardUser/myPaymentStatus/PaymentStatus";
 import styles from '@/styles/admin.module.css';
-import { postPayment, updatePayment } from "@/utils/payments";
 import { deletedReview } from "@/utils/reviews";
-import { useState } from "react";
-import { ControlPayments } from "../Payments/Payments";
 import { DancerDetails } from "./DancersDetails";
 import { DetailItem } from "./DancersDetails";
 export const RepresentativeDetails = ({ representative } : any) => {
