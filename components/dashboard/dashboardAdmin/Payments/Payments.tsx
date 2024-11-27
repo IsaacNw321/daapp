@@ -1,26 +1,39 @@
 import { Payment, TypePayment, User, UserRole } from "@/app/types"
 import styles from '@/styles/admin.module.css'
-import { postPayment, confirmedPayment } from "@/utils/payments"
+import { postPayment, confirmedPayment, deletePayment } from "@/utils/payments"
 import { useState } from "react"
 export interface ControlPaymentsProps{
   payments: Payment[];
   id : string;
+  dancerR : boolean;
 }
-export const ControlPayments: React.FC<ControlPaymentsProps> = ({payments, id}) => {
+export const ControlPayments: React.FC<ControlPaymentsProps> = ({payments, id, dancerR}) => {
   const [typePayment, setTypePayment] = useState<TypePayment>(TypePayment.PMOVIL)
   const [addPayment, setAddPayment] = useState<boolean>(false)
   const handlePayment =(id: string) => (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   const formData = new FormData(e.currentTarget);
   const typePayment = formData.get('typePayment') as string;
-    let dancerId = id
-    if (typePayment === TypePayment.PMOVIL) {
-      const numberRef = formData.get('numberRef') as string;
-      const paymentData = { numberRef, typePayment, dancerId };
-      postPayment(paymentData)
-    } else if (typePayment === TypePayment.CASH) {
-      const paymentData = { cash: true, typePayment, dancerId };
-      postPayment(paymentData);
+    if(dancerR){
+      let dancerRId = id
+      if (typePayment === TypePayment.PMOVIL) {
+        const numberRef = formData.get('numberRef') as string;
+        const paymentData = { numberRef, typePayment, dancerRId };
+        postPayment(paymentData)
+      } else if (typePayment === TypePayment.CASH) {
+        const paymentData = { cash: true, typePayment, dancerRId };
+        postPayment(paymentData);
+      }
+    } else {
+      let dancerId = id
+      if (typePayment === TypePayment.PMOVIL) {
+        const numberRef = formData.get('numberRef') as string;
+        const paymentData = { numberRef, typePayment, dancerId };
+        postPayment(paymentData)
+      } else if (typePayment === TypePayment.CASH) {
+        const paymentData = { cash: true, typePayment, dancerId };
+        postPayment(paymentData);
+      }
     }
 }
 
@@ -44,7 +57,7 @@ setTypePayment(type)
             payments?.map((payment : Payment) => {
               return(
                 <li key={payment.id}>
-                  {payment.type === "PMOVIL" ? (
+                  {payment.type === TypePayment.PMOVIL ? (
                     <strong> Pago Movil : {payment.numberRef}
                      {payment.confirm ? null : (<button  onClick={() => confirmedPayment(payment.id, {confirm})}className={styles.roleButton}>
                      confirmar Pago
@@ -52,6 +65,9 @@ setTypePayment(type)
                   ) : (<strong> Efectivo : {payment.cash}   {payment.confirm ? null : (<button onClick={() => confirmedPayment(payment.id, {confirm})} className={styles.roleButton}>
                      confirmar Pago
                      </button>)}</strong>)}
+                    <button className={styles.deleteButton} onClick={() => deletePayment(payment.id)}>
+                     Eliminar Pago  
+                    </button> 
                 </li>
               )
             })

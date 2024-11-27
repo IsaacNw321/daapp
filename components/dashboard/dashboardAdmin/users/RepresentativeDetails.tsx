@@ -34,7 +34,7 @@ export const RepresentativeDetails: React.FC<RepresentativeProps> = ({ represent
       <section>
       {
         representative?.dancers.map((dancer : DancerR) => (
-          <DancerRDetails key={dancer.id} dancer={dancer} />
+          <DancerRDetails key={dancer.id} dancer={dancer}  />
         ))
       }
       </section>

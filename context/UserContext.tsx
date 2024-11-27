@@ -32,7 +32,7 @@ const ContextProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (!user) return;
-
+  
     const id = user.sub;
     const datos = {
       id: id,
@@ -43,23 +43,22 @@ const ContextProvider = ({ children }: Props) => {
       photo: user.picture,
       updatedAt: new Date(),
     };
-
+  
     if (!id || !user.email) return;
-
+  
     getUserById(id)
       .then((data) => {
+        if (!data) {
+          mutation.mutate(datos);
+        }
         setExist(!!data);
       })
       .catch((err) => {
         console.log(err);
         setExist(false);
       });
-
-    if (!exist) {
-      mutation.mutate(datos);
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, exist]);
+  }, [user]);
 
   return <userContext.Provider value={usuario}>{children}</userContext.Provider>;
 };

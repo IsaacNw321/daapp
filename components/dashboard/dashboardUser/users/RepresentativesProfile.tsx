@@ -36,7 +36,7 @@ const RepresentativeProfile: React.FC<RepresentativeProfileProps> = ({ dbUser, u
   };
 
   const handlePayment = (id: string) => (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault(); 
     const formData = new FormData(e.currentTarget);
     const typePayment = formData.get('typePayment') as string;
     let dancerRId = id;
@@ -90,11 +90,8 @@ const RepresentativeProfile: React.FC<RepresentativeProfileProps> = ({ dbUser, u
                     <option value={TypePayment.PMOVIL}>Pago movil</option>
                     <option value={TypePayment.CASH}>Efectivo</option>
                   </select>
-                  {typePayment === TypePayment.PMOVIL && (
-                    <>
-                      <label htmlFor="numberRef">Numero de Referencia</label>
-                      <input type="text" name='numberRef' placeholder='Numero de referencia' />
-                    </>
+                  {typePayment === TypePayment.PMOVIL && (         
+                    <input type="text" name='numberRef' placeholder='Numero de referencia' />              
                   )}
                   <button type='submit' className={styles.roleButton}>
                     Enviar

@@ -9,7 +9,7 @@ export interface DancerProp{
 export const DancerRDetails: React.FC<DancerProp> = ({ dancer }) => {
   
   let pending = 0;
-  for (let i = 0; i < dancer.Payment.length; i++) {
+  for (let i = 0; i < dancer.Payment?.length; i++) {
     if (dancer.Payment[i].confirm === false) {
       pending++;
     }
@@ -22,7 +22,7 @@ export const DancerRDetails: React.FC<DancerProp> = ({ dancer }) => {
       <DetailItem label="Edad" value={dancer?.age} />
       <DetailItem label="CI" value={dancer?.cI} />
       <DetailItem label="Alergias" value={dancer?.allergies} />
-      <ControlPayments id={dancer.id} payments={dancer.Payment} /> 
+      <ControlPayments id={dancer.id} payments={dancer.Payment} dancerR={true} /> 
       <PaymentStatus Payment={dancer.Payment.length} pending={pending} />
     </div>
   );
