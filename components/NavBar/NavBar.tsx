@@ -35,7 +35,7 @@ const links = [{
 
 export default function NavBar(){
   const [name, setName] = useState<String | undefined>('')
-  const [picture, setPicture] = useState<string | StaticImport>('');
+  const [picture, setPicture] = useState<string | undefined>(undefined);
   const [showMenu, setShowMenu] = useState<any>(false);
   const usuario = useUsers()
   const {user} = useUser();
