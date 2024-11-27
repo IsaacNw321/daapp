@@ -4,14 +4,16 @@ import { ControlPayments } from '../Payments/Payments';
 import PaymentStatus from '../../dashboardUser/myPaymentStatus/PaymentStatus';
 import { Dancer } from '@/app/types';
 export interface DancerProp{
-  dancer : Dancer
+  dancer : Dancer | undefined
 }
 export const DancerDetails: React.FC<DancerProp> = ({ dancer }) => {
   
   let pending = 0;
-  for (let i = 0; i < dancer.Payment.length; i++) {
-    if (dancer.Payment[i].confirm === false) {
-      pending++;
+  if(dancer?.Payment !== undefined){
+    for (let i = 0; i < dancer.Payment.length; i++) {
+      if (dancer?.Payment[i].confirm === false) {
+        pending++;
+      }
     }
   }
 
@@ -19,8 +21,8 @@ export const DancerDetails: React.FC<DancerProp> = ({ dancer }) => {
     <div className={styles.grid}>
       <p>Bailarin</p>
       <DetailItem label="Edad" value={dancer?.age} />
-      {dancer.phone !== undefined ? <DetailItem label="Telefono" value={dancer?.phone} /> : null}
-      {dancer.Adress !== undefined ? <DetailItem label="Direccion" value={dancer?.Adress} /> : null}
+      {dancer?.phone !== undefined ? <DetailItem label="Telefono" value={dancer?.phone} /> : null}
+      {dancer?.Adress !== undefined ? <DetailItem label="Direccion" value={dancer?.Adress} /> : null}
       <DetailItem label="CI" value={dancer?.CI} />
       <DetailItem label="Alergias" value={dancer?.allergies} />
       {dancer?.review?.content ? (
@@ -34,8 +36,8 @@ export const DancerDetails: React.FC<DancerProp> = ({ dancer }) => {
           </button>
         </>
       ) : null}
-      <ControlPayments id={dancer.id} payments={dancer.Payment} dancerR={false} /> 
-      <PaymentStatus Payment={dancer.Payment.length} pending={pending} />
+      <ControlPayments id={dancer?.id} payments={dancer?.Payment} dancerR={false} /> 
+      <PaymentStatus Payment={dancer?.Payment.length} pending={pending} />
     </div>
   );
 };

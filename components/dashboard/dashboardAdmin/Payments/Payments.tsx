@@ -3,8 +3,8 @@ import styles from '@/styles/admin.module.css'
 import { postPayment, confirmedPayment, deletePayment } from "@/utils/payments"
 import { useState } from "react"
 export interface ControlPaymentsProps{
-  payments: Payment[];
-  id : string;
+  payments?: Payment[];
+  id? : string;
   dancerR : boolean;
 }
 export const ControlPayments: React.FC<ControlPaymentsProps> = ({payments, id, dancerR}) => {
@@ -77,7 +77,7 @@ setTypePayment(type)
             Agregar Pago
           </button>
           {
-            addPayment 
+            addPayment && id !== undefined
             ? (
               <form onSubmit={handlePayment(id)}>
                 <select name='typePayment' onChange={handleType} >

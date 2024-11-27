@@ -20,7 +20,6 @@ export const Filters = () => {
     <option value="all">Todos los usuarios</option>
     <option value={UserRole.REPRESENTATIVE}>Representantes</option>
     <option value={UserRole.DANCER}>Bailarines</option>
-    <option value="dancersR">Bailerines Representados</option>
     <option value={UserRole.CONTACT}>Usuarios sin rol asignado</option>
   </select>
   )

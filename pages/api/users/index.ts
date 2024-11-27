@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import  prisma  from "../../../lib/prisma";
-import { UserRequestBody } from "@/app/types";
+import  prisma  from "@/lib/prisma";
 
 
 const isValidEmail = (email: string): boolean => {

@@ -1,9 +1,9 @@
-import styles from "../../../../styles/dashboard.module.css"
+import styles from "@/styles/dashboard.module.css"
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
-import {reviewSchema} from "../../../../validations/reviewSchema";
-import { updatedReview, postedReviewRepresentative } from "../../../../utils/reviews";
-import { Content, postReviewRepresentative, ReviewRProps } from "../../../../app/types";
+import {reviewSchema} from "@/validations/reviewSchema";
+import { updatedReview, postedReviewRepresentative } from "@/utils/reviews";
+import { Content, ReviewRProps } from "@/app/types";
 import { useState } from "react";
 
 const ReviewR = ({representativeId, reviewId} : ReviewRProps) =>{

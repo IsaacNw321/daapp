@@ -56,7 +56,7 @@ const DancerProfile: React.FC<DancerProfileProps> = ({ dbUser, payment }) => {
         <h3>Lista de Pagos</h3>
         {payment?.map(payment => (
           <li className={styles.payments} key={payment.id}>
-            {payment.type === "PMOVIL" 
+            {payment.type === TypePayment.PMOVIL 
               ? <p>{payment.numberRef}</p>
               : <p>Efectivo</p>
             }        

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import  prisma  from "../../../lib/prisma";
+import  prisma  from "@/lib/prisma";
 
 export default async function DancersR(req: NextApiRequest, res: NextApiResponse) {
   const method = req.method;
@@ -24,7 +24,6 @@ export default async function DancersR(req: NextApiRequest, res: NextApiResponse
             age,
             dateBirth,
             representativeId,
-            Payment : 0
           }
         });
         newDancer

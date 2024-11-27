@@ -124,7 +124,7 @@ export interface QuestionItemProps {
 }
 
 export interface RepresentativeProps{
-  representative: Representative;
+  representative: Representative | undefined;
 }
 
 export interface LogginButtonProps {

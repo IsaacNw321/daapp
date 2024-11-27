@@ -6,7 +6,6 @@ import  { getUserById} from "../../utils/users";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useQuery } from "react-query";
-import Loading from "../NavBar/loading";
 import { LogginButtonProps, UserRole } from "@/app/types";
 
 
@@ -54,7 +53,7 @@ export const LogginButton: React.FC<LogginButtonProps>  = ({ userName, userPictu
               className={styles.imgLogNavBar}
               width={40}
               height={40}
-              src={userPicture}
+              src={userPicture ?? ""}
               alt="User profile picture"
               loading="lazy"
             />

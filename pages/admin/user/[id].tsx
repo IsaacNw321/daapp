@@ -14,12 +14,23 @@ export default function UserDetail() {
   const router = useRouter();
   const { id } = router.query;
   const [user, setUser] = useState<User | undefined>(undefined);
- const {data , isLoading, error} = useQuery(["adminUser", id], () => getUserById(id))
+  const { data: dbUser, isLoading, error } = useQuery<User | undefined>(
+    ['user', id],
+    () => {
+      if (id) {
+        return getUserById(id as string);
+      }
+      return undefined;
+    },
+    {
+      enabled: !!id,
+    }
+  );
   useEffect(() => {
-    if(!data) return
-    setUser(data)
-    console.log(data)
-  }, [id]);
+    if(!dbUser) return
+    setUser(dbUser)
+    
+  }, [id, dbUser]);
 
  if(isLoading) return <Loading/>
  if(error) return <div>

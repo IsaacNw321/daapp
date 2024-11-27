@@ -7,9 +7,11 @@ import { DancerR, RepresentativeProps } from '@/app/types';
 export const RepresentativeDetails: React.FC<RepresentativeProps> = ({ representative }) => {
 
   let pending = 0;
-  for (let i = 0; i < representative.Payment.length; i++) {
-    if (representative.Payment[i].confirm === false) {
-      pending++;
+  if(representative?.Payment !== undefined){
+    for (let i = 0; i < representative.Payment.length; i++) {
+      if (representative.Payment[i].confirm === false) {
+        pending++;
+      }
     }
   }
 

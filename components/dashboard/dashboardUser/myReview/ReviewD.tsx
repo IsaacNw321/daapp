@@ -1,11 +1,11 @@
 "use client"
-import styles from "../../../../styles/dashboard.module.css"
+import styles from "@/styles/dashboard.module.css"
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
-import {reviewSchema} from "../../../../validations/reviewSchema";
-import { updatedReview, postedReviewDancer } from "../../../../utils/reviews";
+import {reviewSchema} from "@/validations/reviewSchema";
+import { updatedReview, postedReviewDancer } from "@/utils/reviews";
 import { useState } from "react";
-import { ReviewDProps, Content } from "../../../../app/types";
+import { ReviewDProps, Content } from "@/app/types";
 const ReviewD = ({dancerId, reviewId} : ReviewDProps) =>{
   const [content, setContent] = useState({ content: '' }); 
   const [showSuccess, setShowSucess] = useState(false);

@@ -9,18 +9,32 @@ import { Statistics } from "./users/statistics";
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { UserRole } from '@/app/types';
 import { useQuery } from 'react-query';
+import { User } from '@/app/types';
 export default function AdminPanel() {
-  const {user} = useUser()
-  const userId = user?.sub
-  const { data: dbUser, isLoading } = useQuery(['user', userId], () => getUserById(userId), {
-    enabled: !!userId, 
-  });
-  console.log(dbUser?.userRole)
+  const { user } = useUser();
+  const userId = user?.sub;
+
+  const { data: dbUser, isLoading } = useQuery<User | undefined>(
+    ['user', userId],
+    () => {
+      if (userId) {
+        return getUserById(userId);
+      }
+      return undefined;
+    },
+    {
+      enabled: !!userId,
+    }
+  );
+
+  console.log(dbUser?.userRole);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  if(dbUser?.userRole !== UserRole.ADMIN){
-      window.location.href = '/';
+
+  if (dbUser?.userRole !== UserRole.ADMIN) {
+    window.location.href = '/';
   }
   return (
     <div className={styles.adminContainer}>

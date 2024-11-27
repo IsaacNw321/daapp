@@ -1,5 +1,5 @@
 "use client";
-import styles from "../../styles/Services.module.css";
+import styles from "@/styles/Services.module.css";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { SwiperButtons } from '../pageComponents/swiperButtons';
 import { EffectFade } from 'swiper/modules';
