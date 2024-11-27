@@ -1,6 +1,11 @@
+import { representativeUpdateData } from '@/app/types';
 import { Representative } from '@prisma/client';
 import axios from 'axios';
-export const updatedRepresentative = async (id: string, updatedRepresentative: any) => {
+
+export const updatedRepresentative = async (
+  id: string | undefined,
+  updatedRepresentative: representativeUpdateData
+): Promise<Representative | null> => {
   try {
     const response = await axios.put(`/api/representatives/${id}`, updatedRepresentative);
     if (response.status === 200) {
@@ -14,8 +19,9 @@ export const updatedRepresentative = async (id: string, updatedRepresentative: a
   }
 };
 
-
-export const deleteRepresentative = async (repId: string | undefined): Promise<Representative | null>  =>{
+export const deleteRepresentative = async (
+  repId: string | undefined
+): Promise<Representative | null> => {
   try {
     const response = await axios.delete(`/api/representatives/${repId}`);
     if (response.status === 200) {
@@ -27,20 +33,24 @@ export const deleteRepresentative = async (repId: string | undefined): Promise<R
     console.error('Error deleting Rep:', error);
     return null;
   }
-}
-export const createRepresentative = async (userId : string, userRole : string) =>{
+};
+
+export const createRepresentative = async (
+  userId: string,
+  userRole: string
+): Promise<string | null> => {
   try {
-    const response = await axios.put(`/api/users/${userId}`, {userRole})
-    if(response.status === 200){
-      const newRepresentative = await axios.post('/api/representatives', {userId})
-      if(newRepresentative.status === 200){
-        return 'Representante creado'
+    const response = await axios.put(`/api/users/${userId}`, { userRole });
+    if (response.status === 200) {
+      const newRepresentative = await axios.post('/api/representatives', { userId });
+      if (newRepresentative.status === 200) {
+        return 'Representante creado';
       } else {
-        throw new Error('Could not create representative')
+        throw new Error('Could not create representative');
       }
     }
   } catch (error) {
     console.error('Error creating representative:', error);
-    return null;
   }
-}
+  return null;
+};

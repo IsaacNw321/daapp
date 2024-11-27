@@ -9,7 +9,7 @@ import { useState } from "react";
 const ReviewR = ({representativeId, reviewId} : ReviewRProps) =>{
   const [content, setContent] = useState({ content: '' }); 
   const [showSuccess, setShowSucess] = useState(false);
-  const {register,handleSubmit,watch, formState: {errors}} = useForm<postReviewRepresentative>({
+  const {register,handleSubmit,watch, formState: {errors}} = useForm<Content>({
     resolver: zodResolver(reviewSchema)
   });
   const onSubmit: SubmitHandler<Content> = async (data) =>{

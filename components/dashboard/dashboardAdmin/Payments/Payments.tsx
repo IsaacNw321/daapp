@@ -1,10 +1,14 @@
-import { TypePayment, User } from "@/app/types"
+import { Payment, TypePayment, User, UserRole } from "@/app/types"
 import styles from '@/styles/admin.module.css'
-import { postPayment, updatePayment } from "@/utils/payments"
+import { postPayment, confirmedPayment } from "@/utils/payments"
 import { useState } from "react"
-export const ControlPayments: React.FC<User> = ({payments, id} : any) => {
+export interface ControlPaymentsProps{
+  payments: Payment[];
+  id : string;
+}
+export const ControlPayments: React.FC<ControlPaymentsProps> = ({payments, id}) => {
   const [typePayment, setTypePayment] = useState<TypePayment>(TypePayment.PMOVIL)
-  const [addPayment, setAddPayment] = useState(false)
+  const [addPayment, setAddPayment] = useState<boolean>(false)
   const handlePayment =(id: string) => (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   const formData = new FormData(e.currentTarget);
@@ -37,15 +41,15 @@ setTypePayment(type)
          <ul>               
           { 
           payments?.length === 0 ? <p>No hay datos de pago</p> : 
-            payments?.map(payment => {
+            payments?.map((payment : Payment) => {
               return(
                 <li key={payment.id}>
                   {payment.type === "PMOVIL" ? (
                     <strong> Pago Movil : {payment.numberRef}
-                     {payment.confirm ? null : (<button  onClick={() => updatePayment(payment.id, {confirm})}className={styles.roleButton}>
+                     {payment.confirm ? null : (<button  onClick={() => confirmedPayment(payment.id, {confirm})}className={styles.roleButton}>
                      confirmar Pago
                      </button>)}</strong>
-                  ) : (<strong> Efectivo : {payment.cash}   {payment.confirm ? null : (<button onClick={() => updatePayment(payment.id, {confirm})} className={styles.roleButton}>
+                  ) : (<strong> Efectivo : {payment.cash}   {payment.confirm ? null : (<button onClick={() => confirmedPayment(payment.id, {confirm})} className={styles.roleButton}>
                      confirmar Pago
                      </button>)}</strong>)}
                 </li>
@@ -64,7 +68,7 @@ setTypePayment(type)
                   <option value={TypePayment.PMOVIL}>Pago movil</option>
                   <option value={TypePayment.CASH}>Efectivo</option>
                 </select>
-                {typePayment === "PMOVIL" ? (
+                {typePayment === TypePayment.PMOVIL ? (
                   <>
                   <label htmlFor="numberRef">Numero de Referencia</label>
                   <input type="text" name='numberRef'  placeholder='Numero de referencia'/>

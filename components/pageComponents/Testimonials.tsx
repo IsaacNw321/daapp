@@ -5,6 +5,7 @@ import { getReviews } from "../../utils/reviews";
 import { ReviewCard } from "../reviews/ReviewCard";
 import { NextComponentType } from "next";
 import AliceCarousel from "react-alice-carousel";
+import { Review } from "@/app/types";
 import "react-alice-carousel/lib/alice-carousel.css";
 const responsive = {
   0 : {items : 1},
@@ -12,12 +13,12 @@ const responsive = {
 }
 
 const Testimonials: NextComponentType = () =>{
+  const [reviews, setReviews] = useState<React.ReactNode[]>([]);
+  const { data, error, isLoading } = useQuery<Review[]>('reviewsAdmin', () => getReviews());
   
-  const {data, error, isLoading} = useQuery('reviews', ()=> getReviews());
-  const [reviews, setReviews] = useState<any>();
   useEffect(()=>{
     if (!data) return;
-    let reviewItems = data?.map((review: any, idx : number) => {
+    let reviewItems = data?.map((review: Review) => {
       let userRole;  
        let user;
        if (!review.representative) {
@@ -28,7 +29,7 @@ const Testimonials: NextComponentType = () =>{
          userRole = "Representante"
        }
       return ReviewCard({
-        key : idx,
+        key : review.id,
         content : review.content,
         firstName : user.firstName,
         lastName : user.lastName,

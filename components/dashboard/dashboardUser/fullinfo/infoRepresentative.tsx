@@ -7,7 +7,7 @@ import { infoRepresentativeSchema } from "../../../../validations/representative
 import { infoRepresentative, infoRepresentativeProps } from "../../../../app/types";
 import { updatedRepresentative } from "@/utils/representative";
 
-export const InfoRepresentative = ({ userRole, representativeId } : infoRepresentativeProps) => {
+export const InfoRepresentative : React.FC<infoRepresentativeProps> = ({ representativeId }) => {
 
   const { register, handleSubmit, formState: { errors } } = useForm<infoRepresentative>({
     resolver: zodResolver(infoRepresentativeSchema)
@@ -55,12 +55,10 @@ export const InfoRepresentative = ({ userRole, representativeId } : infoRepresen
   return (
     <>
       <div>
-        <div className={userRole === "REPRESENTATIVE" ? styles.leftCont : styles.none}>
-          {userRole === "REPRESENTATIVE" && (
+        <div className={styles.leftCont}>
             <button onClick={handleUpdatedRepresentative} className={styles.button}>
               {textButton === false ? "Completar Datos" : "Ocultar formulario"}
-            </button>
-          )}
+            </button>   
           {showAddDancerForm && (
             <form onSubmit={handleSubmit(onSubmit)} className={styles.myForm}>
               <label htmlFor="firstName">

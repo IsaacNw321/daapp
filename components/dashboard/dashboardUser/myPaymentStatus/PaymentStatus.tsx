@@ -1,4 +1,4 @@
-import styles from "../../../../styles/dashboard.module.css";
+import styles from "@/styles/dashboard.module.css";
 import { PaymentStatusProps } from "@/app/types";
 
 export const PaymentStatus = ({ Payment, pending }: PaymentStatusProps) => {
@@ -8,13 +8,13 @@ export const PaymentStatus = ({ Payment, pending }: PaymentStatusProps) => {
   const months: string[] = ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
 
  
-  const confirmedPayments = Payment - pending;
-  const pendingPayments = Payment - confirmedPayments;
+  const confirmedPayments = (Payment ?? 0) - (pending ?? 0);
+  const pendingPayments = (Payment ?? 0) - confirmedPayments;
 
   let monthsNotPaidyet: number = currentMonth + 1 - confirmedPayments;
   let monthsNotInPresent: number = monthsNotPaidyet <= 0 ? totalMonths - confirmedPayments : totalMonths - confirmedPayments - monthsNotPaidyet;
 
-  const notPaidMonths: string[] = months.slice(confirmedPayments + pending, currentMonth + 1);
+  const notPaidMonths: string[] = months.slice(confirmedPayments +(pending ?? 0), currentMonth + 1);
   const paidMonths: string[] = months.slice(0, confirmedPayments);
   const pendingMonths: string[] = months.slice(confirmedPayments, confirmedPayments + pendingPayments);
   const inComingMonths: string[] = months.slice(currentMonth + 1);

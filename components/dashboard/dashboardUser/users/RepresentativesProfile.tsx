@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 import ReviewR from "../myReview/ReviewR";
 import InfoRepresentative from "../fullinfo/infoRepresentative";
 import Dancers from "../../dashboardUser/myDancers/Dancers";
 import { postPayment } from "@/utils/payments";
 import styles from "@/styles/dashboard.module.css";
+import { DancerInfo, Payment, User, UserRole } from "@/app/types";
+import { TypePayment } from "@prisma/client";
 
-const RepresentativeProfile = ({ dbUser, userDancers, payment }) => {
+interface RepresentativeProfileProps{
+  dbUser? : User ;
+  userDancers? : DancerInfo[];
+  payment?: Payment[];
+}
+
+const RepresentativeProfile: React.FC<RepresentativeProfileProps> = ({ dbUser, userDancers, payment }) => {
   const [showDancers, setShowDancers] = useState(false);
   const [addPayment, setAddPayment] = useState(false);
-  const [typePayment, setTypePayment] = useState('PMOVIL');
+  const [typePayment, setTypePayment] = useState<TypePayment>(TypePayment.PMOVIL);
 
   const toggleShowDancers = () => {
     setShowDancers(prevState => !prevState);
@@ -19,7 +27,12 @@ const RepresentativeProfile = ({ dbUser, userDancers, payment }) => {
   };
 
   const handleType = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setTypePayment(e.target.value);
+    if(e.target.value === TypePayment.PMOVIL){
+      setTypePayment(TypePayment.PMOVIL);
+    }
+    if(e.target.value === TypePayment.CASH){
+      setTypePayment(TypePayment.CASH);
+    }
   };
 
   const handlePayment = (id: string) => (e: React.FormEvent<HTMLFormElement>) => {
@@ -27,24 +40,24 @@ const RepresentativeProfile = ({ dbUser, userDancers, payment }) => {
     const formData = new FormData(e.currentTarget);
     const typePayment = formData.get('typePayment') as string;
     let dancerRId = id;
-    if (typePayment === "PMOVIL") {
+    if (typePayment === TypePayment.PMOVIL) {
       const numberRef = formData.get('numberRef') as string;
       const paymentData = { numberRef, typePayment, dancerRId };
       postPayment(paymentData);
-    } else if (typePayment === "CASH") {
+    } else if (typePayment === TypePayment.CASH) {
       const paymentData = { cash: true, typePayment, dancerRId };
       postPayment(paymentData);
     }
   };
 
-  const representativeId = dbUser?.representative?.id;
+  const representativeId   = dbUser?.representative?.id;
   const reviewId = dbUser?.representative?.review?.id;
   const numberDancers = userDancers?.length ?? 0;
 
   return (
     <>
       <ReviewR representativeId={representativeId} reviewId={reviewId} />
-      <InfoRepresentative representativeId={representativeId} userRole="REPRESENTATIVE" />
+      <InfoRepresentative representativeId={representativeId} />
       <button className={styles.button} onClick={toggleShowDancers}>
         {showDancers ? 'Esconder Bailarines' : 'Mostrar Bailarines'}
       </button>
@@ -52,17 +65,17 @@ const RepresentativeProfile = ({ dbUser, userDancers, payment }) => {
         numberDancers === 0 ? (
           <p>No tienes Bailarines inscritos</p>
         ) : (
-          userDancers?.map((el: any) => (
-            <div key={el.id}>
+          userDancers?.map((dancer: DancerInfo) => (
+            <div key={dancer.id}>
               <Dancers
-                firstName={el.firstName}
-                lastName={el.lastName}
-                Payment={el.Payment.length}
-                pending={el.pending}
+                firstName={dancer.firstName}
+                lastName={dancer.lastName}
+                Payment={dancer.Payment?.length}
+                pending={dancer.pending}
               />
-              {el.Payment.map(payment => (
+              {dancer.Payment.map((payment : Payment) => (
                 <li className={styles.payments} key={payment.id}>
-                  {payment.type === "PMOVIL" 
+                  {payment.type === TypePayment.PMOVIL 
                     ? <p>{payment.numberRef}</p>
                     : <p>Efectivo</p>
                   }
@@ -72,12 +85,12 @@ const RepresentativeProfile = ({ dbUser, userDancers, payment }) => {
                 Agregar Pago
               </button>
               {addPayment && (
-                <form onSubmit={handlePayment(el.id)}>
+                <form onSubmit={handlePayment(dancer.id)}>
                   <select name='typePayment' onChange={handleType}>
-                    <option value="PMOVIL">Pago movil</option>
-                    <option value="CASH">Efectivo</option>
+                    <option value={TypePayment.PMOVIL}>Pago movil</option>
+                    <option value={TypePayment.CASH}>Efectivo</option>
                   </select>
-                  {typePayment === "PMOVIL" && (
+                  {typePayment === TypePayment.PMOVIL && (
                     <>
                       <label htmlFor="numberRef">Numero de Referencia</label>
                       <input type="text" name='numberRef' placeholder='Numero de referencia' />

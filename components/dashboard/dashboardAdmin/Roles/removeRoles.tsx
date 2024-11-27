@@ -3,9 +3,9 @@ import { updateUser, getUserById } from '@/utils/users';
 import { deleteDancer } from '@/utils/dancers';
 import { deleteRepresentative } from '@/utils/representative';
 import styles from '@/styles/admin.module.css';
-import { UserRole } from "@/app/types";
+import { UserRole, UserIdProp } from "@/app/types";
 
-export const RemoveRoles: React.FC<string> = (userId) => {
+export const RemoveRoles: React.FC<UserIdProp> = ({userId}) => {
   const [showRemove, setShowRemove] = useState<string | null>(null);
 
   const toggleRemoveRole = (userId: string) => {

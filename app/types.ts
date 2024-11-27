@@ -42,6 +42,13 @@ export interface Dancer {
   Adress?: string;
 }
 
+export interface DancerInfo{
+  id : string;
+  Payment : Payment[] ;
+  firstName : string;
+  lastName : string;
+  pending : number
+}
 
 export interface Representative {
   id: string;
@@ -95,6 +102,9 @@ export interface Payment {
   dancerRId?: string;
   dancerId?: string;
 }
+export interface UserIdProp{
+  userId : string;
+}
 
 export type SelectChangeEvent = React.ChangeEvent<HTMLSelectElement>;
 
@@ -111,6 +121,10 @@ export interface QuestionItemProps {
   isOpen: boolean;
   type : String;
   toggleAnswer: () => void;
+}
+
+export interface RepresentativeProps{
+  representative: Representative;
 }
 
 export interface LogginButtonProps {
@@ -137,7 +151,7 @@ export interface HomeProps {
 }
 
 export interface InstructorProps {
-  nameInstructor: number;
+  nameInstructor: string;
   array: StaticImageData[];
   text: string;
   position: string;
@@ -190,7 +204,7 @@ export interface postReviewDancer {
 }
 
 export interface Content {
-  content : String;
+  content : string;
 }
 
 export interface postReviewRepresentative {
@@ -199,8 +213,18 @@ export interface postReviewRepresentative {
 }
 
 export interface updateReview {
-  content : String;
-  reviewId : String;
+  content? : string;
+  reviewId? : string;
+}
+
+
+
+export interface representativeUpdateData{
+  firstName? : string;
+  lastName?: string;
+  Adress? : string;
+  phone? : number;
+  representativeId? : string;
 }
 
 export interface DancerR  {
@@ -224,13 +248,11 @@ export interface DancerR  {
  }
 
  export interface infoDancerProps {
-  userRole : "ADMIN"| "REPRESENTATIVE"| "DANCER" | "CONTACT";
-  dancerId : string;
+  dancerId? : string;
  }
 
  export interface infoRepresentativeProps {
-  userRole : "ADMIN"| "REPRESENTATIVE"| "DANCER" | "CONTACT";
-  representativeId : string;
+  representativeId? : string;
  }
 
  export interface infoRepresentative {
@@ -251,17 +273,27 @@ export interface DancerR  {
  }
 
 export  interface ReviewRProps {
-  representativeId: String | undefined;
-  reviewId: String;
+  representativeId?: string ;
+  reviewId?: string;
 }
 
 export interface ReviewDProps {
-  dancerId: string | undefined;
-  reviewId: string;
+  dancerId?: string ;
+  reviewId?: string;
+}
+
+export interface postPaymentProps{
+  numberRef? : string; 
+  cash?: boolean;
+  dancerId?: string;
+}
+
+export interface confirmPayment{
+  confirm? : boolean; 
 }
 
 export interface createDanceProps {
-  userRole : "ADMIN"| "REPRESENTATIVE"| "DANCER" | "CONTACT";
+  userRole : UserRole;
   representativeId : string | undefined;
   numberDancers : number | undefined;
 }
@@ -283,15 +315,11 @@ export interface DancersProps {
 }
 
 export interface PaymentStatusProps {
-  Payment: number;
-  pending : number;
+  Payment?: number;
+  pending? : number;
 }
 
-export interface DancerInfo {
-  firstName: string;
-  lastName: string;
-  Payment: number | undefined;
-}
+
 
 
 export interface GendersAndShowsProps {

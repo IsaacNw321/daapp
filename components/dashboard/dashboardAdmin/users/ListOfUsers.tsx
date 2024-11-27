@@ -5,12 +5,13 @@ import { AsignRoles } from "../Roles/asignRoles";
 import { RemoveRoles } from "../Roles/removeRoles";
 import { getUsers } from "@/utils/users";
 import styles from "@/styles/admin.module.css"
-import { User } from "@/app/types";
+import { User, UserRole } from "@/app/types";
 import { useQuery } from "react-query";
 import Loading from "@/components/layout/loading";
 export const ListOfUsers = () => {
   const [users, setUsers] = useState<User[]>([]);
   const { data, error, isLoading } = useQuery<User[]>('usersAdmin', () => getUsers());
+  
   useEffect(() => {
     if (!data) return;
     setUsers(data);
@@ -40,11 +41,11 @@ export const ListOfUsers = () => {
       }
         </Link>
         <p className={styles.userType}>
-          {user.userRole === "REPRESENTATIVE" ? "Representante" :
-          user.userRole === "DANCER" ? "Bailarin" : 
-          user.userRole === "CONTACT" ? "Usuario sin rol" : ""}
+          {user.userRole ===  UserRole.REPRESENTATIVE ? "Representante" :
+          user.userRole ===  UserRole.DANCER ? "Bailarin" : 
+          user.userRole === UserRole.CONTACT ? "Usuario sin rol" : ""}
         </p>
-        {user.userRole === "CONTACT" ? (           
+        {user.userRole === UserRole.CONTACT ? (           
          <AsignRoles userId={user.id} />             
         ) 
         : <RemoveRoles userId={user.id} /> }

@@ -3,16 +3,16 @@ import styles from '@/styles/admin.module.css'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from "react-hook-form";
 import { questionSchema } from '@/validations/questionsSchema'; 
-import { dataQuestion } from "@/app/types";
+import { dataQuestion, UserIdProp } from "@/app/types";
 import React from "react";
-export const ChangueContentQuestion : React.FC<string> = (id) => {
+export const ChangueContentQuestion : React.FC<UserIdProp> = ({userId}) => {
   const { register, handleSubmit, formState: { errors } } = useForm<dataQuestion>({
     resolver: zodResolver(questionSchema),
   });
 
   const onSubmit: SubmitHandler<dataQuestion> = async (data) => {
     try {
-      const response = await updateQuestion(data , id);
+      const response = await updateQuestion(data , userId);
       console.log(response)
     } catch (error) {
       console.error(error);

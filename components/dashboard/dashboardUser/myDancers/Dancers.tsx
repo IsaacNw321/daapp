@@ -1,6 +1,5 @@
 "use client"
-import React from 'react';
-import styles from "../../../../styles/dashboard.module.css";
+import styles from "@/styles/dashboard.module.css";
 import PaymentStatus from "../myPaymentStatus/PaymentStatus";
 import { DancersProps } from '@/app/types';
 

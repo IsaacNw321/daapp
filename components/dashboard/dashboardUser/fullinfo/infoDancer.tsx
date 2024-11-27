@@ -1,12 +1,12 @@
 "use client"
-import styles from "../../../../styles/dashboard.module.css"
+import styles from "@/styles/dashboard.module.css"
 import React, { useState } from 'react';
-import { updateDancer } from "../../../../utils/dancers";
+import { updateDancer } from "@/utils/dancers";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
-import {infoDancerSchema} from "../../../../validations/dancerSchema";
-import { infoDancer, infoDancerProps } from "../../../../app/types";
-export const InfoDancer = ({userRole, dancerId} : infoDancerProps) =>{
+import {infoDancerSchema} from "@/validations/dancerSchema";
+import { infoDancer, infoDancerProps } from "@/app/types";
+export const InfoDancer = ({dancerId} : infoDancerProps) =>{
 
    const {register,handleSubmit,watch, formState: {errors}} = useForm<infoDancer>({
     resolver: zodResolver(infoDancerSchema)
@@ -66,12 +66,10 @@ export const InfoDancer = ({userRole, dancerId} : infoDancerProps) =>{
   return (
     <>
       <div>
-        <div className={userRole === "DANCER" ? styles.leftCont : styles.none}>
-          {userRole === "DANCER" && (
+        <div className={styles.leftCont}>
             <button onClick={handleUpdateDancer} className={styles.button}>
               {textButton === false ? "Completar Datos" : "Ocultar formulario"}
             </button>
-          )}
           {showAddDancerForm && (
             <form onSubmit={handleSubmit(onSubmit)} className={styles.myForm}> 
              <label htmlFor="firstName">

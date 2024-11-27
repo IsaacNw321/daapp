@@ -1,11 +1,11 @@
 "use client"
-import styles from "../../../../styles/dashboard.module.css"
+import styles from "@/styles/dashboard.module.css"
 import React, { useState } from 'react';
-import { createDancer, createDancerR } from "../../../../utils/dancers";
+import { createDancer, createDancerR } from "@/utils/dancers";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
-import {danceRSchema} from "../../../../validations/dancerRSchema";
-import { DancerR, createDanceProps } from "../../../../app/types";
+import {danceRSchema} from "@/validations/dancerRSchema";
+import { DancerR, createDanceProps } from "@/app/types";
 export const CreateDancer = ({userRole, representativeId, numberDancers} : createDanceProps) =>{
 
    const {register,handleSubmit,watch, formState: {errors}} = useForm<DancerR>({

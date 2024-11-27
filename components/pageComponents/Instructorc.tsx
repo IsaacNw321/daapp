@@ -2,6 +2,7 @@ import styles from "../../styles/OurTeam.module.css";
 import { NextComponentType } from "next";
 import { Instructor } from "../../components/pageComponents/Instructor";
 import {Instructors} from "../../utils/Instructors";
+import { InstructorProps } from "@/app/types";
 const InstructorC: NextComponentType = () => {
   return (
     <main>
@@ -14,9 +15,9 @@ const InstructorC: NextComponentType = () => {
         </p>
       </div>
       <div className={styles.outContI}>
-        {Instructors?.map((e: any) => (
+        {Instructors?.map((e: InstructorProps, index : number) => (
           <Instructor
-            key={e.id}
+            key={index}
             nameInstructor={e.nameInstructor}
             position={e.position}
             text={e.text}

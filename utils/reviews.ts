@@ -58,7 +58,7 @@ export const postedReviewDancer = async ({ content, dancerId }: postReviewDancer
 };
 
 
-export const deletedReview = async (reviewId: string): Promise<boolean> => {
+export const deletedReview = async (reviewId: string | undefined): Promise<boolean> => {
   try {
     await axios.delete(`/api/reviews/${reviewId}`);
     console.log("Comentario eliminado");

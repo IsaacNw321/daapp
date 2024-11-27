@@ -2,12 +2,13 @@ import styles from '@/styles/admin.module.css'
 import { createRoleDancer } from '@/utils/dancers'
 import { createRepresentative} from '@/utils/representative'
 import { deleteUser } from '@/utils/users'
-import { UserRole } from '@/app/types'
+import { UserIdProp, UserRole } from '@/app/types'
 import { SubmitHandler, useForm } from 'react-hook-form'
 interface FormValues {
   role: UserRole;
 }
-export const AsignRoles: React.FC<string> = (userId) => {
+
+export const AsignRoles: React.FC<UserIdProp> = ({userId}) => {
   const { register, handleSubmit } = useForm<FormValues>();
 
   const onSubmit: SubmitHandler<FormValues> = ({ role }) => {

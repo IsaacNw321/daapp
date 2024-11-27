@@ -1,8 +1,10 @@
 import styles from '@/styles/admin.module.css';
 import { deletedReview } from "@/utils/reviews";
-import { DancerDetails } from "./DancersDetails";
+import { DancerRDetails } from './DancersRDetails';
 import { DetailItem } from "./DancersDetails";
-export const RepresentativeDetails = ({ representative } : any) => {
+import { DancerR, RepresentativeProps } from '@/app/types';
+
+export const RepresentativeDetails: React.FC<RepresentativeProps> = ({ representative }) => {
 
   let pending = 0;
   for (let i = 0; i < representative.Payment.length; i++) {
@@ -31,8 +33,8 @@ export const RepresentativeDetails = ({ representative } : any) => {
       </section>
       <section>
       {
-        representative?.dancers.map(dancer => (
-          <DancerDetails key={dancer.id} dancer={dancer} />
+        representative?.dancers.map((dancer : DancerR) => (
+          <DancerRDetails key={dancer.id} dancer={dancer} />
         ))
       }
       </section>

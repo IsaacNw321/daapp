@@ -40,7 +40,7 @@ export const LisOfQuestions = () =>{
               </button>
               {
                 edit ? (
-                  <ChangueContentQuestion id={question.id} />
+                  <ChangueContentQuestion userId={question.id} />
                 ) : <></>
               }
               <button onClick={() => deleteQuestion(question.id)} className={styles.deleteButton}>
