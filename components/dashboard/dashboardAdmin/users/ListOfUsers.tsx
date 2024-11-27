@@ -7,7 +7,7 @@ import { getUsers } from "@/utils/users";
 import styles from "@/styles/admin.module.css"
 import { User, UserRole } from "@/app/types";
 import { useQuery } from "react-query";
-import Loading from "@/components/layout/loading";
+import Loading from "@/components/NavBar/loading";
 export const ListOfUsers = () => {
   const [users, setUsers] = useState<User[]>([]);
   const { data, error, isLoading } = useQuery<User[]>('usersAdmin', () => getUsers());

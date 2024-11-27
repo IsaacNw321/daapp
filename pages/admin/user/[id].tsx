@@ -8,7 +8,7 @@ import { RepresentativeDetails } from '@/components/dashboard/dashboardAdmin/use
 import { DancerDetails } from '@/components/dashboard/dashboardAdmin/users/DancersDetails';
 import { DetailItem } from '@/components/dashboard/dashboardAdmin/users/DancersDetails';
 import { useQuery } from 'react-query';
-import Loading from '@/components/layout/loading';
+import Loading from '@/components/NavBar/loading';
 
 export default function UserDetail() {
   const router = useRouter();

@@ -1,8 +1,8 @@
 import { NextPage } from "next";
-import { DashboardLayout } from "../../components/dashboard";
+import DashboardLayout  from "@/layouts/DashboardLayout";
 import dynamic from 'next/dynamic';
 import React, { Suspense } from 'react';
-import Loading from "../../components/layout/loading";
+import Loading from "../../components/NavBar/loading";
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client'
 const MyProfileLazy = dynamic(() => import('../../components/dashboard/dashboardUser/MyProfile'), { suspense: true });
 const Profile : NextPage = withPageAuthRequired(() => {

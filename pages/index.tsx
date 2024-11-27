@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
-import RootLayout from '../components/layout/layout';
-import Loading from '../components/layout/loading';
+import RootLayout from '@/layouts/RootLayout';
+import Loading from '../components/NavBar/loading';
 import React, { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import Landing from '../components/pageComponents/Landing';

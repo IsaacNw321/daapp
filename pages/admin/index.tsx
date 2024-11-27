@@ -1,20 +1,20 @@
 import { NextPage } from "next";
-import { DashboardLayout } from "../../components/dashboard";
+import AdminDashboardLayout from "@/layouts/AdminLayout";
 import dynamic from 'next/dynamic';
 import React, { Suspense } from 'react';
-import Loading from "../../components/layout/loading";
+import Loading from "../../components/NavBar/loading";
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client'
 import { FiltersProvider } from "@/context/filters";
 const AdminLazy = dynamic(() => import('../../components/dashboard/dashboardAdmin/controlPanel'), { suspense: true });
-const ControlPanel : NextPage =() => {
+const ControlPanel : NextPage = withPageAuthRequired(() => {
   return (
-    <DashboardLayout title="Mi perfil">
+    <AdminDashboardLayout title="Mi perfil">
       <Suspense fallback={<Loading/>}>
       <FiltersProvider>
         <AdminLazy/>
       </FiltersProvider>
       </Suspense>
-    </DashboardLayout>
+    </AdminDashboardLayout>
   )
-}
+})
 export default ControlPanel;

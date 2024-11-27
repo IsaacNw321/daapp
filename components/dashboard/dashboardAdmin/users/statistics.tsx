@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from '@/styles/admin.module.css'
 import { getUsers } from "@/utils/users";
 import { User, UserRole } from "@/app/types";
-import Loading from "@/components/layout/loading";
+import Loading from "@/components/NavBar/loading";
 import { useQuery } from "react-query";
 export const Statistics = () => {
   const [users, setUsers] = useState<User[]>([]);

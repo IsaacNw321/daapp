@@ -1,8 +1,8 @@
 import { NextPage } from "next";
-import RootLayout from "../../components/layout/layout";
+import RootLayout from "@/layouts/RootLayout"
 import dynamic from 'next/dynamic';
 import React, { Suspense } from 'react';
-import Loading from "../../components/layout/loading";
+import Loading from "../../components/NavBar/loading";
 import  InfoAbout from "../../components/pageComponents/InfoAbout";
 import SomeServices from "../../components/pageComponents/SomeServices";
 const GenderLazy = dynamic(() => import("../../components/pageComponents/Gender"), { suspense: true });

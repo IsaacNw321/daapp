@@ -3,13 +3,17 @@ import { postedUser, User } from '@/app/types';
 
 
 export async function getUserById(id: string): Promise<User | undefined> {
- 
-  const response = await axios.get(`/api/users/${id}`);
-  if (response.status !== 200) {
-    return undefined
-  }
-  const user: User = await response.data;
-  return user;
+ try {
+   const response = await axios.get(`/api/users/${id}`);
+   if (response.status !== 200) {
+     return undefined
+   }
+   const user: User = await response.data;
+   return user;
+ } catch (error) {
+   console.log(error)
+   return undefined
+ }
 }
 
 

@@ -5,7 +5,7 @@ import { getUserById } from "@/utils/users";
 import Link from "next/link";
 import styles from "@/styles/dashboard.module.css";
 import { useQuery } from "react-query";
-import Loading from "@/components/layout/loading";
+import Loading from "@/components/NavBar/loading";
 import Image from "next/image";
 import RepresentativeProfile from "../dashboardUser/users/RepresentativesProfile";
 import DancerProfile from "../dashboardUser/users/DancersProfile";
@@ -16,7 +16,6 @@ const MyProfile: NextComponentType = () => {
   const { user, isLoading: isLoadingU } = useUser();
   const [userDancers, setuserDancers] = useState<DancerInfo[] | undefined>();
   const [payment, setPayment] = useState<Payment[] | undefined>([]);
-  
   const userId = user?.sub ?? '';
   const { data: dbUser, isLoading } = useQuery(['user', userId], () => getUserById(userId));
   
