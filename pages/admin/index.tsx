@@ -5,7 +5,7 @@ import React, { Suspense } from 'react';
 import Loading from "../../components/NavBar/loading";
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client'
 import { FiltersProvider } from "@/context/filters";
-const AdminLazy = dynamic(() => import('../../components/dashboard/dashboardAdmin/controlPanel'), { suspense: true });
+const AdminLazy = dynamic(() => import('../../components/dashboard/dashboardAdmin/controlPanel'));
 const ControlPanel : NextPage = withPageAuthRequired(() => {
   return (
     <AdminDashboardLayout title="Mi perfil">

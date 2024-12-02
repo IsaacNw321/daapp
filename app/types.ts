@@ -129,7 +129,7 @@ export interface RepresentativeProps{
 
 export interface LogginButtonProps {
   userName: String;
-  userPicture:  StaticImport | string;
+  userPicture:  string | undefined;
 }
 
 export interface LogginNavProps {

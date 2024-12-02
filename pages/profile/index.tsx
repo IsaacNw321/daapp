@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import React, { Suspense } from 'react';
 import Loading from "../../components/NavBar/loading";
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client'
-const MyProfileLazy = dynamic(() => import('../../components/dashboard/dashboardUser/MyProfile'), { suspense: true });
+const MyProfileLazy = dynamic(() => import('../../components/dashboard/dashboardUser/MyProfile'));
 const Profile : NextPage = withPageAuthRequired(() => {
 
   return (

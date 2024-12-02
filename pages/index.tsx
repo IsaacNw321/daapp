@@ -4,9 +4,9 @@ import Loading from '../components/NavBar/loading';
 import React, { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import Landing from '../components/pageComponents/Landing';
-const MoreServicesLazy = dynamic(() => import('../components/pageComponents/moreServices'), { suspense: true });
-const ResultsLazy = dynamic(() => import('../components/pageComponents/Results'), { suspense: true });
-const TestimonialsLazy = dynamic(() => import('../components/pageComponents/Testimonials'), { suspense: true });
+const MoreServicesLazy = dynamic(() => import('../components/pageComponents/moreServices'));
+const ResultsLazy = dynamic(() => import('../components/pageComponents/Results'));
+const TestimonialsLazy = dynamic(() => import('../components/pageComponents/Testimonials'));
 
 const Home : NextPage = () => {
   return (
