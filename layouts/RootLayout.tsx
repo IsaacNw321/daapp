@@ -1,9 +1,9 @@
 import Head from 'next/head';
-import Navbar from './NavBar';
-import styles from "../../styles/home.module.css";
-import { Footer } from './Footer';
+import NavBar from '@/components/NavBar/NavBar';
+import styles from "@/styles/home.module.css";
+import { Footer } from '@/components/NavBar/Footer';
 import { Suspense } from 'react';
-import Loading from './loading';
+import Loading from '@/components/NavBar/loading';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 interface RootLayoutProps {
@@ -17,7 +17,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }: RootLayoutProps) =>
         <title>Dancer Angels</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
+      <NavBar />
       <Suspense fallback={<Loading />}>
         <main className={styles.main}>
           {children}

@@ -1,11 +1,10 @@
 "use client"
-import React from 'react';
-import styles from "../../../../styles/dashboard.module.css";
+import styles from "@/styles/dashboard.module.css";
 import PaymentStatus from "../myPaymentStatus/PaymentStatus";
 import { DancersProps } from '@/app/types';
 
 
-const Dancers: React.FC<DancersProps> = ({ firstName, lastName, Payment }) => {
+const Dancers = ({ firstName, lastName, Payment, pending } : DancersProps) => {
   return (
     <>
       <div>
@@ -17,6 +16,7 @@ const Dancers: React.FC<DancersProps> = ({ firstName, lastName, Payment }) => {
             {!Payment ? <p>sin estado de pago</p> :
               <PaymentStatus
                 Payment={Payment}
+                pending={pending}
               />
             }
           </div>

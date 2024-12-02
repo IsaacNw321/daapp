@@ -169,7 +169,7 @@
   display: flex;
   flex-direction: column;
   width: 660px; 
-  height:120px;
+  height:auto;
   border-radius: 16px;
 }
 .notPaymentC{
@@ -184,7 +184,7 @@
   display: flex;
   flex-direction: row;
   background-color: black;
-  width: 600px; 
+  width: 380px; 
   height: 80px;
   border: 2px solid #6B0D0D;
   border-radius: 24px;
@@ -197,6 +197,17 @@
   justify-content: center;
   flex-direction: column;
   background-color: green;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 40px;
+  color: white;
+}
+.blueBar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: blue;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   height: 40px;
@@ -321,7 +332,7 @@
   flex-direction: column;
   background-color: #6B0D0D;
   border-radius: 26px;
-  height:600px;
+  height:auto;
 }
 
 
@@ -358,7 +369,7 @@
   justify-content: center;
   flex-wrap: wrap;
   color:  #fff;
-  height: 550px;
+  height:auto;
   width: 450px;
   animation-name: showSlow;
   animation-duration: 0.6s;
@@ -530,4 +541,19 @@
   }
 }
 
+.roleButton{
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
 
+.payments{
+  color : white;
+  list-style: none;
+}

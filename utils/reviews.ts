@@ -1,90 +1,70 @@
 import axios from 'axios';
-import { postReviewDancer, postReviewRepresentative, updateReview } from '../app/types';
+import { Review, postReviewDancer, postReviewRepresentative, updateReview } from '@/app/types';
 
 
-
-export const getReviews = async () => {
+export const getReviews = async (): Promise<Review[]> => {
   try {
-      const response = await axios.get("/api/reviews");
-      if (response.status === 200) {
-          return response.data;
-      }
+    const response = await axios.get<Review[]>("/api/reviews");
+    return response.data;
   } catch (error) {
-    return
+    console.error('Error getting reviews:', error);
+    return [];
   }
 };
 
 
-export const getReviewById = async (id: String) =>{
+export const getReviewById = async (id: string): Promise<Review | null> => {
   try {
-    const response = await axios.get(`/api/reviews/${id}`)
-    if(response.status === 200){
-      return response.data
-      
-    } else {
-      throw new Error('Failed to post Review');
-    }
+    const response = await axios.get<Review>(`/api/reviews/${id}`);
+    return response.data;
   } catch (error) {
-    console.error('Error posting Review:', error);
-    return null;
-  }
-}
-
-export const updatedReview = async ({content , reviewId}: updateReview) => {
-  try {
-    const response =  await axios.put(`/api/reviews/${reviewId}`, {
-      content: content
-  });
-    if (response.status === 200) {
-      return response.data;
-    } else {
-      throw new Error('Failed to post Review');
-    }
-  } catch (error) {
-    console.error('Error posting Review:', error);
+    console.error('Error getting review by ID:', error);
     return null;
   }
 };
 
-export const postedReviewRepresentative = async ({content, representativeId} :postReviewRepresentative) => {
+export const updatedReview = async ({ content, reviewId }: updateReview): Promise<Review | null> => {
   try {
-    const createReview = await axios.post(`/api/reviews`, {
-      content: content,
-      representativeId: representativeId,
-  });
-    if (createReview !== undefined) {
-      console.log("comentario posteado");
-      return true
-    } else {
-      console.log("no se pudo postear");
-    }
+    const response = await axios.put<Review>(`/api/reviews/${reviewId}`, { content });
+    return response.data;
   } catch (error) {
-      console.error('Error creating review:', error);
+    console.error('Error updating review:', error);
+    return null;
   }
 };
 
-export const postedReviewDancer = async ({content, dancerId} : postReviewDancer) => {
+
+export const postedReviewRepresentative = async ({ content, representativeId }: postReviewRepresentative): Promise<boolean> => {
   try {
-    const createReview = await axios.post(`/api/reviews`, {
-      content: content,
-      dancerId : dancerId
-  });
-    if (createReview !== undefined) {
-      console.log("comentario posteado");
-      return true
-    } else {
-      console.log("no se pudo postear");
-    }
+    const response = await axios.post<Review>(`/api/reviews`, { content, representativeId });
+    console.log("Comentario posteado");
+    return true;
   } catch (error) {
-      console.error('Error creating review:', error);
+    console.error('Error creating review for representative:', error);
+    return false;
   }
 };
 
-export const deletedReview = async (reviewId: String) =>{
-  const deletedReview  = await axios.delete(`/api/reviews/${reviewId}`)
-  if(deletedReview){
-    console.log("comentario eliminado")
-  }else {
-    console.log("comentario no eliminado")
+
+export const postedReviewDancer = async ({ content, dancerId }: postReviewDancer): Promise<boolean> => {
+  try {
+    const response = await axios.post<Review>(`/api/reviews`, { content, dancerId });
+    console.log("Comentario posteado");
+    return true;
+  } catch (error) {
+    console.error('Error creating review for dancer:', error);
+    return false;
   }
-}
+};
+
+
+export const deletedReview = async (reviewId: string | undefined): Promise<boolean> => {
+  try {
+    await axios.delete(`/api/reviews/${reviewId}`);
+    console.log("Comentario eliminado");
+    return true;
+  } catch (error) {
+    console.error('Error deleting review:', error);
+    return false;
+  }
+};

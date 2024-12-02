@@ -2,7 +2,7 @@ import { Genders } from "../../utils/Genders";
 import { GendersAndShows } from "../Genders/GendersAndShows";
 import { NextComponentType } from "next";
 import styles from "../../styles/about.module.css";
-
+import { GendersAndShowsProps } from "@/app/types";
 const Gender : NextComponentType = () =>{
   return (
     <div className={styles.gendersCont}>
@@ -10,9 +10,9 @@ const Gender : NextComponentType = () =>{
         Mira los generos de baile que ofrecemos
       </h4>
     {
-      Genders?.map((e :any)=> (
+      Genders?.map((e :GendersAndShowsProps, index :number)=> (
       <GendersAndShows 
-        key={e.id}
+        key={index}
         nameGender={e.nameGender}
         description={e.description}
         array={e.array}

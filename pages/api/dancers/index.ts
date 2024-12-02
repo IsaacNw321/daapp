@@ -1,11 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "../../../lib/prisma";
+import  prisma  from "@/lib/prisma";
 
 export default async function Dancers(req: NextApiRequest, res: NextApiResponse) {
   const method = req.method;
   const {
     userId,
-    representativeId,
+    allergies,
+    age,
+    Adress,
+    phone,
+    CI,
+    dateBirth
   } = req.body;
   switch (method) {
     case "POST":
@@ -13,8 +18,12 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
         const newDancer = await prisma.dancer.create({
           data: {
             userId,
-            representativeId,
-            Payment : 0
+            allergies,
+            age,
+            Adress,
+            phone,
+            CI,
+            dateBirth,
           }
         });
         newDancer

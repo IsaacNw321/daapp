@@ -5,11 +5,12 @@ import Image from "next/image";
 import { LogginButton } from "../login/LoginButton";
 import MenuIcon from "../../public/images/MenuuIcon.jpg"
 import { useState, useEffect } from "react";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useQuery} from "react-query";
 import { getUserById } from "../../utils/users";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { postUser } from "../../utils/users";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import {useUsers} from "@/context/UserContext";
+
 
 const links = [{
     type: "image",
@@ -34,51 +35,26 @@ const links = [{
 
 export default function NavBar(){
   const [name, setName] = useState<String | undefined>('')
-  const [picture, setPicture] = useState<string | StaticImport>('');
+  const [picture, setPicture] = useState<string | undefined>(undefined);
   const [showMenu, setShowMenu] = useState<any>(false);
-  const queryClient = useQueryClient();
+  const usuario = useUsers()
   const {user} = useUser();
   const userId = user?.sub ?? '';
   
-  
-  const postUserMutation = useMutation(postUser, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(['user', userId]);
-    },
-  });
+  let id: string = ''
+  if (user && user.sub && usuario) {
+      id = user.sub
+  }
   const { data: dbUser, isLoading } = useQuery(['user', userId], () => getUserById(userId), {
     enabled: !!userId, 
   });
-  let count = 0;
-  useEffect(() => {
-    if (count>0) return;
-    if (!user) return;
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (user.email && emailPattern.test(user.email)) {
-      if (!dbUser) {
-        try {
-          const data = {
-            id: userId,
-            firstName: user?.given_name as string,
-            lastName: user?.family_name as string,
-            email: user.email as string,
-            photo: user.picture as string,
-          };
-          postUserMutation.mutate(data);
-          count++;
-        } catch (error) {
-          console.error("Error verifying emails:", error);
-        }
-      } else {
-        if (!isLoading) {
-          setName(dbUser?.firstName);
-          setPicture(dbUser?.photo);
-        }
-      }
-    }
-     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading, dbUser, user, userId, count]);
 
+  useEffect(() => {
+    if (!isLoading && dbUser) {
+      setName(dbUser.firstName);
+      setPicture(dbUser.photo);
+    }
+  }, [isLoading, dbUser]);
 
   return (
     <header className={styles.header}>

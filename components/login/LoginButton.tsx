@@ -2,12 +2,11 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
 import styles from "../../styles/NavBar.module.css";
-import  {emailExist, getUserById, postUser} from "../../utils/users";
+import  { getUserById} from "../../utils/users";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useQuery } from "react-query";
-import Loading from "../layout/loading";
-import { LogginButtonProps } from "@/app/types";
+import { LogginButtonProps, UserRole } from "@/app/types";
 
 
 export const LogginButton: React.FC<LogginButtonProps>  = ({ userName, userPicture }) =>{
@@ -27,7 +26,7 @@ export const LogginButton: React.FC<LogginButtonProps>  = ({ userName, userPictu
   const { data: dbUser, isLoading } = useQuery(['user', id], () => getUserById(id));
   useEffect(() => {
     if (!isLoading && dbUser) {
-        if (dbUser?.message?.userRole === 'ADMIN') {
+        if (dbUser?.userRole === UserRole.ADMIN) {
             setIsAdmin(true)
             return
         }
@@ -54,26 +53,24 @@ export const LogginButton: React.FC<LogginButtonProps>  = ({ userName, userPictu
               className={styles.imgLogNavBar}
               width={40}
               height={40}
-              src={userPicture}
+              src={userPicture ?? ""}
               alt="User profile picture"
               loading="lazy"
             />
           )}
         </button>
         <u className={dropdown=== false ? styles.userButton : styles.userButtonShow}>
-        <h3>{userName}</h3>
-          <div className={isAdmin === true ? styles.button : styles.notButton}>
-            <li>
+        <h3>{userName}</h3>       
+            <li className={isAdmin === true ? styles.button : styles.notButton}>
           {isAdmin === true ?
-            <Link href="/dashboard">
+            <Link href="/admin">
               <button className="">
                 Panel de control
               </button>
             </Link>
             : null
           }
-          </li>
-          </div>
+          </li>     
           <li>
             <Link href="/profile">
               <button>

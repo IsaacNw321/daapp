@@ -3,7 +3,7 @@ import styles from "../../styles/contact.module.css";
 import QuestionItem from "../questions/QuestionItem";
 import { useQuery } from 'react-query';
 import { getQuestions } from "../../utils/questions";
-import { Question } from "@/app/types";
+import { Question, QuestionItemProps } from "@/app/types";
 
 
 const Questions = () => {
@@ -30,7 +30,7 @@ const Questions = () => {
       <div className={styles.questionsCont}>
         {!data  
           ?  <p>Sin contenido!</p> 
-          : question?.map((el : any , index: number) => (
+          : question?.map((el : QuestionItemProps , index: number) => (
           <QuestionItem
             key={index}
             question={el.question}

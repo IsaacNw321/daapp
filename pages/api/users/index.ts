@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "../../../lib/prisma";
-import { UserRequestBody } from "@/app/types";
+import  prisma  from "@/lib/prisma";
 
 
 const isValidEmail = (email: string): boolean => {
@@ -16,24 +15,16 @@ export default async function  Users(req: NextApiRequest, res: NextApiResponse){
     email, 
     photo,
   } = req.body;
-  if (!isValidEmail(email)) {
-    return res.status(400).json({ message: 'Invalid email format' });
-  }
 
   switch(method){
     case "GET" :
     try {
-      const users = await prisma.user.findMany({
-        where : {
-          email : email
-        },
-      })
+      const users = await prisma.user.findMany()
       if(users.length < 1){
         res.status(400).json({message: 'There are not users yet!'});
       }
       if(users.length > 0 ){
-        const userEmails = users.map(user => user.email); 
-        res.status(200).json(userEmails);
+        res.status(200).json(users)
       }
     } catch (error) {
       res.status(500).json({message : (error as Error).message});

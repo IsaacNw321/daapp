@@ -1,53 +1,72 @@
 import axios from 'axios';
-import { postedUser } from '@/app/types';
-export const getUserById = async(id : String) =>{
-  const response = await axios.get(`/api/users/${id}`, {
-    timeout: 1000, 
-  });
+import { postedUser, User } from '@/app/types';
 
-  
-  
-  if(!response){
-      return 'There is no data';
-  };
-  return response.data;
-};
 
-export const postUser = async (userData : postedUser) => {
+export async function getUserById(id: string): Promise<User | undefined> {
+ try {
+   const response = await axios.get(`/api/users/${id}`);
+   if (response.status !== 200) {
+     return undefined
+   }
+   const user: User = await response.data;
+   return user;
+ } catch (error) {
+   console.log(error)
+   return undefined
+ }
+}
+
+
+export const postUser = async (userData: postedUser): Promise<User | null> => {
   try {
-    const response = await axios.post(`/api/users`, userData);
-    if (response.status === 200) {
-      return response.data;
-    } else {
-      throw new Error('Failed to post user');
-    }
+    const response = await axios.post<User>(`/api/users`, userData);
+    return response.data;
   } catch (error) {
     console.error('Error posting user:', error);
     return null;
   }
 };
 
-export const emailExist = async () => {
+
+export const emailExist = async (): Promise<User[] | string> => {
   try {
-      const response = await axios.get(`/api/users`);
-      const usersEmail = response.data;
-     return usersEmail
+    const response = await axios.get<User[]>(`/api/users`);
+    return response.data;
   } catch (error) {
-      console.error('An error occurred:', error);
-      return 'Error checking email existence';
+    console.error('An error occurred:', error);
+    return 'Error checking email existence';
   }
 };
 
-export const updateUser = async (id: string, updatedUserData: any) => {
+
+export const updateUser = async (id: string, updatedUserData: Partial<User>): Promise<User | null> => {
   try {
-    const response = await axios.put(`/api/users/${id}`, updatedUserData);
-    if (response.status === 200) {
-      return response.data;
-    } else {
-      throw new Error('Failed to update user');
-    }
+    const response = await axios.put<User>(`/api/users/${id}`, updatedUserData);
+    return response.data;
   } catch (error) {
     console.error('Error updating user:', error);
+    return null;
+  }
+};
+
+
+export const getUsers = async (): Promise<User[]> => {
+  try {
+    const response = await axios.get<User[]>(`/api/users`);
+    return response.data;
+  } catch (error) {
+    console.error('Error getting users:', error);
+    return [];
+  }
+};
+
+
+export const deleteUser = async (id: string): Promise<User | null> => {
+  try {
+    const response = await axios.delete<User>(`/api/users/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error removing user:', error);
     return null;
   }
 };

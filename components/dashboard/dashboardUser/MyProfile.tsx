@@ -1,166 +1,89 @@
 import { NextComponentType } from "next";
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { useEffect, useState } from 'react';
-import { getUserById, postUser } from "../../../utils/users";
+import { getUserById } from "@/utils/users";
 import Link from "next/link";
-import styles from "../../../styles/dashboard.module.css"
+import styles from "@/styles/dashboard.module.css";
 import { useQuery } from "react-query";
-import Dancers from "../dashboardUser/myDancers/Dancers";
-import PaymentStatus from "./myPaymentStatus/PaymentStatus";
-import Role from "./myRole/Role";
-import { CreateDancer } from "./myDancers/createDancer";
-import Loading from "../../../components/layout/loading";
-import ReviewD from "./myReview/ReviewD";
-import ReviewR from "./myReview/ReviewR";
+import Loading from "@/components/NavBar/loading";
 import Image from "next/image";
-import { DancerInfo } from "@/app/types";
-import UserUpdate from "./UpdateUser";
+import RepresentativeProfile from "../dashboardUser/users/RepresentativesProfile";
+import DancerProfile from "../dashboardUser/users/DancersProfile";
+import { UserRole, Payment, DancerInfo } from "@/app/types";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
-
-const MyProfile : NextComponentType = () =>{
-  const { user, isLoading: isLoadingU  } = useUser();
-  const [showDancers, setShowDancers] = useState(false);
-  const [userDancers , setuserDancers] = useState<any>()
-  const [payment , setPayment] = useState<any>()
-  const toggleShowDancers = () => {
-    setShowDancers(prevState => !prevState);
-  };
-
+const MyProfile: NextComponentType = () => {
+  const { user, isLoading: isLoadingU } = useUser();
+  const [userDancers, setuserDancers] = useState<DancerInfo[] | undefined>();
+  const [payment, setPayment] = useState<Payment[] | undefined>([]);
   const userId = user?.sub ?? '';
   const { data: dbUser, isLoading } = useQuery(['user', userId], () => getUserById(userId));
-  let numberDancers;
-  if(dbUser?.representative?.dancers){
-    numberDancers = [...dbUser?.representative?.dancers].length
-  }
+  
   useEffect(() => {
-    
-    const payment = dbUser?.representative?.Payment;
-    if (payment) {
-      setPayment(payment);
+    if (dbUser) {
+      const userRole = dbUser.userRole;
+      if (userRole === UserRole.REPRESENTATIVE) {
+        setPayment(dbUser.representative?.Payment);
+        const dancers = dbUser.representative?.dancers;
+        if (dancers) {
+          const allDancersInfo: DancerInfo[] = dancers.map((dancer) => {
+            const { Payment, firstName, lastName, id } = dancer;
+            return {
+              id,
+              firstName,
+              lastName,
+              Payment: Payment,
+              pending: Payment.filter((payment : Payment) => !payment.confirm).length 
+            };
+          });
+          setuserDancers(allDancersInfo);
+        }
+      } else if (userRole === UserRole.DANCER) {
+        setPayment(dbUser.dancer?.Payment);
+      }
     }
-    
+  }, [dbUser]);
 
-    const dancers = dbUser?.representative?.dancers;
-    if (dancers) {
-      const allDancersInfo: DancerInfo[] = dancers.map((dancer: any) => {
-        const { Payment, user: { firstName, lastName } } = dancer;
-        return {
-          firstName,
-          lastName,
-          Payment
-        };
-      });
-      setuserDancers(allDancersInfo);
-    }
-  }, [user, userId, dbUser, payment, numberDancers]);
+  if (isLoading || isLoadingU) return <Loading />;
 
-  if (isLoading) return <Loading/>;
   const userRole = dbUser?.userRole;
-  let reviewId;
-  let representativeId;
-  let dancerId;
-  let firstName = dbUser?.firstName;
-  let lastName = dbUser?.lastName;
-  let picture = dbUser?.photo;
-  if(userRole === "REPRESENTATIVE" && dbUser?.representative.review !== undefined){
-    reviewId = dbUser?.representative?.review?.id
-  } 
-  if(userRole === "DANCER" && dbUser?.dancer.review !== undefined)
-    reviewId =  dbUser?.dancer?.review?.id
-  if(userRole === "REPRESENTATIVE"){
-    representativeId = dbUser?.representative?.id
-  }
-  if(userRole === "DANCER"){
-    dancerId = dbUser?.dancer?.id
-  }
+  const firstName = dbUser?.firstName;
+  const lastName = dbUser?.lastName;
+  const picture : string | StaticImport | undefined = dbUser?.photo;
+
   return (
     <div className={styles.dashboardUser}>
-      {firstName && lastName ? (
-        <div className={styles.info}>
-          <div className={styles.firstLine}>
-            <Link
-               href={'/'} 
-               style={{ textDecoration: 'none', backgroundColor: 'transparent' }}>
-              <button className={styles.back}>
-                Volver
-              </button>
-            </Link>
-            <div className={styles.text1}>
-            <h3>
-              Bienvenido {firstName} {lastName}
-            </h3>
+      <div className={styles.info}>
+        <div className={styles.firstLine}>
+          <Link href={'/'} style={{ textDecoration: 'none', backgroundColor: 'transparent' }}>
+            <button className={styles.back}>Volver</button>
+          </Link>
+          <div className={styles.text1}>
+            <h3>Bienvenido {firstName} {lastName}</h3>
             <div>
-            <Image
-                  src={picture}
-                  alt="Prev arrow"
-                  width={50}
-                  height={50}
-                  style={{
-                    backgroundColor: 'transparent',
-                    textDecoration: 'none',
-                    borderRadius: '100%'
-                  }}
-                />
-            </div>
+              <Image
+                src={picture ? picture : ""}
+                alt="User profile picture"
+                width={50}
+                height={50}
+                style={{
+                  backgroundColor: 'transparent',
+                  textDecoration: 'none',
+                  borderRadius: '100%',
+                }}
+              />
             </div>
           </div>
-          <label  className={styles.text}>
-            Si quieres ser parte de nosotros escoje tu rol aqui, veremos tu solicitud y tendras nuestra respuesta
-            Si eres Representante que quiere inscirbir a su hijo escoja el rol Representante, asi tendra la opcion de inscibirlo una vez activada su cuenta
-          </label>
-        <Role 
-          userRole={userRole}
-          userId={userId}
-        />
-           {userRole === "REPRESENTATIVE" ? (
-        <ReviewR
-          representativeId={representativeId}
-          reviewId={reviewId}
-        />
-      ) : userRole === "DANCER" ? (
-        <ReviewD
-          dancerId={dancerId}
-          reviewId={reviewId}
-        />
-      ) : null}
-        <div className={!payment ? styles.notPaymentC : styles.paymentC}> 
-          <PaymentStatus 
-            Payment={payment}
-          />  
         </div>
-        <CreateDancer
-          userRole={userRole}
-          representativeId={representativeId}
-          numberDancers={numberDancers}
-        />
-    <div>
-  {userRole === 'REPRESENTATIVE' && (
-    <>
-      <button className={styles.button} onClick={toggleShowDancers}>
-        {showDancers ? 'Esconder Bailarines' : 'Mostrar Bailarines'}
-      </button>
-      {showDancers && (
-        (numberDancers === 0 || undefined) ? (
-          <p>
-            No tienes Bailarines inscritos
-          </p>
-        ) : (
-          userDancers?.map((el : any, index : any) => (
-            <Dancers
-              key={index}
-              firstName={el.firstName}
-              lastName={el.lastName}
-              Payment={el.Payment}
-            />
-          ))
-        )
-      )}
-    </>
-  )}
-</div>
-      </div> ) : <UserUpdate/> }
+        {userRole === UserRole.REPRESENTATIVE && (
+          <RepresentativeProfile dbUser={dbUser} userDancers={userDancers} payment={payment} />
+        )}
+        {userRole === UserRole.DANCER && (
+          <DancerProfile dbUser={dbUser} payment={payment} />
+        )}
+      </div>
     </div>
   );
-}
+};
 
 export default MyProfile;

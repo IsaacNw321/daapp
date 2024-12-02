@@ -5,6 +5,7 @@ import { getReviews } from "../../utils/reviews";
 import { ReviewCard } from "../reviews/ReviewCard";
 import { NextComponentType } from "next";
 import AliceCarousel from "react-alice-carousel";
+import { Review } from "@/app/types";
 import "react-alice-carousel/lib/alice-carousel.css";
 const responsive = {
   0 : {items : 1},
@@ -12,25 +13,27 @@ const responsive = {
 }
 
 const Testimonials: NextComponentType = () =>{
+  const [reviews, setReviews] = useState<React.ReactNode[]>([]);
+  const { data, error, isLoading } = useQuery<Review[]>('reviewsAdmin', () => getReviews());
   
-  const {data, error, isLoading} = useQuery('reviews', ()=> getReviews());
-  const [reviews, setReviews] = useState<any>();
   useEffect(()=>{
     if (!data) return;
-    let reviewItems = data?.map((review: any, idx : number) => {
+    let reviewItems = data?.map((review: Review) => {
       let userRole;  
        let user;
        if (!review.representative) {
-         user = review.dancer.user;
+         user = review?.dancer?.user;
          userRole = "Bailarin"
       } else {
          user = review.representative.user;
          userRole = "Representante"
        }
       return ReviewCard({
-        key : idx,
+        key : review.id,
         content : review.content,
-        user : user,
+        firstName : user.firstName,
+        lastName : user.lastName,
+        photo : user.photo,
         userRole : userRole
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps

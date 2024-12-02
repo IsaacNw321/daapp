@@ -2,8 +2,7 @@ import styles from "../../styles/Testimonials.module.css";
 import Image from "next/image";
 import { reviewProps } from "@/app/types";
 
-export const ReviewCard: React.FC<reviewProps> = ({ content, userRole , user }) =>{
-  const {firstName, lastName, photo,  } = user
+export const ReviewCard = ({ content, userRole ,firstName, lastName, photo } : any) =>{
   return(
     <>
       <div className={styles.item}>
@@ -21,7 +20,7 @@ export const ReviewCard: React.FC<reviewProps> = ({ content, userRole , user }) 
         width={80}
         height={80}
         alt="userPhoto"
-        src={photo}
+        src={photo ? photo : ""}
         className={styles.tImage}
          loading="lazy"
         />

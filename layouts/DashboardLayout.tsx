@@ -10,7 +10,7 @@ const MainLayout = ({ children, title }: DashBoardLayoutProps) => {
       <>
           <Head>
               <title>{title} - Dashboard</title>
-              <meta name="description" content="Pawsitive admin dashboard" />
+              <meta name="description" content="Pawsitive User dashboard" />
           </Head>
           <div >
               <div >

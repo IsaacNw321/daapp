@@ -1,16 +1,112 @@
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { StaticImageData } from "next/image";
 
-export interface getUser {
+export enum UserRole {
+  ADMIN = 'ADMIN',
+  DANCER = 'DANCER',
+  REPRESENTATIVE = 'REPRESENTATIVE',
+  CONTACT = 'CONTACT',
+}
+
+export enum TypePayment {
+  PMOVIL = 'PMOVIL',
+  CASH = 'CASH',
+}
+
+
+export interface User {
+  id: string;
+  firstName?: string;
+  lastName?: string;
+  email: string;
+  photo?: string;
+  userRole: UserRole;
+  active: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  dancer?: Dancer;
+  representative?: Representative;
+}
+export type noRole = UserRole | undefined;
+export interface Dancer {
+  id: string;
+  userId: string;
+  user : User;
+  Payment: Payment[];
+  review?: Review;
+  allergies?: string;
+  CI?: number;
+  age?: number;
+  dateBirth: Date;
+  phone?: number;
+  Adress?: string;
+}
+
+export interface DancerInfo{
+  id : string;
+  Payment : Payment[] ;
+  firstName : string;
+  lastName : string;
+  pending : number
+}
+
+export interface Representative {
+  id: string;
+  userId: string;
+  user : User;
+  dancers: DancerR[];
+  Payment: Payment[];
+  review?: Review;
+  phone?: number;
+  Adress?: string;
+}
+
+
+export interface DancerR {
+  id: string;
+  representativeId: string;
   firstName: string;
   lastName: string;
-  email: string;
-  photo: string;
-  userRole: string;
-  active: boolean;
-  updatedAt: Date | null;
-  createdAt: Date | null;    
+  allergies: string;
+  cI: number;
+  age: number;
+  dateBirth: Date;
+  Payment: Payment[];
 }
+
+
+export interface Review {
+  id: string;
+  content: string;
+  representative: Representative;
+  representativeId?: string;
+  dancer : Dancer;
+  dancerId?: string;
+}
+
+
+export interface Question {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+
+export interface Payment {
+  id: string;
+  type: TypePayment;
+  numberRef?: string;
+  cash?: boolean;
+  confirm: boolean;
+  representativeId?: string;
+  dancerRId?: string;
+  dancerId?: string;
+}
+export interface UserIdProp{
+  userId : string;
+}
+
+export type SelectChangeEvent = React.ChangeEvent<HTMLSelectElement>;
 
 export interface reviewProps {
   key : number;
@@ -27,9 +123,13 @@ export interface QuestionItemProps {
   toggleAnswer: () => void;
 }
 
+export interface RepresentativeProps{
+  representative: Representative | undefined;
+}
+
 export interface LogginButtonProps {
   userName: String;
-  userPicture:  StaticImport | string;
+  userPicture:  string | undefined;
 }
 
 export interface LogginNavProps {
@@ -65,9 +165,11 @@ export interface reviewUser {
 
 export interface Question {
   id : string;
-  question: string | undefined;
-  answer: string | undefined;
+  question: string;
+  answer: string ;
 }
+
+export type dataQuestion = Omit<Question, 'id'>
 
 export interface ReviewType {
   content: string;
@@ -79,6 +181,15 @@ export interface postedUser {
   firstName: string;
   lastName: string;
   email: string;
+}
+
+export interface PostedDancerR {
+  firstName: string;
+  lastName: string;
+  cI : number;
+  allergies : string;
+  age : number,
+  dateBirth : Date
 }
 
 export interface postDancers {
@@ -93,7 +204,7 @@ export interface postReviewDancer {
 }
 
 export interface Content {
-  content : String;
+  content : string;
 }
 
 export interface postReviewRepresentative {
@@ -102,28 +213,87 @@ export interface postReviewRepresentative {
 }
 
 export interface updateReview {
-  content : String;
-  reviewId : String;
+  content? : string;
+  reviewId? : string;
+}
+
+
+
+export interface representativeUpdateData{
+  firstName? : string;
+  lastName?: string;
+  Adress? : string;
+  phone? : number;
+  representativeId? : string;
 }
 
 export interface DancerR  {
   firstName: string;
   lastName: string;
-  email: string;
+  cI : number;
+  allergies : string;
+  age : number,
+  dateBirth : Date
+ }
+
+ export interface infoDancer  {
+  firstName : string;
+  lastName : string;
+  phone : number;
+  cI : number;
+  allergies : string;
+  age : number;
+  dateBirth : Date;
+  Adress : string;
+ }
+
+ export interface infoDancerProps {
+  dancerId? : string;
+ }
+
+ export interface infoRepresentativeProps {
+  representativeId? : string;
+ }
+
+ export interface infoRepresentative {
+  firstName : string;
+  lastName : string;
+  Adress : string;
+  phone : number
+ }
+ export interface updatedDancer {
+  firstName : string;
+  lastName : string;
+  phone : number;
+  cI : number;
+  allergies : string;
+  age : number,
+  dateBirth : Date;
+  Adress : string
  }
 
 export  interface ReviewRProps {
-  representativeId: String | undefined;
-  reviewId: String;
+  representativeId?: string ;
+  reviewId?: string;
 }
 
 export interface ReviewDProps {
-  dancerId: string | undefined;
-  reviewId: string;
+  dancerId?: string ;
+  reviewId?: string;
+}
+
+export interface postPaymentProps{
+  numberRef? : string; 
+  cash?: boolean;
+  dancerId?: string;
+}
+
+export interface confirmPayment{
+  confirm? : boolean; 
 }
 
 export interface createDanceProps {
-  userRole : "ADMIN"| "REPRESENTATIVE"| "DANCER" | "CONTACT";
+  userRole : UserRole;
   representativeId : string | undefined;
   numberDancers : number | undefined;
 }
@@ -141,17 +311,15 @@ export interface DancersProps {
   firstName: string;
   lastName: string;
   Payment: number;
+  pending : number;
 }
 
 export interface PaymentStatusProps {
-  Payment: number;
+  Payment?: number;
+  pending? : number;
 }
 
-export interface DancerInfo {
-  firstName: string;
-  lastName: string;
-  Payment: number | undefined;
-}
+
 
 
 export interface GendersAndShowsProps {

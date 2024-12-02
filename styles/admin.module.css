@@ -1,0 +1,227 @@
+.adminContainer {
+  min-height: 100vh;
+  background-color: black;
+  color: white;
+  padding: 2rem;
+}
+
+.adminPanel {
+  max-width: 1000px;
+  margin: 0 auto;
+  border: 2px solid #6B0D0D;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.topSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.filterSelect {
+  width: 200px;
+}
+
+.userInfo {
+  text-align: right;
+}
+
+.userGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.userCard {
+  background-color: #333;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.userName {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.userType, .userCreatedBy {
+  margin-bottom: 0.25rem;
+}
+
+.deleteButton {
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  max.width : 300px;
+  margin-top: 1rem;
+}
+
+.deleteButton:hover {
+  background-color: #b91c1c;
+}
+
+.deleteIcon {
+  margin-right: 0.5rem;
+}
+
+.roleButton{
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.roleButton:hover {
+  background-color: #b91c1c;
+}
+
+.questionsCont{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.questionsCont h3{
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.questions {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.questionCard {
+  background-color: #333;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.questionForm{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #333;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.container {
+  min-height: 100vh;
+  background-color: black;
+  color: white;
+  padding: 1rem;
+}
+
+.card {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #1a1a1a;
+  border: 2px solid #6B0D0D;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #6B0D0D;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+}
+
+.content {
+  padding: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.detailItem {
+  margin-bottom: 1rem;
+}
+
+.detailLabel {
+  font-size: 0.875rem;
+  color: #a0a0a0;
+  margin-bottom: 0.25rem;
+}
+
+.detailValue {
+  font-size: 1rem;
+}
+
+.allergiesSection {
+  margin-top: 1.5rem;
+}
+
+.allergiesTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.allergiesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.allergyBadge {
+  background-color: #6B0D0D;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.875rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 2rem;
+  }
+}
+
+.dancersR{
+  list-style: none;
+}
