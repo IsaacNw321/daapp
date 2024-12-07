@@ -23,7 +23,7 @@ const Landing : NextComponentType = () => {
       Pasion por el baile
     </h1>
     <p className={styles.text}>
-      Creamos artistas capaces de despegar sus alas
+      Creamos artistas capaces de desplegar sus alas
     </p>
     <Link href={'/about'} style={{ textDecoration: 'none', backgroundColor: 'transparent' }}>
     <button className={styles.buttonH}>

@@ -6,24 +6,23 @@ import  { getUserById} from "../../utils/users";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useQuery } from "react-query";
-import { LogginButtonProps, UserRole } from "@/app/types";
-
+import { LogginButtonProps, UserRole} from "@/app/types";
+import { UseUsers } from "@/context/UserContext";
 
 export const LogginButton: React.FC<LogginButtonProps>  = ({ userName, userPicture }) =>{
   const [dropdown, setDropdown] = useState<boolean>(false)
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
   const {error,  user} = useUser();
+  const usuario = UseUsers()
   const { picture } = user || {};
   const showMenu = () => {
     setDropdown(!dropdown); 
 }
-'';
  
-  let id: string = ''
-  if (user && user.sub) {
-      id = user.sub
-  }
-  const { data: dbUser, isLoading } = useQuery(['user', id], () => getUserById(id));
+ let id: string = usuario || ''
+  const { data: dbUser, isLoading } = useQuery(['user', id], () => getUserById(id), {
+    enabled: !!id, 
+  });
   useEffect(() => {
     if (!isLoading && dbUser) {
         if (dbUser?.userRole === UserRole.ADMIN) {
@@ -39,11 +38,11 @@ export const LogginButton: React.FC<LogginButtonProps>  = ({ userName, userPictu
   if (isLoading) {
     return <div className={styles.logNavBar}>Cargando...</div>;
   }
-  if (!dbUser){
-    setTimeout(() => {
-      window.location.href = '/api/auth/logout'; 
-    }, 10000); 
-  }
+  //if (!dbUser){
+  //  setTimeout(() => {
+  //    window.location.href = '/api/auth/logout'; 
+  //  }, 100000); 
+  //}
  return (
   <div className={styles.logNavBar}>
       <div>

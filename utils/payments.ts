@@ -12,7 +12,6 @@ export const confirmedPayment = async (
       throw new Error('Failed to update user');
     }
   } catch (error) {
-    console.error('Error updating user:', error);
     return null;
   }
 };
@@ -28,7 +27,6 @@ export const postPayment = async (
       throw new Error('Failed to post user');
     }
   } catch (error) {
-    console.error('Error posting user:', error);
     return null;
   }
 };
@@ -44,7 +42,6 @@ export const deletePayment = async (
       throw new Error('Failed removing payment');
     }
   } catch (error) {
-    console.error('Error removing user:', error);
     return null;
   }
 };

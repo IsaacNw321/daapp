@@ -7,14 +7,13 @@ export const updatedRepresentative = async (
   updatedRepresentative: representativeUpdateData
 ): Promise<Representative | null> => {
   try {
-    const response = await axios.put(`/api/representatives/${id}`, updatedRepresentative);
+    const response = await axios.patch(`/api/representatives/${id}`, updatedRepresentative);
     if (response.status === 200) {
       return response.data;
     } else {
       throw new Error('Failed to update user');
     }
   } catch (error) {
-    console.error('Error updating user:', error);
     return null;
   }
 };
@@ -30,7 +29,6 @@ export const deleteRepresentative = async (
       throw new Error('Failed to delete Rep');
     }
   } catch (error) {
-    console.error('Error deleting Rep:', error);
     return null;
   }
 };
@@ -40,7 +38,7 @@ export const createRepresentative = async (
   userRole: string
 ): Promise<string | null> => {
   try {
-    const response = await axios.put(`/api/users/${userId}`, { userRole });
+    const response = await axios.patch(`/api/users/${userId}`, { userRole });
     if (response.status === 200) {
       const newRepresentative = await axios.post('/api/representatives', { userId });
       if (newRepresentative.status === 200) {
@@ -50,7 +48,6 @@ export const createRepresentative = async (
       }
     }
   } catch (error) {
-    console.error('Error creating representative:', error);
   }
   return null;
 };

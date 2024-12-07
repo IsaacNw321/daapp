@@ -16,7 +16,7 @@ const MyProfile: NextComponentType = () => {
   const { user, isLoading: isLoadingU } = useUser();
   const [userDancers, setuserDancers] = useState<DancerInfo[] | undefined>();
   const [payment, setPayment] = useState<Payment[] | undefined>([]);
-  const userId = user?.sub ?? '';
+  const userId = user?.sub?.split('|')[1] || '';
   const { data: dbUser, isLoading } = useQuery(['user', userId], () => getUserById(userId));
   
   useEffect(() => {
