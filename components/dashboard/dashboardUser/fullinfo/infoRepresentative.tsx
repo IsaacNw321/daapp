@@ -1,10 +1,10 @@
 "use client"
-import styles from "../../../../styles/dashboard.module.css"
+import styles from "@/styles/dashboard.module.css"
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
-import { infoRepresentativeSchema } from "../../../../validations/representativeSchema";
-import { infoRepresentative, infoRepresentativeProps } from "../../../../app/types";
+import { infoRepresentativeSchema } from "@/validations/representativeSchema";
+import { infoRepresentative, infoRepresentativeProps } from "@/app/types";
 import { updatedRepresentative } from "@/utils/representative";
 
 export const InfoRepresentative : React.FC<infoRepresentativeProps> = ({ representativeId }) => {
@@ -53,72 +53,44 @@ export const InfoRepresentative : React.FC<infoRepresentativeProps> = ({ represe
   };
 
   return (
-    <>
-      <div>
-        <div className={styles.leftCont}>
-            <button onClick={handleUpdatedRepresentative} className={styles.button}>
-              {textButton === false ? "Completar Datos" : "Ocultar formulario"}
-            </button>   
-          {showAddDancerForm && (
-            <form onSubmit={handleSubmit(onSubmit)} className={styles.myForm}>
-              <label htmlFor="firstName">
-                {errors.firstName ? errors.firstName.message : "Nombre"}
-              </label>
-              <input  
-                {...register("firstName")}
-                type="text" 
-                placeholder="Nombre" 
-                value={representativeData.firstName}
-                onChange={(e) => {
-                  console.log("First Name:", e.target.value);
-                  setRepresentativeData({ ...representativeData, firstName: e.target.value });
-                }}
-              />
-              <label htmlFor="lastName">
-                {
-                  errors.lastName ? errors.lastName.message : "Apellido"
-                }
-             </label>
-              <input   
-                {...register("lastName")}
-                type="text"
-                placeholder="Apellido"
-                value={representativeData.lastName}
-                onChange={(e) => setRepresentativeData({...representativeData, lastName : e.target.value})}
-              />
-              <label htmlFor="Adress">
-                {errors.Adress ? errors.Adress.message : "Dirección"}
-              </label>
-              <input
-                {...register("Adress")}
-                type="text"
-                placeholder="Dirección"
-                value={representativeData.Adress}
-                onChange={(e) => setRepresentativeData({ ...representativeData, Adress: e.target.value })}
-              />
-
-              <label htmlFor="phone">
-                {errors.phone ? errors.phone.message : "Teléfono"}
-              </label>
-              <input
-                {...register("phone")}
-                type="text"
-                placeholder="Teléfono"
-                value={representativeData.phone}
-                onChange={(e) => setRepresentativeData({ ...representativeData, phone: e.target.value })}
-              />
-
-              <button type="submit">Actualizar Información</button>
-            </form>
-          )}
-        </div>
-        {showSuccess && (
-          <div className={styles.successMessage}>
-            La informacion ha sido guardada!
-          </div>
+    <div className={styles.formContainer}>
+      <button onClick={handleUpdatedRepresentative} className={styles.button}>
+        {textButton === false ? "Completar Datos" : "Ocultar formulario"}
+      </button>
+      <div className={`${styles.formWrapper} ${showAddDancerForm ? styles.open : ''}`}>
+        {showAddDancerForm && (
+          <form onSubmit={handleSubmit(onSubmit)} className={styles.myForm}>
+            {[
+              { name: 'firstName', label: 'Nombre', type: 'text' },
+              { name: 'lastName', label: 'Apellido', type: 'text' },
+              { name: 'phone', label: 'Teléfono', type: 'text' },
+              { name: 'Adress', label: 'Dirección', type: 'text' },
+            ].map((field) => (
+              <div key={field.name} className={styles.inputGroup}>
+                <label htmlFor={field.name}>
+                  {errors[field.name as keyof infoRepresentative]
+                    ? errors[field.name as keyof infoRepresentative]?.message
+                    : field.label}
+                </label>
+                <input
+                  {...register(field.name as keyof infoRepresentative)}
+                  type={field.type}
+                  placeholder={field.label}
+                  value={representativeData[field.name as keyof infoRepresentative]}
+                  onChange={(e) => setRepresentativeData({ ...representativeData, [field.name]: e.target.value })}
+                />
+              </div>
+            ))}
+            <button type="submit" className={styles.submitButton}>Actualizar Información</button>
+          </form>
         )}
       </div>
-    </>
+      {showSuccess && (
+        <div className={styles.successMessage}>
+          La informacion ha sido guardada!
+        </div>
+      )}
+    </div>
   );
 };
 
