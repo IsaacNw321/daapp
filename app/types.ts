@@ -293,7 +293,6 @@ export interface confirmPayment{
 }
 
 export interface createDanceProps {
-  userRole : UserRole;
   representativeId : string | undefined;
   numberDancers : number | undefined;
 }

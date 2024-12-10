@@ -55,7 +55,7 @@ export const InfoRepresentative : React.FC<infoRepresentativeProps> = ({ represe
   return (
     <div className={styles.formContainer}>
       <button onClick={handleUpdatedRepresentative} className={styles.button}>
-        {textButton === false ? "Completar Datos" : "Ocultar formulario"}
+        {textButton === false ? "Completar Datos" : "Ocultar"}
       </button>
       <div className={`${styles.formWrapper} ${showAddDancerForm ? styles.open : ''}`}>
         {showAddDancerForm && (

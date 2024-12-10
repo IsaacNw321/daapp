@@ -1,5 +1,5 @@
 import ReviewD from "../myReview/ReviewD";
-import InfoDancer from "../fullinfo/infoDancer";
+import {InfoDancer} from "../fullinfo/infoDancer";
 import PaymentStatus from "../myPaymentStatus/PaymentStatus";
 import styles from "@/styles/dashboard.module.css";
 import { User, Payment, TypePayment } from "@/app/types";
@@ -53,7 +53,8 @@ const DancerProfile: React.FC<DancerProfileProps> = ({ dbUser, payment }) => {
       <div className={!payment ? styles.notPaymentC : styles.paymentC}>
         <h3>Estado de Pago</h3>
         <PaymentStatus Payment={payment?.length} pending={pending} />
-        <h3>Lista de Pagos</h3>
+        <div className={styles.listPayment}>
+          <strong>Lista de pagos</strong>
         {payment?.map(payment => (
           <li className={styles.payments} key={payment.id}>
             {payment.type === TypePayment.PMOVIL 
@@ -62,6 +63,7 @@ const DancerProfile: React.FC<DancerProfileProps> = ({ dbUser, payment }) => {
             }        
           </li>    
         ))}
+        </div>
             <button className={styles.roleButton} onClick={handleShowP}>
               Agregar Pago
             </button>

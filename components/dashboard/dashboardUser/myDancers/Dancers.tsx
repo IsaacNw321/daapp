@@ -13,12 +13,10 @@ const Dancers = ({ firstName, lastName, Payment, pending } : DancersProps) => {
             Bailarin {firstName + " " + lastName}
           </h4>
           <div className={styles.paymentC}>
-            {!Payment ? <p>sin estado de pago</p> :
               <PaymentStatus
                 Payment={Payment}
                 pending={pending}
               />
-            }
           </div>
         </div>
       </div>

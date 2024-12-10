@@ -66,7 +66,7 @@ export default function NavBar(){
             <li key={route} className={styles.Div}>
               <Link href={route}>
                 <div>
-                  {type === "image" && 
+                  {type === "image" && (<h3>
                   <Image
                   width={50}
                   height={50}
@@ -74,7 +74,7 @@ export default function NavBar(){
                   src={logo}
                    priority={true}
                    className={styles.logo}
-                  />}
+                  /> </h3>)}
                   {label}
                 </div>
               </Link>

@@ -29,7 +29,7 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
         res.status(500).json({message : (error as Error).message});
       }
     break;
-    case "PUT":
+    case "PATCH":
       try {
         const updateDancer = await prisma.dancer.update({
           where : {

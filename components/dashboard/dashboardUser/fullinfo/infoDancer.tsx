@@ -1,7 +1,11 @@
 "use client"
+import styles from "@/styles/dashboard.module.css"
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import styles from '@/styles/dashboard.module.css';
+import { updateDancer } from "@/utils/dancers";
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { zodResolver } from "@hookform/resolvers/zod";
+import {infoDancerSchema} from "@/validations/dancerSchema";
+import { infoDancer, infoDancerProps } from "@/app/types";
 
 interface DancerData {
   firstName: string;
@@ -14,9 +18,10 @@ interface DancerData {
   dateBirth: string;
 }
 
-export default function EnhancedForm() {
+export const InfoDancer = ({dancerId} : infoDancerProps) =>{
+  
   const [showAddDancerForm, setShowAddDancerForm] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [showSuccess, setShowSucess] = useState<boolean>(false);
   const [dancerData, setDancerData] = useState<DancerData>({
     firstName: '',
     lastName: '',
@@ -28,12 +33,40 @@ export default function EnhancedForm() {
     dateBirth: '',
   });
 
-  const { register, handleSubmit, formState: { errors } } = useForm<DancerData>();
+  const {register,handleSubmit,watch, formState: {errors}} = useForm<infoDancer>({
+    resolver: zodResolver(infoDancerSchema)
+  });
 
-  const onSubmit = (data: DancerData) => {
-    console.log(data);
-    setShowSuccess(true);
-    setTimeout(() => setShowSuccess(false), 3000);
+  const onSubmit: SubmitHandler<infoDancer> = async (data) => {
+    try {
+      const { allergies, firstName, lastName, Adress } = data;
+      const cI = Number(data.cI);
+      const age = Number(data.age);
+      const phone = Number(data.phone);
+      const dateBirth = new Date(data.dateBirth);
+  
+      const dancerData = { firstName, lastName, allergies, cI, age, dateBirth, phone, Adress };
+      const newUserResponse = await updateDancer(dancerId, dancerData);
+  
+      if (newUserResponse) {
+        setShowSucess(true);
+        setTimeout(() => {
+          setShowSucess(false);
+        }, 3000);
+        setDancerData({
+          firstName : "",
+          lastName : "",
+          allergies: "",
+          cI: "",
+          age: "",
+          dateBirth: "",
+          phone: "",
+          Adress : ""
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleUpdateDancer = () => {
@@ -43,7 +76,7 @@ export default function EnhancedForm() {
   return (
     <div className={styles.formContainer}>
       <button onClick={handleUpdateDancer} className={styles.button}>
-        {showAddDancerForm ? "Ocultar formulario" : "Completar Datos"}
+        {showAddDancerForm ? "Ocultar" : "Completar Datos"}
       </button>
       <div className={`${styles.formWrapper} ${showAddDancerForm ? styles.open : ''}`}>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.myForm}>

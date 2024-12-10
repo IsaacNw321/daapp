@@ -6,6 +6,7 @@ import { postPayment } from "@/utils/payments";
 import styles from "@/styles/dashboard.module.css";
 import { DancerInfo, Payment, User, UserRole } from "@/app/types";
 import { TypePayment } from "@prisma/client";
+import { CreateDancer } from "../myDancers/createDancer";
 
 interface RepresentativeProfileProps{
   dbUser? : User ;
@@ -58,21 +59,25 @@ const RepresentativeProfile: React.FC<RepresentativeProfileProps> = ({ dbUser, u
     <>
       <ReviewR representativeId={representativeId} reviewId={reviewId} />
       <InfoRepresentative representativeId={representativeId} />
+      <CreateDancer representativeId={representativeId} numberDancers={numberDancers} />
       <button className={styles.button} onClick={toggleShowDancers}>
         {showDancers ? 'Esconder Bailarines' : 'Mostrar Bailarines'}
       </button>
+      <div className={styles.dancersCont}>
       {showDancers && (
         numberDancers === 0 ? (
           <p>No tienes Bailarines inscritos</p>
         ) : (
           userDancers?.map((dancer: DancerInfo) => (
-            <div key={dancer.id}>
+            <div className={styles.dancerCont} key={dancer.id}>
               <Dancers
                 firstName={dancer.firstName}
                 lastName={dancer.lastName}
                 Payment={dancer.Payment?.length}
                 pending={dancer.pending}
               />
+              <div className={styles.listPayment}>
+                <strong>Lista de Pagos</strong>
               {dancer.Payment.map((payment : Payment) => (
                 <li className={styles.payments} key={payment.id}>
                   {payment.type === TypePayment.PMOVIL 
@@ -81,6 +86,7 @@ const RepresentativeProfile: React.FC<RepresentativeProfileProps> = ({ dbUser, u
                   }
                 </li>
               ))}
+              </div>
               <button className={styles.roleButton} onClick={handleShowP}>
                 Agregar Pago
               </button>
@@ -102,6 +108,7 @@ const RepresentativeProfile: React.FC<RepresentativeProfileProps> = ({ dbUser, u
           ))
         )
       )}
+      </div>
     </>
   );
 };

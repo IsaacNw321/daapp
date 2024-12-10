@@ -23,7 +23,7 @@ export default async function Representative(req: NextApiRequest, res: NextApiRe
         res.status(500).json({message : (error as Error).message});
       }
     break;
-    case "PUT":
+    case "PATCH":
       try {
         const updatedUser = await prisma.representative.update({
           where : {
