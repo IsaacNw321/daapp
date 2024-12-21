@@ -8,7 +8,7 @@ const MyProfileLazy = dynamic(() => import('../../components/dashboard/dashboard
 const Profile : NextPage = withPageAuthRequired(() => {
 
   return (
-    <DashboardLayout title="Mi perfil">
+    <DashboardLayout>
       <Suspense fallback={<Loading/>}>
         <MyProfileLazy/>
       </Suspense>
