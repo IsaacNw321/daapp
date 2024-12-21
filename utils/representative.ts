@@ -1,20 +1,20 @@
-import { representativeUpdateData } from '@/app/types';
-import { Representative } from '@prisma/client';
+import { representativeUpdateData, Representative } from '@/app/types';
 import axios from 'axios';
 
 export const updatedRepresentative = async (
   id: string | undefined,
   updatedRepresentative: representativeUpdateData
-): Promise<Representative | null> => {
+): Promise<Representative | void> => {
   try {
     const response = await axios.patch(`/api/representatives/${id}`, updatedRepresentative);
+    console.log(updatedRepresentative)
     if (response.status === 200) {
       return response.data;
     } else {
-      throw new Error('Failed to update user');
+      throw new Error('Failed to update representative');
     }
   } catch (error) {
-    return null;
+    console.log(error);
   }
 };
 

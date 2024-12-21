@@ -52,7 +52,7 @@ const MyProfile: NextComponentType = () => {
   const picture : string | StaticImport | undefined = dbUser?.photo;
 
   return (
-    <div className={styles.dashboardUser}>
+    <main className={styles.dashboardUser}>
       <div className={styles.info}>
         <div className={styles.firstLine}>
           <Link href={'/'} style={{ textDecoration: 'none', backgroundColor: 'transparent' }}>
@@ -82,7 +82,7 @@ const MyProfile: NextComponentType = () => {
           <DancerProfile dbUser={dbUser} payment={payment} />
         )}
       </div>
-    </div>
+    </main>
   );
 };
 

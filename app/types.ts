@@ -316,6 +316,7 @@ export interface DancersProps {
 export interface PaymentStatusProps {
   Payment?: number;
   pending? : number;
+  representative : boolean;
 }
 
 

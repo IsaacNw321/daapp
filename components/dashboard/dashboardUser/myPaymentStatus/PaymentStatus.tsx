@@ -1,7 +1,7 @@
 import styles from "@/styles/dashboard.module.css";
 import { PaymentStatusProps } from "@/app/types";
 
-export const PaymentStatus = ({ Payment, pending }: PaymentStatusProps) => {
+export const PaymentStatus = ({ Payment, pending, representative }: PaymentStatusProps) => {
   const totalMonths: number = 12;
   const currentDateTime = new Date().toISOString();
   const currentMonth = new Date(currentDateTime).getMonth();
@@ -57,27 +57,31 @@ export const PaymentStatus = ({ Payment, pending }: PaymentStatusProps) => {
           </div>
         )}
       </div>
-      <div className={styles.legend}>
-        <div className={styles.legendItem}>
-          <span className={styles.legendColor} style={{ backgroundColor: 'var(--color-confirmed)' }}></span>
-          <span>Pagado</span>
-        </div>
-        <div className={styles.legendItem}>
-          <span className={styles.legendColor} style={{ backgroundColor: 'var(--color-pending)' }}></span>
-          <span>Pendiente</span>
-        </div>
-        <div className={styles.legendItem}>
-          <span className={styles.legendColor} style={{ backgroundColor: 'var(--color-not-paid)' }}></span>
-          <span>No pagado</span>
-        </div>
-        <div className={styles.legendItem}>
-          <span className={styles.legendColor} style={{ backgroundColor: 'var(--color-incoming)' }}></span>
-          <span>Próximo</span>
-        </div>
+      {
+        representative === false ? (
+          <div className={styles.legend}>
+            <div className={styles.legendItem}>
+              <span className={styles.legendColor} style={{ backgroundColor: 'var(--color-confirmed)' }}></span>
+              <span>Pagado</span>
+            </div>
+            <div className={styles.legendItem}>
+              <span className={styles.legendColor} style={{ backgroundColor: 'var(--color-pending)' }}></span>
+              <span>Pendiente</span>
+            </div>
+            <div className={styles.legendItem}>
+              <span className={styles.legendColor} style={{ backgroundColor: 'var(--color-not-paid)' }}></span>
+              <span>No pagado</span>
+            </div>
+            <div className={styles.legendItem}>
+              <span className={styles.legendColor} style={{ backgroundColor: 'var(--color-incoming)' }}></span>
+              <span>Próximo</span>
+            </div>
+          </div>
+      
+        ) : null
+      }
       </div>
-    </div>
   );
-
 };
 
 export default PaymentStatus;

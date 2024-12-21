@@ -7,6 +7,7 @@ import { NextComponentType } from "next";
 import AliceCarousel from "react-alice-carousel";
 import { Review } from "@/app/types";
 import "react-alice-carousel/lib/alice-carousel.css";
+import Loading from "../NavBar/loading";
 const responsive = {
   0 : {items : 1},
   800 : {items: 2}
@@ -42,17 +43,21 @@ const Testimonials: NextComponentType = () =>{
 }, [isLoading, data])
  
 if(isLoading){
-  return <div>Cargando...</div>
+  return(
+    <section className={styles.fatherCont}>
+      <Loading />
+    </section>
+  ) 
  }
   return (
-  <div className={styles.fatherCont}>
+  <section className={styles.fatherCont}>
   
-    <h3>
-      Testimonios
-    </h3>
     <h2>
-      Lo que dicen nuestros clientes
+      Testimonios
     </h2>
+    <h3>
+      Lo que dicen nuestros clientes
+    </h3>
     <p>
       Nuestra sección de testimonios del estudio de baile presenta historias reales de un grupo diverso de bailarines y representantes de todos los orígenes culturales, edades y géneros, que han sido inspirados por nuestras clases.
     </p>
@@ -70,7 +75,7 @@ if(isLoading){
         />}
     </div>
     </div>
-  </div>
+  </section>
   )
 }
 

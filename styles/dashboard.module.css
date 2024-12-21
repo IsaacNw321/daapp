@@ -230,6 +230,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  color: white;
   justify-content: center;
 }
 
@@ -396,6 +397,16 @@
   font-size: 1rem;
 }
 
+.myForm select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #6B0D0D;
+  border-radius: 10px;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
 .myForm input:focus {
   outline: none;
   border-color: #FF0000;
@@ -433,6 +444,9 @@
   }
 
   .myForm input {
+    padding: 0.6rem;
+  }
+  .myForm select {
     padding: 0.6rem;
   }
 
@@ -586,6 +600,15 @@
 }
 
 .dancersCont{
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
   height: auto;
+  gap: 60px;
+}
+
+.repCont{
+  display: flex;
+  flex-direction:column;
   gap: 30px;
 }

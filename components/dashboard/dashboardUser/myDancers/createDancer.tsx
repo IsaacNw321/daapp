@@ -56,7 +56,11 @@ export const CreateDancer = ({representativeId, numberDancers} : createDanceProp
   };
   
   if (numberDancers !== undefined && numberDancers >2) {
-    return null; 
+    return (
+      <div className={styles.formContainer}>
+        Ya tienes a tus bailarines inscritos
+      </div>
+    ); 
   }
   
   return (

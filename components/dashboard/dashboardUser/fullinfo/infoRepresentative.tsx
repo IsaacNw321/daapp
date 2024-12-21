@@ -28,6 +28,7 @@ export const InfoRepresentative : React.FC<infoRepresentativeProps> = ({ represe
       const { Adress, firstName, lastName } = data;
       const phone = Number(data.phone)
       const representativeData = { firstName , lastName, Adress, phone, representativeId };
+      console.log(representativeData)
       const newUserResponse = await updatedRepresentative(representativeId, representativeData);
       if (newUserResponse) {
         setShowSucess(true);

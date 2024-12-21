@@ -8,7 +8,7 @@ export const createDancer = async (dancerData: postDancers): Promise<Dancer | nu
     if (response.status === 200) {
       return response.data;
     } else {
-      throw new Error('Failed to post user');
+      throw new Error('Failed to post dancer');
     }
   } catch (error) {
     return null;
@@ -34,7 +34,7 @@ export const updateDancer = async (id: string | undefined, dancerData: infoDance
     if (response.status === 200) {
       return response.data;
     } else {
-      throw new Error('Failed to update user');
+      throw new Error('Failed to update dancer');
     }
   } catch (error) {
     return null;
@@ -47,7 +47,7 @@ export const createDancerR = async (dancerData: PostedDancerR): Promise<Dancer |
     if (response.status === 200) {
       return response.data;
     } else {
-      throw new Error('Failed to post user');
+      throw new Error('Failed to post dancerR');
     }
   } catch (error) {
     return null;
@@ -62,7 +62,7 @@ export const createRoleDancer = async (userId: string, userRole: string): Promis
       if (newRepresentative.status === 200) {
         return response.data;
       } else {
-        throw new Error('Could not create Bailarin');
+        throw new Error('Could not create Dancer by Admin');
       }
     }
   } catch (error) {

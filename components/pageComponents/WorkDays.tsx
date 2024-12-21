@@ -3,7 +3,7 @@ import { NextComponentType } from "next";
 import Link from "next/link";
 const WorkDays : NextComponentType = () =>{
   return (
-    <div className={styles.daysCont}>
+    <section className={styles.daysCont}>
     <div className={styles.rightCont}>
         <h2>
           Registrate y mantente informado
@@ -23,20 +23,20 @@ const WorkDays : NextComponentType = () =>{
                 Registrarme
               </button>
             </Link>
-    <h2>Horario de trabajo</h2>
-    <div className={styles.order}> 
-      <div className={styles.day} >
+    <h3>Horario de trabajo</h3>
+    <ul className={styles.order}> 
+      <li className={styles.day} >
         Martes : 09:30 am a 11:30 am
-      </div>
-      <div className={styles.day} >
+      </li>
+      <li className={styles.day} >
         Jueves : 09:30 am a 11:30 am
-      </div>
-      <div className={styles.day} >
+      </li>
+      <li className={styles.day} >
         Sabado : 01:00 pm a 4:30pm
-      </div>
-    </div>
+      </li>
+    </ul>
    </div>
-   </div>
+   </section>
   )
 }
 

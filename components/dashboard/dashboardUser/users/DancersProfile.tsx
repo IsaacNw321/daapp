@@ -43,27 +43,18 @@ const DancerProfile: React.FC<DancerProfileProps> = ({ dbUser, payment }) => {
     }
   };
   const dancerId = dbUser?.dancer?.id;
+  console.log(dbUser)
+  console.log(dancerId)
   const reviewId = dbUser?.dancer?.review?.id;
   const pending = payment?.filter(p => !p.confirm).length || 0;
 
   return (
-    <>
+    <section>
       <ReviewD dancerId={dancerId} reviewId={reviewId} />
       <InfoDancer dancerId={dancerId} />
       <div className={!payment ? styles.notPaymentC : styles.paymentC}>
         <h3>Estado de Pago</h3>
-        <PaymentStatus Payment={payment?.length} pending={pending} />
-        <div className={styles.listPayment}>
-          <strong>Lista de pagos</strong>
-        {payment?.map(payment => (
-          <li className={styles.payments} key={payment.id}>
-            {payment.type === TypePayment.PMOVIL 
-              ? <p>{payment.numberRef}</p>
-              : <p>Efectivo</p>
-            }        
-          </li>    
-        ))}
-        </div>
+        <PaymentStatus Payment={payment?.length} pending={pending} representative={false} />
             <button className={styles.roleButton} onClick={handleShowP}>
               Agregar Pago
             </button>
@@ -81,7 +72,7 @@ const DancerProfile: React.FC<DancerProfileProps> = ({ dbUser, payment }) => {
                 </button>
               </form>) }
       </div>
-    </>
+    </section>
   );
 };
 

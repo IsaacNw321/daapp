@@ -32,7 +32,7 @@ export const InfoDancer = ({dancerId} : infoDancerProps) =>{
     Adress: '',
     dateBirth: '',
   });
-
+console.log(dancerId)
   const {register,handleSubmit,watch, formState: {errors}} = useForm<infoDancer>({
     resolver: zodResolver(infoDancerSchema)
   });
@@ -46,6 +46,7 @@ export const InfoDancer = ({dancerId} : infoDancerProps) =>{
       const dateBirth = new Date(data.dateBirth);
   
       const dancerData = { firstName, lastName, allergies, cI, age, dateBirth, phone, Adress };
+      console.log(dancerData)
       const newUserResponse = await updateDancer(dancerId, dancerData);
   
       if (newUserResponse) {
