@@ -19,7 +19,6 @@ export const AsignRoles: React.FC<UserIdProp> = ({userId}) => {
       createRoleDancer(userId, role);
     }
   };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <select {...register('role')} className={styles.filterSelect}>

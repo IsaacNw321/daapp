@@ -5,7 +5,7 @@ import styles from "../../styles/about.module.css";
 import { GendersAndShowsProps } from "@/app/types";
 const Gender : NextComponentType = () =>{
   return (
-    <div className={styles.gendersCont}>
+    <section className={styles.gendersCont}>
       <h4 className={styles.genderTitle}>
         Mira los generos de baile que ofrecemos
       </h4>
@@ -18,7 +18,7 @@ const Gender : NextComponentType = () =>{
         array={e.array}
       />
     ))}
-  </div>
+  </section>
   )
 }
 

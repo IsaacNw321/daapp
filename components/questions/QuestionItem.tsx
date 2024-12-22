@@ -5,9 +5,7 @@ import { QuestionItemProps } from "@/app/types";
 
 const QuestionItem: React.FC<QuestionItemProps> = ({ question, answer, isOpen, toggleAnswer }) => {
   return (
-    <>
-    
-    <ul className={styles.question} onClick={toggleAnswer}>
+    <li className={styles.question} onClick={toggleAnswer}>
       <div className={styles.qI}>
         {question}
         <Image
@@ -21,9 +19,8 @@ const QuestionItem: React.FC<QuestionItemProps> = ({ question, answer, isOpen, t
       {isOpen && (
         <p className={`${styles.answer} ${isOpen ? styles.open : styles.close}`}>{answer}</p>
       )}
-    </ul>
-    </>
-  );
+    </li>
+  )
 };
 
 export default QuestionItem;

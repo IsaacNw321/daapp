@@ -1,12 +1,12 @@
 "use client"
 import styles from "@/styles/dashboard.module.css"
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { createDancer, createDancerR } from "@/utils/dancers";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import {danceRSchema} from "@/validations/dancerRSchema";
 import { DancerR, createDanceProps } from "@/app/types";
-export const CreateDancer = ({userRole, representativeId, numberDancers} : createDanceProps) =>{
+export const CreateDancer = ({representativeId, numberDancers} : createDanceProps) =>{
 
    const {register,handleSubmit,watch, formState: {errors}} = useForm<DancerR>({
     resolver: zodResolver(danceRSchema)
@@ -56,18 +56,20 @@ export const CreateDancer = ({userRole, representativeId, numberDancers} : creat
   };
   
   if (numberDancers !== undefined && numberDancers >2) {
-    return null; 
+    return (
+      <div className={styles.formContainer}>
+        Ya tienes a tus bailarines inscritos
+      </div>
+    ); 
   }
   
   return (
     <>
-      <div>
-        <div className={userRole === "REPRESENTATIVE" ? styles.leftCont : styles.none}>
-          {userRole === "REPRESENTATIVE" && (
-            <button onClick={handleAddDancer} className={styles.button}>
-              {textButton === false ? "Registrar Bailarin" : "Ocultar formulario"}
-            </button>
-          )}
+      <div className={styles.formContainer}>
+        <button onClick={handleAddDancer} className={styles.button}>
+          {textButton === false ? "Inscribir Bailarin" : "Ocultar"}
+        </button> 
+        <div className={`${styles.formWrapper} ${showAddDancerForm ? styles.open : ''}`}>
           {showAddDancerForm && (
             <form onSubmit={handleSubmit(onSubmit)} className={styles.myForm}>
               <label htmlFor="firstName">
@@ -134,16 +136,16 @@ export const CreateDancer = ({userRole, representativeId, numberDancers} : creat
                 value={dancerData.dateBirth}
                 onChange={(e) => setDancerData({ ...dancerData, dateBirth: e.target.value })}
               />
-              <button type="submit">Inscribir Bailarin</button>
+              <button className={styles.button} type="submit">Inscribir Bailarin</button>
             </form>
           )}
+          </div> 
         </div>
         {showSuccess && (
           <div className={styles.successMessage}>
             La informacion ha sido guardada!
           </div>
         )}
-      </div>
     </>
   );
 };

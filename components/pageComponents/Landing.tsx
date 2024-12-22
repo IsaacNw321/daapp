@@ -5,7 +5,7 @@ import { NextComponentType } from "next";
 import Link from "next/link";
 const Landing : NextComponentType = () => {
   return(
-    <div className={styles.Landing}>
+    <section className={styles.Landing}>
       <Image
         className={styles.image}
         width={700} 
@@ -23,7 +23,7 @@ const Landing : NextComponentType = () => {
       Pasion por el baile
     </h1>
     <p className={styles.text}>
-      Creamos artistas capaces de despegar sus alas
+      Creamos artistas capaces de desplegar sus alas
     </p>
     <Link href={'/about'} style={{ textDecoration: 'none', backgroundColor: 'transparent' }}>
     <button className={styles.buttonH}>
@@ -31,7 +31,7 @@ const Landing : NextComponentType = () => {
     </button>
     </Link>
     </div>
-</div>
+</section>
   )
 }
 

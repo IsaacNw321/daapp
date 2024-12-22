@@ -37,7 +37,7 @@ export const DancerDetails: React.FC<DancerProp> = ({ dancer }) => {
         </>
       ) : null}
       <ControlPayments id={dancer?.id} payments={dancer?.Payment} dancerR={false} /> 
-      <PaymentStatus Payment={dancer?.Payment.length} pending={pending} />
+      <PaymentStatus Payment={dancer?.Payment.length} pending={pending} representative={false} />
     </div>
   );
 };

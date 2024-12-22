@@ -4,8 +4,7 @@ import { reviewProps } from "@/app/types";
 
 export const ReviewCard = ({ content, userRole ,firstName, lastName, photo } : any) =>{
   return(
-    <>
-      <div className={styles.item}>
+      <li className={styles.item}>
         <h3>
           {firstName + " "}
           {lastName}
@@ -24,7 +23,6 @@ export const ReviewCard = ({ content, userRole ,firstName, lastName, photo } : a
         className={styles.tImage}
          loading="lazy"
         />
-      </div>
-    </>
+      </li>
   )
 }

@@ -42,7 +42,10 @@
 }
 
 .text1 h3{
-  background-color: #6B0D0D;
+  background-color: #000000;
+  border-radius: 26px;
+  box-shadow: 0 0 20px rgba(107, 13, 13, 0.5);
+  border: 2px solid #6B0D0D;
   border-radius: 10px;
   padding: 12px;
   color: white;
@@ -70,7 +73,10 @@
 }
 
 .back{
-  background-color : #6B0D0D;
+  background-color: #000000;
+  border-radius: 26px;
+  box-shadow: 0 0 20px rgba(107, 13, 13, 0.5);
+  border: 2px solid #6B0D0D;
   width: 80px;
   height: 40px;
   border-radius: 15px;
@@ -165,93 +171,111 @@
   transition: transform 0.5s;
 }
 
-.paymentC{
-  display: flex;
-  flex-direction: column;
-  width: 660px; 
-  height:auto;
-  border-radius: 16px;
-}
-.notPaymentC{
-  display: none;
-}
-.paymentB{
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  display: flex;
-  flex-direction: row;
-  background-color: black;
-  width: 380px; 
-  height: 80px;
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+.paymentStatus {
+  --color-confirmed: #4CAF50;
+  --color-pending: #2196F3;
+  --color-not-paid: #F44336;
+  --color-incoming: #9E9E9E;
+  --border-radius: 12px;
+
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  height: 180px;
+  background-color: #000000;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+  color: #ffffff;
   border: 2px solid #6B0D0D;
-  border-radius: 24px;
 }
 
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+}
 
-.greenBar {
+.paymentBar {
+  display: flex;
+  height: 60px;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  //margin-bottom: 1rem;
+}
+
+.barSection {
   display: flex;
   align-items: center;
+  justify-content: space-around;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.month {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  width: 1.5em;
+  text-align: center;
+  display: inline-block;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  color: white;
   justify-content: center;
-  flex-direction: column;
-  background-color: green;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  height: 40px;
-  color: white;
-}
-.blueBar{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: blue;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  height: 40px;
-  color: white;
+  margin-top: 0.5rem;
 }
 
-.redBar {
+.legendItem {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color:  red;
-  color: white;
-  height: 40px;
+  font-size: 0.875rem;
 }
 
-.grayBar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  background-color:gray;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  height: 40px;
-  color: white;
+.legendColor {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  margin-right: 0.5rem;
 }
 
-@media screen and (max-width: 460px){
-  .paymentB{
-    width: 300px;
-    border-radius: 30px;
-    height: 140px;
+@media screen and (max-width: 480px) {
+  .paymentStatus {
+    padding: 15px;
+    width: 370px;
+    border: none;
+    height: 240px;
   }
-  .greenBar {
-    height: 60px;
+
+  .title {
+    font-size: 1.25rem;
   }
-  .redBar {
-    height: 60px;
+
+  .paymentBar {
+    height: 50px;
+    width: 330px;
   }
-  .grayBar {
-    height: 60px;
+
+  .month {
+    font-size: 1rem;
+  }
+
+  .legend {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
+
 .select {
   width: 100%;
   padding: 10px;
@@ -283,16 +307,12 @@
   align-items:center;
   flex-direction: column;
   font-size: 20px;
-  border-radius: 10px;
-  background-color: white;
   color: white;
   width: 300px;
-  height: 145px;
-  border-radius: 10px;
-  border: 2px solid #6B0D0D;
+  height: 200px;
   background-color:black;
   padding: 16px;
-  margin-top: 10px;
+  margin-top: 30px;
 }
 
 .danceCardNoPay {
@@ -323,140 +343,136 @@
   }
 }
 
-.leftCont {
-  padding: 20px;
-  width: 500px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: #6B0D0D;
+.formContainer {
+  max-width: 500px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #000000;
+  border: 2px solid #6B0D0D;
   border-radius: 26px;
-  height:auto;
+  box-shadow: 0 0 20px rgba(107, 13, 13, 0.5);
 }
 
-
-.leftCont h2{
-  font-size: 50px;
-  margin-bottom: 15px;
-  color: white;
-  font-family: Poppins;
-  animation-duration: 1s;
-  animation-name: slideup;
+.button {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: #6B0D0D;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  max-width: 200px;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
 }
 
-.leftCont span{
-  margin-top: 8px;
-  margin-bottom: 16px;
-  width: 20%;
-  height: 2px;
-  background-color: #fff;
-  display: flex;
+.button:hover {
+  background-color: #8B1D1D;
 }
 
-.leftCont p{
-  font-weight: bold;
-  color: #fff;
-}
-
-
-.myForm{
-  margin-top: 16px;
-  padding:12px;
+.myForm {
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  color:  #fff;
-  height:auto;
-  width: 450px;
-  animation-name: showSlow;
-  animation-duration: 0.6s;
-  border: 4px solid #232323;
-  background-color: black;
-  border-radius: 30px;
-  box-shadow: 0 0 20px  #FF0000;
+  gap: 1rem;
 }
 
-
-
-
-.myForm input{
-  background-color: white;
-  color: white;
-  width: 400px;
-  height: 45px;
-  border-radius: 10px;
-  border: 2px solid #fff;
-  background-color:#000;
-  padding: 16px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-
-.myForm label{
-  color: #fff;
-  font-size: 16px;
-  width: 150px;
-  height: 50px;
-}
-
-
-
-.myForm button {
+.inputGroup {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 390px;
-  height: 50px;
-  font-size: 20px;
-  padding: 16px 32px;
-  color: white;
-  background-color: #000;
-  margin-top: 30px;
-  border-radius: 42px;
-  border: 2px solid white;
+  flex-direction: column;
 }
 
-.myForm button:hover {
+.myForm label {
+  color: #ffffff;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.myForm input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #6B0D0D;
+  border-radius: 10px;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.myForm select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #6B0D0D;
+  border-radius: 10px;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.myForm input:focus {
+  outline: none;
+  border-color: #FF0000;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #ffffff;
+  background-color: #6B0D0D;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
-  background-color: black;
-  border-radius: 20px;
+  transition: background-color 0.3s ease;
 }
 
-@media screen and (max-width: 460px){
-  .myForm{
-    width: 280px;
-    border-radius: 30px;
+.submitButton:hover {
+  background-color: #8B1D1D;
+}
+
+.successMessage {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #4CAF50;
+  color: #ffffff;
+  border-radius: 10px;
+  text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .formContainer {
+    padding: 1.5rem;
   }
-  .leftCont {
-    width: 300px;
+
+  .myForm input {
+    padding: 0.6rem;
   }
-  .myForm input{
-    width: 220px;
+  .myForm select {
+    padding: 0.6rem;
   }
-  .myForm label{
-    width: 220px;
+
+  .submitButton {
+    padding: 0.8rem;
+    font-size: 1rem;
   }
-  .myForm button{
-    width: 220px;
-    font-size: 16px;
-    height: 40px;
-  }
-  .form input{
-    width: 220px;
-    margin: auto;
-  }
-  .form{
-    width: 300px;
-  }
+
+}
+
+.formWrapper {
+  overflow: hidden;
+  transition: max-height 1s ease, opacity 1s ease;
+  max-height: 0;
+  opacity: 0;
+}
+
+.formWrapper.open {
+  max-height: 2000px; 
+  opacity: 1;
 }
 
 
-.myForm p{
-  height: 0;
-}
 
 .contenedor{ 
   background-color:  #6B0D0D; 
@@ -556,4 +572,46 @@
 .payments{
   color : white;
   list-style: none;
+}
+
+
+.listPayment{
+  margin-top: 2rem;
+  height: auto;
+  max-width: 300px;
+  background-color: #000000;
+  border-radius: 26px;
+  box-shadow: 0 0 20px rgba(107, 13, 13, 0.5);
+  border: 2px solid #6B0D0D;
+  color: white;
+}
+
+.listPayment strong{
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 450px) {
+  .listPayment{
+    border: none;
+    background-color: transparent;
+  }
+}
+
+.dancerCont{
+  height: 180px;
+}
+
+.dancersCont{
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  height: auto;
+  gap: 60px;
+}
+
+.repCont{
+  display: flex;
+  flex-direction:column;
+  gap: 30px;
 }

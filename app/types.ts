@@ -293,7 +293,6 @@ export interface confirmPayment{
 }
 
 export interface createDanceProps {
-  userRole : UserRole;
   representativeId : string | undefined;
   numberDancers : number | undefined;
 }
@@ -317,6 +316,7 @@ export interface DancersProps {
 export interface PaymentStatusProps {
   Payment?: number;
   pending? : number;
+  representative : boolean;
 }
 
 

@@ -11,20 +11,20 @@
   text-align: center;
 }
 
-.fatherCont h3{
+.fatherCont h2{
   margin-top: 5%;
   color : white;
   font-size: 32px;
 }
 
-.fatherCont h2{
+.fatherCont h3{
   color: white;
   font-size: 60px;
   font-family: "New Times Roman";
 }
 
 @media screen and (max-width: 460px){
-  .fatherCont h2{
+  .fatherCont h3{
     font-size: 40px;
   }
 }

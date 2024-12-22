@@ -6,7 +6,7 @@ import { NextComponentType } from "next";
 
 const InfoAbout : NextComponentType = () =>{
   return(
-    <div className={styles.upCont}>
+    <section className={styles.upCont}>
     <div className={styles.about}>
       <h3>
         Sobre nosotros
@@ -40,7 +40,7 @@ const InfoAbout : NextComponentType = () =>{
         priority={true}>
       </Image>
     </div>
-  </div>
+  </section>
   )
 }
 

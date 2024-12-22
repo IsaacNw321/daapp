@@ -1,5 +1,5 @@
 import ReviewD from "../myReview/ReviewD";
-import InfoDancer from "../fullinfo/infoDancer";
+import {InfoDancer} from "../fullinfo/infoDancer";
 import PaymentStatus from "../myPaymentStatus/PaymentStatus";
 import styles from "@/styles/dashboard.module.css";
 import { User, Payment, TypePayment } from "@/app/types";
@@ -47,26 +47,17 @@ const DancerProfile: React.FC<DancerProfileProps> = ({ dbUser, payment }) => {
   const pending = payment?.filter(p => !p.confirm).length || 0;
 
   return (
-    <>
+    <section>
       <ReviewD dancerId={dancerId} reviewId={reviewId} />
       <InfoDancer dancerId={dancerId} />
       <div className={!payment ? styles.notPaymentC : styles.paymentC}>
         <h3>Estado de Pago</h3>
-        <PaymentStatus Payment={payment?.length} pending={pending} />
-        <h3>Lista de Pagos</h3>
-        {payment?.map(payment => (
-          <li className={styles.payments} key={payment.id}>
-            {payment.type === TypePayment.PMOVIL 
-              ? <p>{payment.numberRef}</p>
-              : <p>Efectivo</p>
-            }        
-          </li>    
-        ))}
+        <PaymentStatus Payment={payment?.length} pending={pending} representative={false} />
             <button className={styles.roleButton} onClick={handleShowP}>
               Agregar Pago
             </button>
             {addPayment && dancerId && (
-              <form onSubmit={handlePayment(dancerId)}>
+              <form className={styles.formContainer} style={{border : "none"}} onSubmit={handlePayment(dancerId)}>
                 <select name='typePayment' onChange={handleType}>
                   <option value={TypePayment.PMOVIL}>Pago movil</option>
                   <option value={TypePayment.CASH}>Efectivo</option>
@@ -79,7 +70,7 @@ const DancerProfile: React.FC<DancerProfileProps> = ({ dbUser, payment }) => {
                 </button>
               </form>) }
       </div>
-    </>
+    </section>
   );
 };
 

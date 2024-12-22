@@ -4,6 +4,7 @@ import QuestionItem from "../questions/QuestionItem";
 import { useQuery } from 'react-query';
 import { getQuestions } from "../../utils/questions";
 import { Question, QuestionItemProps } from "@/app/types";
+import Loading from "../NavBar/loading";
 
 
 const Questions = () => {
@@ -19,15 +20,23 @@ const Questions = () => {
     setShowAnswer((prev) => ({ ...prev, [index]: !prev[index] }));
   };
   if(isLoading){
-    return <div>Cargando...</div>
-   }
-  return (
-    <>
-    <div className={styles.questionsSect}>
+    return(
+      <section className={styles.questionsSect}>
       <h2 className={styles.frec}>
         Preguntas frecuentes
       </h2>
       <div className={styles.questionsCont}>
+       <Loading />
+      </div>
+      </section>
+    )
+   }
+  return (
+    <section className={styles.questionsSect}>
+      <h2 className={styles.frec}>
+        Preguntas frecuentes
+      </h2>
+      <ul className={styles.questionsCont}>
         {!data  
           ?  <p>Sin contenido!</p> 
           : question?.map((el : QuestionItemProps , index: number) => (
@@ -40,9 +49,8 @@ const Questions = () => {
             toggleAnswer={() => toggleAnswer(index)}
           />
         ))}
-      </div>
-      </div>
-    </>
+      </ul>
+      </section>
   );
 };
 

@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import RootLayout from '@/layouts/RootLayout';
 import Loading from '../components/NavBar/loading';
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import Landing from '../components/pageComponents/Landing';
 const MoreServicesLazy = dynamic(() => import('../components/pageComponents/moreServices'));
@@ -10,7 +10,6 @@ const TestimonialsLazy = dynamic(() => import('../components/pageComponents/Test
 
 const Home : NextPage = () => {
   return (
-    <>
     <RootLayout>
       <Suspense fallback={<Loading/>}>
           <Landing />
@@ -19,7 +18,6 @@ const Home : NextPage = () => {
           <TestimonialsLazy />  
           </Suspense>  
     </RootLayout>
-    </>
   )
 }
 

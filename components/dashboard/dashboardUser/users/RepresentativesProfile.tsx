@@ -4,12 +4,12 @@ import InfoRepresentative from "../fullinfo/infoRepresentative";
 import Dancers from "../../dashboardUser/myDancers/Dancers";
 import { postPayment } from "@/utils/payments";
 import styles from "@/styles/dashboard.module.css";
-import { DancerInfo, Payment, User, UserRole } from "@/app/types";
-import { TypePayment } from "@prisma/client";
+import { DancerInfo, Payment, User, TypePayment } from "@/app/types";
+import { CreateDancer } from "../myDancers/createDancer";
 
-interface RepresentativeProfileProps{
-  dbUser? : User ;
-  userDancers? : DancerInfo[];
+interface RepresentativeProfileProps {
+  dbUser?: User;
+  userDancers?: DancerInfo[];
   payment?: Payment[];
 }
 
@@ -27,16 +27,16 @@ const RepresentativeProfile: React.FC<RepresentativeProfileProps> = ({ dbUser, u
   };
 
   const handleType = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if(e.target.value === TypePayment.PMOVIL){
+    if (e.target.value === TypePayment.PMOVIL) {
       setTypePayment(TypePayment.PMOVIL);
     }
-    if(e.target.value === TypePayment.CASH){
+    if (e.target.value === TypePayment.CASH) {
       setTypePayment(TypePayment.CASH);
     }
   };
 
   const handlePayment = (id: string) => (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); 
+    e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const typePayment = formData.get('typePayment') as string;
     let dancerRId = id;
@@ -50,59 +50,79 @@ const RepresentativeProfile: React.FC<RepresentativeProfileProps> = ({ dbUser, u
     }
   };
 
-  const representativeId   = dbUser?.representative?.id;
+  const representativeId = dbUser?.representative?.id;
   const reviewId = dbUser?.representative?.review?.id;
   const numberDancers = userDancers?.length ?? 0;
 
   return (
-    <>
+    <section className={styles.repCont}>
       <ReviewR representativeId={representativeId} reviewId={reviewId} />
       <InfoRepresentative representativeId={representativeId} />
+      <CreateDancer representativeId={representativeId} numberDancers={numberDancers} />
       <button className={styles.button} onClick={toggleShowDancers}>
         {showDancers ? 'Esconder Bailarines' : 'Mostrar Bailarines'}
       </button>
-      {showDancers && (
-        numberDancers === 0 ? (
-          <p>No tienes Bailarines inscritos</p>
-        ) : (
-          userDancers?.map((dancer: DancerInfo) => (
-            <div key={dancer.id}>
-              <Dancers
-                firstName={dancer.firstName}
-                lastName={dancer.lastName}
-                Payment={dancer.Payment?.length}
-                pending={dancer.pending}
-              />
-              {dancer.Payment.map((payment : Payment) => (
-                <li className={styles.payments} key={payment.id}>
-                  {payment.type === TypePayment.PMOVIL 
-                    ? <p>{payment.numberRef}</p>
-                    : <p>Efectivo</p>
-                  }
-                </li>
-              ))}
+      <div className={styles.dancersCont}>
+        <div className={styles.legend}>
+          <div className={styles.legendItem}>
+            <span className={styles.legendColor} style={{ backgroundColor: 'green' }}></span>
+            <span>Pagado</span>
+          </div>
+          <div className={styles.legendItem}>
+            <span className={styles.legendColor} style={{ backgroundColor: 'blue' }}></span>
+            <span>Pendiente</span>
+          </div>
+          <div className={styles.legendItem}>
+            <span className={styles.legendColor} style={{ backgroundColor: 'red' }}></span>
+            <span>No pagado</span>
+          </div>
+          <div className={styles.legendItem}>
+            <span className={styles.legendColor} style={{ backgroundColor: 'grey' }}></span>
+            <span>Próximo</span>
+          </div>
+        </div>
+        {showDancers && (
+  <div className={styles.dancersCont}>
+    {numberDancers === 0 ? (
+      <p>No tienes Bailarines inscritos</p>
+    ) : (
+      userDancers?.map((dancer: DancerInfo, index: number) => (
+        <div key={dancer.id}>
+          {index === 0 && (   
               <button className={styles.roleButton} onClick={handleShowP}>
                 Agregar Pago
               </button>
-              {addPayment && (
-                <form onSubmit={handlePayment(dancer.id)}>
+          )}
+          <Dancers
+            key={dancer.id}
+            firstName={dancer.firstName}
+            lastName={dancer.lastName}
+            Payment={dancer.Payment?.length}
+            pending={dancer.pending}
+          />
+             {addPayment && (
+                <form className={styles.formContainer} style={{border : "none"}} onSubmit={handlePayment(dancer.id)}>
                   <select name='typePayment' onChange={handleType}>
                     <option value={TypePayment.PMOVIL}>Pago movil</option>
                     <option value={TypePayment.CASH}>Efectivo</option>
                   </select>
-                  {typePayment === TypePayment.PMOVIL && (         
-                    <input type="text" name='numberRef' placeholder='Numero de referencia' />              
+                  <div className={styles.myForm}>
+                  {typePayment === TypePayment.PMOVIL && (
+                    <input type="text" name='numberRef' placeholder='Numero de referencia' />
                   )}
+                  </div>
                   <button type='submit' className={styles.roleButton}>
                     Enviar
                   </button>
                 </form>
               )}
-            </div>
-          ))
-        )
-      )}
-    </>
+        </div>
+      ))
+    )}
+  </div>
+)}
+      </div>
+    </section>
   );
 };
 

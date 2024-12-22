@@ -93,7 +93,7 @@
   }
 }
 
-.downCont h3{
+.downCont h2{
   font-size: 60px;
   color:	white;
   margin-top: 40px;
@@ -104,7 +104,7 @@
 
 
 @media screen and (max-width: 460px){
-  .downCont h3{
+  .downCont h2{
     margin-left: 10px;
   }
 }

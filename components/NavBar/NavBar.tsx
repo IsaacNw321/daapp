@@ -8,9 +8,7 @@ import { useState, useEffect } from "react";
 import { useQuery} from "react-query";
 import { getUserById } from "../../utils/users";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
-import {useUsers} from "@/context/UserContext";
-
+import {UseUsers} from "@/context/UserContext";
 
 const links = [{
     type: "image",
@@ -37,25 +35,18 @@ export default function NavBar(){
   const [name, setName] = useState<String | undefined>('')
   const [picture, setPicture] = useState<string | undefined>(undefined);
   const [showMenu, setShowMenu] = useState<any>(false);
-  const usuario = useUsers()
+  const usuario = UseUsers()
   const {user} = useUser();
-  const userId = user?.sub ?? '';
-  
-  let id: string = ''
-  if (user && user.sub && usuario) {
-      id = user.sub
-  }
-  const { data: dbUser, isLoading } = useQuery(['user', userId], () => getUserById(userId), {
-    enabled: !!userId, 
+  let id: string = usuario || ''
+  const { data: dbUser, isLoading } = useQuery(['user', id], () => getUserById(id), {
+    enabled: !!id, 
   });
-
   useEffect(() => {
-    if (!isLoading && dbUser) {
+    if (!isLoading &&dbUser) {
       setName(dbUser.firstName);
       setPicture(dbUser.photo);
     }
   }, [isLoading, dbUser]);
-
   return (
     <header className={styles.header}>
       <nav >
@@ -75,7 +66,7 @@ export default function NavBar(){
             <li key={route} className={styles.Div}>
               <Link href={route}>
                 <div>
-                  {type === "image" && 
+                  {type === "image" && (<h3>
                   <Image
                   width={50}
                   height={50}
@@ -83,7 +74,7 @@ export default function NavBar(){
                   src={logo}
                    priority={true}
                    className={styles.logo}
-                  />}
+                  /> </h3>)}
                   {label}
                 </div>
               </Link>

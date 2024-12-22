@@ -2,12 +2,12 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { useMutation } from 'react-query';
 import { postUser, getUserById } from '@/utils/users';
-import { UserRole } from '@/app/types';
+import { UserRole, User } from '@/app/types';
 
-const userContext = createContext<string | null>(null);
+const UserContext = createContext<string | null>(null);
 
-export const useUsers = () => {
-  return useContext(userContext);
+export const UseUsers = () => {
+  return useContext(UserContext);
 };
 
 type Props = {
@@ -18,11 +18,11 @@ const ContextProvider = ({ children }: Props) => {
   const { user } = useUser();
   const [usuario, setUsuario] = useState<string | null>(null);
   const [exist, setExist] = useState(false);
-
+  const [userR, setUserR] = useState<User | undefined>(undefined)
   const mutation = useMutation((data: any) => postUser(data), {
     onSuccess: () => {
       if (user?.sub) {
-        setUsuario(user.sub);
+        setUsuario(user?.sub?.split('|')[1]);
       }
     },
     onError: (error) => {
@@ -31,11 +31,11 @@ const ContextProvider = ({ children }: Props) => {
   });
 
   useEffect(() => {
-    if (!user) return;
-  
-    const id = user.sub;
+    if (!user || !user.sub) return;
+
+    const id = user?.sub?.split('|')[1];
     const datos = {
-      id: id,
+      id,
       firstName: '',
       userRole: UserRole.CONTACT,
       lastName: '',
@@ -43,15 +43,16 @@ const ContextProvider = ({ children }: Props) => {
       photo: user.picture,
       updatedAt: new Date(),
     };
-  
-    if (!id || !user.email) return;
-  
+
+    if (!user.email) return;
+
     getUserById(id)
       .then((data) => {
         if (!data) {
           mutation.mutate(datos);
         }
         setExist(!!data);
+        setUsuario(id)
       })
       .catch((err) => {
         console.log(err);
@@ -60,7 +61,7 @@ const ContextProvider = ({ children }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  return <userContext.Provider value={usuario}>{children}</userContext.Provider>;
+  return <UserContext.Provider value={usuario}>{children}</UserContext.Provider>;
 };
 
 export default ContextProvider;

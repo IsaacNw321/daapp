@@ -14,7 +14,7 @@ const InstructorC: NextComponentType = () => {
           Nuestro equipo de experimentados instructores de baile está dedicado a brindar un excelente servicio al cliente y la más alta calidad de enseñanza. Ofrecemos una variedad de clases para estudiantes de todas las edades y niveles, desde clases para principiantes hasta niveles más avanzados. ¡Nuestro objetivo es ayudarte a alcanzar tus metas de baile mientras te diviertes!
         </p>
       </div>
-      <div className={styles.outContI}>
+      <section className={styles.outContI}>
         {Instructors?.map((e: InstructorProps, index : number) => (
           <Instructor
             key={index}
@@ -25,7 +25,7 @@ const InstructorC: NextComponentType = () => {
           >
           </Instructor>
         ))}
-      </div>
+      </section>
     </main>
   );
 };

@@ -11,10 +11,10 @@ export async function getUserById(id: string): Promise<User | undefined> {
    const user: User = await response.data;
    return user;
  } catch (error) {
-   console.log(error)
    return undefined
  }
 }
+
 
 
 export const postUser = async (userData: postedUser): Promise<User | null> => {
@@ -22,7 +22,6 @@ export const postUser = async (userData: postedUser): Promise<User | null> => {
     const response = await axios.post<User>(`/api/users`, userData);
     return response.data;
   } catch (error) {
-    console.error('Error posting user:', error);
     return null;
   }
 };
@@ -33,7 +32,6 @@ export const emailExist = async (): Promise<User[] | string> => {
     const response = await axios.get<User[]>(`/api/users`);
     return response.data;
   } catch (error) {
-    console.error('An error occurred:', error);
     return 'Error checking email existence';
   }
 };
@@ -44,7 +42,6 @@ export const updateUser = async (id: string, updatedUserData: Partial<User>): Pr
     const response = await axios.put<User>(`/api/users/${id}`, updatedUserData);
     return response.data;
   } catch (error) {
-    console.error('Error updating user:', error);
     return null;
   }
 };
@@ -55,7 +52,6 @@ export const getUsers = async (): Promise<User[]> => {
     const response = await axios.get<User[]>(`/api/users`);
     return response.data;
   } catch (error) {
-    console.error('Error getting users:', error);
     return [];
   }
 };
@@ -66,7 +62,6 @@ export const deleteUser = async (id: string): Promise<User | null> => {
     const response = await axios.delete<User>(`/api/users/${id}`);
     return response.data;
   } catch (error) {
-    console.error('Error removing user:', error);
     return null;
   }
 };

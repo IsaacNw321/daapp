@@ -5,7 +5,7 @@ import { Footer } from '@/components/NavBar/Footer';
 import { Suspense } from 'react';
 import Loading from '@/components/NavBar/loading';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { title } from 'process';
+
 
 interface RootLayoutProps {
   children: React.ReactNode;

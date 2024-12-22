@@ -10,34 +10,33 @@ export const getQuestions = async (): Promise<Question[]> => {
       throw new Error('Error getting questions');
     }
   } catch (error) {
-    console.error('Error getting questions:', error);
     return []; 
   }
 }
 
-export const deleteQuestion = async (userId: string): Promise<void> => {
+export const deleteQuestion = async (userId: string): Promise<void | null> => {
   try {
     const response = await axios.delete(`/api/questions/${userId}`);
     if (response.status === 200) {
       return response.data;
     }
   } catch (error) {
-    console.log(error);
+    return null
   }
 }
 
-export const createQuestion = async (data: dataQuestion): Promise<Question | undefined> => {
+export const createQuestion = async (data: dataQuestion): Promise<Question | undefined | boolean> => {
   try {
     const response = await axios.post<Question>(`/api/questions`, data);
     if (response.status === 200) {
       return response.data;
     }
   } catch (error) {
-    console.log(error);
+    return false
   }
 }
 
-export const updateQuestion = async (data: dataQuestion, id: string): Promise<Question | undefined> => {
+export const updateQuestion = async (data: dataQuestion, id: string): Promise<Question | undefined | boolean> => {
   
   try {
     const response = await axios.put<Question>(`/api/questions/${id}`, data);
@@ -45,6 +44,6 @@ export const updateQuestion = async (data: dataQuestion, id: string): Promise<Qu
       return response.data;
     }
   } catch (error) {
-    console.log(error);
+    return false
   }
 }

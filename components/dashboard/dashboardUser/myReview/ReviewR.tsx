@@ -41,23 +41,33 @@ const ReviewR = ({representativeId, reviewId} : ReviewRProps) =>{
 }
   }
   return (
-    <>
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <p className={styles.text}>Nos interesa la opinion de cada Representante</p>
-      <label htmlFor="content">
-        {errors.content ? errors.content.message : "Comentario"}
-      </label>
-      {reviewId ? <p>Comentario guardado exitosamente R</p> : <p>Aun no has hecho tu comentario</p>}
-      <input {...register("content")} className={styles.reviewC} type="text" id="content" name="content" value={content.content} onChange={(e) => setContent({ ...content, content: e.target.value })} />
-      <button type="submit">{reviewId ? "Editar comentario" : "Crear comentario"}</button>
-    </form>
-    {showSuccess && (
-  <div className={styles.successMessage}>
-    La informacion ha sido guardada!
-  </div>
-)}
-</>
-  )
+    <div className={styles.formContainer}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.myForm}>
+        <p className={styles.text}>Nos interesa la opinion de cada Representante</p>
+        <label htmlFor="content">
+          {errors.content ? errors.content.message : "Comentario"}
+        </label>
+        {reviewId ? <p>Comentario guardado exitosamente R</p> : <p>Aun no has hecho tu comentario</p>}
+        <input
+          {...register("content")}
+          className={styles.reviewC}
+          type="text"
+          id="content"
+          name="content"
+          value={content.content}
+          onChange={(e) => setContent({ ...content, content: e.target.value })}
+        />
+        <button type="submit" className={styles.submitButton}>
+          {reviewId ? "Editar comentario" : "Crear comentario"}
+        </button>
+      </form>
+      {showSuccess && (
+        <div className={styles.successMessage}>
+          La informacion ha sido guardada!
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default ReviewR;

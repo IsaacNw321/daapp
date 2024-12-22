@@ -3,6 +3,7 @@ import { deletedReview, getReviews } from '@/utils/reviews';
 import { useState, useEffect } from 'react';
 import styles from '@/styles/admin.module.css';
 import { Review } from '@/app/types';
+import Loading from '@/components/NavBar/loading';
 
 export const ListOfReviews = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -11,14 +12,19 @@ export const ListOfReviews = () => {
   useEffect(() => {
     if (!data) return;
     setReviews(data);
-    console.log(reviews);
   }, [isLoading, data, reviews]);
-
+  if(isLoading){
+    return(
+      <section className={styles.questionsCont}>
+        <Loading />
+      </section>
+    )
+  }
   return (
     <section className={styles.questionsCont}>
       <strong>Seccion de Comentarios</strong>
       <ul className={styles.questions}>
-        {reviews.map((review) => (
+        {reviews.map((review : Review) => (
           <li className={styles.questionCard} key={review.id}>
             {review.representative ? <p>Representante</p> : <p>Bailarin</p>}
             <br />
