@@ -62,7 +62,7 @@ if(isLoading){
       Nuestra sección de testimonios del estudio de baile presenta historias reales de un grupo diverso de bailarines y representantes de todos los orígenes culturales, edades y géneros, que han sido inspirados por nuestras clases.
     </p>
     <div className={styles.reviews}>
-    <div className={styles.carouselCont}>
+    <ul className={styles.carouselCont}>
     {!reviews ? <div className={styles.reviews}>No hay comentarios</div> : 
        <AliceCarousel
         mouseTracking
@@ -73,7 +73,7 @@ if(isLoading){
         disableButtonsControls
         items={reviews}
         />}
-    </div>
+    </ul>
     </div>
   </section>
   )

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { NextComponentType } from "next";
 const Results : NextComponentType = () => {
   return(
-    <div className={styles.fatherCont}>
+    <section className={styles.fatherCont}>
       <div className={styles.upCont}>
         <Image
           className={styles.image}
@@ -57,7 +57,7 @@ const Results : NextComponentType = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

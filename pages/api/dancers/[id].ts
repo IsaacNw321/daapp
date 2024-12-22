@@ -54,7 +54,7 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
           }
         });
         updateDancer
-          ? res.status(200).json({ message: 'Dancer updated' })
+          ? res.status(200).json({ message:"Dancer updated" })
           : res.status(400).json({ message: 'Could not update dancer' });
       } catch (error) {
         res.status(500).json({message : (error as Error).message});

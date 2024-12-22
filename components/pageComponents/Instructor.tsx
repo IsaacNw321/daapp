@@ -11,7 +11,7 @@ import { InstructorProps } from '@/app/types';
 
 export const Instructor: React.FC<InstructorProps> = ({nameInstructor, array, text, position}) =>{
   return (
-    <div className={styles.instructor}>
+    <section className={styles.instructor}>
       <div className={styles.swiperCont}>
         <Swiper
           modules={[Navigation, EffectFade]}
@@ -48,6 +48,6 @@ export const Instructor: React.FC<InstructorProps> = ({nameInstructor, array, te
           {text}
         </p>
       </div>
-    </div>
+    </section>
   )
 }

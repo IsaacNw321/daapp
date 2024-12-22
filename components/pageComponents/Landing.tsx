@@ -5,7 +5,7 @@ import { NextComponentType } from "next";
 import Link from "next/link";
 const Landing : NextComponentType = () => {
   return(
-    <div className={styles.Landing}>
+    <section className={styles.Landing}>
       <Image
         className={styles.image}
         width={700} 
@@ -31,7 +31,7 @@ const Landing : NextComponentType = () => {
     </button>
     </Link>
     </div>
-</div>
+</section>
   )
 }
 

@@ -43,8 +43,6 @@ const DancerProfile: React.FC<DancerProfileProps> = ({ dbUser, payment }) => {
     }
   };
   const dancerId = dbUser?.dancer?.id;
-  console.log(dbUser)
-  console.log(dancerId)
   const reviewId = dbUser?.dancer?.review?.id;
   const pending = payment?.filter(p => !p.confirm).length || 0;
 
@@ -59,7 +57,7 @@ const DancerProfile: React.FC<DancerProfileProps> = ({ dbUser, payment }) => {
               Agregar Pago
             </button>
             {addPayment && dancerId && (
-              <form onSubmit={handlePayment(dancerId)}>
+              <form className={styles.formContainer} style={{border : "none"}} onSubmit={handlePayment(dancerId)}>
                 <select name='typePayment' onChange={handleType}>
                   <option value={TypePayment.PMOVIL}>Pago movil</option>
                   <option value={TypePayment.CASH}>Efectivo</option>

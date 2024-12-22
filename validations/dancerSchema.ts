@@ -35,10 +35,6 @@ lastName: z.string()
     path: ['dateBirth']
   }),
   Adress: z.string()
-  .min(10, { message: 'El nombre debe tener más de 3 letras' })
+  .min(10, { message: 'La direccion debe tener más de 10 caracteres' })
   .max(30, { message: 'El nombre es muy largo' })
-  .refine(value => /^[a-zA-ZÀ-ÿ\s'-]+$/.test(value), {
-    message: 'El nombre solo puede contener letras, espacios, guiones y apóstrofes',
-    path: ['Adress']
-  }),
 });

@@ -6,10 +6,7 @@ import { ListOfReviews } from "./reviews/ListOfReviews";
 import { Filters } from "./Roles/filters";
 import { ListOfUsers } from "./users/ListOfUsers";
 import { Statistics } from "./users/statistics";
-import { useUser } from '@auth0/nextjs-auth0/client';
-import { UserRole } from '@/app/types';
-import { useQuery } from 'react-query';
-import { User } from '@/app/types';
+
 export default function AdminPanel() {
   
   return (

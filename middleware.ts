@@ -4,7 +4,7 @@ import { getUserById } from '@/utils/users';
 import { UserRole } from '@/app/types';
 
 export async function middleware(req: NextRequest) {
-  const res = NextResponse.next();
+  /*const res = NextResponse.next();
   const session = await getSession(req, res);
 
   if (!session || !session.user) {
@@ -34,7 +34,7 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/', req.url));
   }
 
-  return res;
+  return res;*/
 }
 
 export const config = {

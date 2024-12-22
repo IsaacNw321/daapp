@@ -14,7 +14,7 @@ const MoreServices : NextComponentType = () =>{
   const [showService, setShowService] = useState(false);
   return(
    
-    <div className={styles.fatherCont}>
+    <section className={styles.fatherCont}>
     <div 
       className={showService 
       ? styles.mServicesCont 
@@ -128,7 +128,7 @@ const MoreServices : NextComponentType = () =>{
         {showService ? 'Ver menos' : 'Ver mas'}
       </button>
     </div>
-    </div>
+    </section>
   )
 }
 

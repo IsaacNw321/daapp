@@ -5,7 +5,7 @@ import  prisma  from "@/lib/prisma";
 export default async function Users(req: NextApiRequest, res: NextApiResponse){
   const id = decodeURIComponent(req.query.id as string);
   const method = req.method;
-  const { firstName, lastName, email, phone, photo, active, userRole } = req.body;
+  const { firstName, lastName, email, photo, active, userRole } = req.body;
 
   switch (method) {
     case "GET":
@@ -54,8 +54,7 @@ export default async function Users(req: NextApiRequest, res: NextApiResponse){
         res.status(500).json({ message: (error as Error).message });
       }
       break;
-    case "PUT":
-    
+    case "PATCH":
       try {
         const updatedUser = await prisma.user.update({
           where : {

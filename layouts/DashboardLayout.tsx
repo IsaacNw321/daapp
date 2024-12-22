@@ -28,7 +28,6 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         <meta name="copyright" content={dashboardMetaData.copyright} />
         <link type='image/x-icon' rel="icon" href="/favicon.ico" />
       </Head>
-      <NavBar />
       <Suspense fallback={<Loading />}>
         <main className={styles.main}>
           {children}

@@ -19,7 +19,9 @@ export const ListOfUsers = () => {
   const filteredUsers = FilterUsers(users);
   if(isLoading){
     return(
-      <Loading/>
+      <section className={styles.userGrid}>
+        <Loading/>
+      </section>
     )
   }
   if(error){
