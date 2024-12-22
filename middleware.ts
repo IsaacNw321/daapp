@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@auth0/nextjs-auth0/edge';
 import { User, UserRole } from '@/app/types';
-import axios from 'axios';
+
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
   const session = await getSession(req, res);
@@ -22,11 +22,20 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/', req.url));
   }
 
-  const baseUrl = req.nextUrl.origin; 
-  const response : any = await axios.get(`${baseUrl}/api/users/${userId}`);
-  const dbUser : User = response.data
+  const baseUrl = req.nextUrl.origin;
+  try {
+    const response = await fetch(`${baseUrl}/api/users/${userId}`);
+    if (!response.ok) {
+      return NextResponse.redirect(new URL('/', req.url));
+    }
 
-  if (dbUser?.userRole !== UserRole.ADMIN) {
+    const dbUser: User = await response.json();
+
+    if (dbUser?.userRole !== UserRole.ADMIN) {
+      return NextResponse.redirect(new URL('/', req.url));
+    }
+  } catch (error) {
+    console.error('Error fetching user:', error);
     return NextResponse.redirect(new URL('/', req.url));
   }
 

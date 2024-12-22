@@ -22,7 +22,7 @@ export const DancerRDetails: React.FC<DancerProp> = ({ dancer }) => {
       <DetailItem label="CI" value={dancer?.cI} />
       <DetailItem label="Alergias" value={dancer?.allergies} />
       <ControlPayments id={dancer.id} payments={dancer.Payment} dancerR={true} /> 
-      <PaymentStatus Payment={dancer.Payment.length} pending={pending} />
+      <PaymentStatus Payment={dancer.Payment.length} pending={pending} representative={true} />
     </div>
   );
 };
