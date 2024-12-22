@@ -10,8 +10,6 @@ export default async function Users(req: NextApiRequest, res: NextApiResponse){
   switch (method) {
     case "GET":
       try {
-        console.log(id); 
-
         const user = await prisma.user.findUnique({
           where: {
             id: String(id)
