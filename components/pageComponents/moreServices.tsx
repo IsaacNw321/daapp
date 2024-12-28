@@ -8,13 +8,17 @@ import MS4 from "../../public/images/contempo.jpeg";
 import MS5 from "../../public/images/MS5.jpeg";
 import MS6 from "../../public/images/MS6.jpeg";
 import { NextComponentType } from "next";
-
+import {motion} from "framer-motion"
 const MoreServices : NextComponentType = () =>{
 
   const [showService, setShowService] = useState(false);
   return(
-   
-    <section className={styles.fatherCont}>
+       <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className={styles.fatherCont}
+        >
     <div 
       className={showService 
       ? styles.mServicesCont 
@@ -128,7 +132,7 @@ const MoreServices : NextComponentType = () =>{
         {showService ? 'Ver menos' : 'Ver mas'}
       </button>
     </div>
-    </section>
+    </motion.section>
   )
 }
 

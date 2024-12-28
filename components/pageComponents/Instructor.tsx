@@ -8,10 +8,15 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 import styles from "../../styles/OurTeam.module.css";
 import { InstructorProps } from '@/app/types';
-
+import {motion} from 'framer-motion'
 export const Instructor: React.FC<InstructorProps> = ({nameInstructor, array, text, position}) =>{
   return (
-    <section className={styles.instructor}>
+    <motion.section 
+      initial={{ opacity : 0 }}
+      whileInView={{ opacity : 1}}
+      transition={{duration : 1.5}}
+      className={styles.instructor}
+      >
       <div className={styles.swiperCont}>
         <Swiper
           modules={[Navigation, EffectFade]}
@@ -48,6 +53,6 @@ export const Instructor: React.FC<InstructorProps> = ({nameInstructor, array, te
           {text}
         </p>
       </div>
-    </section>
+    </motion.section>
   )
 }

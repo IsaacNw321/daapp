@@ -3,9 +3,15 @@ import Image from "next/image";
 import Reginfo from "../../public/images/reginfo.jpeg";
 import { NextComponentType } from "next";
 import Link from "next/link";
+import {motion} from 'framer-motion'
 const Landing : NextComponentType = () => {
   return(
-    <section className={styles.Landing}>
+        <motion.section
+        initial={{ opacity : 0 }}
+        whileInView={{ opacity : 1}}
+        transition={{duration : 0.8}}
+        className={styles.Landing}
+      >
       <Image
         className={styles.image}
         width={700} 
@@ -31,7 +37,7 @@ const Landing : NextComponentType = () => {
     </button>
     </Link>
     </div>
-</section>
+    </motion.section>
   )
 }
 

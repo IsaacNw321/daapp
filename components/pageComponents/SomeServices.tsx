@@ -1,9 +1,15 @@
 import styles from "../../styles/about.module.css";
 import { NextComponentType } from "next";
+import {motion} from 'framer-motion'
 const SomeServices : NextComponentType = () =>{
 
   return(
-    <section className={styles.downCont}>
+        <motion.section
+      initial={{ opacity : 0}}
+      whileInView={{ opacity : 1}}
+      transition={{duration : 1}}
+      className={styles.downCont}
+      >
         <h2>
           Servicios
         </h2>
@@ -49,7 +55,7 @@ const SomeServices : NextComponentType = () =>{
             </p>
           </div>
         </div>
-    </section>
+        </motion.section>
   )
 }
 

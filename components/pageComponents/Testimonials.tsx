@@ -8,6 +8,7 @@ import AliceCarousel from "react-alice-carousel";
 import { Review } from "@/app/types";
 import "react-alice-carousel/lib/alice-carousel.css";
 import Loading from "../NavBar/loading";
+
 const responsive = {
   0 : {items : 1},
   800 : {items: 2}
@@ -51,7 +52,6 @@ if(isLoading){
  }
   return (
   <section className={styles.fatherCont}>
-  
     <h2>
       Testimonios
     </h2>
