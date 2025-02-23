@@ -17,6 +17,11 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
   switch (method) {
     case "DELETE" :
       try {
+        await prisma.payment.deleteMany({
+          where : {
+            dancerId : String(id)
+          }
+        })
         await prisma.review.delete({
           where : {
             dancerId : String(id)

@@ -51,6 +51,18 @@ export default async function Representative(req: NextApiRequest, res: NextApiRe
     break;
     case "DELETE":
       try {
+        const dancerSr = await prisma.dancerR.findMany({
+          where : {
+            representativeId : String(id)
+          }
+        })
+        for (const dancerR of dancerSr){
+          await prisma.payment.deleteMany({
+            where : {
+              dancerRId : dancerR.id
+            }
+          })
+        }
         await prisma.dancerR.deleteMany({
           where : {
             representativeId : String(id)
