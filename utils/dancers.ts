@@ -28,6 +28,19 @@ export const deleteDancer = async (dancerId: string | undefined): Promise<Dancer
   }
 };
 
+export const deleteDancerR = async (dancerId: string | undefined): Promise<Dancer | null> => {
+  try {
+    const response = await axios.delete(`/api/dancersR/${dancerId}`);
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      throw new Error('Failed to delete dancer');
+    }
+  } catch (error) {
+    return null;
+  }
+};
+
 export const updateDancer = async (id: string | undefined, dancerData: infoDancer): Promise<Dancer | null> => {
   try {
     const response = await axios.patch(`/api/dancers/${id}`, dancerData);

@@ -43,6 +43,11 @@ export default async function Dancer(req: NextApiRequest, res: NextApiResponse){
     break;
     case "DELETE":
       try {
+        await prisma.payment.deleteMany({
+          where : {
+            dancerRId : String(id)
+          }
+        })
         const deleteDancerR = await prisma.dancerR.delete({
           where : {
             id : String(id)

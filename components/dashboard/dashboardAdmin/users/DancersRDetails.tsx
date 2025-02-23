@@ -2,6 +2,7 @@ import styles from '@/styles/admin.module.css';
 import { ControlPayments } from '../Payments/Payments';
 import PaymentStatus from '../../dashboardUser/myPaymentStatus/PaymentStatus';
 import { DancerR } from '@/app/types';
+import { deleteDancerR } from '@/utils/dancers';
 export interface DancerProp{
   dancer : DancerR
 }
@@ -13,7 +14,9 @@ export const DancerRDetails: React.FC<DancerProp> = ({ dancer }) => {
       pending++;
     }
   }
-
+  const handleDelete = async () => {
+    const deleted = await deleteDancerR(dancer.id);
+  }
   return (
     <div className={styles.grid}>
       <p>Bailarin</p>
@@ -21,6 +24,9 @@ export const DancerRDetails: React.FC<DancerProp> = ({ dancer }) => {
       <DetailItem label="Edad" value={dancer?.age} />
       <DetailItem label="CI" value={dancer?.cI} />
       <DetailItem label="Alergias" value={dancer?.allergies} />
+      <button onClick={() => handleDelete()} className={styles.deleteButton}>
+        Eliminar Bailarin
+      </button>
       <ControlPayments id={dancer.id} payments={dancer.Payment} dancerR={true} /> 
       <PaymentStatus Payment={dancer.Payment.length} pending={pending} representative={true} />
     </div>

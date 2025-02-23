@@ -31,7 +31,7 @@ yarn-error.log*
 .env.development.local
 # vercel
 .vercel
-
+.milion
 # typescript
 *.tsbuildinfo
 next-env.d.ts
