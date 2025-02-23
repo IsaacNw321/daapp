@@ -1,5 +1,4 @@
 "use client"
-import { getUserById } from '@/utils/users';
 import styles from '../../../styles/admin.module.css'
 import { LisOfQuestions } from "./questions/sectionQuestions"
 import { ListOfReviews } from "./reviews/ListOfReviews";

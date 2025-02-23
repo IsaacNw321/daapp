@@ -23,8 +23,12 @@ export default async function DancersR(req: NextApiRequest, res: NextApiResponse
             cI,
             age,
             dateBirth,
-            representativeId,
-          }
+            representative : {
+              connect : {
+                id : representativeId
+              }
+            }
+          },
         });
         newDancer
           ? res.status(200).json({ message: 'Dancer created' })

@@ -20,11 +20,21 @@ export const ListOfReviews = () => {
       </section>
     )
   }
+  if(error){
+    return(
+      <section className={styles.questionsCont}>
+        Hubo un error intente mas tarde
+      </section>
+    )
+  }
   return (
     <section className={styles.questionsCont}>
       <strong>Seccion de Comentarios</strong>
       <ul className={styles.questions}>
-        {reviews.map((review : Review) => (
+        {reviews.length === 0 ? (
+          <p>No hay comentarios</p>
+        ) : (
+        reviews.map((review : Review) => (
           <li className={styles.questionCard} key={review.id}>
             {review.representative ? <p>Representante</p> : <p>Bailarin</p>}
             <br />
@@ -46,7 +56,7 @@ export const ListOfReviews = () => {
               Eliminar Comentario
             </button>
           </li>
-        ))}
+        )))}
       </ul>
     </section>
   );

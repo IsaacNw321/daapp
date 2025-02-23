@@ -28,7 +28,7 @@ export const RemoveRoles: React.FC<UserIdProp> = ({userId}) => {
     }
     const userRole: UserRole = UserRole.CONTACT;
     
-    await updateUser(userId, { userRole : userRole });
+    await updateUser(userId, { userRole });
   };
 
   return (

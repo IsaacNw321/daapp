@@ -39,7 +39,7 @@ export const emailExist = async (): Promise<User[] | string> => {
 
 export const updateUser = async (id: string, updatedUserData: Partial<User>): Promise<User | null> => {
   try {
-    const response = await axios.put<User>(`/api/users/${id}`, updatedUserData);
+    const response = await axios.patch<User>(`/api/users/${id}`, updatedUserData);
     return response.data;
   } catch (error) {
     return null;

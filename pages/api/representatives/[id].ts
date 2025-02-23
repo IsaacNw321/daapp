@@ -51,6 +51,16 @@ export default async function Representative(req: NextApiRequest, res: NextApiRe
     break;
     case "DELETE":
       try {
+        await prisma.dancerR.deleteMany({
+          where : {
+            representativeId : String(id)
+          }
+        })
+        await prisma.review.delete({
+          where : {
+            representativeId : String(id)
+          }
+        })
         const deleteRepresentative = await prisma.representative.delete({
           where : {
             id : String(id)

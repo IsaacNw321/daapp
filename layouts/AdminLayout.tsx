@@ -30,7 +30,6 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
         <meta name="copyright" content={adminMetaData.copyright} />
         <link type='image/x-icon' rel="icon" href="/favicon.ico" />
       </Head>
-      <NavBar />
       <Suspense fallback={<Loading />}>
         <main className={styles.main}>
           {children}
