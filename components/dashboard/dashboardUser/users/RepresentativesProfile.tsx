@@ -95,6 +95,7 @@ const RepresentativeProfile: React.FC<RepresentativeProfileProps> = ({ dbUser, u
           )}
           <Dancers
             key={dancer.id}
+            id={dancer.id}
             firstName={dancer.firstName}
             lastName={dancer.lastName}
             Payment={dancer.Payment?.length}

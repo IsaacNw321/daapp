@@ -308,6 +308,7 @@ export interface postRole {
 }
 
 export interface DancersProps {
+  id : string;
   firstName: string;
   lastName: string;
   Payment: number;

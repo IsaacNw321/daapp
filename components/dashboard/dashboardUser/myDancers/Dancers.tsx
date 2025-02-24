@@ -2,11 +2,11 @@
 import styles from "@/styles/dashboard.module.css";
 import PaymentStatus from "../myPaymentStatus/PaymentStatus";
 import { DancersProps } from '@/app/types';
+import InfoDancerR from "../fullinfo/infoDancerR";
 
-
-const Dancers = ({ firstName, lastName, Payment, pending } : DancersProps) => {
+const Dancers = ({id, firstName, lastName, Payment, pending } : DancersProps) => {
   return (
-      <li className={Payment !== 0 ? styles.danceCard : styles.danceCardNoPay}>
+      <li className={styles.danceCard}>
           <h4>
             Bailarin {firstName + " " + lastName}
           </h4>
@@ -17,6 +17,7 @@ const Dancers = ({ firstName, lastName, Payment, pending } : DancersProps) => {
                 pending={pending}
               />
           </div>
+          <InfoDancerR dancerId={id}/>
       </li>
   );
 };
