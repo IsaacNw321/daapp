@@ -49,7 +49,7 @@ const DancerProfile: React.FC<DancerProfileProps> = ({ dbUser, payment }) => {
   return (
     <section>
       <ReviewD dancerId={dancerId} reviewId={reviewId} />
-      <InfoDancer dancerId={dancerId} />
+      <InfoDancer dancerR={false} dancerId={dancerId} />
       <div className={!payment ? styles.notPaymentC : styles.paymentC}>
         <h3>Estado de Pago</h3>
         <PaymentStatus Payment={payment?.length} pending={pending} representative={false} />

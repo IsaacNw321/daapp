@@ -5,7 +5,7 @@ import  prisma  from "@/lib/prisma";
 export default async function Dancer(req: NextApiRequest, res: NextApiResponse){
   const id = req.query.id;
   const method = req.method;
-  const { allergies, CI, age, dateBirth, firstName, lastName } = req.body
+  const { allergies, cI, age, dateBirth, firstName, lastName } = req.body
   switch (method){
     case "GET":
       try {
@@ -20,7 +20,7 @@ export default async function Dancer(req: NextApiRequest, res: NextApiResponse){
         res.status(500).json({message : (error as Error).message});
       }
     break;
-    case "PUT":
+    case "PATCH":
       try {
         const updatedDancerR = await prisma.dancerR.update({
           where : {
@@ -30,7 +30,7 @@ export default async function Dancer(req: NextApiRequest, res: NextApiResponse){
             firstName,
             lastName,
             allergies, 
-            cI : CI, 
+            cI, 
             age, 
             dateBirth, 
           }

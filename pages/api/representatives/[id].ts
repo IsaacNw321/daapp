@@ -25,6 +25,7 @@ export default async function Representative(req: NextApiRequest, res: NextApiRe
     break;
     case "PATCH":
       try {
+        console.log(id, Adress, phone, firstName, lastName)
         const updatedUser = await prisma.representative.update({
           where : {
             id : String(id)
@@ -46,6 +47,7 @@ export default async function Representative(req: NextApiRequest, res: NextApiRe
         updatedUser ? res.status(200).json({message : "user updated"})
         : res.status(400).json({message : "there is not users with that id"})
       } catch (error) {
+        console.log(error)
         res.status(500).json({message : (error as Error).message});
       }
     break;

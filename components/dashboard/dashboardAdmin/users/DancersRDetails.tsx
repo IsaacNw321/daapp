@@ -3,6 +3,7 @@ import { ControlPayments } from '../Payments/Payments';
 import PaymentStatus from '../../dashboardUser/myPaymentStatus/PaymentStatus';
 import { DancerR } from '@/app/types';
 import { deleteDancerR } from '@/utils/dancers';
+import InfoDancerR from '../../dashboardUser/fullinfo/infoDancerR';
 export interface DancerProp{
   dancer : DancerR
 }
@@ -23,7 +24,11 @@ export const DancerRDetails: React.FC<DancerProp> = ({ dancer }) => {
       {dancer.firstName !== undefined ? <DetailItem label="Nombre" value={`${dancer?.firstName} ${dancer?.lastName}`} /> : null }
       <DetailItem label="Edad" value={dancer?.age} />
       <DetailItem label="CI" value={dancer?.cI} />
-      <DetailItem label="Alergias" value={dancer?.allergies} />
+      <DetailItem label="Alergias" value={dancer?.allergies} />    
+      <div>
+        Hola
+      </div>
+      <InfoDancerR dancerId={dancer.id} /> 
       <button onClick={() => handleDelete()} className={styles.deleteButton}>
         Eliminar Bailarin
       </button>

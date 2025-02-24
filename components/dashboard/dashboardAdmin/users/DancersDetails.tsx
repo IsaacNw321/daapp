@@ -3,11 +3,11 @@ import { deletedReview } from '@/utils/reviews';
 import { ControlPayments } from '../Payments/Payments';
 import PaymentStatus from '../../dashboardUser/myPaymentStatus/PaymentStatus';
 import { Dancer } from '@/app/types';
+import { InfoDancer } from '../../dashboardUser/fullinfo/infoDancer';
 export interface DancerProp{
   dancer : Dancer | undefined
 }
 export const DancerDetails: React.FC<DancerProp> = ({ dancer }) => {
-  
   let pending = 0;
   if(dancer?.Payment !== undefined){
     for (let i = 0; i < dancer.Payment.length; i++) {
@@ -16,7 +16,7 @@ export const DancerDetails: React.FC<DancerProp> = ({ dancer }) => {
       }
     }
   }
-
+  const dancerR = false
   return (
     <div className={styles.grid}>
       <p>Bailarin</p>
@@ -38,6 +38,7 @@ export const DancerDetails: React.FC<DancerProp> = ({ dancer }) => {
       ) : null}
       <ControlPayments id={dancer?.id} payments={dancer?.Payment} dancerR={false} /> 
       <PaymentStatus Payment={dancer?.Payment.length} pending={pending} representative={false} />
+     <InfoDancer dancerR={dancerR} dancerId={dancer?.id}/>
     </div>
   );
 };

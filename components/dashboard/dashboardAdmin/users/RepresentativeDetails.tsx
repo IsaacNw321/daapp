@@ -3,6 +3,7 @@ import { deletedReview } from "@/utils/reviews";
 import { DancerRDetails } from './DancersRDetails';
 import { DetailItem } from "./DancersDetails";
 import { DancerR, RepresentativeProps } from '@/app/types';
+import InfoRepresentative from '../../dashboardUser/fullinfo/infoRepresentative';
 
 export const RepresentativeDetails: React.FC<RepresentativeProps> = ({ representative }) => {
 
@@ -20,6 +21,7 @@ export const RepresentativeDetails: React.FC<RepresentativeProps> = ({ represent
       <strong>Representante</strong>
       <DetailItem label="Telefono" value={representative?.phone} />
       <DetailItem label="Direccion" value={representative?.Adress} />
+      <InfoRepresentative representativeId={representative?.id} />
       <section>
       {representative?.review?.content ? (
         <>

@@ -52,7 +52,6 @@ export const InfoRepresentative : React.FC<infoRepresentativeProps> = ({ represe
     setShowSucess(false);
     setTextButton((prevShowAddDancerForm) => !prevShowAddDancerForm);
   };
-  console.log(representativeId)
   return (
     <div className={styles.formContainer}>
       <button onClick={handleUpdatedRepresentative} className={styles.button}>

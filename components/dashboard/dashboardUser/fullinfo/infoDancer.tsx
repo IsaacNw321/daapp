@@ -1,7 +1,7 @@
 "use client"
 import styles from "@/styles/dashboard.module.css"
 import React, { useState } from 'react';
-import { updateDancer } from "@/utils/dancers";
+import { updateDancer} from "@/utils/dancers";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import {infoDancerSchema} from "@/validations/dancerSchema";
@@ -18,7 +18,12 @@ interface DancerData {
   dateBirth: string;
 }
 
-export const InfoDancer = ({dancerId} : infoDancerProps) =>{
+interface InfoDancerProps {
+  dancerId?: string;
+  dancerR : boolean;
+}
+
+export const InfoDancer = ({dancerId, dancerR} : InfoDancerProps) =>{
   
   const [showAddDancerForm, setShowAddDancerForm] = useState(false);
   const [showSuccess, setShowSucess] = useState<boolean>(false);
@@ -43,24 +48,23 @@ export const InfoDancer = ({dancerId} : infoDancerProps) =>{
       const phone = Number(data.phone);
       const dateBirth = new Date(data.dateBirth);
   
-      const dancerData = { firstName, lastName, allergies, cI, age, dateBirth, phone, Adress };
-      const newUserResponse = await updateDancer(dancerId, dancerData);
-  
-      if (newUserResponse) {
-        setShowSucess(true);
-        setTimeout(() => {
-          setShowSucess(false);
-        }, 3000);
-        setDancerData({
-          firstName : "",
-          lastName : "",
-          allergies: "",
-          cI: "",
-          age: "",
-          dateBirth: "",
-          phone: "",
-          Adress : ""
-        });
+      const dancerData = { firstName, lastName, allergies, cI, age, dateBirth, phone, Adress };   
+        const updateDancerResponse = await updateDancer(dancerId, dancerData);
+        if (updateDancerResponse) {
+          setShowSucess(true);
+          setTimeout(() => {
+            setShowSucess(false);
+          }, 3000);
+          setDancerData({
+            firstName : "",
+            lastName : "",
+            allergies: "",
+            cI: "",
+            age: "",
+            dateBirth: "",
+            phone: "",
+            Adress : ""
+          });
       }
     } catch (error) {
       console.error(error);
@@ -70,7 +74,6 @@ export const InfoDancer = ({dancerId} : infoDancerProps) =>{
   const handleUpdateDancer = () => {
     setShowAddDancerForm(!showAddDancerForm);
   };
-
   return (
     <div className={styles.formContainer}>
       <button onClick={handleUpdateDancer} className={styles.button}>

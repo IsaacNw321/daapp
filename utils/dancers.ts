@@ -67,6 +67,19 @@ export const createDancerR = async (dancerData: PostedDancerR): Promise<Dancer |
   }
 };
 
+export const updateDancerR = async (id: string | undefined, dancerData:any): Promise<Dancer | null> => {
+  try {
+    const response = await axios.patch(`/api/dancersR/${id}`, dancerData);
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      throw new Error('Failed to update dancer');
+    }
+  } catch (error) {
+    return null;
+  }
+};
+
 export const createRoleDancer = async (userId: string, userRole: string): Promise<Dancer | undefined> => {
   try {
     const response = await axios.patch(`/api/users/${userId}`, { userRole: userRole });

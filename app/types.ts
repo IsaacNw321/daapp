@@ -249,6 +249,7 @@ export interface DancerR  {
 
  export interface infoDancerProps {
   dancerId? : string;
+  dancerR : boolean;
  }
 
  export interface infoRepresentativeProps {
