@@ -51,20 +51,21 @@ setTypePayment(type)
   return(
     <>
     <h3>Lista de Pagos</h3>
-         <ul>               
+    <section className={styles.listPayment}>
+         <ul className={styles.listPayments}>               
           { 
           payments?.length === 0 ? <p>No hay datos de pago</p> : 
             payments?.map((payment : Payment) => {
               return(
-                <li key={payment.id}>
+                <li className={styles.payment} key={payment.id}>
                   {payment.type === TypePayment.PMOVIL ? (
-                    <strong> Pago Movil : {payment.numberRef}
+                    <p><strong>Pago Movil</strong> : {payment.numberRef}
                      {payment.confirm ? null : (<button  onClick={() => confirmedPayment(payment.id, {confirm})}className={styles.roleButton}>
                      confirmar Pago
-                     </button>)}</strong>
-                  ) : (<strong> Efectivo : {payment.cash}   {payment.confirm ? null : (<button onClick={() => confirmedPayment(payment.id, {confirm})} className={styles.roleButton}>
+                     </button>)}</p>
+                  ) : (<p> <strong>Efectivo</strong> : {payment.cash}   {payment.confirm ? null : (<button onClick={() => confirmedPayment(payment.id, {confirm})} className={styles.roleButton}>
                      confirmar Pago
-                     </button>)}</strong>)}
+                     </button>)}</p>)}
                     <button className={styles.deleteButton} onClick={() => deletePayment(payment.id)}>
                      Eliminar Pago  
                     </button> 
@@ -73,13 +74,14 @@ setTypePayment(type)
             })
           }
          </ul>
+         <div className={styles.flex}>
          <button  className={styles.roleButton} onClick={handleShowP}>
             Agregar Pago
           </button>
           {
             addPayment && id !== undefined
             ? (
-              <form onSubmit={handlePayment(id)}>
+              <form className={styles.form} onSubmit={handlePayment(id)}>
                 <select name='typePayment' onChange={handleType} >
                   <option value={TypePayment.PMOVIL}>Pago movil</option>
                   <option value={TypePayment.CASH}>Efectivo</option>
@@ -96,6 +98,8 @@ setTypePayment(type)
               </form>
             ) : null
           }
+         </div>
+    </section>
     </>
   )
 }

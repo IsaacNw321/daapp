@@ -66,8 +66,10 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  max.width : 300px;
+  max-width : 200px;
+  max-height: 40px;
   margin-top: 1rem;
+  margin-bottom: 12px;
 }
 
 .deleteButton:hover {
@@ -87,6 +89,8 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  max-width : 200px;
+  max-height: 40px;
   margin-top: 1rem;
 }
 
@@ -129,15 +133,15 @@
 }
 
 .container {
-  min-height: 100vh;
+  min-height: 80vh;
   background-color: black;
   color: white;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .card {
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 500px;
+  margin: auto;
   background-color: #1a1a1a;
   border: 2px solid #6B0D0D;
   border-radius: 8px;
@@ -158,10 +162,14 @@
 
 .content {
   padding: 1.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .grid {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 1rem;
 }
 
@@ -176,7 +184,7 @@
 }
 
 .detailValue {
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .allergiesSection {
@@ -225,4 +233,63 @@
 
 .dancersR{
   list-style: none;
+}
+
+.details{
+  margin-left: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.flex{
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  flex-direction: column;
+  align-items: space-around;
+}
+
+.listPayment{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.listPayments{
+  display: flex;
+  list-style: none;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;  
+}
+
+.payment{
+  width: 120px;
+  height: 150px;
+}
+
+.form{
+  margin-top: 20px;
+  padding: 20px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  border-radius: 26px;
+  height:200px;
+  border: 4px solid #232323;
+}
+
+.infoForm{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+
+.flex strong{
+  font-size: 1.3rem;
 }

@@ -25,32 +25,37 @@ export default async function Representative(req: NextApiRequest, res: NextApiRe
     break;
     case "PATCH":
       try {
-        console.log(id, Adress, phone, firstName, lastName)
+        if (!id || !Adress || !phone || !firstName || !lastName) {
+          return res.status(400).json({ message: "Missing required fields" });
+        }
+
         const updatedUser = await prisma.representative.update({
-          where : {
-            id : String(id)
+          where: {
+            id: String(id),
           },
           data: {
-            phone : phone,
-            Adress : Adress,
+            phone: phone,
+            Adress: Adress,
             user: {
-              update : {
-                firstName : firstName,
-                lastName : lastName
-              }
+              update: {
+                firstName: firstName,
+                lastName: lastName,
+              },
             },
           },
-          include : {
-            user : true
-          }
-        })
-        updatedUser ? res.status(200).json({message : "user updated"})
-        : res.status(400).json({message : "there is not users with that id"})
+          include: {
+            user: true,
+          },
+        });
+
+        updatedUser
+          ? res.status(200).json({ message: "User updated" })
+          : res.status(400).json({ message: "No user found with that ID" });
       } catch (error) {
-        console.log(error)
-        res.status(500).json({message : (error as Error).message});
+        console.log(error);
+        res.status(500).json({ message: (error as Error).message });
       }
-    break;
+      break;
     case "DELETE":
       try {
         const dancerSr = await prisma.dancerR.findMany({

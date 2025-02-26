@@ -7,7 +7,7 @@ import { infoRepresentativeSchema } from "@/validations/representativeSchema";
 import { infoRepresentative, infoRepresentativeProps } from "@/app/types";
 import { updatedRepresentative } from "@/utils/representative";
 
-export const InfoRepresentative : React.FC<infoRepresentativeProps> = ({ representativeId }) => {
+export const InfoRepresentative : React.FC<infoRepresentativeProps> = ({representativeId} ) => {
 
   const { register, handleSubmit, formState: { errors } } = useForm<infoRepresentative>({
     resolver: zodResolver(infoRepresentativeSchema)

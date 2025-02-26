@@ -20,10 +20,9 @@ interface DancerData {
 
 interface InfoDancerProps {
   dancerId?: string;
-  dancerR : boolean;
 }
 
-export const InfoDancer = ({dancerId, dancerR} : InfoDancerProps) =>{
+export const InfoDancer = ({dancerId} : InfoDancerProps) =>{
   
   const [showAddDancerForm, setShowAddDancerForm] = useState(false);
   const [showSuccess, setShowSucess] = useState<boolean>(false);

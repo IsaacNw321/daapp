@@ -16,17 +16,21 @@ export const DancerDetails: React.FC<DancerProp> = ({ dancer }) => {
       }
     }
   }
-  const dancerR = false
   return (
-    <div className={styles.grid}>
-      <p>Bailarin</p>
+    <section className={styles.flex}>
+      <div className={styles.details}>
+      <strong>Bailarin</strong>
       <DetailItem label="Edad" value={dancer?.age} />
       {dancer?.phone !== undefined ? <DetailItem label="Telefono" value={dancer?.phone} /> : null}
       {dancer?.Adress !== undefined ? <DetailItem label="Direccion" value={dancer?.Adress} /> : null}
       <DetailItem label="CI" value={dancer?.CI} />
       <DetailItem label="Alergias" value={dancer?.allergies} />
+      </div>
+      <div className={styles.infoForm}>
+      <InfoDancer dancerId={dancer?.id}/>
+      </div>
       {dancer?.review?.content ? (
-        <>
+        <div className={styles.flex}>
           <DetailItem label="Comentario" value={dancer.review.content} />
           <button
             onClick={() => deletedReview(dancer?.review?.id)}
@@ -34,12 +38,13 @@ export const DancerDetails: React.FC<DancerProp> = ({ dancer }) => {
           >
             Borrar Comentario
           </button>
-        </>
+        </div>
       ) : null}
+      <div className={styles.flex}>
       <ControlPayments id={dancer?.id} payments={dancer?.Payment} dancerR={false} /> 
       <PaymentStatus Payment={dancer?.Payment.length} pending={pending} representative={false} />
-     <InfoDancer dancerR={dancerR} dancerId={dancer?.id}/>
-    </div>
+      </div>
+    </section>
   );
 };
 

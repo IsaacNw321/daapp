@@ -41,10 +41,9 @@ export default function UserDetail() {
       <div className={styles.card}>
         <header className={styles.header}>
           <h1 className={styles.title}>Detalles de usuario</h1>
+        <DetailItem label="Nombre" value={`${user?.firstName} ${user?.lastName}`} />
         </header>
         <div className={styles.content}>
-        <DetailItem label="Nombre" value={`${user?.firstName} ${user?.lastName}`} />
-          <div className={styles.grid}>
             {user?.userRole === UserRole.REPRESENTATIVE ? (
               <RepresentativeDetails representative={user.representative} />
             ) : user?.userRole === UserRole.DANCER ? (
@@ -52,7 +51,6 @@ export default function UserDetail() {
             ) : (
               <p>Rol sin asignar</p>
             )}
-          </div>
         </div>
       </div>
     </div>

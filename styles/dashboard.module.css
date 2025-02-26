@@ -181,8 +181,8 @@
   --border-radius: 12px;
 
   width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
+  max-width: 500px;
+  margin: auto;
   padding: 20px;
   height: 180px;
   background-color: #000000;
@@ -203,6 +203,7 @@
 .paymentBar {
   display: flex;
   height: 60px;
+  max-width: 400px;
   border-radius: var(--border-radius);
   overflow: hidden;
   //margin-bottom: 1rem;
@@ -345,9 +346,12 @@
 
 .formContainer {
   max-width: 500px;
-  width: 100%;
   margin: 2rem auto;
   padding: 2rem;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
   background-color: #000000;
   border: 2px solid #6B0D0D;
   border-radius: 26px;
