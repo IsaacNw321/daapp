@@ -43,10 +43,9 @@ export interface Dancer {
 }
 
 export interface DancerInfo{
-  id : string;
+  id: string;
+  dancer: Dancer
   Payment : Payment[] ;
-  firstName : string;
-  lastName : string;
   pending : number
 }
 

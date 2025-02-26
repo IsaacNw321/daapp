@@ -14,7 +14,7 @@ export default async function Representative(req: NextApiRequest, res: NextApiRe
             id : String(id)
           },
           include : {
-            review : true
+            review : true,
           }
         })
         representative ? res.status(200).json({ message : representative })

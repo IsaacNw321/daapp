@@ -5,6 +5,7 @@ import styles from "@/styles/dashboard.module.css";
 import { User, Payment, TypePayment } from "@/app/types";
 import { useState } from "react";
 import { postPayment } from "@/utils/payments";
+import { DetailItem } from "../../dashboardAdmin/users/DancersDetails";
 interface DancerProfileProps{
   dbUser? : User ;
   payment?: Payment[];
@@ -48,8 +49,16 @@ const DancerProfile: React.FC<DancerProfileProps> = ({ dbUser, payment }) => {
 
   return (
     <section>
+      <div className={styles.details}>
+      <strong>Bailarin</strong>
+      <DetailItem label="Edad" value={dbUser?.dancer?.age} />
+      {dbUser?.dancer?.phone !== undefined ? <DetailItem label="Telefono" value={dbUser?.dancer?.phone} /> : null}
+      {dbUser?.dancer?.Adress !== undefined ? <DetailItem label="Direccion" value={dbUser?.dancer?.Adress} /> : null}
+      <DetailItem label="CI" value={dbUser?.dancer?.CI} />
+      <DetailItem label="Alergias" value={dbUser?.dancer?.allergies} />
+      </div>
       <ReviewD dancerId={dancerId} reviewId={reviewId} />
-      <InfoDancer dancerR={false} dancerId={dancerId} />
+      <InfoDancer dancerId={dancerId} />
       <div className={!payment ? styles.notPaymentC : styles.paymentC}>
         <h3>Estado de Pago</h3>
         <PaymentStatus Payment={payment?.length} pending={pending} representative={false} />

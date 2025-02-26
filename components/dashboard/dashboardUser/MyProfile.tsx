@@ -27,11 +27,14 @@ const MyProfile: NextComponentType = () => {
         const dancers = dbUser.representative?.dancers;
         if (dancers) {
           const allDancersInfo: DancerInfo[] = dancers.map((dancer) => {
-            const { Payment, firstName, lastName, id } = dancer;
+            const { Payment, firstName, lastName, id, cI, allergies, age } = dancer;
             return {
               id,
               firstName,
               lastName,
+              cI,
+              allergies,
+              age,
               Payment: Payment,
               pending: Payment.filter((payment : Payment) => !payment.confirm).length 
             };
