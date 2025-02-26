@@ -253,7 +253,7 @@
 @media screen and (max-width: 480px) {
   .paymentStatus {
     padding: 15px;
-    width: 370px;
+    width: 280px;
     border: none;
     height: 240px;
   }
@@ -264,7 +264,7 @@
 
   .paymentBar {
     height: 50px;
-    width: 330px;
+    width: 250px;
   }
 
   .month {
