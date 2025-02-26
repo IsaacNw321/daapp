@@ -17,14 +17,17 @@ export const RepresentativeDetails: React.FC<RepresentativeProps> = ({ represent
   }
 
   return (
-    <div className={styles.grid}>
+    <section className={styles.flex}>
+    <div className={styles.details}>
       <strong>Representante</strong>
       <DetailItem label="Telefono" value={representative?.phone} />
       <DetailItem label="Direccion" value={representative?.Adress} />
+    </div>
+    <div className={styles.infoForm}>
       <InfoRepresentative representativeId={representative?.id} />
-      <section>
+    </div>
       {representative?.review?.content ? (
-        <>
+        <div className={styles.flex}>
           <DetailItem label="Comentario" value={representative.review.content} />
           <button
             onClick={() => deletedReview(representative?.review?.id)}
@@ -32,9 +35,8 @@ export const RepresentativeDetails: React.FC<RepresentativeProps> = ({ represent
           >
             Borrar Comentario
           </button>
-        </>
+        </div>
       ) : null}
-      </section>
       <section>
       {
         representative?.dancers.map((dancer : DancerR) => (
@@ -42,7 +44,7 @@ export const RepresentativeDetails: React.FC<RepresentativeProps> = ({ represent
         ))
       }
       </section>
-    </div>
+    </section>
   );
 };
 

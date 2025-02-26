@@ -19,16 +19,17 @@ export const DancerRDetails: React.FC<DancerProp> = ({ dancer }) => {
     const deleted = await deleteDancerR(dancer.id);
   }
   return (
-    <div className={styles.grid}>
-      <p>Bailarin</p>
+    <div className={styles.flex}>
+      <div className={styles.details}>
+      <strong>Bailarin</strong>
       {dancer.firstName !== undefined ? <DetailItem label="Nombre" value={`${dancer?.firstName} ${dancer?.lastName}`} /> : null }
       <DetailItem label="Edad" value={dancer?.age} />
       <DetailItem label="CI" value={dancer?.cI} />
       <DetailItem label="Alergias" value={dancer?.allergies} />    
-      <div>
-        Hola
       </div>
+      <div className={styles.infoForm}>
       <InfoDancerR dancerId={dancer.id} /> 
+      </div>
       <button onClick={() => handleDelete()} className={styles.deleteButton}>
         Eliminar Bailarin
       </button>
