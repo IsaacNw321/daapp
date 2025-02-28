@@ -50,7 +50,7 @@ model Dancer {
   CI       Int?
   age      Int?
   dateBirth DateTime  @default(now())
-  phone      Int?
+  phone      String?
   Adress     String?
 }
 

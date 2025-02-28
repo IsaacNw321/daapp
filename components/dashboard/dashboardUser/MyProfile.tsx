@@ -9,7 +9,7 @@ import Loading from "@/components/NavBar/loading";
 import Image from "next/image";
 import RepresentativeProfile from "../dashboardUser/users/RepresentativesProfile";
 import DancerProfile from "../dashboardUser/users/DancersProfile";
-import { UserRole, Payment, DancerInfo } from "@/app/types";
+import { UserRole, Payment, DancerInfo, DancerR } from "@/app/types";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 const MyProfile: NextComponentType = () => {

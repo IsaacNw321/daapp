@@ -44,9 +44,13 @@ export interface Dancer {
 
 export interface DancerInfo{
   id: string;
-  dancer: Dancer
-  Payment : Payment[] ;
-  pending : number
+  firstName: string;
+  lastName: string;
+  allergies: string;
+  cI: number;
+  age: number;
+  Payment: Payment[];
+  pending: number;
 }
 
 export interface Representative {
@@ -307,9 +311,7 @@ export interface postRole {
 }
 
 export interface DancersProps {
-  id : string;
-  firstName: string;
-  lastName: string;
+  dancer : DancerInfo;
   Payment: number;
   pending : number;
 }

@@ -40,6 +40,7 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
       }
     break;
     case "PATCH":
+      console.log(req.body)
       try {
         const updateDancer = await prisma.dancer.update({
           where : {
@@ -48,9 +49,9 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
           data: {
             allergies,
             age : Number(age),
-            phone : Number(phone),
+            phone: String(phone),
             CI : Number(cI),
-            dateBirth,
+            dateBirth: new Date(dateBirth),
             Adress,
             user : {
               update : {

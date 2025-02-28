@@ -26,6 +26,7 @@ export const InfoDancer = ({dancerId} : InfoDancerProps) =>{
   
   const [showAddDancerForm, setShowAddDancerForm] = useState(false);
   const [showSuccess, setShowSucess] = useState<boolean>(false);
+  const [phonePrefix, setPhonePrefix] = useState<string>('0424');
   const [dancerData, setDancerData] = useState<DancerData>({
     firstName: '',
     lastName: '',
@@ -39,14 +40,17 @@ export const InfoDancer = ({dancerId} : InfoDancerProps) =>{
   const {register,handleSubmit,watch, formState: {errors}} = useForm<infoDancer>({
     resolver: zodResolver(infoDancerSchema)
   });
+  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setPhonePrefix(e.target.value);
+  };
   const onSubmit: SubmitHandler<infoDancer> = async (data) => {
     try {
       const { allergies, firstName, lastName, Adress } = data;
+      console.log(data)
       const cI = Number(data.cI);
-      const age = Number(data.age);
-      const phone = Number(data.phone);
+      const age = Number(calculateAge(String(data.age)));
+      const phone = Number(phonePrefix.concat(String(data.phone))); 
       const dateBirth = new Date(data.dateBirth);
-  
       const dancerData = { firstName, lastName, allergies, cI, age, dateBirth, phone, Adress };   
         const updateDancerResponse = await updateDancer(dancerId, dancerData);
         if (updateDancerResponse) {
@@ -73,6 +77,14 @@ export const InfoDancer = ({dancerId} : InfoDancerProps) =>{
   const handleUpdateDancer = () => {
     setShowAddDancerForm(!showAddDancerForm);
   };
+
+  const calculateAge = (birthDate: string) => {
+    const today = new Date();
+    const birth = new Date(birthDate);
+    let age = today.getFullYear() - birth.getFullYear();
+    return age;
+};
+
   return (
     <div className={styles.formContainer}>
       <button onClick={handleUpdateDancer} className={styles.button}>
@@ -85,10 +97,7 @@ export const InfoDancer = ({dancerId} : InfoDancerProps) =>{
             { name: 'lastName', label: 'Apellido', type: 'text' },
             { name: 'allergies', label: 'Alergias', type: 'text' },
             { name: 'cI', label: 'CI', type: 'number' },
-            { name: 'phone', label: 'Phone', type: 'number' },
-            { name: 'age', label: 'Edad', type: 'number' },
             { name: 'Adress', label: 'Dirección', type: 'text' },
-            { name: 'dateBirth', label: 'Fecha de Nacimiento', type: 'date' },
           ].map((field) => (
             <div key={field.name} className={styles.inputGroup}>
               <label htmlFor={field.name}>
@@ -105,6 +114,48 @@ export const InfoDancer = ({dancerId} : InfoDancerProps) =>{
               />
             </div>
           ))}
+          <div className={styles.inputGroup}>
+            <label htmlFor="dateBirth">
+              {errors.dateBirth ? errors.dateBirth.message : 'Fecha'}
+            </label>
+            <input
+              type="date"
+              placeholder="Fecha"
+              value={dancerData.dateBirth}
+              {...register('dateBirth')}
+              onChange={(e) => setDancerData({...dancerData, dateBirth: e.target.value, age: calculateAge(e.target.value).toString()})}
+            />
+            <label htmlFor="age">
+              {errors.age ? errors.age.message : 'Edad'}
+            </label>
+            <input
+              type="number"
+              placeholder="Edad"
+              value={Number(dancerData.age)}
+              {...register('age')}
+              readOnly
+            />
+          </div>
+            <div className={styles.inputGroup}>
+            <label htmlFor="phone">
+              {errors.phone ? errors.phone.message : 'Telefono'}
+            </label>
+            <div className={styles.phoneInput}>
+              <select
+                onChange={(e) => handleSelect(e)}
+              >
+                <option value="0424">0424</option>
+                <option value="0414">0414</option>
+                <option value="0416">0416</option>
+                <option value="0426">0426</option>
+              </select>
+              <input
+                {...register('phone')}
+                type="number"
+                placeholder="Numero"
+              />
+            </div>
+          </div>
           <button type="submit" className={styles.submitButton}>Actualizar Datos</button>
         </form>
       </div>
