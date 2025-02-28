@@ -57,6 +57,7 @@ export interface Representative {
   id: string;
   userId: string;
   user : User;
+  CI?: number;
   dancers: DancerR[];
   Payment: Payment[];
   review?: Review;
@@ -262,8 +263,9 @@ export interface DancerR  {
  export interface infoRepresentative {
   firstName : string;
   lastName : string;
+  cI : number;
   Adress : string;
-  phone : number
+  phone : number;
  }
  export interface updatedDancer {
   firstName : string;

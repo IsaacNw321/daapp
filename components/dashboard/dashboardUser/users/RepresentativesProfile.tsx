@@ -29,6 +29,7 @@ const RepresentativeProfile: React.FC<RepresentativeProfileProps> = ({ dbUser, u
       <strong>Representante</strong>
       {dbUser?.representative?.phone !== undefined ? <DetailItem label="Telefono" value={dbUser?.representative?.phone} /> : null}
       {dbUser?.representative?.Adress !== undefined ? <DetailItem label="Direccion" value={dbUser?.representative?.Adress} /> : null}
+      {dbUser?.representative?.CI !== undefined ? <DetailItem label="Cedula" value={dbUser?.representative?.CI} /> : null}
       </div>
       <ReviewR representativeId={representativeId} reviewId={reviewId} />
       <InfoRepresentative representativeId={representativeId} />

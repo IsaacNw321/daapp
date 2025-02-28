@@ -5,7 +5,7 @@ import  prisma  from "@/lib/prisma";
 export default async function Representative(req: NextApiRequest, res: NextApiResponse){
   const id = req.query.id;
   const method = req.method;
-  const { firstName, lastName, Adress, phone } = req.body
+  const { firstName, lastName, Adress, phone, CI } = req.body
   switch (method){
     case "GET":
       try {
@@ -24,6 +24,7 @@ export default async function Representative(req: NextApiRequest, res: NextApiRe
       }
     break;
     case "PATCH":
+      console.log(req.body)
       try {
         if (!id || !Adress || !phone || !firstName || !lastName) {
           return res.status(400).json({ message: "Missing required fields" });
@@ -34,8 +35,9 @@ export default async function Representative(req: NextApiRequest, res: NextApiRe
             id: String(id),
           },
           data: {
-            phone: phone,
+            phone: String(phone),
             Adress: Adress,
+            CI, 
             user: {
               update: {
                 firstName: firstName,
