@@ -22,7 +22,6 @@ const RepresentativeProfile: React.FC<RepresentativeProfileProps> = ({ dbUser, u
   const representativeId = dbUser?.representative?.id;
   const reviewId = dbUser?.representative?.review?.id;
   const numberDancers = userDancers?.length ?? 0;
-  console.log(userDancers)
   return (
     <section >
        <div className={styles.details}>
