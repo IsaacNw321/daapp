@@ -68,7 +68,7 @@ export interface Representative {
 
 export interface DancerR {
   id: string;
-  representativeId: string;
+  representativeId?: string;
   firstName: string;
   lastName: string;
   allergies: string;

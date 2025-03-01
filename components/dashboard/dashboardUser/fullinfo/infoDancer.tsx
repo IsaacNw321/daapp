@@ -55,7 +55,6 @@ export const InfoDancer = ({dancerId} : InfoDancerProps) =>{
   const onSubmit: SubmitHandler<infoDancer> = async (data) => {
     try {
       const { allergies, firstName, lastName, Adress } = data;
-      console.log(data)
       const cI = Number(data.cI);
       const age = Number(calculateAge(String(data.age)));
       const phone = Number(phonePrefix.concat(String(data.phone))); 
