@@ -161,7 +161,7 @@ export const InfoDancer = ({dancerId} : InfoDancerProps) =>{
               }
             >
             {mutation.isLoading
-              ? (<span className={styles.loadingSpinner}></span>) 
+              ? ('Cargando...') 
               : mutation.isError 
               ? ('Error intente mas tarde') 
               : mutation.isSuccess 

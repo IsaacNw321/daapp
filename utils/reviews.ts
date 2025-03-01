@@ -21,10 +21,10 @@ export const getReviewById = async (id: string): Promise<Review | null> => {
   }
 };
 
-export const updatedReview = async ({ content, reviewId }: updateReview): Promise<Review | null> => {
+export const updatedReview = async ({ content, reviewId }: updateReview): Promise<200 | null> => {
   try {
     const response = await axios.put<Review>(`/api/reviews/${reviewId}`, { content });
-    return response.data;
+    return response.status === 200 ? response.status : null;
   } catch (error) {
     return null;
   }
