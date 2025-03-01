@@ -2,17 +2,25 @@
 import styles from "@/styles/dashboard.module.css"
 import { useState } from 'react';
 import { updateDancerR } from "@/utils/dancers";
+import { useMutation } from "react-query";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import {danceRSchema} from "@/validations/dancerRSchema";
-import { DancerR, infoDancerProps } from "@/app/types";
+import { DancerRSubmitData } from "@/app/types";
+
 const InfoDancerR = ({ dancerId }: any) => {
-  const { register, handleSubmit, formState: { errors } } = useForm<DancerR>({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<DancerRSubmitData>({
       resolver: zodResolver(danceRSchema)
   });
-
-  const [showAddDancerForm, setShowAddDancerForm] = useState<boolean>(false);
-  const [showSuccess, setShowSuccess] = useState<boolean>(false);
+  const mutation = useMutation((dancerData: DancerRSubmitData) => updateDancerR(dancerId, dancerData), {
+      onSuccess: () => {
+            reset();
+        },
+        onError: (error) => {
+            console.error(error);
+        }
+    });
+  const [showAddDancerForm, setShowAddDancerForm] = useState<boolean>(false);;
   const [textButton, setTextButton] = useState<boolean>(false);
   const [dancerData, setDancerData] = useState({
       firstName: '',
@@ -30,43 +38,26 @@ const InfoDancerR = ({ dancerId }: any) => {
     return age;
 };
 
-  const onSubmit: SubmitHandler<DancerR> = async (data) => {
+  const onSubmit: SubmitHandler<DancerRSubmitData> = async (data) => {
       try {
-          const { firstName, lastName, allergies, dateBirth } = data;
-          const age = Number(calculateAge(String(dateBirth)));
+          const { firstName, lastName, allergies } = data;
+          const age = Number(calculateAge(String(data.dateBirth)));
           const cI = Number(data.cI);
-          const Birth = new Date(dateBirth);
-          const dancerData = { firstName, lastName, allergies, cI, age, Birth };
-          const newUserResponse = await updateDancerR(dancerId, dancerData);
-          if (newUserResponse) {
-              setShowSuccess(true);
-              setTimeout(() => {
-                  setShowSuccess(false);
-              }, 3000);
-              setDancerData({
-                  firstName: '',
-                  lastName: '',
-                  allergies: '',
-                  cI: '',
-                  age: '',
-                  dateBirth: '',
-              });
-          }
+          const dateBirth = new Date(data.dateBirth);
+          const dancerData = { firstName, lastName, allergies, cI, age, dateBirth };
+          mutation.mutate(dancerData);
       } catch (error) {
           console.error(error);
       }
   };
 
-  const handleAddDancer = () => {
-      setShowAddDancerForm((prevShowAddDancerForm) => !prevShowAddDancerForm);
-      setShowSuccess(false);
-      setTextButton((prevShowAddDancerForm) => !prevShowAddDancerForm);
-  };
-
+ const handleForm = () =>{
+    setShowAddDancerForm(!showAddDancerForm);
+ }
   return (
       <>
           <div className={styles.formContainer}>
-              <button onClick={handleAddDancer} className={styles.button}>
+              <button onClick={() => handleForm()} className={styles.button}>
                   {textButton === false ? "Editar informacion" : "Ocultar"}
               </button>
               <div className={`${styles.formWrapper} ${showAddDancerForm ? styles.open : ''}`}>
@@ -144,16 +135,29 @@ const InfoDancerR = ({ dancerId }: any) => {
                               {...register('age')}
                               readOnly
                           />
-                          <button className={styles.button} type="submit">Actualizar informacion</button>
+                            <button
+              type="submit"
+              disabled={mutation.isLoading}
+              className={
+                mutation.isError
+                ? styles.errorMessage
+                : mutation.isSuccess
+                ? styles.successMessage
+                : styles.submitButton
+              }
+            >
+            {mutation.isLoading
+              ? (<span className={styles.loadingSpinner}></span>) 
+              : mutation.isError 
+              ? ('Error intente mas tarde') 
+              : mutation.isSuccess 
+              ? ('Datos actualizados') 
+              : ('Actualizar')}
+            </button>
                       </form>
                   )}
               </div>
           </div>
-          {showSuccess && (
-              <div className={styles.successMessage}>
-                  La informacion ha sido guardada!
-              </div>
-          )}
       </>
   );
 };

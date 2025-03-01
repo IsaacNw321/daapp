@@ -1,6 +1,6 @@
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { StaticImageData } from "next/image";
-
+import { Omit } from "@prisma/client/runtime/library";
 export enum UserRole {
   ADMIN = 'ADMIN',
   DANCER = 'DANCER',
@@ -78,6 +78,7 @@ export interface DancerR {
   Payment: Payment[];
 }
 
+export type DancerRSubmitData = Omit<DancerR, 'id' | 'representativeId' | 'Payment'>;
 
 export interface Review {
   id: string;

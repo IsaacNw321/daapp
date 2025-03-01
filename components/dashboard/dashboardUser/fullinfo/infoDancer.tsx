@@ -1,5 +1,6 @@
 "use client"
 import styles from "@/styles/dashboard.module.css"
+import { useMutation } from 'react-query';
 import React, { useState } from 'react';
 import { updateDancer} from "@/utils/dancers";
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -25,7 +26,6 @@ interface InfoDancerProps {
 export const InfoDancer = ({dancerId} : InfoDancerProps) =>{
   
   const [showAddDancerForm, setShowAddDancerForm] = useState(false);
-  const [showSuccess, setShowSucess] = useState<boolean>(false);
   const [phonePrefix, setPhonePrefix] = useState<string>('0424');
   const [dancerData, setDancerData] = useState<DancerData>({
     firstName: '',
@@ -37,8 +37,17 @@ export const InfoDancer = ({dancerId} : InfoDancerProps) =>{
     Adress: '',
     dateBirth: '',
   });
-  const {register,handleSubmit,watch, formState: {errors}} = useForm<infoDancer>({
+  
+  const {register,handleSubmit,watch, formState: {errors}, reset} = useForm<infoDancer>({
     resolver: zodResolver(infoDancerSchema)
+  });
+  const mutation = useMutation((dancerData:any) => updateDancer(dancerId, dancerData), {
+    onSuccess: () => {
+      reset();
+    },
+    onError: (error) => {
+      console.error(error);
+    }
   });
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPhonePrefix(e.target.value);
@@ -52,23 +61,7 @@ export const InfoDancer = ({dancerId} : InfoDancerProps) =>{
       const phone = Number(phonePrefix.concat(String(data.phone))); 
       const dateBirth = new Date(data.dateBirth);
       const dancerData = { firstName, lastName, allergies, cI, age, dateBirth, phone, Adress };   
-        const updateDancerResponse = await updateDancer(dancerId, dancerData);
-        if (updateDancerResponse) {
-          setShowSucess(true);
-          setTimeout(() => {
-            setShowSucess(false);
-          }, 3000);
-          setDancerData({
-            firstName : "",
-            lastName : "",
-            allergies: "",
-            cI: "",
-            age: "",
-            dateBirth: "",
-            phone: "",
-            Adress : ""
-          });
-      }
+      mutation.mutate(dancerData);
     } catch (error) {
       console.error(error);
     }
@@ -148,6 +141,7 @@ export const InfoDancer = ({dancerId} : InfoDancerProps) =>{
                 <option value="0414">0414</option>
                 <option value="0416">0416</option>
                 <option value="0426">0426</option>
+                <option value="0412">0412</option>
               </select>
               <input
                 {...register('phone')}
@@ -156,14 +150,27 @@ export const InfoDancer = ({dancerId} : InfoDancerProps) =>{
               />
             </div>
           </div>
-          <button type="submit" className={styles.submitButton}>Actualizar Datos</button>
+          <button
+              type="submit"
+              disabled={mutation.isLoading}
+              className={
+                mutation.isError
+                ? styles.errorMessage
+                : mutation.isSuccess
+                ? styles.successMessage
+                : styles.submitButton
+              }
+            >
+            {mutation.isLoading
+              ? (<span className={styles.loadingSpinner}></span>) 
+              : mutation.isError 
+              ? ('Error intente mas tarde') 
+              : mutation.isSuccess 
+              ? ('Datos actualizados') 
+              : ('Actualizar')}
+            </button>
         </form>
       </div>
-      {showSuccess && (
-        <div className={styles.successMessage}>
-          La informacion ha sido guardada!
-        </div>
-      )}
     </div>
   );
 }
