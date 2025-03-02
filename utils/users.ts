@@ -57,10 +57,14 @@ export const getUsers = async (): Promise<User[]> => {
 };
 
 
-export const deleteUser = async (id: string): Promise<User | null> => {
+export const deleteUser = async (id: string): Promise<number | null> => {
   try {
     const response = await axios.delete<User>(`/api/users/${id}`);
-    return response.data;
+    if(response.status === 200){
+      return response.status;
+    }else{
+      return null
+    }
   } catch (error) {
     return null;
   }

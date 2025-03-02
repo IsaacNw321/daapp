@@ -17,16 +17,30 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
   switch (method) {
     case "DELETE" :
       try {
-        await prisma.payment.deleteMany({
+        const payments = await prisma.payment.findMany({
           where : {
             dancerId : String(id)
           }
         })
-        await prisma.review.delete({
+        if(payments.length > 0){
+          await prisma.payment.deleteMany({
+            where : {
+              dancerId : String(id)
+            }
+          })
+        }
+        const existReview = await prisma.review.findUnique({
           where : {
             dancerId : String(id)
           }
         })
+        if(existReview){
+          await prisma.review.delete({
+            where : {
+              dancerId : String(id)
+            }
+          })
+        }
         const deletedDancer = await prisma.dancer.delete({
           where : {
             id : String(id)
@@ -40,7 +54,6 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
       }
     break;
     case "PATCH":
-      console.log(req.body)
       try {
         const updateDancer = await prisma.dancer.update({
           where : {

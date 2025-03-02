@@ -65,23 +65,38 @@ export default async function Representative(req: NextApiRequest, res: NextApiRe
             representativeId : String(id)
           }
         })
-        for (const dancerR of dancerSr){
-          await prisma.payment.deleteMany({
-            where : {
-              dancerRId : dancerR.id
+        if (dancerSr.length > 0) {
+          for (const dancerR of dancerSr) {
+            const payments = await prisma.payment.findMany({
+              where: {
+                dancerRId: dancerR.id,
+              },
+            });
+        
+            if (payments.length > 0) {
+              await prisma.payment.deleteMany({
+                where: {
+                  dancerRId: dancerR.id,
+                },
+              });
             }
-          })
+          }
+        
+          await prisma.dancerR.deleteMany({
+            where: {
+              representativeId: String(id),
+            },
+          });
         }
-        await prisma.dancerR.deleteMany({
-          where : {
-            representativeId : String(id)
-          }
-        })
-        await prisma.review.delete({
-          where : {
-            representativeId : String(id)
-          }
-        })
+        const reviewExists = await prisma.review.findUnique({
+          where: { representativeId: String(id) },
+        });
+
+        if (reviewExists) {
+          await prisma.review.delete({
+            where: { representativeId: String(id) },
+          });
+        }
         const deleteRepresentative = await prisma.representative.delete({
           where : {
             id : String(id)
