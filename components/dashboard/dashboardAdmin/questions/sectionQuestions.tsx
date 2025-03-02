@@ -42,7 +42,6 @@ export const LisOfQuestions = () =>{
                 onClick={() => handleDelete(question.id)} 
                 className={styles.deleteButton}
                 disabled={mutation.isLoading 
-                  || mutation.isSuccess 
                   || mutation.isError}
                 >
                 {mutation.isLoading ? 'Eliminando...' 
@@ -62,7 +61,7 @@ export const LisOfQuestions = () =>{
       showCreateQuestion 
         ? (
           <NewQuestion />
-        ) : <></>
+        ) : null
     }
   </section>
   )

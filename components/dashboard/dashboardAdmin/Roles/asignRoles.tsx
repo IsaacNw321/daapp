@@ -11,7 +11,11 @@ interface FormValues {
   role: UserRole;
 }
 
-export const AsignRoles: React.FC<UserIdProp> = ({ userId }) => {
+interface AsignRolesProps extends UserIdProp {
+  onUserDeleted: () => void;
+}
+
+export const AsignRoles: React.FC<AsignRolesProps> = ({ userId, onUserDeleted }) => {
   const { register, handleSubmit } = useForm<FormValues>();
   const [isAssigning, setIsAssigning] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -25,16 +29,16 @@ export const AsignRoles: React.FC<UserIdProp> = ({ userId }) => {
         const response = await createRepresentative(userId, role);
         if (response === 200) {
           setSuccess("Rol asignado");
-        } else{
-          setError("Error al asignar rol")
+        } else {
+          setError("Error al asignar rol");
         }
       }
       if (role === UserRole.DANCER) {
         const response = await createRoleDancer(userId, role);
         if (response === 200) {
           setSuccess("Rol asignado");
-        }else{
-          setError("Error al asignar rol")
+        } else {
+          setError("Error al asignar rol");
         }
       }
     } catch (error) {
@@ -44,14 +48,15 @@ export const AsignRoles: React.FC<UserIdProp> = ({ userId }) => {
     }
   };
 
-  const handleDelete = async() => {
+  const handleDelete = async () => {
     setIsDeleting(true);
     const response = await deleteUser(userId);
-    if(response === 200){
+    if (response === 200) {
       setIsDeleting(false);
       setSuccess("Usuario Borrado");
-    }else{
-      setError("Error borrando usuario")
+      onUserDeleted(); 
+    } else {
+      setError("Error borrando usuario");
     }
   };
 
@@ -64,7 +69,7 @@ export const AsignRoles: React.FC<UserIdProp> = ({ userId }) => {
       </select>
       <button
         type="submit"
-        disabled={isAssigning 
+        disabled={isAssigning
           || success === "Rol asignado"
           || success === "Usuario Borrado"
           || error === "Error borrando usuario"
@@ -72,22 +77,22 @@ export const AsignRoles: React.FC<UserIdProp> = ({ userId }) => {
         }
         className={
           error === "Error al asignar rol" ? styles.errorMessage
-          : success ? styles.successMessage
-          : isAssigning ? styles.loading
-          : styles.roleButton
+            : success ? styles.successMessage
+              : isAssigning ? styles.loading
+                : styles.roleButton
         }
       >
         {error === "Error al asignar rol"
-         ? "Error intente mas tarde"
-         : error === "Error borrando usuario"
-         ? ""
-         : isAssigning 
-         ? 'Asignando...' 
-         : success === "Rol asignado" 
-         ? 'Rol Asignado'
-         : success === "Usuario Borrado"
-         ? "" 
-         : 'Asignar Rol'}
+          ? "Error intente mas tarde"
+          : error === "Error borrando usuario"
+            ? ""
+            : isAssigning
+              ? 'Asignando...'
+              : success === "Rol asignado"
+                ? 'Rol Asignado'
+                : success === "Usuario Borrado"
+                  ? ""
+                  : 'Asignar Rol'}
       </button>
       <button
         type="button"
@@ -97,22 +102,22 @@ export const AsignRoles: React.FC<UserIdProp> = ({ userId }) => {
           || error === "Error al asignar rol"}
         className={
           error === "Error borrando usuario" ? styles.errorMessage
-          : success ? styles.successMessage
-          : isDeleting ? styles.loading
-          : styles.deleteButton
+            : success ? styles.successMessage
+              : isDeleting ? styles.loading
+                : styles.deleteButton
         }
         onClick={handleDelete}
       >
-        {isDeleting ? 'Eliminando...' 
-          : success === "Usuario Borrado" 
-          ? "Usuario Eliminado"
-          : success === "Rol asignado"
-          ? ""
-          : error === "Error Borrando Usuario" 
-          ? "Hubo un error intente mas tarde"
-          : error === "Error al asignar rol"
-          ? "" 
-          : 'Eliminar Usuario'}
+        {isDeleting ? 'Eliminando...'
+          : success === "Usuario Borrado"
+            ? "Usuario Eliminado"
+            : success === "Rol asignado"
+              ? ""
+              : error === "Error Borrando Usuario"
+                ? "Hubo un error intente mas tarde"
+                : error === "Error al asignar rol"
+                  ? ""
+                  : 'Eliminar Usuario'}
       </button>
     </form>
   );
