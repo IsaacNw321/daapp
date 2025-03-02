@@ -77,11 +77,16 @@ export const AsignRoles: React.FC<UserIdProp> = ({ userId }) => {
           : styles.roleButton
         }
       >
-        {error !== null 
-        ? (<p>Error intente mas tarde</p>)
+        {error === "Error al asignar rol"
+         ? "Error intente mas tarde"
+         : error === "Error borrando usuario"
+         ? ""
          : isAssigning 
          ? 'Asignando...' 
-         : success ? 'Rol Asignado' 
+         : success === "Rol asignado" 
+         ? 'Rol Asignado'
+         : success === "Usuario Borrado"
+         ? "" 
          : 'Asignar Rol'}
       </button>
       <button
@@ -99,8 +104,14 @@ export const AsignRoles: React.FC<UserIdProp> = ({ userId }) => {
         onClick={handleDelete}
       >
         {isDeleting ? 'Eliminando...' 
-          : success ? "Usuario Eliminado"
-          : error !== null ? "Hubo un error intente mas tarde" 
+          : success === "Usuario Borrado" 
+          ? "Usuario Eliminado"
+          : success === "Rol asignado"
+          ? ""
+          : error === "Error Borrando Usuario" 
+          ? "Hubo un error intente mas tarde"
+          : error === "Error al asignar rol"
+          ? "" 
           : 'Eliminar Usuario'}
       </button>
     </form>
