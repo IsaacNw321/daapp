@@ -54,5 +54,9 @@ export default async function Questions(req : NextApiRequest, res : NextApiRespo
     } catch (error) {
       res.status(500).json({message :  (error as Error).message})
     }
+    break;
+    default:
+      res.status(503).json({ error: 'Bad request, invalid method' });
+      break;
   }
 }

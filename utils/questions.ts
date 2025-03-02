@@ -25,23 +25,28 @@ export const deleteQuestion = async (userId: string): Promise<void | null> => {
   }
 }
 
-export const createQuestion = async (data: dataQuestion): Promise<Question | undefined | boolean> => {
+export const createQuestion = async (data: dataQuestion): Promise<number | undefined | boolean> => {
   try {
-    const response = await axios.post<Question>(`/api/questions`, data);
+    const response = await axios.post('/api/questions', data);
     if (response.status === 200) {
-      return response.data;
+      return response.status;
     }
   } catch (error) {
-    return false
+    if (axios.isAxiosError(error)) {
+      console.error('Axios error:', error.response?.status, error.message);
+    } else {
+      console.error('Unexpected error:', error);
+    }
+    return false;
   }
-}
+};
 
-export const updateQuestion = async (data: dataQuestion, id: string): Promise<Question | undefined | boolean> => {
+export const updateQuestion = async (data: dataQuestion, id: string): Promise<number | undefined | boolean> => {
   
   try {
     const response = await axios.put<Question>(`/api/questions/${id}`, data);
     if (response.status === 200) {
-      return response.data;
+      return response.status;
     }
   } catch (error) {
     return false
