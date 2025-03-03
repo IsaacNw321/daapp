@@ -18,7 +18,7 @@ const ContextProvider = ({ children }: Props) => {
   const { user } = useUser();
   const [usuario, setUsuario] = useState<string | null>(null);
   const [exist, setExist] = useState(false);
-  const [userR, setUserR] = useState<User | undefined>(undefined)
+  
   const mutation = useMutation((data: any) => postUser(data), {
     onSuccess: () => {
       if (user?.sub) {
@@ -32,8 +32,10 @@ const ContextProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (!user || !user.sub) return;
-
+    
     const id = user?.sub?.split('|')[1];
+    const now = new Date();
+    const createdAt = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const datos = {
       id,
       firstName: '',
@@ -41,7 +43,7 @@ const ContextProvider = ({ children }: Props) => {
       lastName: '',
       email: user.email,
       photo: user.picture,
-      updatedAt: new Date(),
+      createdAt,
     };
 
     if (!user.email) return;
@@ -52,16 +54,20 @@ const ContextProvider = ({ children }: Props) => {
           mutation.mutate(datos);
         }
         setExist(!!data);
-        setUsuario(id)
+        setUsuario(id);
       })
       .catch((err) => {
         console.log(err);
         setExist(false);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  return <UserContext.Provider value={usuario}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={usuario}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 export default ContextProvider;

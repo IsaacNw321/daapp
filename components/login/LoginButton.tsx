@@ -6,36 +6,40 @@ import  { getUserById} from "../../utils/users";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useQuery } from "react-query";
-import { LogginButtonProps, UserRole} from "@/app/types";
+import { UserRole} from "@/app/types";
 import { UseUsers } from "@/context/UserContext";
 
-export const LogginButton: React.FC<LogginButtonProps>  = ({ userName, userPicture }) =>{
+export const LogginButton: React.FC  = () =>{
   const [dropdown, setDropdown] = useState<boolean>(false)
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
-  const {error,  user} = useUser();
+  const [isUserLoading, setIsUserLoading] = useState<boolean>(true);
+  const {error} = useUser();
   const usuario = UseUsers()
-  const { picture } = user || {};
   const showMenu = () => {
     setDropdown(!dropdown); 
 }
  
  let id: string = usuario || ''
-  const { data: dbUser, isLoading } = useQuery(['user', id], () => getUserById(id), {
-    enabled: !!id, 
-  });
-  useEffect(() => {
-    if (!isLoading && dbUser) {
-        if (dbUser?.userRole === UserRole.ADMIN) {
-            setIsAdmin(true)
-            return
-        }
+ const { data: dbUser, isLoading } = useQuery(
+  ['user', id],
+  () => getUserById(id),
+  {
+    enabled: !!id,
+    onSettled: () => setIsUserLoading(false), 
+  }
+);
+useEffect(() => {
+  if (!isLoading && dbUser) {
+    if (dbUser?.userRole === UserRole.ADMIN) {
+      setIsAdmin(true);
     }
+  }
 // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [dbUser])
+}, [dbUser, isLoading])
   if(error){
     return <div>Error</div>
   }
-  if (isLoading) {
+  if (isLoading || isUserLoading) {
     return <div className={styles.logNavBar}>Cargando...</div>;
   }
   //if (!dbUser){
@@ -47,19 +51,19 @@ export const LogginButton: React.FC<LogginButtonProps>  = ({ userName, userPictu
   <div className={styles.logNavBar}>
       <div>
         <button onClick={showMenu}>
-          {userPicture && (
+          {dbUser?.photo && (
             <Image
               className={styles.imgLogNavBar}
               width={40}
               height={40}
-              src={userPicture ?? ""}
+              src={dbUser?.photo ?? ""}
               alt="User profile picture"
               loading="lazy"
             />
           )}
         </button>
         <u className={dropdown=== false ? styles.userButton : styles.userButtonShow}>
-        <h3>{userName}</h3>       
+        <h3>{dbUser?.firstName}</h3>       
             <li className={isAdmin === true ? styles.button : styles.notButton}>
           {isAdmin === true ?
             <Link href="/admin">
