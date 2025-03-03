@@ -47,7 +47,13 @@ const MyProfile: NextComponentType = () => {
     }
   }, [dbUser]);
 
-  if (isLoading || isLoadingU) return <Loading />;
+  if (isLoading || isLoadingU){
+    return(
+      <main className={styles.dashboardUser}>
+        <Loading />;
+      </main>
+    )
+  } 
 
   const userRole = dbUser?.userRole;
   const firstName = dbUser?.firstName;

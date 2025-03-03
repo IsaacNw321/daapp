@@ -1,17 +1,23 @@
-import MillionLint from "@million/lint";
+import Million from "@million/lint";
 
-
-
-const pluginOptions = {
-  options: {
-    
-  }
-};
-
-/** @type {NextConfig} */
-const nextConfig= {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
-    domains: ['lh3.googleusercontent.com', 's.gravatar.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 's.gravatar.com',
+        pathname: '/**',
+      },
+    ],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    formats: ['image/avif', 'image/webp'],
   },
   webpack: (config, options) => {
     config.module.rules.push({
@@ -20,20 +26,7 @@ const nextConfig= {
         options.defaultLoaders.babel,
         {
           loader: '@mdx-js/loader',
-          options: pluginOptions.options,
-        },
-      ],
-    });
-
-    config.module.rules.push({
-      test: /\.(jpe?g|png|gif|svg)$/i,
-      use: [
-        {
-          loader: 'image-webpack-loader',
-          options: {
-            bypassOnDebug: true,
-            disable: true,
-          },
+          options: {}, 
         },
       ],
     });
@@ -42,4 +35,4 @@ const nextConfig= {
   },
 };
 
-export default MillionLint.next({ rsc: true })(nextConfig);
+export default Million.next({ rsc: true })(nextConfig);
