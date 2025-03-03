@@ -27,6 +27,14 @@ export const LisOfQuestions = () =>{
     mutation.mutate(id);
     setQuestions(prevState => prevState.filter(question => question.id !== id))
  }
+ if(questions === undefined || questions.length===0){
+    return (
+      <section className={styles.questionsCont}>
+        No hay preguntas
+        <NewQuestion />
+      </section>
+    )
+ }
   return (
     <section className={styles.questionsCont}>
     <strong>Seccion de Preguntas Frecuentes</strong>
