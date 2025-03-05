@@ -13,6 +13,7 @@
 /.next/
 /out/
 
+
 # production
 /build
 
@@ -32,7 +33,7 @@ yarn-error.log*
 
 # vercel
 .vercel
-.milion
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

@@ -9,7 +9,7 @@ import { DancerDetails } from '@/components/dashboard/dashboardAdmin/users/Dance
 import { DetailItem } from '@/components/dashboard/dashboardAdmin/users/DancersDetails';
 import { useQuery } from 'react-query';
 import Loading from '@/components/NavBar/loading';
-
+import Link from 'next/link';
 export default function UserDetail() {
   const router = useRouter();
   const { id } = router.query;
@@ -32,7 +32,13 @@ export default function UserDetail() {
     
   }, [id, dbUser]);
 
- if(isLoading) return <Loading/>
+ if(isLoading){
+  return(
+    <div className={styles.container}>
+      <Loading/>
+    </div>
+  )
+ }
  if(error) return <div>
   Hubo un error vuelva a intentarlo mas tarde
  </div>
@@ -43,6 +49,9 @@ export default function UserDetail() {
           <h1 className={styles.title}>Detalles de usuario</h1>
         <DetailItem label="Nombre" value={`${user?.firstName} ${user?.lastName}`} />
         </header>
+        <Link  className={styles.roleButton} style={{ marginBottom: '10px' }}href="/" passHref>
+            Volver
+        </Link>
         <div className={styles.content}>
             {user?.userRole === UserRole.REPRESENTATIVE ? (
               <RepresentativeDetails representative={user.representative} />

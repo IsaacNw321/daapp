@@ -1,4 +1,4 @@
-import Million from "@million/lint";
+
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -35,4 +35,4 @@ const nextConfig = {
   },
 };
 
-export default Million.next({ rsc: true })(nextConfig);
+export default nextConfig;
