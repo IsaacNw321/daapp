@@ -1,30 +1,54 @@
-import { useQuery } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { deletedReview, getReviews } from '@/utils/reviews';
-import { useState, useEffect } from 'react';
 import styles from '@/styles/admin.module.css';
+import { useState } from 'react';
 import { Review } from '@/app/types';
 import Loading from '@/components/NavBar/loading';
 
 export const ListOfReviews = () => {
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const { data, error, isLoading } = useQuery<Review[]>('reviewsAdmin', () => getReviews());
+  const queryClient = useQueryClient();
+  const { data: reviews, error, isLoading } = useQuery<Review[]>('reviewsAdmin', getReviews);
+  const [success, setSuccess] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!data) return;
-    setReviews(data);
-  }, [isLoading, data, reviews]);
-  if(isLoading){
-    return(
+  const mutation = useMutation((id: string) => deletedReview(id), {
+    onSuccess: () => {
+      setSuccess("Comentario eliminado");
+      setTimeout(() => {
+        setSuccess(null);
+      }, 3000);
+      queryClient.invalidateQueries('reviewsAdmin');
+    },
+    onError: (error) => {
+      console.error(error);
+    }
+  });
+
+
+  if (error) {
+    return (
       <section className={styles.questionsCont}>
-        <Loading />
+        Hubo un error intente mas tarde
       </section>
-    )
+    );
   }
+
+  if (!reviews || reviews.length === 0) {
+    return (
+      <section className={styles.questionsCont}>
+        No hay comentarios
+      </section>
+    );
+  }
+
+  const handleDelete = (id: string) => {
+    mutation.mutate(id);
+  };
+
   return (
     <section className={styles.questionsCont}>
       <strong>Seccion de Comentarios</strong>
       <ul className={styles.questions}>
-        {reviews.map((review : Review) => (
+        {reviews.map((review: Review) => (
           <li className={styles.questionCard} key={review.id}>
             {review.representative ? <p>Representante</p> : <p>Bailarin</p>}
             <br />
@@ -42,8 +66,24 @@ export const ListOfReviews = () => {
             <br />
             <p>{review.content}</p>
             <br />
-            <button onClick={() => deletedReview(review.id)} className={styles.roleButton}>
-              Eliminar Comentario
+            <button
+              onClick={() => handleDelete(review.id)}
+              disabled={mutation.isLoading || mutation.isError}
+              className={
+                success
+                  ? styles.successMessage
+                  : mutation.isError
+                  ? styles.errorMessage
+                  : styles.roleButton
+              }
+            >
+              {mutation.isLoading
+                ? 'Eliminando...'
+                : success
+                ? 'Eliminado'
+                : mutation.isError
+                ? 'Hubo un error intente mas tarde'
+                : 'Eliminar'}
             </button>
           </li>
         ))}

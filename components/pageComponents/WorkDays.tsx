@@ -1,9 +1,15 @@
 import styles from "../../styles/contact.module.css";
 import { NextComponentType } from "next";
 import Link from "next/link";
+import { motion } from 'framer-motion'
 const WorkDays : NextComponentType = () =>{
   return (
-    <section className={styles.daysCont}>
+    <motion.section 
+      initial={{ opacity : 0, y : 20 }}
+      whileInView={{ opacity : 1, y : 0}}
+      transition={{duration : 1}}
+      className={styles.daysCont}
+    >
     <div className={styles.rightCont}>
         <h2>
           Registrate y mantente informado
@@ -36,7 +42,7 @@ const WorkDays : NextComponentType = () =>{
       </li>
     </ul>
    </div>
-   </section>
+   </motion.section>
   )
 }
 

@@ -25,6 +25,7 @@ export default async function  Questions(req: NextApiRequest, res: NextApiRespon
   break;
   case "POST" :
     try {
+      console.log(answer, question)
       const newQuestion = await prisma.question.create({
         data : {
           question,
@@ -36,6 +37,7 @@ export default async function  Questions(req: NextApiRequest, res: NextApiRespon
     } catch (error) {
       res.status(500).json({message : (error as Error).message});
     }
+  break;  
   default:
     res.status(503).json({error: 'Bad request, invalid method'})
   break;

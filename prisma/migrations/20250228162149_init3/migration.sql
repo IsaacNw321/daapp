@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Representative" ADD COLUMN     "CI" INTEGER,
+ALTER COLUMN "phone" SET DATA TYPE TEXT;

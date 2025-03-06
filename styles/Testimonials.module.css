@@ -1,5 +1,5 @@
 .fatherCont{
-  margin-top: 180px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,23 +9,24 @@
   background-color: transparent;
   gap: 50px;
   text-align: center;
+  padding: 1.5rem;
 }
 
 .fatherCont h2{
-  margin-top: 5%;
   color : white;
-  font-size: 32px;
+  font-size: 60px;
 }
 
 .fatherCont h3{
   color: white;
-  font-size: 60px;
+  font-size: 20px;
+  margin-top:12px;
   font-family: "New Times Roman";
 }
 
 @media screen and (max-width: 460px){
   .fatherCont h3{
-    font-size: 40px;
+    font-size: 22px;
   }
 }
 
@@ -82,7 +83,7 @@
   height: 90px;
   position: relative;
   bottom: 40%;
-  left: 90%;
+  left: 75%;
   border-radius: 50%;
 }
 

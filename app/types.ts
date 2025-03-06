@@ -1,6 +1,6 @@
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { StaticImageData } from "next/image";
-
+import { Omit } from "@prisma/client/runtime/library";
 export enum UserRole {
   ADMIN = 'ADMIN',
   DANCER = 'DANCER',
@@ -43,17 +43,21 @@ export interface Dancer {
 }
 
 export interface DancerInfo{
-  id : string;
-  Payment : Payment[] ;
-  firstName : string;
-  lastName : string;
-  pending : number
+  id: string;
+  firstName: string;
+  lastName: string;
+  allergies: string;
+  cI: number;
+  age: number;
+  Payment: Payment[];
+  pending: number;
 }
 
 export interface Representative {
   id: string;
   userId: string;
   user : User;
+  CI?: number;
   dancers: DancerR[];
   Payment: Payment[];
   review?: Review;
@@ -64,7 +68,7 @@ export interface Representative {
 
 export interface DancerR {
   id: string;
-  representativeId: string;
+  representativeId?: string;
   firstName: string;
   lastName: string;
   allergies: string;
@@ -74,6 +78,7 @@ export interface DancerR {
   Payment: Payment[];
 }
 
+export type DancerRSubmitData = Omit<DancerR, 'id' | 'representativeId' | 'Payment'>;
 
 export interface Review {
   id: string;
@@ -249,6 +254,7 @@ export interface DancerR  {
 
  export interface infoDancerProps {
   dancerId? : string;
+  dancerR : boolean;
  }
 
  export interface infoRepresentativeProps {
@@ -258,8 +264,9 @@ export interface DancerR  {
  export interface infoRepresentative {
   firstName : string;
   lastName : string;
+  cI : number;
   Adress : string;
-  phone : number
+  phone : number;
  }
  export interface updatedDancer {
   firstName : string;
@@ -307,8 +314,7 @@ export interface postRole {
 }
 
 export interface DancersProps {
-  firstName: string;
-  lastName: string;
+  dancer : DancerInfo;
   Payment: number;
   pending : number;
 }

@@ -39,7 +39,7 @@ export const emailExist = async (): Promise<User[] | string> => {
 
 export const updateUser = async (id: string, updatedUserData: Partial<User>): Promise<User | null> => {
   try {
-    const response = await axios.put<User>(`/api/users/${id}`, updatedUserData);
+    const response = await axios.patch<User>(`/api/users/${id}`, updatedUserData);
     return response.data;
   } catch (error) {
     return null;
@@ -57,10 +57,14 @@ export const getUsers = async (): Promise<User[]> => {
 };
 
 
-export const deleteUser = async (id: string): Promise<User | null> => {
+export const deleteUser = async (id: string): Promise<number | null> => {
   try {
     const response = await axios.delete<User>(`/api/users/${id}`);
-    return response.data;
+    if(response.status === 200){
+      return response.status;
+    }else{
+      return null
+    }
   } catch (error) {
     return null;
   }

@@ -1,8 +1,6 @@
-import { NextComponentType } from "next";
 import styles from "../../styles/NavBar.module.css";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Image from "next/image";
-import { withPageAuthRequired } from '@auth0/nextjs-auth0/client'
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 interface LogNavBarProps {
@@ -28,4 +26,4 @@ const LogNavBar: React.FC<LogNavBarProps> = ({  userPicture }) =>  {
   );
 };
 
-export default withPageAuthRequired(LogNavBar);
+export default LogNavBar;

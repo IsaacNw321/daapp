@@ -9,7 +9,7 @@ import Loading from "@/components/NavBar/loading";
 import Image from "next/image";
 import RepresentativeProfile from "../dashboardUser/users/RepresentativesProfile";
 import DancerProfile from "../dashboardUser/users/DancersProfile";
-import { UserRole, Payment, DancerInfo } from "@/app/types";
+import { UserRole, Payment, DancerInfo, DancerR } from "@/app/types";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 const MyProfile: NextComponentType = () => {
@@ -27,11 +27,14 @@ const MyProfile: NextComponentType = () => {
         const dancers = dbUser.representative?.dancers;
         if (dancers) {
           const allDancersInfo: DancerInfo[] = dancers.map((dancer) => {
-            const { Payment, firstName, lastName, id } = dancer;
+            const { Payment, firstName, lastName, id, cI, allergies, age } = dancer;
             return {
               id,
               firstName,
               lastName,
+              cI,
+              allergies,
+              age,
               Payment: Payment,
               pending: Payment.filter((payment : Payment) => !payment.confirm).length 
             };
@@ -44,7 +47,13 @@ const MyProfile: NextComponentType = () => {
     }
   }, [dbUser]);
 
-  if (isLoading || isLoadingU) return <Loading />;
+  if (isLoading || isLoadingU){
+    return(
+      <main className={styles.dashboardUser}>
+        <Loading />;
+      </main>
+    )
+  } 
 
   const userRole = dbUser?.userRole;
   const firstName = dbUser?.firstName;

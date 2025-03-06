@@ -45,7 +45,8 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
         : res.status(400).json({ message: 'not data found' });
       } catch (error) {
         res.status(500).json({message : (error as Error).message});
-      }  
+      }
+    break;    
     default:
       res.status(503).json({ error: 'Bad request, invalid method' });
       break;

@@ -3,11 +3,11 @@ import { deletedReview } from '@/utils/reviews';
 import { ControlPayments } from '../Payments/Payments';
 import PaymentStatus from '../../dashboardUser/myPaymentStatus/PaymentStatus';
 import { Dancer } from '@/app/types';
+import { InfoDancer } from '../../dashboardUser/fullinfo/infoDancer';
 export interface DancerProp{
   dancer : Dancer | undefined
 }
 export const DancerDetails: React.FC<DancerProp> = ({ dancer }) => {
-  
   let pending = 0;
   if(dancer?.Payment !== undefined){
     for (let i = 0; i < dancer.Payment.length; i++) {
@@ -16,17 +16,21 @@ export const DancerDetails: React.FC<DancerProp> = ({ dancer }) => {
       }
     }
   }
-
   return (
-    <div className={styles.grid}>
-      <p>Bailarin</p>
+    <section className={styles.flex}>
+      <div className={styles.details}>
+      <strong>Bailarin</strong>
       <DetailItem label="Edad" value={dancer?.age} />
       {dancer?.phone !== undefined ? <DetailItem label="Telefono" value={dancer?.phone} /> : null}
       {dancer?.Adress !== undefined ? <DetailItem label="Direccion" value={dancer?.Adress} /> : null}
       <DetailItem label="CI" value={dancer?.CI} />
       <DetailItem label="Alergias" value={dancer?.allergies} />
+      </div>
+      <div className={styles.infoForm}>
+      <InfoDancer dancerId={dancer?.id}/>
+      </div>
       {dancer?.review?.content ? (
-        <>
+        <div className={styles.flex}>
           <DetailItem label="Comentario" value={dancer.review.content} />
           <button
             onClick={() => deletedReview(dancer?.review?.id)}
@@ -34,11 +38,13 @@ export const DancerDetails: React.FC<DancerProp> = ({ dancer }) => {
           >
             Borrar Comentario
           </button>
-        </>
+        </div>
       ) : null}
+      <div className={styles.flex}>
       <ControlPayments id={dancer?.id} payments={dancer?.Payment} dancerR={false} /> 
       <PaymentStatus Payment={dancer?.Payment.length} pending={pending} representative={false} />
-    </div>
+      </div>
+    </section>
   );
 };
 

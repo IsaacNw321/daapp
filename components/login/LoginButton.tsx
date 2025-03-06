@@ -1,75 +1,86 @@
-"use client"
-import { useUser } from "@auth0/nextjs-auth0/client";
-import Link from "next/link";
-import styles from "../../styles/NavBar.module.css";
-import  { getUserById} from "../../utils/users";
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { useQuery } from "react-query";
-import { LogginButtonProps, UserRole} from "@/app/types";
-import { UseUsers } from "@/context/UserContext";
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useUser } from '@auth0/nextjs-auth0/client';
+import { useQuery } from 'react-query';
+import { getUserById } from '../../utils/users';
+import { UseUsers } from '@/context/UserContext';
+import styles from '../../styles/NavBar.module.css';
+import Image from 'next/image';
+import Link from 'next/link';
+import { UserRole } from '@/app/types';
 
-export const LogginButton: React.FC<LogginButtonProps>  = ({ userName, userPicture }) =>{
-  const [dropdown, setDropdown] = useState<boolean>(false)
-  const [isAdmin, setIsAdmin] = useState<boolean>(false)
-  const {error,  user} = useUser();
-  const usuario = UseUsers()
-  const { picture } = user || {};
+export const LogginButton: React.FC = () => {
+  const [dropdown, setDropdown] = useState<boolean>(false);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const { error } = useUser();
+  const usuario = UseUsers();
+  const router = useRouter(); 
+  const [isUserLoading, setIsUserLoading] = useState<boolean>(true);
   const showMenu = () => {
-    setDropdown(!dropdown); 
-}
- 
- let id: string = usuario || ''
-  const { data: dbUser, isLoading } = useQuery(['user', id], () => getUserById(id), {
-    enabled: !!id, 
-  });
-  useEffect(() => {
-    if (!isLoading && dbUser) {
-        if (dbUser?.userRole === UserRole.ADMIN) {
-            setIsAdmin(true)
-            return
-        }
+    setDropdown(!dropdown);
+  };
+
+  let id: string = usuario || '';
+
+  const { data: dbUser, isLoading: isDbUserLoading } = useQuery(
+    ['user', id],
+    () => getUserById(id),
+    {
+      enabled: !!id, 
+      onSettled: () => setIsUserLoading(false), 
     }
-// eslint-disable-next-line react-hooks/exhaustive-deps
-}, [dbUser])
-  if(error){
-    return <div>Error</div>
+  );
+
+  useEffect(() => {
+    if (!isDbUserLoading && !dbUser) {
+      const timeoutId = setTimeout(() => {
+        router.push('/api/auth/logout'); 
+      }, 20000);
+
+      return () => clearTimeout(timeoutId); 
+    }
+
+    if (!isDbUserLoading && dbUser) {
+      if (dbUser?.userRole === UserRole.ADMIN) {
+        setIsAdmin(true);
+      }
+    }
+  }, [dbUser, isDbUserLoading, router]);
+
+  if (error) {
+    return <div>Error</div>;
   }
-  if (isLoading) {
+
+  if (isUserLoading || isDbUserLoading) {
     return <div className={styles.logNavBar}>Cargando...</div>;
   }
-  //if (!dbUser){
-  //  setTimeout(() => {
-  //    window.location.href = '/api/auth/logout'; 
-  //  }, 100000); 
-  //}
- return (
-  <div className={styles.logNavBar}>
+
+  return (
+    <div className={styles.logNavBar}>
       <div>
         <button onClick={showMenu}>
-          {userPicture && (
+          {dbUser?.photo && (
             <Image
               className={styles.imgLogNavBar}
               width={40}
               height={40}
-              src={userPicture ?? ""}
+              src={dbUser?.photo ?? ""}
               alt="User profile picture"
               loading="lazy"
             />
           )}
         </button>
-        <u className={dropdown=== false ? styles.userButton : styles.userButtonShow}>
-        <h3>{userName}</h3>       
-            <li className={isAdmin === true ? styles.button : styles.notButton}>
-          {isAdmin === true ?
-            <Link href="/admin">
-              <button className="">
-                Panel de control
-              </button>
-            </Link>
-            : null
-          }
-          </li>     
+        <ul className={dropdown === false ? styles.userButton : styles.userButtonShow}>
+          <h3>{dbUser?.firstName}</h3>
+          <li className={isAdmin ? styles.button : styles.notButton}>
+            {isAdmin && (
+              <Link href="/admin">
+                <button className="">
+                  Panel de control
+                </button>
+              </Link>
+            )}
+          </li>
           <li>
             <Link href="/profile">
               <button>
@@ -84,8 +95,8 @@ export const LogginButton: React.FC<LogginButtonProps>  = ({ userName, userPictu
               </button>
             </Link>
           </li>
-        </u>
+        </ul>
       </div>
-  </div>
-);
-}
+    </div>
+  );
+};

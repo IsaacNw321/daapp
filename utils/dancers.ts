@@ -15,9 +15,22 @@ export const createDancer = async (dancerData: postDancers): Promise<Dancer | nu
   }
 };
 
-export const deleteDancer = async (dancerId: string | undefined): Promise<Dancer | null> => {
+export const deleteDancer = async (dancerId: string | undefined): Promise<number | null> => {
   try {
     const response = await axios.delete(`/api/dancers/${dancerId}`);
+    if (response.status === 200) {
+      return response.status;
+    } else {
+      throw new Error('Failed to delete dancer');
+    }
+  } catch (error) {
+    return null;
+  }
+};
+
+export const deleteDancerR = async (dancerId: string | undefined): Promise<Dancer | null> => {
+  try {
+    const response = await axios.delete(`/api/dancersR/${dancerId}`);
     if (response.status === 200) {
       return response.data;
     } else {
@@ -54,18 +67,35 @@ export const createDancerR = async (dancerData: PostedDancerR): Promise<Dancer |
   }
 };
 
-export const createRoleDancer = async (userId: string, userRole: string): Promise<Dancer | undefined> => {
+export const updateDancerR = async (id: string | undefined, dancerData:any): Promise<Dancer | null> => {
   try {
-    const response = await axios.patch(`/api/users/${userId}`, { userRole: userRole });
+    const response = await axios.patch(`/api/dancersR/${id}`, dancerData);
     if (response.status === 200) {
-      const newRepresentative = await axios.post('/api/dancers', { userId });
-      if (newRepresentative.status === 200) {
-        return response.data;
+      return response.data;
+    } else {
+      throw new Error('Failed to update dancer');
+    }
+  } catch (error) {
+    return null;
+  }
+};
+
+export const createRoleDancer = async (
+  userId: string,
+  userRole: string
+): Promise<number | null> => {
+  try {
+    const response = await axios.patch(`/api/users/${userId}`, { userRole });
+    if (response.status === 200) {
+      const newDancer = await axios.post('/api/dancers', { userId });
+      if (newDancer.status === 200) {
+        return newDancer.status;
       } else {
-        throw new Error('Could not create Dancer by Admin');
+        throw new Error('Could not create dancer');
       }
     }
   } catch (error) {
-    return undefined;
+    console.error(error);
   }
+  return null;
 };

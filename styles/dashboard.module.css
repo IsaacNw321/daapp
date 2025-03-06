@@ -11,8 +11,6 @@
   margin-top: 5%;
   border-radius: 20px;
   text-align: center;
-  animation-name: slidein;
-  animation-duration: 2s;
 }
 
 .info{
@@ -163,6 +161,7 @@
   transition: transform 0.5s;
   margin: auto;
   background-color: black;
+  margin-bottom: 12px;
 }
 
 .button:hover{
@@ -181,8 +180,8 @@
   --border-radius: 12px;
 
   width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
+  max-width: 500px;
+  margin: auto;
   padding: 20px;
   height: 180px;
   background-color: #000000;
@@ -203,6 +202,7 @@
 .paymentBar {
   display: flex;
   height: 60px;
+  max-width: 400px;
   border-radius: var(--border-radius);
   overflow: hidden;
   //margin-bottom: 1rem;
@@ -252,7 +252,7 @@
 @media screen and (max-width: 480px) {
   .paymentStatus {
     padding: 15px;
-    width: 370px;
+    width: 280px;
     border: none;
     height: 240px;
   }
@@ -263,7 +263,7 @@
 
   .paymentBar {
     height: 50px;
-    width: 330px;
+    width: 250px;
   }
 
   .month {
@@ -309,7 +309,7 @@
   font-size: 20px;
   color: white;
   width: 300px;
-  height: 200px;
+  height: auto;
   background-color:black;
   padding: 16px;
   margin-top: 30px;
@@ -336,7 +336,7 @@
 @media screen and (max-width: 460px){
   .danceCard {
     width: 260px;
-    height: 180px;
+    height: auto;
   }
   .danceCardNoPay {
     width: 260px;
@@ -345,9 +345,12 @@
 
 .formContainer {
   max-width: 500px;
-  width: 100%;
   margin: 2rem auto;
   padding: 2rem;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
   background-color: #000000;
   border: 2px solid #6B0D0D;
   border-radius: 26px;
@@ -419,7 +422,7 @@
   width: 100%;
   padding: 1rem;
   margin-top: 1rem;
-  font-size: 1.1rem;
+  font-size: 0.875rem;
   color: #ffffff;
   background-color: #6B0D0D;
   border: none;
@@ -605,7 +608,8 @@
 .dancersCont{
   display: flex;
   flex-direction: column;
-  min-height: 200px;
+  justify-content: flex-start;
+  align-items: center;
   height: auto;
   gap: 60px;
 }
@@ -615,3 +619,45 @@
   flex-direction:column;
   gap: 30px;
 }
+
+.details{
+  margin-left: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  color: white;
+}
+
+
+
+.errorMessage {
+  color: #fc8181;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.successMessage {
+  color: #68d391;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+
+.loadingSpinner {
+  width: 50px; 
+  height: 50px;
+  border: 5px solid #ffffff; 
+  border-top: 5px solid transparent; 
+  border-radius: 50%; 
+  animation: spin 0.8s linear infinite; 
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+

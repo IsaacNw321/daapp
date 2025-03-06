@@ -20,11 +20,11 @@ export const updatedRepresentative = async (
 
 export const deleteRepresentative = async (
   repId: string | undefined
-): Promise<Representative | null> => {
+): Promise<number | null> => {
   try {
     const response = await axios.delete(`/api/representatives/${repId}`);
     if (response.status === 200) {
-      return response.data;
+      return response.status;
     } else {
       throw new Error('Failed to delete Rep');
     }
@@ -36,18 +36,19 @@ export const deleteRepresentative = async (
 export const createRepresentative = async (
   userId: string,
   userRole: string
-): Promise<string | null> => {
+): Promise<number | null> => {
   try {
     const response = await axios.patch(`/api/users/${userId}`, { userRole });
     if (response.status === 200) {
       const newRepresentative = await axios.post('/api/representatives', { userId });
       if (newRepresentative.status === 200) {
-        return 'Representante creado';
+        return newRepresentative.status;
       } else {
         throw new Error('Could not create representative');
       }
     }
   } catch (error) {
+    console.error(error);
   }
   return null;
 };

@@ -17,6 +17,30 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
   switch (method) {
     case "DELETE" :
       try {
+        const payments = await prisma.payment.findMany({
+          where : {
+            dancerId : String(id)
+          }
+        })
+        if(payments.length > 0){
+          await prisma.payment.deleteMany({
+            where : {
+              dancerId : String(id)
+            }
+          })
+        }
+        const existReview = await prisma.review.findUnique({
+          where : {
+            dancerId : String(id)
+          }
+        })
+        if(existReview){
+          await prisma.review.delete({
+            where : {
+              dancerId : String(id)
+            }
+          })
+        }
         const deletedDancer = await prisma.dancer.delete({
           where : {
             id : String(id)
@@ -38,9 +62,9 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
           data: {
             allergies,
             age : Number(age),
-            phone : Number(phone),
+            phone: String(phone),
             CI : Number(cI),
-            dateBirth,
+            dateBirth: new Date(dateBirth),
             Adress,
             user : {
               update : {
@@ -75,7 +99,8 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
         : res.status(400).json({ message: 'not data found' });
       } catch (error) {
         res.status(500).json({message : (error as Error).message});
-      }  
+      } 
+    break;   
     default:
       res.status(503).json({ error: 'Bad request, invalid method' });
       break;

@@ -5,7 +5,6 @@ import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import Landing from '../components/pageComponents/Landing';
 const MoreServicesLazy = dynamic(() => import('../components/pageComponents/moreServices'));
-const ResultsLazy = dynamic(() => import('../components/pageComponents/Results'));
 const TestimonialsLazy = dynamic(() => import('../components/pageComponents/Testimonials'));
 
 const Home : NextPage = () => {
@@ -14,7 +13,6 @@ const Home : NextPage = () => {
       <Suspense fallback={<Loading/>}>
           <Landing />
           <MoreServicesLazy />
-          <ResultsLazy />
           <TestimonialsLazy />  
           </Suspense>  
     </RootLayout>

@@ -3,10 +3,15 @@ import ballet from "../../public/images/about2.jpeg";
 import flow from "../../public/images/about1.jpeg";
 import Image from "next/image"
 import { NextComponentType } from "next";
-
+import {motion} from "framer-motion"
 const InfoAbout : NextComponentType = () =>{
   return(
-    <section className={styles.upCont}>
+    <motion.section
+      initial={{ opacity : 0}}
+      whileInView={{ opacity : 1}}
+      transition={{duration : 1}}
+      className={styles.upCont}
+      >
     <div className={styles.about}>
       <h3>
         Sobre nosotros
@@ -40,7 +45,7 @@ const InfoAbout : NextComponentType = () =>{
         priority={true}>
       </Image>
     </div>
-  </section>
+    </motion.section>
   )
 }
 

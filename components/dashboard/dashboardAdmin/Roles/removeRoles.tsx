@@ -7,7 +7,9 @@ import { UserRole, UserIdProp } from "@/app/types";
 
 export const RemoveRoles: React.FC<UserIdProp> = ({userId}) => {
   const [showRemove, setShowRemove] = useState<string | null>(null);
-
+  const [success, setSuccess] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const toggleRemoveRole = (userId: string) => {
     if (showRemove === userId) {
       setShowRemove(null);
@@ -17,18 +19,35 @@ export const RemoveRoles: React.FC<UserIdProp> = ({userId}) => {
   };
 
   const removeRole = async (userId: string) => {
-    const user = await getUserById(userId);
-    if (user?.userRole === "REPRESENTATIVE") {
-      const repId = user?.representative?.id;
-      await deleteRepresentative(repId);
+    try {
+      setIsLoading(true);
+      const user = await getUserById(userId);
+      if (user?.userRole === "REPRESENTATIVE") {
+        const repId = user?.representative?.id;
+        const response = await deleteRepresentative(repId);
+        if(response === 200){
+          setIsLoading(false);
+          setSuccess(true);
+        }else{
+          setError("Error intente mas tarde")
+        }
+      }
+      if (user?.userRole === "DANCER") {
+        const dancerId = user?.dancer?.id;
+        const response = await deleteDancer(dancerId);
+        if(response === 200){
+          setIsLoading(false);
+          setSuccess(true);
+        }else{
+          setError("Error intente mas tarde")
+        }
+      }
+      const userRole: UserRole = UserRole.CONTACT;
+      
+      const response = await updateUser(userId, { userRole });
+    } catch (error) {
+      console.error(error);
     }
-    if (user?.userRole === "DANCER") {
-      const dancerId = user?.dancer?.id;
-      await deleteDancer(dancerId);
-    }
-    const userRole: UserRole = UserRole.CONTACT;
-    
-    await updateUser(userId, { userRole : userRole });
   };
 
   return (
@@ -39,8 +58,19 @@ export const RemoveRoles: React.FC<UserIdProp> = ({userId}) => {
       {showRemove === userId && (
         <>
           <strong>Esta segura de remover el rol? se eliminara toda la informacion</strong>
-          <button className={styles.roleButton} onClick={() => { removeRole(userId); setShowRemove(null); }}>
-            Remover y eliminar informacion
+          <button
+           type="submit"
+            disabled={isLoading || success}
+           className={
+            success
+            ? styles.successMessage
+            : isLoading 
+            ? styles.loading
+            : error !== null ? styles.errorMessage 
+            : styles.roleButton
+          } onClick={() => { removeRole(userId); }}>
+            {error !== null 
+              ? "Hubo un error intente mas tarde" : isLoading ? 'Eliminando...' : success ? 'Rol Eliminado' : 'Eliminar Rol'}
           </button>
         </>
       )}

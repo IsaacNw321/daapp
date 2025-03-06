@@ -8,11 +8,16 @@ import Image, {StaticImageData} from "next/image";
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import { GendersAndShowsProps } from "@/app/types";
-
+import {motion} from "framer-motion";
 export const GendersAndShows: React.FC<GendersAndShowsProps> = ({ nameGender, description, array}) =>{
 
   return(
-    <div className={styles.genderCont}>
+    <motion.div
+      initial={{ opacity : 0 }}
+      whileInView={{ opacity : 1}}
+      transition={{duration : 1.5}}
+      className={styles.genderCont}
+    >
       <div className={styles.infoGender}>
         <h2>
           {nameGender}
@@ -46,6 +51,6 @@ export const GendersAndShows: React.FC<GendersAndShowsProps> = ({ nameGender, de
           <SwiperButtons/>
           </Swiper>
       </div>  
-    </div>
+    </motion.div>
   )
 }

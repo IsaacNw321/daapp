@@ -16,15 +16,11 @@ export const danceRSchema = z.object({
       path: ['lastName']
     }),
   allergies: z.string().optional(), 
-  cI: z.string().refine(cI => !isNaN(parseFloat(cI)), {
-    message: "cI must be a number"
+  cI: z.string().min(8, {message: 'La cedula debe tener al menos 8 digitos'})
+    .max(9,{message : 'La cedula debe tener menos de 10 digitos'}).refine(cI => !isNaN(parseFloat(cI)), {
+    message: "La cedula debe ser un numero"
   }),
-  age: z.string().refine(age => {
-    const num = parseInt(age, 10);
-    return !isNaN(num) && num > 0;
-  }, {
-    message: 'La edad debe ser un número entero y positivo'
-  }),
+  age: z.string(),
   dateBirth: z.string()
     .refine(value => !isNaN(Date.parse(value)), {
       message: 'Fecha de nacimiento no válida',

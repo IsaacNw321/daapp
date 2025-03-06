@@ -2,9 +2,14 @@ import styles from "../../styles/Results.module.css";
 import R1 from "../../public/images/results.jpeg";
 import Image from "next/image";
 import { NextComponentType } from "next";
+import {motion} from 'framer-motion'
 const Results : NextComponentType = () => {
   return(
-    <section className={styles.fatherCont}>
+      <motion.section
+        initial={{ opacity : 0, y : 20 }}
+        whileInView={{ opacity : 1, y : 0}}
+        transition={{duration : 1}}
+      >
       <div className={styles.upCont}>
         <Image
           className={styles.image}
@@ -57,7 +62,7 @@ const Results : NextComponentType = () => {
           </div>
         </div>
       </div>
-    </section>
+      </motion.section>
   )
 }
 

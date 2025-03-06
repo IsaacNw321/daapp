@@ -5,7 +5,7 @@ import  prisma  from "@/lib/prisma";
 export default async function Dancer(req: NextApiRequest, res: NextApiResponse){
   const id = req.query.id;
   const method = req.method;
-  const { allergies, CI, age, dateBirth, firstName, lastName } = req.body
+  const { allergies, cI, age, Birth, firstName, lastName } = req.body
   switch (method){
     case "GET":
       try {
@@ -20,7 +20,8 @@ export default async function Dancer(req: NextApiRequest, res: NextApiResponse){
         res.status(500).json({message : (error as Error).message});
       }
     break;
-    case "PUT":
+    case "PATCH":
+      console.log(req.body)
       try {
         const updatedDancerR = await prisma.dancerR.update({
           where : {
@@ -30,9 +31,9 @@ export default async function Dancer(req: NextApiRequest, res: NextApiResponse){
             firstName,
             lastName,
             allergies, 
-            cI : CI, 
+            cI, 
             age, 
-            dateBirth, 
+            dateBirth : Birth, 
           }
         })
         updatedDancerR ? res.status(200).json({message : "user updated"})
@@ -43,6 +44,11 @@ export default async function Dancer(req: NextApiRequest, res: NextApiResponse){
     break;
     case "DELETE":
       try {
+        await prisma.payment.deleteMany({
+          where : {
+            dancerRId : String(id)
+          }
+        })
         const deleteDancerR = await prisma.dancerR.delete({
           where : {
             id : String(id)

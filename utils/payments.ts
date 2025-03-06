@@ -3,13 +3,13 @@ import { postPaymentProps, confirmPayment } from '@/app/types';
 export const confirmedPayment = async (
   id: string,
   paymentData: confirmPayment
-): Promise<string | null> => {
+): Promise<number | null> => {
   try {
     const response = await axios.patch(`/api/payments/${id}`, paymentData);
     if (response.status === 200) {
-      return "updated Payment";
+      return response.status;
     } else {
-      throw new Error('Failed to update user');
+      return null
     }
   } catch (error) {
     return null;
@@ -33,11 +33,11 @@ export const postPayment = async (
 
 export const deletePayment = async (
   paymentId: string
-): Promise<string | null> => {
+): Promise<number | null> => {
   try {
     const response = await axios.delete(`/api/payments/${paymentId}`);
     if (response.status === 200) {
-      return "Deleted Payment";
+      return response.status;
     } else {
       throw new Error('Failed removing payment');
     }

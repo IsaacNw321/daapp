@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from 'react-query';
 import { questionSchema } from '@/validations/questionsSchema'; 
 import { createQuestion } from "@/utils/questions";
 import { dataQuestion } from '@/app/types';
@@ -9,14 +10,20 @@ import styles from '@/styles/admin.module.css';
 
 
 export const NewQuestion = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<dataQuestion>({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<dataQuestion>({
     resolver: zodResolver(questionSchema),
   });
-
+  const mutation = useMutation((data: dataQuestion) => createQuestion(data), {
+    onSuccess: () => {
+      reset();
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
   const onSubmit: SubmitHandler<dataQuestion> = async (data) => {
     try {
-      const response = await createQuestion(data);
-      console.log(response)
+      mutation.mutate(data);
     } catch (error) {
       console.error(error);
     }
@@ -40,8 +47,24 @@ export const NewQuestion = () => {
         type="text"
         name="answer"
       />
-      <button className={styles.roleButton} type="submit">
-        Crear
+      <button 
+        className={
+          mutation.isSuccess
+          ? styles.successMessage
+          : mutation.isError
+          ? styles.errorMessage
+          :
+          styles.roleButton}
+        type="submit"
+        disabled={mutation.isLoading 
+          || mutation.isError 
+          || mutation.isSuccess}
+        
+        >
+        {mutation.isLoading ? "Creando..."
+        : mutation.isSuccess ? "Creado"
+        : mutation.isError ? "Error intente mas tarde"
+        : "Crear"}
       </button>
     </form>
   );
