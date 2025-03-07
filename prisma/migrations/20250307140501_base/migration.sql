@@ -27,7 +27,7 @@ CREATE TABLE "Dancer" (
     "CI" INTEGER,
     "age" INTEGER,
     "dateBirth" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "phone" INTEGER,
+    "phone" TEXT,
     "Adress" TEXT,
 
     CONSTRAINT "Dancer_pkey" PRIMARY KEY ("id")
@@ -37,7 +37,8 @@ CREATE TABLE "Dancer" (
 CREATE TABLE "Representative" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
-    "phone" INTEGER,
+    "CI" INTEGER,
+    "phone" TEXT,
     "Adress" TEXT,
 
     CONSTRAINT "Representative_pkey" PRIMARY KEY ("id")
