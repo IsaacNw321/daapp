@@ -9,9 +9,6 @@ export const ReviewCard = ({ content, userRole ,firstName, lastName, photo } : a
           {firstName + " "}
           {lastName}
         </h3> 
-        <div>
-        {userRole === "Representante" ? <p>Representante</p> : <p>Bailarin</p>}
-        </div>
         <p>
           {content}
         </p>
