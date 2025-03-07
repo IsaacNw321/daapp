@@ -35,7 +35,7 @@ export const LogginButton: React.FC = () => {
     if (!isDbUserLoading && !dbUser) {
       const timeoutId = setTimeout(() => {
         router.push('/api/auth/logout'); 
-      }, 20000);
+      }, 4000);
 
       return () => clearTimeout(timeoutId); 
     }
