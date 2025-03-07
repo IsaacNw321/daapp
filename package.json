@@ -2,14 +2,14 @@
   "name": "daapp",
   "version": "0.1.0",
   "private": true,
- "scripts": {
-  "dev": "next dev",
-  "build": "next build",
-  "start": "next start",
-  "lint": "next lint",
-  "postinstall":"npx prisma generate && npx prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script > baseline.sql && npx prisma migrate resolve --applied 20250307140501_base && npx prisma migrate deploy",
-  "migrate:deploy": "prisma migrate deploy"
-},
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "postinstall": "prisma generate",
+    "migrate:deploy": "prisma migrate deploy"
+  },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.5.0",
     "@hookform/resolvers": "^3.9.1",
