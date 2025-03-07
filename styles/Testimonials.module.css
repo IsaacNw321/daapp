@@ -25,6 +25,9 @@
 }
 
 @media screen and (max-width: 460px){
+  .fatherCont{
+    margin-top: 100px;
+  }
   .fatherCont h3{
     font-size: 22px;
   }
@@ -69,6 +72,7 @@
 
 .item h3{
   color: white;
+  margin-top: 40px;
   margin-left: 50px;
 }
 
@@ -82,7 +86,7 @@
   width: 90px;
   height: 90px;
   position: relative;
-  bottom: 40%;
+  bottom: 20%;
   left: 75%;
   border-radius: 50%;
 }
