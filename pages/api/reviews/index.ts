@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import  prisma  from "@/lib/prisma";
+import { resolveSoa } from "dns";
 
 
 export default async function  Reviews(req: NextApiRequest, res: NextApiResponse){
@@ -40,12 +41,9 @@ export default async function  Reviews(req: NextApiRequest, res: NextApiResponse
           }
         }
       })
-      if(reviews.length < 0){
-        res.status(400).json({message: 'There are not reviews yet!'});
-      }
-      if(reviews.length > 0 ){
-        res.status(200).json(reviews);
-      }
+     reviews
+      ? res.status(200).json(reviews)
+      : res.status(404).json({message: "There are not reviews yet"})
     } catch (error) {
       res.status(500).json({message : (error as Error).message});
     }
