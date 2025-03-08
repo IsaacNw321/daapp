@@ -5,7 +5,11 @@ import { Review, postReviewDancer, postReviewRepresentative, updateReview } from
 export const getReviews = async (): Promise<Review[]> => {
   try {
     const response = await axios.get<Review[]>("/api/reviews");
-    return response.data;
+    if(response.status === 200){
+      return response.data;
+    } else{
+      throw new Error("Error gettin the reviews")
+    }
   } catch (error) {
     return [];
   }

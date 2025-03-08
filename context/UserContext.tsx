@@ -50,7 +50,7 @@ const ContextProvider = ({ children }: Props) => {
 
     getUserById(id)
       .then((data) => {
-        if (!data) {
+        if (data === undefined) {
           mutation.mutate(datos);
         } else {
           setUsuario(data.id);
@@ -61,7 +61,8 @@ const ContextProvider = ({ children }: Props) => {
         console.log("Error fetching user:", err);
         setExist(false);
       });
-  }, [user, mutation]);
+       // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <UserContext.Provider value={usuario}>

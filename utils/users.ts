@@ -2,14 +2,16 @@ import axios from 'axios';
 import { postedUser, User } from '@/app/types';
 
 
+
+
 export async function getUserById(id: string): Promise<User | undefined> {
  try {
    const response = await axios.get(`/api/users/${id}`);
-   if (response.status !== 200) {
-     return undefined
+   if (response.status === 200) {
+     return response.data
+   } else{
+    return undefined
    }
-   const user: User = await response.data;
-   return user;
  } catch (error) {
    return undefined
  }
@@ -50,7 +52,11 @@ export const updateUser = async (id: string, updatedUserData: Partial<User>): Pr
 export const getUsers = async (): Promise<User[]> => {
   try {
     const response = await axios.get<User[]>(`/api/users`);
-    return response.data;
+    if(response.status === 200){
+      return response.data
+    } else {
+      throw new Error("Error fetching Users")
+    }
   } catch (error) {
     return [];
   }
