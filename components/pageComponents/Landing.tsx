@@ -1,6 +1,5 @@
 import styles from "../../styles/home.module.css";
 import Image from "next/image";
-import Reginfo from "../../public/images/reginfo.jpeg";
 import { NextComponentType } from "next";
 import Link from "next/link";
 import {motion} from 'framer-motion'
@@ -17,7 +16,7 @@ const Landing : NextComponentType = () => {
         width={700} 
         height={700} 
         alt={'Dancers'} 
-        src={Reginfo}
+        src="https://i.imgur.com/Q50VYxx.jpg"
         priority={true}>
       </Image>
     <div className={styles.fadeInLeftWhen}>

@@ -1,6 +1,4 @@
 import styles from "../../styles/about.module.css";
-import ballet from "../../public/images/about2.jpeg";
-import flow from "../../public/images/about1.jpeg";
 import Image from "next/image"
 import { NextComponentType } from "next";
 import {motion} from "framer-motion"
@@ -29,7 +27,7 @@ const InfoAbout : NextComponentType = () =>{
       <Image
         className={styles.image}
         alt={'Directora'}
-        src={flow}
+        src="https://i.imgur.com/fH47st6.jpg"
         width={400}
         height={450}
         priority={true}>
@@ -39,7 +37,7 @@ const InfoAbout : NextComponentType = () =>{
     <Image
       className={styles.image}
         alt={'student'}
-        src={ballet}
+        src="https://i.imgur.com/22fOykq.jpg"
         width={400}
         height={450}
         priority={true}>

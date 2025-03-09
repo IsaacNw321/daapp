@@ -1,5 +1,4 @@
 import styles from "../../styles/Results.module.css";
-import R1 from "../../public/images/results.jpeg";
 import Image from "next/image";
 import { NextComponentType } from "next";
 import {motion} from 'framer-motion'
@@ -17,7 +16,7 @@ const Results : NextComponentType = () => {
           width={400}
           height={400}
           alt="image"
-          src={R1}
+          src="https://i.imgur.com/5g1s7ZW.jpg"
           loading="lazy"
         />
       </div>

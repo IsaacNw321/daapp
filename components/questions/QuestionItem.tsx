@@ -1,6 +1,5 @@
 import Image from "next/image";
 import styles from "../../styles/contact.module.css";
-import arrow from "../../public/images/awd.jpg";
 import { QuestionItemProps } from "@/app/types";
 import {motion} from "framer-motion";
 const QuestionItem: React.FC<QuestionItemProps> = ({ question, answer, isOpen, toggleAnswer }) => {
@@ -18,7 +17,7 @@ const QuestionItem: React.FC<QuestionItemProps> = ({ question, answer, isOpen, t
           width="25"
           height="25"
           alt="arrow"
-          src={arrow}
+          src="https://i.imgur.com/DGFVFRL.jpg"
         />
       </div>
       {isOpen && (

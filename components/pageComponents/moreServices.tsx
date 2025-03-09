@@ -1,12 +1,6 @@
 import styles from "../../styles/moreServices.module.css";
 import Image from "next/image";
 import { useState } from "react";
-import MS1 from "../../public/images/MS1.jpeg";
-import MS2 from "../../public/images/MS2.jpeg";
-import MS3 from "../../public/images/MS3.jpeg";
-import MS4 from "../../public/images/contempo.jpeg";
-import MS5 from "../../public/images/MS5.jpeg";
-import MS6 from "../../public/images/MS6.jpeg";
 import { NextComponentType } from "next";
 import {motion} from "framer-motion"
 const MoreServices : NextComponentType = () =>{
@@ -33,7 +27,7 @@ const MoreServices : NextComponentType = () =>{
             height={260} 
             width={260}  
             alt={`picture`} 
-            src={MS1}
+            src={"https://i.imgur.com/bGXJ8kc.jpg"}
             priority={true}>
           </Image>
           <h3>
@@ -49,7 +43,7 @@ const MoreServices : NextComponentType = () =>{
             height={260} 
             width={260}  
             alt={`picture`} 
-            src={MS2}
+            src={"https://i.imgur.com/ZENt4Un.jpg"}
             priority={true}>
           </Image>
               <h3>
@@ -65,7 +59,7 @@ const MoreServices : NextComponentType = () =>{
             height={260} 
             width={260}  
             alt={`picture`} 
-            src={MS4}
+            src="https://i.imgur.com/CbmUYpP.jpg"
             priority={true}>
           </Image>
               <h3>
@@ -83,7 +77,7 @@ const MoreServices : NextComponentType = () =>{
                 height={260} 
                 width={260}  
                 alt={`picture`} 
-                src={MS3}
+                src="https://i.imgur.com/xZ3K22M.jpg"
                 loading="lazy">
               </Image>
               <h3>
@@ -99,7 +93,7 @@ const MoreServices : NextComponentType = () =>{
                 height={260} 
                 width={260}  
                 alt={`picture`} 
-                src={MS5}
+                src="https://i.imgur.com/iPXLjFr.jpg"
                 loading="lazy">
               </Image>
               <h3>
@@ -115,7 +109,7 @@ const MoreServices : NextComponentType = () =>{
                 height={260} 
                 width={260}  
                 alt={`picture`} 
-                src={MS6}
+                src="https://i.imgur.com/EvVAMHY.jpg"
                 loading="lazy">
               </Image>
               <h3>
