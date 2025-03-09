@@ -331,7 +331,7 @@ export interface PaymentStatusProps {
 export interface GendersAndShowsProps {
   nameGender: string;
   description: string;
-  array: StaticImageData[]; 
+  array: string[]; 
 }
 
 export interface fullName{

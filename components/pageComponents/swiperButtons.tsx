@@ -17,7 +17,7 @@ export const SwiperButtons : NextComponentType = () =>{
                 height={25} 
                 width={25}  
                 alt={`arrow`} 
-                src={arrow}
+                src="https://i.imgur.com/DGFVFRL.jpg"
                 loading="lazy">
             </Image>
       </button>
@@ -29,7 +29,7 @@ export const SwiperButtons : NextComponentType = () =>{
                 height={25} 
                 width={25}  
                 alt={`arrow`} 
-                src={arrow}
+                src="https://i.imgur.com/DGFVFRL.jpg"
                 loading="lazy">
             </Image>
       </button>

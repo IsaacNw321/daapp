@@ -2,7 +2,6 @@
 import styles from "../../styles/Footer.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../../public/images/blackLogo.png";
 export const Footer = () =>{
   return (
     <footer>
@@ -17,7 +16,7 @@ export const Footer = () =>{
               width={60}
               height={50}
               alt="logo"
-              src={logo}
+              src="https://i.imgur.com/QOq54rp.png"
               />
             </div>
             <Link 
