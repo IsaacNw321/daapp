@@ -157,7 +157,7 @@ export interface HomeProps {
 
 export interface InstructorProps {
   nameInstructor: string;
-  array: StaticImageData[];
+  array: string[];
   text: string;
   position: string;
 }
