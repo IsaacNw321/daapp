@@ -1,7 +1,8 @@
 import styles from "@/styles/dashboard.module.css";
 import { PaymentStatusProps } from "@/app/types";
-
-export const PaymentStatus = ({ Payment, pending, representative }: PaymentStatusProps) => {
+import {PDFDownloadLink} from "@react-pdf/renderer"
+import ConfirmedPayment from "../../pdf/ConfirmedPayment"
+export const PaymentStatus = ({ Payment, pending, representative, firstName, lastName }: PaymentStatusProps) => {
   const totalMonths: number = 12;
   const currentDateTime = new Date().toISOString();
   const currentMonth = new Date(currentDateTime).getMonth();
@@ -23,6 +24,62 @@ export const PaymentStatus = ({ Payment, pending, representative }: PaymentStatu
   const pendingWidth: number = (100 / totalMonths) * pendingPayments;
   const notPaidWidth: number = (100 / totalMonths) * monthsNotPaidyet;
   const inComingWidth: number = (100 / totalMonths) * monthsNotInPresent;
+  
+  const handleConfirmedPayment = (index: number) =>{
+    const paidMonth = months[index]
+    let monthFullName = '';
+    switch (paidMonth){
+      case 'E':
+      monthFullName = 'Enero';
+      break;
+      case 'F':
+      monthFullName = 'Febrero';
+      break;
+      case 'M':
+      monthFullName = index === 2 ? 'Marzo' : 'Mayo';
+      break;
+      case 'A':
+      monthFullName = 'Abril';
+      break;
+      case 'J':
+      monthFullName = index === 5 ? 'Junio' : 'Julio';
+      break;
+      case 'A':
+      monthFullName = 'Agosto';
+      break;
+      case 'S':
+      monthFullName = 'Septiembre';
+      break;
+      case 'O':
+      monthFullName = 'Octubre';
+      break;
+      case 'N':
+      monthFullName = 'Noviembre';
+      break;
+      case 'D':
+      monthFullName = 'Diciembre';
+      break;   
+      default:
+        monthFullName = '' 
+    }
+    
+    const data = {
+      mes : monthFullName,
+      firstName,
+      lastName
+    }
+    return(
+      <PDFDownloadLink
+      document={<ConfirmedPayment data={data} />}
+      fileName={`Comprobante-pago-${monthFullName}.pdf`}
+      >
+      { ({loading}) => 
+        loading ? (<button disabled className={styles.pButton}>...</button>)
+        : (<button className={styles.pButton}>DC</button>)
+      }
+      </PDFDownloadLink>  
+    )
+  }
 
   return (
     <div className={styles.paymentStatus}>
@@ -31,7 +88,9 @@ export const PaymentStatus = ({ Payment, pending, representative }: PaymentStatu
         {confirmedWidth > 0 && (
           <div className={styles.barSection} style={{ width: `${confirmedWidth}%`, backgroundColor: 'var(--color-confirmed)' }}>
             {paidMonths.map((month, index) => (
-              <span key={index} className={styles.month}>{month}</span>
+              <span key={index} className={styles.month}>
+                {index < confirmedPayments && handleConfirmedPayment(index)}
+              </span>
             ))}
           </div>
         )}

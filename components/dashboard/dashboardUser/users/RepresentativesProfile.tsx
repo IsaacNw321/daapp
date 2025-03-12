@@ -60,7 +60,7 @@ const RepresentativeProfile: React.FC<RepresentativeProfileProps> = ({ dbUser, u
           />
         <PDFDownloadLink 
           document={<RegistrationFormDR dancerData={dancer} repData={repData} />}
-          filename={`${dancer.firstName} ${dancer.lastName}.pdf`}
+          fileName={`${dancer.firstName} ${dancer.lastName}.pdf`}
         >
         {({loading}) => 
           loading ? (

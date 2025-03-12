@@ -78,6 +78,8 @@ const Dancers = ({ dancer, Payment, pending }: DancersProps) => {
           representative={false}
           Payment={Payment}
           pending={pending}
+          firstName={dancer.firstName}
+          lastName={dancer.lastName}
         />
         <button className={styles.roleButton} onClick={handleShowP}>
           Agregar Pago

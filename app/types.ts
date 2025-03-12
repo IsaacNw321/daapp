@@ -324,6 +324,8 @@ export interface PaymentStatusProps {
   Payment?: number;
   pending? : number;
   representative : boolean;
+  firstName: string;
+  lastName: string;
 }
 
 

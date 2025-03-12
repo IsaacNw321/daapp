@@ -661,3 +661,22 @@
   }
 }
 
+.pButton{
+  background-color: green;
+  color: white;
+  font-size: 10px;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 40%;
+  width: 30px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pButton:hover{
+  background-color: white;
+  color: black;
+}
