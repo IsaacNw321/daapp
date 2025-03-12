@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
   signature: {
     flex: 1,
     textAlign: 'center',
-    gap: '20px',
-    width: "200px"
+    gap: 20,
+    width: 200
   },
 });
 
@@ -99,7 +99,7 @@ const RegistrationForm = ({ userData, firstName, lastName }) => {
 
 
         <Text style={styles.instructions}>
-          A este formulario por favor anexar: Carpeta amarilla, copia de la cédula (alumno, representante), foto carnet (alumno).
+          A este formulario por favor anexar: Carpeta amarilla, copia de la cédula, foto carnet.
         </Text>
 
         <Text style={styles.value}>
@@ -113,10 +113,6 @@ const RegistrationForm = ({ userData, firstName, lastName }) => {
         <View style={styles.signatureContainer}>
           <View style={styles.signature}>
             <Text>Dirección</Text>
-            <Text>______________________</Text>
-          </View>
-          <View style={styles.signature}>
-            <Text>Sub-dirección</Text>
             <Text>______________________</Text>
           </View>
           <View style={styles.signature}>
@@ -138,3 +134,4 @@ const RegistrationForm = ({ userData, firstName, lastName }) => {
 };
 
 export default RegistrationForm;
+
