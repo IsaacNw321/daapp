@@ -11,7 +11,8 @@ import RepresentativeProfile from "../dashboardUser/users/RepresentativesProfile
 import DancerProfile from "../dashboardUser/users/DancersProfile";
 import { UserRole, Payment, DancerInfo, DancerR } from "@/app/types";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
-
+import RegistrationForm from "../pdf/RegisterForm";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 const MyProfile: NextComponentType = () => {
   const { user, isLoading: isLoadingU } = useUser();
   const [userDancers, setuserDancers] = useState<DancerInfo[] | undefined>();
@@ -59,7 +60,7 @@ const MyProfile: NextComponentType = () => {
   const firstName = dbUser?.firstName;
   const lastName = dbUser?.lastName;
   const picture : string | StaticImport | undefined = dbUser?.photo;
-
+  const userData = dbUser?.userRole === UserRole.DANCER ? dbUser.dancer : dbUser?.representative
   return (
     <main className={styles.dashboardUser}>
       <div className={styles.info}>
@@ -91,6 +92,20 @@ const MyProfile: NextComponentType = () => {
           <DancerProfile dbUser={dbUser} payment={payment} />
         )}
       </div>
+      {dbUser?.userRole === UserRole.DANCER && dbUser?.firstName !== null &&
+     <PDFDownloadLink
+     document={<RegistrationForm userData={userData} firstName={dbUser?.firstName} lastName={dbUser?.lastName} />}
+     fileName={`${dbUser?.firstName} ${dbUser?.lastName}.pdf`}
+   >
+     {({ loading }) =>
+       loading ? (
+         <button className={styles.roleButton} disabled>Cargando documento...</button>
+       ) : (
+         <button className={styles.roleButton}>Descargar PDF</button>
+       )
+     }
+   </PDFDownloadLink>
+      }
     </main>
   );
 };

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { postedUser, User } from '@/app/types';
-
+import { ImgurClient } from 'imgur';
 
 
 
@@ -72,6 +72,50 @@ export const deleteUser = async (id: string): Promise<number | null> => {
       return null
     }
   } catch (error) {
+    return null;
+  }
+};
+
+
+/**
+ * 
+ * @param imageFile 
+ * @returns 
+ */
+export const uploadImage = async (imageFile: File): Promise<string | null> => {
+  const client = new ImgurClient({
+    clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
+    clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
+    refreshToken: process.env.NEXT_PUBLIC_REFRESH_TOKEN,
+  });
+
+  try {
+    console.log('Image file type:', imageFile.constructor.name);
+
+    if (!(imageFile instanceof File)) {
+      throw new Error('Provided image is not a valid File object');
+    }
+    const arrayBuffer = await imageFile.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    console.log('Buffer size:', buffer.length);
+    if (buffer.length > 10 * 1024 * 1024) {
+      throw new Error('Image size exceeds 10MB limit');
+    }
+
+    const response = await client.upload({
+      image: buffer,
+      type: 'stream',
+    });
+
+    if (response.success) {
+      return response.data.link;
+    } else {
+      console.error('Image upload failed:', response.status, response.data);
+      return null;
+    }
+  } catch (error) {
+    console.error('Error uploading image:', error);
     return null;
   }
 };

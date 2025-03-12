@@ -62,7 +62,7 @@ const ContextProvider = ({ children }: Props) => {
         setExist(false);
       });
        // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user, mutation]);
 
   return (
     <UserContext.Provider value={usuario}>

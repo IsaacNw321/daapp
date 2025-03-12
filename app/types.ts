@@ -250,6 +250,7 @@ export interface DancerR  {
   age : number;
   dateBirth : Date;
   Adress : string;
+  image: File;
  }
 
  export interface infoDancerProps {
