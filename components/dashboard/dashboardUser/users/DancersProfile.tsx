@@ -32,6 +32,7 @@ const DancerProfile: React.FC<DancerProfileProps> = ({ dbUser, payment }) => {
       onSuccess: () => {
         setIsSuccess(true);
         setTimeout(() => {
+          handleShowP()
           setIsSuccess(false);
         }, 3000);
       },
@@ -87,7 +88,7 @@ const DancerProfile: React.FC<DancerProfileProps> = ({ dbUser, payment }) => {
       <InfoDancer dancerId={dancerId} />
       <div className={!payment ? styles.notPaymentC : styles.paymentC}>
         <h3>Estado de Pago</h3>
-        <PaymentStatus Payment={payment?.length} pending={pending} representative={false} />
+        <PaymentStatus firstName={dbUser?.firstName} lastName={dbUser?.lastName} Payment={payment?.length} pending={pending} representative={false} />
         <button className={styles.roleButton} onClick={handleShowP}>
           Agregar Pago
         </button>

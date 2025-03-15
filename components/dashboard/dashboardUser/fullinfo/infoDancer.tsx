@@ -59,8 +59,10 @@ export const InfoDancer = ({dancerId} : InfoDancerProps) =>{
       const age = Number(calculateAge(String(data.age)));
       const phone = Number(phonePrefix.concat(String(data.phone))); 
       const dateBirth = new Date(data.dateBirth);
-      const dancerData = { firstName, lastName, allergies, cI, age, dateBirth, phone, Adress };   
-      mutation.mutate(dancerData);
+  
+      const dancerData = { firstName, lastName, allergies, cI, age, dateBirth, phone, Adress };
+       mutation.mutate(dancerData);
+      
     } catch (error) {
       console.error(error);
     }

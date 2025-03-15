@@ -12,7 +12,8 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
     phone,
     cI,
     dateBirth,
-    Adress
+    Adress,
+    imageUrl
   } = req.body;
   switch (method) {
     case "DELETE" :
@@ -69,7 +70,8 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
             user : {
               update : {
                 firstName,
-                lastName
+                lastName,
+                photo: imageUrl
               }
             }
           },

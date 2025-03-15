@@ -6,6 +6,9 @@ import styles from "@/styles/dashboard.module.css";
 import { DancerInfo, Payment, User } from "@/app/types";
 import { CreateDancer } from "../myDancers/createDancer";
 import { DetailItem } from "../../dashboardAdmin/users/DancersRDetails";
+import {PDFDownloadLink} from '@react-pdf/renderer'
+import RegistrationFormDR from '../../pdf/RegisterFormDR'
+import { DancerR } from "@prisma/client";
 interface RepresentativeProfileProps {
   dbUser?: User;
   userDancers?: DancerInfo[];
@@ -22,6 +25,13 @@ const RepresentativeProfile: React.FC<RepresentativeProfileProps> = ({ dbUser, u
   const representativeId = dbUser?.representative?.id;
   const reviewId = dbUser?.representative?.review?.id;
   const numberDancers = userDancers?.length ?? 0;
+  const repData = {
+    firstName : dbUser?.firstName,
+    lastName : dbUser?.lastName,
+    Adress : dbUser?.representative?.Adress,
+    CI : dbUser?.representative?.CI,
+    phone : dbUser?.representative?.phone
+  }
   return (
     <section >
        <div className={styles.details}>
@@ -49,6 +59,19 @@ const RepresentativeProfile: React.FC<RepresentativeProfileProps> = ({ dbUser, u
             Payment={dancer.Payment?.length}
             pending={dancer.pending}
           />
+        <PDFDownloadLink 
+          document={<RegistrationFormDR dancerData={dancer} repData={repData} />}
+          fileName={`${dancer.firstName} ${dancer.lastName}.pdf`}
+        >
+        {({loading}) => 
+          loading ? (
+            <button disabled className={styles.roleButton}> Cargando documento..</button>
+          ) : (
+            <button className={styles.roleButton}>Descargar PDF</button>
+          )
+
+        }
+        </PDFDownloadLink>  
         </div>
       ))
     )}

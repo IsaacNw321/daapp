@@ -49,14 +49,14 @@ export default function UserDetail() {
           <h1 className={styles.title}>Detalles de usuario</h1>
         <DetailItem label="Nombre" value={`${user?.firstName} ${user?.lastName}`} />
         </header>
-        <Link  className={styles.roleButton} style={{ marginBottom: '10px' }}href="/" passHref>
+        <Link  className={styles.roleButton} style={{ marginBottom: '10px' }}href="/admin" passHref>
             Volver
         </Link>
         <div className={styles.content}>
             {user?.userRole === UserRole.REPRESENTATIVE ? (
               <RepresentativeDetails representative={user.representative} />
             ) : user?.userRole === UserRole.DANCER ? (
-              <DancerDetails dancer={user.dancer} />
+              <DancerDetails firstName={user.firstName} lastName={user.lastName} dancer={user.dancer} />
             ) : (
               <p>Rol sin asignar</p>
             )}
