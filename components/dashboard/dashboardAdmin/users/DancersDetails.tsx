@@ -5,9 +5,11 @@ import PaymentStatus from '../../dashboardUser/myPaymentStatus/PaymentStatus';
 import { Dancer } from '@/app/types';
 import { InfoDancer } from '../../dashboardUser/fullinfo/infoDancer';
 export interface DancerProp{
-  dancer : Dancer | undefined
+  dancer : Dancer | undefined;
+  firstName? : string;
+  lastName? : string;
 }
-export const DancerDetails: React.FC<DancerProp> = ({ dancer }) => {
+export const DancerDetails: React.FC<DancerProp> = ({ dancer, firstName, lastName }) => {
   let pending = 0;
   if(dancer?.Payment !== undefined){
     for (let i = 0; i < dancer.Payment.length; i++) {
@@ -42,7 +44,7 @@ export const DancerDetails: React.FC<DancerProp> = ({ dancer }) => {
       ) : null}
       <div className={styles.flex}>
       <ControlPayments id={dancer?.id} payments={dancer?.Payment} dancerR={false} /> 
-      <PaymentStatus Payment={dancer?.Payment.length} pending={pending} representative={false} />
+      <PaymentStatus firstName={firstName} lastName={lastName} Payment={dancer?.Payment.length} pending={pending} representative={false} />
       </div>
     </section>
   );

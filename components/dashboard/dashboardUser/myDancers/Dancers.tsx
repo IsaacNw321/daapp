@@ -24,6 +24,7 @@ const Dancers = ({ dancer, Payment, pending }: DancersProps) => {
     {
       onSuccess: () => {
         setIsSuccess(true)
+        handleShowP()
         setTimeout(() => {
           setIsSuccess(false);
         },3000);

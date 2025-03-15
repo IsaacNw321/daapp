@@ -60,14 +60,14 @@ const MyProfile: NextComponentType = () => {
   const firstName = dbUser?.firstName;
   const lastName = dbUser?.lastName;
   const picture : string | StaticImport | undefined = dbUser?.photo;
-  const userData = dbUser?.userRole === UserRole.DANCER ? dbUser.dancer : dbUser?.representative
+  const userData = dbUser?.dancer 
   return (
     <main className={styles.dashboardUser}>
       <div className={styles.info}>
         <div className={styles.firstLine}>
-          <Link href={'/'} style={{ textDecoration: 'none', backgroundColor: 'transparent' }}>
-            <button className={styles.back}>Volver</button>
-          </Link>
+        <Link  className={styles.roleButton} style={{ marginBottom: '10px' }}href="/" passHref>
+            Volver
+        </Link>
           <div className={styles.text1}>
             <h3>Bienvenido {firstName} {lastName}</h3>
             <div>

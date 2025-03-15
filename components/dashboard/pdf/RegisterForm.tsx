@@ -1,5 +1,6 @@
 import React from 'react';
 import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
+import { dataDocumentD } from '@/app/types';
 
 const styles = StyleSheet.create({
   page: {
@@ -62,11 +63,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const RegistrationForm = ({ userData, firstName, lastName }) => {
+const RegistrationForm = ({ userData, firstName, lastName }: dataDocumentD) => {
   return (
     <Document>
       <Page style={styles.page}>
         <View style={styles.logoContainer}>
+            {/* eslint-disable-next-line jsx-a11y/alt-text */}
           <Image src="https://i.imgur.com/7FEkFSu.png" style={styles.logo} />
         </View>
 
@@ -79,22 +81,22 @@ const RegistrationForm = ({ userData, firstName, lastName }) => {
 
         <View style={styles.section}>
           <Text style={styles.label}>Edad:</Text>
-          <Text style={styles.value}>{userData.age}</Text>
+          <Text style={styles.value}>{userData?.age}</Text>
         </View>
 
         <View style={styles.section}>
           <Text style={styles.label}>C.I:</Text>
-          <Text style={styles.value}>{userData.CI}</Text>
+          <Text style={styles.value}>{userData?.CI}</Text>
         </View>
 
         <View style={styles.section}>
           <Text style={styles.label}>Enfermedades o Alergias:</Text>
-          <Text style={styles.value}>{userData.allergies || 'Ninguna'}</Text>
+          <Text style={styles.value}>{userData?.allergies || 'Ninguna'}</Text>
         </View>
 
         <View style={styles.section}>
           <Text style={styles.label}>Dirección:</Text>
-          <Text style={styles.value}>{userData.Adress}</Text>
+          <Text style={styles.value}>{userData?.Adress}</Text>
         </View>
 
 

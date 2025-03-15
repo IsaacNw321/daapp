@@ -8,6 +8,7 @@ import { CreateDancer } from "../myDancers/createDancer";
 import { DetailItem } from "../../dashboardAdmin/users/DancersRDetails";
 import {PDFDownloadLink} from '@react-pdf/renderer'
 import RegistrationFormDR from '../../pdf/RegisterFormDR'
+import { DancerR } from "@prisma/client";
 interface RepresentativeProfileProps {
   dbUser?: User;
   userDancers?: DancerInfo[];
@@ -25,11 +26,11 @@ const RepresentativeProfile: React.FC<RepresentativeProfileProps> = ({ dbUser, u
   const reviewId = dbUser?.representative?.review?.id;
   const numberDancers = userDancers?.length ?? 0;
   const repData = {
-    firstName : dbUser.firstName,
-    lastName : dbUser.lastName,
-    Adress : dbUser.representative.Adress,
-    CI : dbUser.representative.CI,
-    phone : dbUser.representative.phone
+    firstName : dbUser?.firstName,
+    lastName : dbUser?.lastName,
+    Adress : dbUser?.representative?.Adress,
+    CI : dbUser?.representative?.CI,
+    phone : dbUser?.representative?.phone
   }
   return (
     <section >

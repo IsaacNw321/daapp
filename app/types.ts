@@ -1,6 +1,7 @@
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { StaticImageData } from "next/image";
 import { Omit } from "@prisma/client/runtime/library";
+import { intersection } from "zod";
 export enum UserRole {
   ADMIN = 'ADMIN',
   DANCER = 'DANCER',
@@ -51,6 +52,7 @@ export interface DancerInfo{
   age: number;
   Payment: Payment[];
   pending: number;
+  dateBirht?: Date
 }
 
 export interface Representative {
@@ -324,8 +326,8 @@ export interface PaymentStatusProps {
   Payment?: number;
   pending? : number;
   representative : boolean;
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
 }
 
 
@@ -340,4 +342,42 @@ export interface GendersAndShowsProps {
 export interface fullName{
   firstName : string;
   lastName : string;
+}
+
+export interface DocumentConfirmedP {
+  data: dataDocumentP
+}
+
+export interface dataDocumentP{
+  firstName?: string;
+  lastName?: string;
+  mes: string;
+}
+
+export interface dataDocumentD{
+  userData?: Dancer;
+  firstName?: string;
+  lastName?: string;
+}
+
+export type ExtendedRepresentative = Representative & {
+  firstName: string;
+  lastName: string;
+};
+
+export type ExtendedDancerR = DancerInfo & {
+  dateBirth : Date
+};
+
+export interface dataDocumentDR{
+  dancerData: DancerInfo;
+  repData: repData;
+}
+
+interface repData{
+  firstName: string | undefined;
+  lastName: string | undefined;
+  Adress: string | undefined;
+  CI: number | undefined;
+  phone: number | undefined;
 }

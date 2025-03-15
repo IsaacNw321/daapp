@@ -1,5 +1,6 @@
 import React from 'react'
 import {Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer'
+import { dataDocumentDR } from '@/app/types'
 
 const styles = StyleSheet.create({
   page: {
@@ -62,11 +63,12 @@ const styles = StyleSheet.create({
   }
 })
 
-const  RegistrationFormDR = ({dancerData, repData}) => {
+const  RegistrationFormDR = ({dancerData, repData} : dataDocumentDR) => {
   return(
     <Document>
     <Page style={styles.page}>
       <View style={styles.logoContainer}>
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
         <Image src="https://i.imgur.com/7FEkFSu.png" style={styles.logo}  />
       </View>
 
@@ -122,7 +124,7 @@ const  RegistrationFormDR = ({dancerData, repData}) => {
         </Text> 
       </View> 
       <View style={styles.section}>
-      <Text style={styles.insctructions}>
+      <Text style={styles.instructions}>
         A este formulario por favor anexar : Carpeta amarilla, copia de la cédula de identidad (alumno y representante), foto tipo carnet (alumno).
       </Text>
       </View>   

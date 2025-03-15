@@ -1,6 +1,6 @@
 import React from 'react'
 import {Document, Page, Text, View, Image, StyleSheet} from '@react-pdf/renderer'
-
+import { DocumentConfirmedP } from '@/app/types'
 const styles = StyleSheet.create({
   page:{
     flexDirection: 'column',
@@ -35,13 +35,14 @@ const styles = StyleSheet.create({
   }
 })
 
-const ConfirmedPayment = ({data}) =>{
+const ConfirmedPayment = ({data} : DocumentConfirmedP) =>{
   
   return(
     <Document>
       <Page style={styles.page}>
         <View style={styles.logoContainer}>
-          <Image src="https://i.imgur.com/7FEkFSu.png" style={styles.logo} />
+            {/* eslint-disable-next-line jsx-a11y/alt-text */}
+        <Image src="https://i.imgur.com/7FEkFSu.png" style={styles.logo} />
         </View>
 
         <View style={styles.section}>
