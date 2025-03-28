@@ -49,6 +49,7 @@ export default async function Users(req: NextApiRequest, res: NextApiResponse){
           : res.status(400).json({ message: "There is not any user with that id" });
 
       } catch (error) {
+        console.error("Error fetching user:", error);
         res.status(500).json({ message: (error as Error).message });
       }
       break;
