@@ -62,7 +62,8 @@ model Representative {
   Payment    Payment[]    
   review     Review?
   phone      Int?
-  Adress     String? 
+  Adress     String?
+  CI       Int? 
 }
 
 model DancerR {
