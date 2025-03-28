@@ -35,7 +35,7 @@ export default async function Representative(req: NextApiRequest, res: NextApiRe
             id: String(id),
           },
           data: {
-            phone: String(phone),
+            phone: Number(phone),
             Adress: Adress,
             CI : cI, 
             user: {

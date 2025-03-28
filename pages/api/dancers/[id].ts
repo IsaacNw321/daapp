@@ -63,7 +63,7 @@ export default async function Dancers(req: NextApiRequest, res: NextApiResponse)
           data: {
             allergies,
             age : Number(age),
-            phone: String(phone),
+            phone: Number(phone),
             CI : Number(cI),
             dateBirth: new Date(dateBirth),
             Adress,

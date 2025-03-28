@@ -50,7 +50,7 @@ model Dancer {
   CI       Int?
   age      Int?
   dateBirth DateTime  @default(now())
-  phone      String?
+  phone      Int?
   Adress     String?
 }
 
@@ -61,9 +61,9 @@ model Representative {
   dancers    DancerR[]
   Payment    Payment[]    
   review     Review?
-  CI         Int?
-  phone      String?
-  Adress     String? 
+  phone      Int?
+  Adress     String?
+  CI       Int? 
 }
 
 model DancerR {
